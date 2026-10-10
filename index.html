@@ -303,6 +303,11 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
 .sptext p{margin:0 0 14px;line-height:1.5;font-size:15px}.sptext a{color:var(--fg)}
 @media (max-width:700px){.cta .lg{display:none}.cta .sm{display:inline}.qchoose{grid-template-columns:1fr}.urna{grid-template-columns:1fr 1fr}.tecla.branco{grid-column:1/-1}.spwrap,.mapwrap{grid-template-columns:1fr}}
 select option{background:#15241D;color:#EEF0E8}
+.more{display:inline-block;margin-top:10px;font:600 14px var(--body);color:var(--led);text-decoration:none;cursor:pointer;list-style:none}
+.more::-webkit-details-marker{display:none}
+.vmorewrap[open]>summary.more{margin-bottom:6px}
+.vmorewrap>summary.more::after{content:" +"}
+.vmorewrap[open]>summary.more::after{content:" −"}
 </style>
 </head>
 <body>
@@ -599,10 +604,11 @@ function cotaBlock(d,h){const c=h.cota; if(!c) return '';
    <details class="whatis"><summary>Para quem foi o dinheiro</summary><p>Os 5 fornecedores que mais receberam, 2025–26:</p><ul class="areas">${c.forn.map(([n,v])=>`<li><span>${esc(n)}</span><b>${brl(v)}</b></li>`).join('')}</ul>
     <p>Cada despesa tem nota fiscal pública no <a href="https://www.camara.leg.br/deputados/${d.id}" target="_blank" rel="noopener" style="color:var(--fg)">site da Câmara ↗</a>.</p></details>
    <p class="note" style="margin:0">Fonte: Câmara dos Deputados, dados da cota parlamentar (CEAP), valores líquidos.</p>`}
-function recBlock(h){ if(!HIST.rec||!h.rk) return '';
+function recBlock(h,id){ if(!HIST.rec||!h.rk) return '';
   const L={S:['Votou sim','b-S'],N:['Votou não','b-N'],A:['Não votou (ausente)','b-A'],B:['Absteve-se','b-A'],P:['Presidia','b-A'],X:['Voto secreto','b-A'],'-':['Fora do mandato','b--']};
-  return `<p class="sec">Últimas votações no plenário</p><p class="hint" style="margin:0">As 10 votações nominais mais recentes de 2026, fora requerimentos.</p>
-   <div class="votes">${HIST.rec.map((r,j)=>{const [lab,cls]=L[h.rk[j]]||L['-']; return `<div class="vrow rec"><time datetime="${r.d}">${fdate(r.d)}</time><div><b style="font-family:var(--body);font-size:16px;font-weight:600">${esc(r.tit)} <a href="https://www.camara.leg.br/propostas-legislativas/${r.prop}" target="_blank" rel="noopener" class="emuted" style="font-size:12px">ver na Câmara</a></b><span>${esc(r.res.length>140?r.res.slice(0,140)+'…':r.res)}</span><span style="display:block">${esc(r.em)}</span></div><span class="badge ${cls}">${lab}</span></div>`}).join('')}</div>`}
+  return `<p class="sec">Últimas votações no plenário</p><p class="hint" style="margin:0">As 3 votações nominais mais recentes de 2026, fora requerimentos.</p>
+   <div class="votes">${HIST.rec.slice(0,3).map((r,j)=>{const [lab,cls]=L[h.rk[j]]||L['-']; return `<div class="vrow rec"><time datetime="${r.d}">${fdate(r.d)}</time><div><b style="font-family:var(--body);font-size:16px;font-weight:600">${esc(r.tit)} <a href="https://www.camara.leg.br/propostas-legislativas/${r.prop}" target="_blank" rel="noopener" class="emuted" style="font-size:12px">ver na Câmara</a></b><span>${esc(r.res.length>140?r.res.slice(0,140)+'…':r.res)}</span><span style="display:block">${esc(r.em)}</span></div><span class="badge ${cls}">${lab}</span></div>`}).join('')}</div>
+   <a class="more" href="https://www.camara.leg.br/deputados/${id}" target="_blank" rel="noopener">Ver todas as votações no site da Câmara ↗</a>`}
 function newsBlock(id,nome){const n=NEWS[id]; const q=encodeURIComponent(`"${nome}" deputado`);
   if(!n||!n.length) return `<p class="sec">Últimas notícias</p><div class="todo">Ainda não acompanhamos as notícias deste deputado. <a href="https://news.google.com/search?q=${q}&hl=pt-BR&gl=BR&ceid=BR:pt-419" target="_blank" rel="noopener" style="color:var(--fg)">Buscar no Google Notícias ↗</a></div>`;
   return `<p class="sec">Últimas notícias</p><div class="news">${n.slice(0,3).map(x=>`<a class="nitem" href="${esc(x.url)}" target="_blank" rel="noopener"><small>${esc(x.veiculo)}${x.data?' · '+fdate(x.data):''}</small><b>${esc(x.titulo)} ↗</b><p>${esc(x.resumo)}</p></a>`).join('')}</div>
@@ -630,7 +636,7 @@ function renderPerfil(id){const i=byId[id]; if(i==null){location.hash='';return}
   const rows=HIST.key.map((k,j)=>{const c=h.k[j]; return `<details class="vdet"><summary class="vrow" data-tip="${esc(k.desc)}"><time datetime="${k.d}">${fdate(k.d)}</time>
     <div><b>${esc(k.t)} <i class="plus" aria-hidden="true">+</i></b><span>${esc(k.r)}</span></div><span class="badge b-${c}">${BADGE[c](k)}</span></summary>
     <div class="vmore"><p>${esc(k.desc)}</p>${k.dep?`<p class="emuted">${esc(k.dep)}</p>`:''}<p class="emuted">${esc(k.m)}</p>
-    <a href="https://www.camara.leg.br/propostas-legislativas/${k.prop}" target="_blank" rel="noopener">Ver a proposta e a tramitação na Câmara ↗</a></div></details>`}).join('');
+    <a href="https://www.camara.leg.br/propostas-legislativas/${k.prop}" target="_blank" rel="noopener">Ver a proposta e a tramitação na Câmara ↗</a></div></details>`});
   perfil.innerHTML=`<a class="back" href="#">Voltar ao plenário</a>
    <div class="hero">${face(d)}<div><div class="brand" style="font-size:16px"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-8px"></i>VOTO ABERTO</div>
     <h1>${esc(d.n)}</h1><div class="meta" style="font-size:16px">${d.p}-${d.uf} · ${posLabel(d.s)}${h.nasc?' · natural de '+esc(h.nasc):''}</div>${estNote(d)}
@@ -645,9 +651,10 @@ function renderPerfil(id){const i=byId[id]; if(i==null){location.hash='';return}
    ${tseBlock(h)}
    ${hcBlock(h)}
    ${OQF}
-   ${recBlock(h)}
+   ${recBlock(h,d.id)}
    <p class="sec">20 votações em destaque</p><p class="hint" style="margin:0">Escolhidas pela repercussão, de 2023 a 2026; não são todas. Passe o mouse para ver o resumo e clique para os detalhes.</p>
-   <div class="votes">${rows}</div>
+   <div class="votes">${rows.slice(0,3).join('')}</div>
+   <details class="vmorewrap"><summary class="more">Ver as outras ${rows.length-3} votações em destaque</summary><div class="votes">${rows.slice(3).join('')}</div></details>
    ${emBlock(h)}
    ${cotaBlock(d,h)}
    ${newsBlock(d.id,d.n)}
