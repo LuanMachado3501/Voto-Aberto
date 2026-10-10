@@ -131,6 +131,7 @@ body:not(.dep){padding:0;background:radial-gradient(ellipse 120% 90% at 50% 92%,
 .legend .grad{flex:1;height:6px}
 .hintline{font-size:12px;color:#7d838b;margin:8px 0 0}
 #h.focusing .seat .in{opacity:.5;transition:opacity .2s}
+#h{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #h .seat .in{transition:opacity .25s, transform .16s}
 .tip[hidden],[hidden]{display:none!important}
 .hovcard{display:flex;gap:12px;align-items:center;padding:10px 14px 10px 10px!important;min-width:220px}
@@ -151,7 +152,7 @@ dialog#info h2{font-family:var(--display);font-weight:900;margin:0}
   .drawer{top:auto;left:0;width:100vw;height:82svh;border-left:0;border-top:1px solid var(--line);border-radius:16px 16px 0 0;transform:translateY(105%)}
   .hall{overflow-x:auto;align-items:flex-start;justify-content:flex-start;padding-top:4px;flex:none}.hall svg{min-width:600px;max-height:none}
   .topbar{padding:10px 14px}.topbar .brand{font-size:17px}
-  .tools{order:4;width:100%;flex-wrap:nowrap}.tools input{flex:1;width:auto}.tools select{max-width:42%}
+  .tools{order:4;width:100%;flex-wrap:nowrap}.tools input{flex:1;width:auto;min-width:0}.tools select{max-width:30%;padding-inline:8px}
   #infoBtn{order:2;width:38px;height:38px;padding:0;border-radius:50%;font-weight:600}#infoBtn .lg{display:none}#infoBtn .sm{display:inline}
   .swipe{display:block;position:sticky;left:0;width:calc(100vw - 24px);text-align:center;font-size:12px;color:#7d838b;margin:2px 0 6px}
   .legend,.hintline{position:sticky;left:0;width:calc(100vw - 24px)}.legend{flex-wrap:wrap}.legend .grad{flex-basis:100%;order:-1}
@@ -310,9 +311,11 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
     <a class="brand" href="#" aria-label="Voto Aberto, início"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-8px"></i>VOTO ABERTO</a>
     <div class="tools">
       <label class="sr" for="q">Buscar deputado</label>
-      <input id="q" type="search" placeholder="Buscar deputado" autocomplete="off">
+      <input id="q" type="search" placeholder="Buscar nome" autocomplete="off">
       <label class="sr" for="party">Partido</label>
       <select id="party"><option value="">Partidos</option></select>
+      <label class="sr" for="uf">Estado</label>
+      <select id="uf"><option value="">Estados</option></select>
     </div>
     <a class="cta" href="#teste"><span class="lg">Quais deputados votam como você?</span><span class="sm">Quem vota como você?</span></a>
     <button type="button" class="ghost" id="infoBtn"><span class="lg">Como funciona</span><span class="sm" aria-hidden="true">?</span><span class="sr sm">Como funciona</span></button>
@@ -343,7 +346,7 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
       <span>Vota mais como PL e aliados</span>
     </div>
     <p class="hintline">Passe o mouse ou toque numa poltrona. A dourada é a presidência.</p>
-    <p class="swipe">← arraste para ver o plenário inteiro →</p>
+    <p class="swipe">Arraste para os lados para ver o plenário inteiro. Segure o dedo numa poltrona para ver o nome; toque para abrir.</p>
   </main>
   <aside class="drawer" id="drawer" aria-label="Deputado selecionado" aria-hidden="true">
     <button type="button" class="close" id="closeBtn" aria-label="Fechar">×</button>
@@ -514,10 +517,21 @@ pg.addEventListener('click',pickPres); pg.addEventListener('keydown',e=>{if(e.ke
 pg.addEventListener('mouseenter',e=>{tip.className='tip';tip.innerHTML=`<b>${PRES.n}</b><span>Presidente da Câmara · ${PRES.p}-${PRES.uf}</span>`;tip.hidden=false;moveTip(e)});
 pg.addEventListener('mousemove',moveTip); pg.addEventListener('mouseleave',()=>tip.hidden=true);
 const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
-function filter(){const t=norm(q.value.trim()), p=sel.value; let first=-1;
-  deps.forEach((d,i)=>{const ok=(!t||norm(d.n).includes(t))&&(!p||d.p===p); els[i].classList.toggle('dim',!ok); if(ok&&first<0&&(t||p)) first=i;});
+const ufSel=document.getElementById('uf');
+[...new Set(deps.map(d=>d.uf))].sort().forEach(u=>{const o=document.createElement('option');o.value=u;o.textContent=`${u} (${deps.filter(d=>d.uf===u).length})`;ufSel.appendChild(o)});
+function filter(){const t=norm(q.value.trim()), p=sel.value, u=ufSel.value; let first=-1;
+  deps.forEach((d,i)=>{const ok=(!t||norm(d.n).includes(t))&&(!p||d.p===p)&&(!u||d.uf===u); els[i].classList.toggle('dim',!ok); if(ok&&first<0&&(t||p||u)) first=i;});
   if(t&&first>=0) pick(first);}
-q.addEventListener('input',filter); sel.addEventListener('change',filter);
+q.addEventListener('input',filter); sel.addEventListener('change',filter); ufSel.addEventListener('change',filter);
+// celular: segurar o dedo numa poltrona mostra o nome; arrastar segurando passa de poltrona em poltrona; tocar rápido abre a gaveta
+(()=>{let timer=null, held=false, hideT=null; const at=(x,y)=>{const el=document.elementFromPoint(x,y); const g=el&&el.closest('.seat'); return g?els.indexOf(g):-1;};
+  const show=(i,x,y)=>{if(i<0) return; clearTimeout(hideT); showTip(i,{clientX:x-60,clientY:y-40});};
+  const svgEl=document.getElementById('h');
+  svgEl.addEventListener('touchstart',e=>{const tch=e.touches[0], i=at(tch.clientX,tch.clientY); held=false; clearTimeout(timer); if(i<0) return;
+    timer=setTimeout(()=>{held=true; show(i,tch.clientX,tch.clientY); if(navigator.vibrate) navigator.vibrate(8);},380);},{passive:true});
+  svgEl.addEventListener('touchmove',e=>{const tch=e.touches[0]; if(!held){clearTimeout(timer); return;} e.preventDefault(); show(at(tch.clientX,tch.clientY),tch.clientX,tch.clientY);},{passive:false});
+  svgEl.addEventListener('touchend',e=>{clearTimeout(timer); if(held){e.preventDefault(); held=false; hideT=setTimeout(()=>{tip.hidden=true; drop();},1600);}},{passive:false});
+  svgEl.addEventListener('contextmenu',e=>e.preventDefault());})();
 
 // página de histórico
 const vw=w=>/^(a favor|contra)$/.test(w)?'Votou '+w:'Votou por '+w;
