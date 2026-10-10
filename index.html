@@ -483,7 +483,7 @@ txt(cx,cy+34,'PRESIDÊNCIA',{...lab,'text-anchor':'middle','font-size':10,'lette
 const pm={}; deps.forEach(d=>{(pm[d.p]=pm[d.p]||[]).push(d.s)});
 const sel=document.getElementById('party');
 Object.entries(pm).map(([p,a])=>[p,a.reduce((x,y)=>x+y,0)/a.length,a.length]).sort((a,b)=>a[1]-b[1])
- .forEach(([p,m,n])=>{const o=document.createElement('option');o.value=p;o.textContent=`${p} (${n})`;sel.appendChild(o)});
+ .forEach(([p,m,n])=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o)});
 
 const tip=document.getElementById('tip'), card=document.getElementById('card'), q=document.getElementById('q');
 let selected=-1;
@@ -542,7 +542,7 @@ pg.addEventListener('mouseenter',e=>{tip.className='tip';tip.innerHTML=`<b>${PRE
 pg.addEventListener('mousemove',moveTip); pg.addEventListener('mouseleave',()=>tip.hidden=true);
 const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 const ufSel=document.getElementById('uf');
-[...new Set(deps.map(d=>d.uf))].sort().forEach(u=>{const o=document.createElement('option');o.value=u;o.textContent=`${u} (${deps.filter(d=>d.uf===u).length})`;ufSel.appendChild(o)});
+[...new Set(deps.map(d=>d.uf))].sort().forEach(u=>{const o=document.createElement('option');o.value=u;o.textContent=u;ufSel.appendChild(o)});
 function filter(){const t=norm(q.value.trim()), p=sel.value, u=ufSel.value; let first=-1;
   deps.forEach((d,i)=>{const ok=(!t||norm(d.n).includes(t))&&(!p||d.p===p)&&(!u||d.uf===u); els[i].classList.toggle('dim',!ok); if(ok&&first<0&&(t||p||u)) first=i;});
   // painel: mostra quantos deputados batem com o filtro (o presidente conta se também bater)
