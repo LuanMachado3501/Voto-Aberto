@@ -382,7 +382,7 @@ const brl=v=>v>=1e6?'R$ '+(v/1e6).toLocaleString('pt-BR',{maximumFractionDigits:
 const AREA={'Encargos especiais':'Transferência especial (“emenda Pix”)','Múltiplo':'Várias áreas'};
 const AREA_TXT={
  'Saúde':'Dinheiro para o fundo de saúde de uma prefeitura ou estado, carimbado para saúde. Quase sempre paga o dia a dia de hospitais e postos: plantões, consultas, cirurgias.',
- 'Encargos especiais':'A “emenda Pix”: o dinheiro cai direto no caixa da prefeitura ou do estado, sem dizer em que vai ser gasto. É rápido, mas difícil de fiscalizar; o STF passou a cobrar mais transparência em 2024.',
+ 'Encargos especiais':'A “emenda Pix” é legal e existe desde 2019: o dinheiro cai direto no caixa da prefeitura ou do estado, sem dizer em que vai ser gasto. É rápido, mas difícil de fiscalizar; o STF passou a cobrar mais transparência em 2024.',
  'Assistência social':'Dinheiro para a rede do SUAS: CRAS, abrigos e atendimento a famílias vulneráveis, idosos e pessoas em situação de rua.',
  'Educação':'Escolas e creches: obras, equipamentos, transporte escolar e manutenção da rede de ensino.',
  'Desporto e lazer':'Quadras, ginásios, praças esportivas e projetos de esporte, muitas vezes feitos por prefeituras ou entidades.',
@@ -478,7 +478,7 @@ function pick(i){ pg.classList.remove('sel'); if(selected>=0) els[selected].clas
   card.innerHTML = face(d) + `<div style="min-width:0"><h2>${esc(d.n)}</h2><div class="meta">${d.p}-${d.uf} · ${posLabel(d.s)}${d.e?' (estimado)':''}</div>${estNote(d)}
    <div class="bar" title="Lugar pelo voto"><i style="left:${pct}%"></i></div>
    <div class="facts">
-    <div class="fact"><small>Votou em</small><strong>${d.v} de ${TOT}</strong><em>votações de plenário, 2025–26</em></div>
+    <div class="fact"><small>Presença em 2026</small><strong>${h.pres&&h.pres[1]?Math.round(h.pres[0]/h.pres[1]*100)+'%':'—'}</strong><em>${h.pres?`votou em ${h.pres[0]} das ${h.pres[1]} votações nominais em que estava no cargo`:''}</em></div>
     <div class="fact"><small>Segue o partido</small><strong>${h.f!=null?h.f+'%':'—'}</strong><em>dos votos Sim/Não, 2025–26</em></div>
     <div class="fact"><small>Votou com o governo</small><strong>${h.gov!=null?h.gov+'%':'—'}</strong><em>orientação do líder do governo, 2025–26</em></div>
     <div class="fact"><small>Na Câmara desde</small><strong>${h.y0}</strong><em>${tenure(h)}</em></div>
@@ -562,6 +562,10 @@ function cotaBlock(d,h){const c=h.cota; if(!c) return '';
    <details class="whatis"><summary>Para quem foi o dinheiro</summary><p>Os 5 fornecedores que mais receberam, 2025–26:</p><ul class="areas">${c.forn.map(([n,v])=>`<li><span>${esc(n)}</span><b>${brl(v)}</b></li>`).join('')}</ul>
     <p>Cada despesa tem nota fiscal pública no <a href="https://www.camara.leg.br/deputados/${d.id}" target="_blank" rel="noopener" style="color:var(--fg)">site da Câmara ↗</a>.</p></details>
    <p class="note" style="margin:0">Fonte: Câmara dos Deputados, dados da cota parlamentar (CEAP), valores líquidos.</p>`}
+function recBlock(h){ if(!HIST.rec||!h.rk) return '';
+  const L={S:['Votou sim','b-S'],N:['Votou não','b-N'],A:['Não votou (ausente)','b-A'],B:['Absteve-se','b-A'],P:['Presidia','b-A'],X:['Voto secreto','b-A'],'-':['Fora do mandato','b--']};
+  return `<p class="sec">Últimas votações no plenário</p><p class="hint" style="margin:0">As 10 votações nominais mais recentes de 2026, fora requerimentos.</p>
+   <div class="votes">${HIST.rec.map((r,j)=>{const [lab,cls]=L[h.rk[j]]||L['-']; return `<div class="vrow rec"><time datetime="${r.d}">${fdate(r.d)}</time><div><b style="font-family:var(--body);font-size:16px;font-weight:600">${esc(r.tit)} <a href="https://www.camara.leg.br/propostas-legislativas/${r.prop}" target="_blank" rel="noopener" class="emuted" style="font-size:12px">ver na Câmara</a></b><span>${esc(r.res.length>140?r.res.slice(0,140)+'…':r.res)}</span><span style="display:block">${esc(r.em)}</span></div><span class="badge ${cls}">${lab}</span></div>`}).join('')}</div>`}
 function newsBlock(id,nome){const n=NEWS[id]; const q=encodeURIComponent(`"${nome}" deputado`);
   if(!n||!n.length) return `<p class="sec">Últimas notícias</p><div class="todo">Ainda não acompanhamos as notícias deste deputado. <a href="https://news.google.com/search?q=${q}&hl=pt-BR&gl=BR&ceid=BR:pt-419" target="_blank" rel="noopener" style="color:var(--fg)">Buscar no Google Notícias ↗</a></div>`;
   return `<p class="sec">Últimas notícias</p><div class="news">${n.slice(0,3).map(x=>`<a class="nitem" href="${esc(x.url)}" target="_blank" rel="noopener"><small>${esc(x.veiculo)}${x.data?' · '+fdate(x.data):''}</small><b>${esc(x.titulo)} ↗</b><p>${esc(x.resumo)}</p></a>`).join('')}</div>
@@ -595,7 +599,7 @@ function renderPerfil(id){const i=byId[id]; if(i==null){location.hash='';return}
     <h1>${esc(d.n)}</h1><div class="meta" style="font-size:16px">${d.p}-${d.uf} · ${posLabel(d.s)}${h.nasc?' · natural de '+esc(h.nasc):''}</div>${estNote(d)}
     <div class="bar" style="max-width:420px"><i style="left:${pct}%"></i></div></div></div>
    <div class="facts">
-    <div class="fact"><small>Votou em</small><strong>${d.v} de ${TOT}</strong><em>votações de plenário, 2025–26</em></div>
+    <div class="fact"><small>Presença em 2026</small><strong>${h.pres&&h.pres[1]?Math.round(h.pres[0]/h.pres[1]*100)+'%':'—'}</strong><em>${h.pres?`votou em ${h.pres[0]} das ${h.pres[1]} votações nominais em que estava no cargo`:''}</em></div>
     <div class="fact"><small>Segue o partido</small><strong>${h.f!=null?h.f+'%':'—'}</strong><em>quando o partido tem maioria</em></div>
     <div class="fact"><small>Votou com o governo</small><strong>${h.gov!=null?h.gov+'%':'—'}</strong><em>orientação do líder do governo, 2025–26</em></div>
     <div class="fact"><small>Na Câmara desde</small><strong>${h.y0}</strong><em>${tenure(h)}</em></div>
@@ -604,12 +608,13 @@ function renderPerfil(id){const i=byId[id]; if(i==null){location.hash='';return}
    ${tseBlock(h)}
    ${hcBlock(h)}
    ${OQF}
-   <p class="sec">Como votou nos temas que o Voto Aberto mostrou <span class="hint">· passe o mouse para resumo, clique para detalhes</span></p>
+   ${recBlock(h)}
+   <p class="sec">20 votações em destaque</p><p class="hint" style="margin:0">Escolhidas pela repercussão, de 2023 a 2026; não são todas. Passe o mouse para ver o resumo e clique para os detalhes.</p>
    <div class="votes">${rows}</div>
    ${emBlock(h)}
    ${cotaBlock(d,h)}
    ${newsBlock(d.id,d.n)}
-   <p class="note">Fonte: dados abertos da Câmara dos Deputados. "Não votou (ausente)" = registrou voto em outras sessões da mesma semana, mas não nesta. "Fora do mandato" = não estava em exercício na data. "Na Câmara desde" = primeira legislatura em que exerceu mandato, inclusive como suplente; pode ter havido intervalos.</p>`;
+   <p class="note">Fonte: dados abertos da Câmara dos Deputados. "Não votou (ausente)" = registrou voto em outras sessões da mesma semana, mas não nesta. "Fora do mandato" = não estava em exercício na data. "Presença" conta as votações nominais de 2026 nas semanas em que o deputado estava no cargo; os dados não separam faltas justificadas, como missão oficial ou licença médica. "Na Câmara desde" = primeira legislatura em que exerceu mandato, inclusive como suplente; pode ter havido intervalos.</p>`;
 }
 function areaTip(el,html){tip.className='tip';tip.innerHTML=html||`<p>${el.dataset.tip}</p>`; tip.style.maxWidth='300px'; tip.hidden=false; const b=el.getBoundingClientRect();
   tip.style.left=Math.max(8,Math.min(b.left, innerWidth-tip.offsetWidth-8))+'px'; tip.style.top=(b.top-tip.offsetHeight-8<8? b.bottom+8 : b.top-tip.offsetHeight-8)+'px';}
