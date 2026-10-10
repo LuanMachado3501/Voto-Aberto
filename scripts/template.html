@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0C0D">
+<title>Hemiciclo Voto Aberto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Doto:wght@700;900&display=swap">
+<style>
+/* Plenário em meia-lua com cadeiras-poltrona; painel do deputado; página de histórico por #dep/ID. Marca Voto Aberto, tema escuro único. */
+:root{
+  --bg:#0F1B16; --panel:#15241D; --line:#2A3C33; --fg:#EEF0E8; --muted:#9DA9A2; --led:#FFB000; --confirma:#2FA24F;
+  --gov:#EF3B36; --mid:#7D838B; --opo:#2F7BFF; --focus:#FFB000; --abs:#5A6B62;
+  --display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --ledf:'Doto','Big Shoulders Display',monospace;
+  --body:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--fg);margin:0}
+body{font-family:var(--body);padding-inline:16px;padding-block:24px 48px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-direction:column;gap:6px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:900;letter-spacing:2px;font-size:22px}
+.brand i{display:inline-block;width:26px;height:8px}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(36px,6vw,64px);line-height:.95;margin:6px 0 0;text-wrap:balance;letter-spacing:.5px}
+.lead{color:var(--muted);font-size:15px;max-width:68ch;line-height:1.5;margin:0}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.controls label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+input,select{font:inherit;font-size:14px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:9px 12px;min-width:0}
+input{width:min(320px,100%)}
+input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.stage{position:relative;overflow-x:auto}
+svg#h{display:block;width:100%;height:auto;min-width:600px}
+.seat{cursor:pointer;outline:none}
+.seat .in{transition:transform .16s ease-out,opacity .15s;transform-box:fill-box;transform-origin:center}
+#hl{pointer-events:none}
+#hl .in{transform:scale(1.9);animation:pop .16s ease-out;filter:drop-shadow(0 2px 3px rgba(0,0,0,.7))}
+@keyframes pop{from{transform:scale(1)}}
+.seat.hov .in{opacity:0}
+.seat.dim .in{opacity:.12}
+.seat.sel use{stroke:var(--focus);stroke-width:2.2}
+.axis{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);margin-top:8px}
+.grad{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--gov),var(--mid),var(--opo))}
+.tip{position:fixed;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:260px;z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.tip b{display:block;font-size:14px}
+.tip span{font-size:12px;color:var(--muted)}
+/* rosto: tenta a foto oficial, cai para iniciais */
+.face{flex:none;position:relative;overflow:hidden;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-weight:900;color:#101214}
+.face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;animation:rise .2s ease-out}
+.card .face{width:104px;height:132px;font-size:40px}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}}
+h2{font-family:var(--display);font-weight:900;font-size:36px;margin:0;line-height:1;letter-spacing:.5px}
+.meta{color:var(--muted);font-size:14px;margin-top:4px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:16px}
+.fact{border-top:1px solid var(--line);padding-top:10px;min-width:0}
+.fact small{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.fact strong{display:block;font-family:var(--display);font-weight:900;font-size:28px;margin-top:4px;font-variant-numeric:tabular-nums}
+.fact em{font-style:normal;font-size:13px;color:var(--muted)}
+.soon{color:var(--muted)}
+.bar{position:relative;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--gov),var(--mid),var(--opo));margin-top:12px}
+.bar i{position:absolute;top:-5px;width:4px;height:18px;background:var(--fg);border-radius:2px;transform:translateX(-2px)}
+.go{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:12px 18px;background:var(--fg);color:#101214;text-decoration:none;font-family:var(--display);font-weight:900;font-size:20px;letter-spacing:1px;border-radius:6px;transition:gap .15s}
+.go:hover{gap:16px}
+.go svg{width:22px;height:22px}
+.empty{color:var(--muted);font-size:15px;margin:0;grid-column:1/-1}
+.note{font-size:13px;color:var(--muted);line-height:1.55;max-width:80ch}
+.note strong{color:var(--fg);font-weight:600}
+.pres{cursor:pointer;outline:none}
+.pres .in{transition:transform .16s ease-out;transform-box:fill-box;transform-origin:center}
+.pres:hover .in,.pres:focus-visible .in{transform:scale(1.15)}
+.pres.sel use{stroke:var(--fg);stroke-width:1.2}
+.plist{display:flex;flex-direction:column;margin-top:8px}
+.plist a{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-size:14px}
+.plist a:hover{color:var(--focus)}
+.plist time{color:var(--muted);font-variant-numeric:tabular-nums;font-size:13px}
+.plist span{color:var(--muted);font-size:13px}
+.role{display:inline-block;margin-top:8px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:#101214;background:var(--focus);padding:4px 8px;border-radius:3px}
+.emb{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.ebig{font-family:var(--display);font-weight:900;font-size:48px;line-height:1}
+.emuted{color:var(--muted);font-style:normal;font-size:13px}
+.ebar{display:grid;grid-template-columns:44px 1fr 90px;gap:10px;align-items:center;margin-top:10px;font-size:13px}
+.ebar span{color:var(--muted)}.ebar b{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.ebar div{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.ebar i{display:block;height:100%;background:var(--fg)}
+.areas{list-style:none;margin:10px 0 0;padding:0}.areas li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.areas b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.ainfo{all:unset;cursor:help;display:inline-flex;align-items:center;gap:8px}
+.ainfo i{font-style:normal;display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;border:1px solid var(--muted);font-size:10px;color:var(--muted)}
+.ainfo:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.tip p{margin:0;font-size:13px;line-height:1.45;color:var(--fg)}
+.whatis{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:14px}
+.whatis summary{cursor:pointer;color:var(--fg);font-weight:600}
+.whatis p{color:var(--muted);line-height:1.55;margin:10px 0 2px}.whatis strong{color:var(--fg)}
+.estn{margin:10px 0 0;font-size:13px;line-height:1.45;color:var(--muted);border-left:2px dashed var(--muted);padding-left:10px;max-width:60ch}
+.vdet{border-bottom:1px solid var(--line)}
+.vdet summary{list-style:none;cursor:pointer;border-bottom:0}
+.vdet summary::-webkit-details-marker{display:none}
+.vdet summary:hover b{color:var(--focus)}
+.plus{font-style:normal;display:inline-grid;place-items:center;width:18px;height:18px;border:1px solid var(--muted);border-radius:50%;font-family:var(--body);font-size:13px;color:var(--muted);vertical-align:3px;margin-left:6px;transition:transform .15s}
+.vdet[open] .plus{transform:rotate(45deg)}
+.vmore{padding:0 0 16px 112px;font-size:14px;line-height:1.55;max-width:820px}
+.vmore p{margin:0 0 6px}.vmore a{color:var(--fg)}
+.hint{text-transform:none;letter-spacing:0;font-weight:400}
+.news{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.nitem{display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;color:var(--fg);text-decoration:none;transition:border-color .15s}
+.nitem:hover{border-color:var(--muted)}
+.nitem small{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.nitem b{font-size:16px;line-height:1.3}.nitem p{margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
+.oqf{margin:10px 0 2px;padding-left:18px;color:var(--muted);line-height:1.6}.oqf strong{color:var(--fg)}
+#perfil .whatis,#plen .whatis{max-width:none}
+/* plenário imersivo */
+body:not(.dep){padding:0;background:radial-gradient(ellipse 120% 90% at 50% 92%,#15271E 0%,#0E1613 48%,#0A0C0D 100%) fixed;overflow-x:hidden}
+#plen{min-height:100svh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:4;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 20px;background:linear-gradient(#0A0C0Dee,#0A0C0D00)}
+.topbar .brand{color:var(--fg);text-decoration:none;font-size:20px}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tools input{width:min(240px,48vw);background:#ffffff0d;border-color:#ffffff1a}
+.tools select{background:#ffffff0d;border-color:#ffffff1a}
+.ghost{font:inherit;font-size:14px;color:var(--fg);background:transparent;border:1px solid #ffffff2a;border-radius:6px;padding:9px 12px;cursor:pointer}
+.ghost:hover{background:#ffffff12}
+.topbar .brand{flex:1}
+#infoBtn{order:3}
+#infoBtn .sm{display:none}
+.swipe{display:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.hall{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 12px 18px;min-height:0}
+.hall svg{width:100%;max-width:1400px;max-height:calc(100svh - 150px);height:auto;display:block}
+.legend{display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted);width:min(720px,100%);margin-top:4px}
+.legend .grad{flex:1;height:6px}
+.hintline{font-size:12px;color:#7d838b;margin:8px 0 0}
+#h.focusing .seat .in{opacity:.5;transition:opacity .2s}
+#h .seat .in{transition:opacity .25s, transform .16s}
+.tip[hidden],[hidden]{display:none!important}
+.hovcard{display:flex;gap:12px;align-items:center;padding:10px 14px 10px 10px!important;min-width:220px}
+.hovcard .face{width:52px;height:64px;font-size:20px;border-radius:6px}
+.hovcard em{display:block;font-style:normal;font-size:11px;color:#7d838b;margin-top:4px}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);z-index:6;background:#121517f2;backdrop-filter:blur(10px);border-left:1px solid var(--line);transform:translateX(105%);transition:transform .32s cubic-bezier(.2,.8,.2,1);overflow-y:auto;padding:22px 22px 30px;box-shadow:-20px 0 60px #0008}
+.drawer.open{transform:none}
+.drawer .card{display:flex;flex-direction:column;gap:14px;background:none;border:0;padding:0;animation:none}
+.drawer .card .face{width:120px;height:150px;font-size:44px}
+.drawer .facts{grid-template-columns:1fr 1fr}
+.drawer .plist a{grid-template-columns:1fr auto;gap:4px 12px}.drawer .plist time{grid-column:1/-1}.drawer .news{grid-template-columns:1fr}
+.close{position:absolute;top:12px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#0006;color:var(--fg);font-size:22px;line-height:1;cursor:pointer}
+dialog#info{max-width:680px;width:calc(100vw - 32px);background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:14px;padding:28px 24px;position:fixed}
+dialog#info::backdrop{background:#000a;backdrop-filter:blur(3px)}
+dialog#info .lead{margin:12px 0}
+dialog#info h2{font-family:var(--display);font-weight:900;margin:0}
+@media (max-width:700px){
+  .drawer{top:auto;left:0;width:100vw;height:82svh;border-left:0;border-top:1px solid var(--line);border-radius:16px 16px 0 0;transform:translateY(105%)}
+  .hall{overflow-x:auto;align-items:flex-start;justify-content:flex-start;padding-top:4px;flex:none}.hall svg{min-width:600px;max-height:none}
+  .topbar{padding:10px 14px}.topbar .brand{font-size:17px}
+  .tools{order:4;width:100%;flex-wrap:nowrap}.tools input{flex:1;width:auto}.tools select{max-width:42%}
+  #infoBtn{order:2;width:38px;height:38px;padding:0;border-radius:50%;font-weight:600}#infoBtn .lg{display:none}#infoBtn .sm{display:inline}
+  .swipe{display:block;position:sticky;left:0;width:calc(100vw - 24px);text-align:center;font-size:12px;color:#7d838b;margin:2px 0 6px}
+  .legend,.hintline{position:sticky;left:0;width:calc(100vw - 24px)}.legend{flex-wrap:wrap}.legend .grad{flex-basis:100%;order:-1}
+  .legend{min-width:0}.tools input{width:40vw}
+}
+/* teste */
+.cta{order:2;font-size:14px;font-weight:600;color:#101214;background:var(--focus);border-radius:6px;padding:9px 14px;text-decoration:none;white-space:nowrap}
+.cta:hover{filter:brightness(1.08)}
+#teste{max-width:920px}
+.qbox .qtema{color:var(--focus);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+.qbox .qq{font-family:var(--display);font-weight:900;font-size:clamp(28px,4.4vw,40px);line-height:1.08}
+.qintro{display:flex;flex-direction:column;gap:14px;padding-top:20px}
+.qintro h1{font-size:clamp(44px,8vw,80px)}
+.qfacts{display:flex;gap:28px;list-style:none;padding:0;margin:6px 0;color:var(--muted);font-size:14px}
+.qfacts b{display:block;font-family:var(--display);font-size:40px;color:var(--fg);line-height:1}
+.qbox{display:flex;flex-direction:column;gap:16px;padding-top:10px;animation:rise .25s ease-out}
+.qprog{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:6px}
+.qprog{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:6px}
+.qprog div{flex:1;height:4px;background:var(--line);border-radius:2px;overflow:hidden}.qprog i{display:block;height:100%;background:var(--focus);transition:width .3s}
+.qback{font:inherit;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}.qback:disabled{opacity:.3;cursor:default}
+.qcard{background:#1A2023;border:1px solid #263035;border-radius:16px;padding:44px 40px 30px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;animation:rise .25s ease-out}
+.qtema{font-size:13px;color:var(--muted);letter-spacing:.3px}
+.qq{font-family:var(--body);font-weight:600;font-size:clamp(21px,2.6vw,28px);line-height:1.38;margin:0;max-width:680px;text-wrap:balance}
+.qtabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.qtab{font:inherit;font-size:14px;font-weight:500;color:var(--fg);background:transparent;border:1px solid #3a464c;border-radius:8px;padding:10px 16px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.qtab:hover,.qtab.on{background:#263035;border-color:#56656c}
+.qpanel{width:100%;max-width:680px;text-align:left;background:#141A1C;border:1px solid #263035;border-radius:10px;padding:16px 18px;font-size:14px;line-height:1.55}
+.qpanel p{margin:0 0 8px}.qpanel a{color:var(--fg)}
+.qpc{display:grid;grid-template-columns:1fr 1fr;gap:18px}.qpc b{display:block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}.qpc p{margin:0}
+.qopts{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;width:100%;max-width:680px;border-radius:8px;overflow:hidden}
+.qopt{font:inherit;font-size:15px;font-weight:600;color:var(--fg);background:#1E4A55;border:0;padding:26px 10px;cursor:pointer;transition:background .15s}
+.qopt:hover{background:#26606d}.qopt.on{background:var(--fg);color:#101214}
+.qskip{font:inherit;font-size:14px;font-weight:500;color:var(--fg);background:none;border:0;cursor:pointer;padding:4px 8px;border-radius:6px}
+.qskip:hover{text-decoration:underline}.qskip.on{background:var(--fg);color:#101214}
+@media (max-width:600px){.qcard{padding:28px 18px 22px}.qopts{grid-template-columns:1fr 1fr}.qopt{padding:20px 8px}.qpc{grid-template-columns:1fr}.qtab{font-size:13px;padding:8px 11px}.qtabs{gap:6px;flex-wrap:nowrap}}
+.qbox .whatis p{color:var(--muted);line-height:1.55;margin:10px 0 0}.qbox .whatis strong{color:var(--fg)}
+.qnav{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;margin-top:6px}
+.qparts{display:flex;flex-direction:column;gap:8px}
+.qpart{display:grid;grid-template-columns:110px 1fr 48px;gap:12px;align-items:center;font-size:14px}
+.qpart div{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.qpart i{display:block;height:100%;background:var(--fg)}
+.qpart b{text-align:right;font-variant-numeric:tabular-nums}
+.qdeps{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
+.qdep{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--fg);text-decoration:none}
+.qdep:hover{border-color:var(--muted)}
+.qdep .face{width:44px;height:54px;font-size:18px;border-radius:6px}
+.qdep b{display:block;font-size:15px}.qdep span{font-size:12px;color:var(--muted)}
+.qdep strong{font-family:var(--display);font-size:28px;font-weight:900}
+.qrev{padding:12px 0;border-bottom:1px solid var(--line)}.qrev b{display:block;font-size:14px;font-weight:600;margin-bottom:4px}
+.qrev span{font-size:13px;color:var(--muted)}.qrev em{font-style:normal;color:var(--fg)}
+@media (max-width:700px){.cta{order:3;padding:8px 12px}.qpart{grid-template-columns:90px 1fr 42px}}
+.elei{display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.elei small{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.elei b{display:block;font-family:var(--display);font-weight:900;font-size:30px;line-height:1.05;margin-top:2px}
+.elei span{font-size:14px;color:var(--muted)}
+.elei .badge.b-S{background:var(--fg);color:#101214}.elei .badge.b-N{color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--fg)}.elei .badge.b-A{color:var(--focus);box-shadow:inset 0 0 0 1.5px var(--focus)}
+.tl{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line);display:flex;flex-direction:column}
+.tl li{position:relative;display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 0}
+.tl li::before{content:'';position:absolute;left:-25px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--bg);border:2px solid var(--muted)}
+.tl li:has(.b-S)::before{background:var(--fg);border-color:var(--fg)}
+.tl time{font-family:var(--display);font-weight:900;font-size:24px;color:var(--muted)}
+.tl b{display:block;font-size:16px}.tl span{font-size:13px;color:var(--muted)}
+.tl .badge{font-size:13px;padding:5px 9px}
+.tl .b-S{background:var(--fg);color:#101214}.tl .b-N{color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--abs)}.tl .b-A{color:var(--focus);box-shadow:inset 0 0 0 1.5px var(--focus)}
+/* página do deputado */
+#perfil,#teste{display:none}
+body.quiz #perfil{display:none!important}
+body.quiz #teste{display:flex}
+body.dep #plen{display:none}
+body.dep #perfil{display:flex}
+.back{align-self:flex-start;color:var(--muted);text-decoration:none;font-size:14px;display:inline-flex;gap:8px;align-items:center}
+.back:hover{color:var(--fg)}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:24px}
+.hero .face{width:150px;height:190px;font-size:56px;border-radius:12px}
+.hero h1{margin:0}
+.sec{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:8px 0 0;font-weight:600}
+.votes{display:flex;flex-direction:column}
+.vrow{display:grid;grid-template-columns:96px 1fr auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.vrow time{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.vrow b{display:block;font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.5px;line-height:1.05}
+.vrow span{font-size:13px;color:var(--muted)}
+.badge{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:1px;padding:6px 10px;border-radius:4px;white-space:nowrap;text-transform:uppercase}
+.vrow .badge{color:var(--fg)}
+.vrow .b-S{background:var(--fg);color:#101214}
+.vrow .b-N{background:#2A2E33;color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--fg)}
+.vrow .b-A{color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--abs)}
+.vrow .b-B,.vrow .b-P,.vrow .b-X{color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--abs)}
+.vrow .b--{color:#5A5F66}
+.todo{background:var(--panel);border:1px dashed var(--line);border-radius:10px;padding:16px;font-size:14px;color:var(--muted);line-height:1.5}
+@media (max-width:600px){
+  .vmore{padding-left:0}
+  .emb{grid-template-columns:1fr}
+  .plist a{grid-template-columns:1fr auto}.plist time{grid-column:1/-1}
+  .card{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.hero .face{width:110px;height:140px;font-size:42px}
+  .vrow{grid-template-columns:1fr;gap:6px}.vrow .badge{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){.seat .in,.go,.card{transition:none;animation:none}}
+
+/* ===== identidade Voto Aberto: plenário, painel eletrônico e urna ===== */
+html,body{background:var(--bg)}
+body.dep{background:var(--bg)}
+body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%,#0F1B16 55%,#0B1410 100%) fixed}
+.led{font-family:var(--ledf);font-weight:900;color:var(--led);letter-spacing:1px}
+.sec{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:.2px;text-transform:none;color:var(--fg);margin:34px 0 4px;line-height:1.05}
+.sec .hint,.hint{font-family:var(--body);font-size:13px;font-weight:400;color:var(--muted)}
+.fact small,.elei small,.ebar span,.emb small{text-transform:none!important;letter-spacing:0!important;font-size:13px!important;color:var(--muted)}
+.fact{border-top:2px solid var(--line)}
+.panel,.card,.emb,.elei,.whatis,.todo,.nitem,.qdep{background:var(--panel)}
+.whatis,.emb,.elei,.nitem,.qdep,.todo{border-color:var(--line)}
+.cta .sm{display:none}
+.cta{background:var(--led);color:#1A1200;border-radius:999px;padding:9px 16px;font-weight:700}
+.back{font-size:14px}
+.back::before{content:'‹ ';font-size:18px}
+/* teste */
+.qintro h1,.qres h1{font-family:var(--display);font-weight:900;font-size:clamp(46px,8vw,86px);line-height:.92;margin:8px 0 0;letter-spacing:.3px;text-wrap:balance}
+.qintro .lead,.qres .lead{font-size:18px;line-height:1.5;color:var(--fg);max-width:62ch}
+.qres .lead b{color:var(--led);font-weight:600}
+.qchoose{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.qver{font:inherit;text-align:left;color:var(--fg);background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:20px 22px;cursor:pointer;display:flex;flex-direction:column;gap:4px;transition:border-color .15s}
+.qver:hover{border-color:var(--led)}
+.qver b{font-family:var(--display);font-weight:900;font-size:34px;line-height:1}
+.qver span{font-size:15px}.qver em{font-style:normal;font-size:13px;color:var(--muted)}
+.qprog .led{font-size:20px}
+.qcard{background:var(--panel);border:1px solid var(--line)}
+.qtema{font-size:14px;color:var(--muted);text-transform:none;letter-spacing:0}
+.qtab{border-color:var(--line)}.qtab:hover,.qtab.on{background:#1D3127;border-color:var(--muted)}
+.qpanel{background:#11201A;border-color:var(--line)}
+.qpc b{text-transform:none;letter-spacing:0;font-size:13px}
+.urna{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:720px;margin-top:4px}
+.tecla{font:600 16px/1.2 var(--body);color:#F4F4EF;background:linear-gradient(#2A2C2F,#151618);border:1px solid #3B3E42;border-radius:9px;padding:24px 8px;cursor:pointer;box-shadow:0 4px 0 #050606,inset 0 1px 0 #ffffff17;transition:transform .07s,box-shadow .07s,background .12s}
+.tecla:hover{background:linear-gradient(#323539,#1B1C1F)}
+.tecla:active{transform:translateY(3px);box-shadow:0 1px 0 #050606}
+.tecla.on{background:var(--confirma);border-color:#62D486;color:#fff}
+.tecla.branco{grid-column:2/span 2;background:linear-gradient(#FBFBF6,#E3E3DA);color:#151618;border-color:#fff;padding:14px 8px;box-shadow:0 4px 0 #8C8C84}
+.tecla.branco small{font-weight:400;color:#5A5D57;margin-left:4px}
+.tecla.branco.on{background:var(--confirma);color:#fff}
+.qnavtabs{display:flex;gap:4px;border-bottom:2px solid var(--line);margin-top:18px;overflow-x:auto}
+.qnt{font:600 15px var(--body);color:var(--muted);background:none;border:0;padding:12px 16px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
+.qnt.on{color:var(--fg);border-bottom-color:var(--led)}
+.qpane{padding-top:18px;display:flex;flex-direction:column;gap:12px}
+.qhint{margin:0;color:var(--muted);font-size:14px}
+.qdep strong.led{font-size:24px}
+.qpart b.led{font-size:18px}
+.qpart i{background:var(--led)!important}
+.spwrap,.mapwrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:center}
+.spider,.pmap{width:100%;height:auto}
+.spl{fill:var(--muted);font:500 12.5px var(--body)}
+.mpl{fill:var(--fg);font:600 11px var(--body)}.mpl.you{fill:var(--led);font-size:13px;font-weight:700}
+.sptext p{margin:0 0 14px;line-height:1.5;font-size:15px}.sptext a{color:var(--fg)}
+@media (max-width:700px){.cta .lg{display:none}.cta .sm{display:inline}.qchoose{grid-template-columns:1fr}.urna{grid-template-columns:1fr 1fr}.tecla.branco{grid-column:1/-1}.spwrap,.mapwrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div id="plen">
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Voto Aberto, início"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-8px"></i>VOTO ABERTO</a>
+    <div class="tools">
+      <label class="sr" for="q">Buscar deputado</label>
+      <input id="q" type="search" placeholder="Buscar deputado" autocomplete="off">
+      <label class="sr" for="party">Partido</label>
+      <select id="party"><option value="">Partidos</option></select>
+    </div>
+    <a class="cta" href="#teste"><span class="lg">Quais deputados votam como você?</span><span class="sm">Quem vota como você?</span></a>
+    <button type="button" class="ghost" id="infoBtn"><span class="lg">Como funciona</span><span class="sm" aria-hidden="true">?</span><span class="sr sm">Como funciona</span></button>
+  </header>
+  <main class="hall">
+    <svg id="h" viewBox="0 0 1000 560" role="group" aria-label="Plenário da Câmara dos Deputados">
+      <defs>
+        <symbol id="pol" viewBox="-11 -11 22 22" overflow="visible">
+        <rect x="-10" y="-10" width="20" height="7.5" rx="3" fill="currentColor"/>
+        <rect x="-10" y="-6" width="4.6" height="14" rx="2.2" fill="currentColor"/>
+        <rect x="5.4" y="-6" width="4.6" height="14" rx="2.2" fill="currentColor"/>
+        <rect x="-6.6" y="-3.8" width="13.2" height="12" rx="2.4" fill="currentColor"/>
+        <rect x="-10" y="-10" width="20" height="7.5" rx="3" fill="#000" fill-opacity=".28" stroke="none"/>
+        <rect x="-5.4" y="-2.2" width="10.8" height="1.2" rx=".6" fill="#000" fill-opacity=".18" stroke="none"/>
+      </symbol>
+        <radialGradient id="carpet" cx="500" cy="505" r="520" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#1B3227"/><stop offset=".55" stop-color="#14251D"/><stop offset="1" stop-color="#0E1914"/>
+        </radialGradient>
+        <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A4A31"/><stop offset="1" stop-color="#3E2A1B"/></linearGradient>
+      </defs>
+      <g id="floor"></g>
+      <g id="seats"></g><g id="hl"></g>
+      <g id="mesa"></g>
+    </svg>
+    <div class="legend">
+      <span>Vota mais como PT e aliados</span>
+      <div class="grad" aria-hidden="true"></div>
+      <span>Vota mais como PL e aliados</span>
+    </div>
+    <p class="hintline">Passe o mouse ou toque numa poltrona. A dourada é a presidência.</p>
+    <p class="swipe">← arraste para ver o plenário inteiro →</p>
+  </main>
+  <aside class="drawer" id="drawer" aria-label="Deputado selecionado" aria-hidden="true">
+    <button type="button" class="close" id="closeBtn" aria-label="Fechar">×</button>
+    <section id="card" class="card" aria-live="polite"></section>
+  </aside>
+  <dialog id="info">
+    <button type="button" class="close" onclick="this.closest('dialog').close()" aria-label="Fechar">×</button>
+    <h2 style="font-size:30px">Como funciona</h2>
+    <p class="lead">Cada poltrona é um deputado em exercício. O lugar não vem do partido: vem de como ele votou em 2025 e 2026. À esquerda, quem vota mais parecido com PT e aliados; à direita, quem vota mais parecido com PL e aliados. Quem está no governo não muda o mapa: isso aparece à parte, no “votou com o governo”.</p>
+    <div id="oqf-top"></div>
+    <p class="note"><strong>Como o lugar é calculado.</strong> Usamos os votos Sim e Não de cada deputado nas votações nominais de plenário de 2025 e 2026 (dados abertos da Câmara), descartando as quase unânimes. A técnica de componentes principais encontra o eixo que mais separa os votos (45% da variação). A única regra fixa é a orientação: o bloco do PT fica sempre à esquerda e o do PL à direita, seja quem for o governo. Isso mede semelhança de voto, não ideologia: o centrão, por exemplo, tende a se aproximar de quem governa. Mostramos os 513 deputados em exercício hoje (lista oficial da Câmara). <span id="nd"></span> têm o lugar calculado pelo voto; os demais, de contorno tracejado, ficaram pouco tempo no cargo e aparecem na média do partido. O presidente da Câmara fica na cadeira dourada, porque quem preside não vota.</p>
+    <p class="note"><strong>Votou com o governo.</strong> Em cada votação, o líder do governo orienta Sim ou Não. Contamos em quantas das votações com essa orientação (2025–26, governo Lula) o deputado votou igual. Quando o governo mudar, a conta muda junto.</p>
+  </dialog>
+</div>
+
+<div class="wrap" id="perfil"></div>
+<div class="wrap" id="teste"></div>
+<div id="tip" class="tip" hidden></div>
+
+<script>
+const DATA = __HEM__;
+const HIST = __HIST__;
+const deps = DATA.deps, TOT = DATA.total_votacoes, byId = Object.fromEntries(deps.map((d,i)=>[d.id,i]));
+document.getElementById('nd').textContent = deps.filter(d=>!d.e).length;
+const smin = Math.min(...deps.map(d=>d.s)), smax = Math.max(...deps.map(d=>d.s));
+const C = {gov:[239,59,54], mid:[125,131,139], opo:[47,123,255]};
+const mix=(a,b,t)=>a.map((x,i)=>Math.round(x+(b[i]-x)*t));
+function color(s){ const t = s<0 ? Math.min(1,-s/Math.abs(smin)) : Math.min(1,s/smax); return `rgb(${s<0?mix(C.mid,C.gov,t):mix(C.mid,C.opo,t)})`; }
+function initials(n){const p=n.replace(/^(Dr\.|Dra\.|Delegado|Delegada|Pastor|Capitão|Coronel|General|Sargento|Professor|Professora)\s+/,'').split(/\s+/);return (p[0][0]+(p.length>1?p[p.length-1][0]:'')).toUpperCase()}
+const posLabel=s=> s<-0.3?'Bloco do PT e aliados':s>0.3?'Bloco do PL e aliados':'Centro';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+// foto oficial da Câmara; se não carregar (ex.: bloqueio), ficam as iniciais
+function face(d,cls){return `<div class="face ${cls||''}" style="background:${color(d.s)}" aria-hidden="true">${initials(d.n)}<img alt="" src="https://www.camara.leg.br/internet/deputado/bandep/${d.id}.jpg" onerror="this.remove()"></div>`}
+function tenure(h){return h.l0===57?'1º mandato':`${h.l0}ª legislatura · ${2026-h.y0} anos desde a estreia`}
+const brl=v=>v>=1e6?'R$ '+(v/1e6).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mi':'R$ '+Math.round(v/1e3).toLocaleString('pt-BR')+' mil';
+const AREA={'Encargos especiais':'Transferência especial (“emenda Pix”)','Múltiplo':'Várias áreas'};
+const AREA_TXT={
+ 'Saúde':'Dinheiro para o fundo de saúde de uma prefeitura ou estado, carimbado para saúde. Quase sempre paga o dia a dia de hospitais e postos: plantões, consultas, cirurgias.',
+ 'Encargos especiais':'A “emenda Pix”: o dinheiro cai direto no caixa da prefeitura ou do estado, sem dizer em que vai ser gasto. É rápido, mas difícil de fiscalizar; o STF passou a cobrar mais transparência em 2024.',
+ 'Assistência social':'Dinheiro para a rede do SUAS: CRAS, abrigos e atendimento a famílias vulneráveis, idosos e pessoas em situação de rua.',
+ 'Educação':'Escolas e creches: obras, equipamentos, transporte escolar e manutenção da rede de ensino.',
+ 'Desporto e lazer':'Quadras, ginásios, praças esportivas e projetos de esporte, muitas vezes feitos por prefeituras ou entidades.',
+ 'Cultura':'Eventos, festivais, centros culturais e projetos artísticos, por prefeituras ou entidades culturais.',
+ 'Urbanismo':'Obras na cidade: pavimentação, calçadas, praças, iluminação e drenagem.',
+ 'Agricultura':'Apoio ao produtor rural: máquinas, tratores, estradas vicinais e programas de agricultura familiar.',
+ 'Defesa nacional':'Projetos das Forças Armadas, como obras em quartéis, equipamentos e programas sociais militares.',
+ 'Segurança pública':'Polícias e guardas municipais: viaturas, equipamentos e câmeras de monitoramento.',
+ 'Direitos da cidadania':'Políticas para mulheres, pessoas com deficiência, igualdade racial, juventude e direitos humanos, em geral feitas por entidades.',
+ 'Comércio e serviços':'Turismo e desenvolvimento econômico local, como feiras, infraestrutura turística e apoio a pequenos negócios.',
+ 'Gestão ambiental':'Saneamento, recuperação de áreas degradadas e projetos ambientais.',
+ 'Organização agrária':'Assentamentos e regularização fundiária no campo.',
+ 'Trabalho':'Qualificação profissional e programas de emprego.',
+ 'Ciência e Tecnologia':'Pesquisa, inovação e equipamentos para universidades e institutos.',
+ 'Comunicações':'Inclusão digital, internet em escolas e comunidades.',
+ 'Transporte':'Estradas, pontes e mobilidade.',
+ 'Múltiplo':'A emenda foi dividida entre várias áreas ao mesmo tempo.'
+};
+const MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const fdate=s=>{const [y,m,d]=s.split('-');return `${+d} ${MES[m-1]} ${y}`};
+
+// geometria: 12 fileiras em 6 setores separados por corredores, como no plenário real
+const N=deps.length, ROWS=12, cx=500, cy=505, R0=168, R1=478, AIS=13, NAIS=5, SZ=21;
+const AIS_A=[...Array(NAIS)].map((_,k)=>Math.PI*(k+1)/(NAIS+1));
+const radii=[...Array(ROWS)].map((_,i)=>R0+(R1-R0)*i/(ROWS-1));
+const avail=radii.map(r=>Math.PI*r-NAIS*AIS-8), sumA=avail.reduce((a,b)=>a+b,0);
+function share(total,w){const s=w.reduce((a,b)=>a+b,0), raw=w.map(x=>total*x/s), out=raw.map(Math.floor); let rem=total-out.reduce((a,b)=>a+b,0);
+  raw.map((x,i)=>[x-Math.floor(x),i]).sort((a,b)=>b[0]-a[0]).slice(0,rem).forEach(([,i])=>out[i]++); return out;}
+const counts=share(N,avail);
+const seats=[];
+radii.forEach((r,ri)=>{const ga=AIS/r, pad=4/r; // limites dos setores (ângulo)
+  const bounds=[]; let a0=Math.PI-pad; AIS_A.slice().reverse().forEach(a=>{bounds.push([a0,a+ga/2]); a0=a-ga/2;}); bounds.push([a0,pad]);
+  const per=share(counts[ri],bounds.map(([x,y])=>x-y));
+  bounds.forEach(([hi,lo],si)=>{const k=per[si]; for(let j=0;j<k;j++){const a=hi-(hi-lo)*(j+.5)/k; seats.push({a,r,x:cx+r*Math.cos(a),y:cy-r*Math.sin(a)})}});});
+seats.sort((p,q)=>q.a-p.a || p.r-q.r);
+const NS='http://www.w3.org/2000/svg', layer=document.getElementById('seats');
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag); Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v)); (parent||document.getElementById('h')).appendChild(e); return e;};
+// piso: carpete, degraus, corredores e balaustrada de madeira
+const floor=document.getElementById('floor'), arc=(r)=>`M ${cx-r} ${cy} A ${r} ${r} 0 0 1 ${cx+r} ${cy}`;
+mk('path',{d:arc(R1+26)+' Z',fill:'url(#carpet)'},floor);
+radii.forEach((r,i)=>mk('path',{d:arc(r),fill:'none',stroke:i%2?'#1E3529':'#192E23','stroke-width':27,'stroke-opacity':.55},floor));
+AIS_A.forEach(a=>mk('line',{x1:cx+(R0-18)*Math.cos(a),y1:cy-(R0-18)*Math.sin(a),x2:cx+(R1+20)*Math.cos(a),y2:cy-(R1+20)*Math.sin(a),stroke:'#0C1511','stroke-width':AIS-2,'stroke-linecap':'round'},floor));
+mk('path',{d:arc(R1+26),fill:'none',stroke:'url(#wood)','stroke-width':5},floor);
+mk('path',{d:arc(R0-22),fill:'none',stroke:'#2A3D33','stroke-width':1.5,'stroke-dasharray':'2 5'},floor);
+const els=deps.map((d,i)=>{const s=seats[i], rot=90-s.a*180/Math.PI;
+  const g=document.createElementNS(NS,'g'); g.setAttribute('class','seat'); g.setAttribute('tabindex','0'); g.setAttribute('role','button');
+  g.setAttribute('aria-label',`${d.n}, ${d.p}-${d.uf}`);
+  g.setAttribute('transform',`translate(${s.x.toFixed(1)} ${s.y.toFixed(1)}) rotate(${rot.toFixed(1)})`);
+  g.innerHTML=`<g class="in"><use href="#pol" x="${-SZ/2}" y="${-SZ/2}" width="${SZ}" height="${SZ}" style="color:${d.e?'#5A5F66':color(d.s)}"${d.e?' fill-opacity=".45" stroke="#A9ADB3" stroke-width=".9" stroke-dasharray="2 1.5"':''}/></g>`;
+  layer.appendChild(g); return g;});
+const txt=(x,y,t,o,parent)=>{const e=mk('text',{x,y,...o},parent); e.textContent=t; return e;};
+const lab={fill:'#8C9298','font-size':14,'font-family':'Archivo, sans-serif'};
+txt(cx-R1-6,cy+30,'PT E ALIADOS',{...lab,'text-anchor':'start','letter-spacing':2,'font-size':12});
+txt(cx+R1+6,cy+30,'PL E ALIADOS',{...lab,'text-anchor':'end','letter-spacing':2,'font-size':12});
+// painel eletrônico e mesa diretora
+const mesa=document.getElementById('mesa');
+mk('rect',{x:cx-92,y:cy-128,width:184,height:62,rx:6,fill:'#06090A',stroke:'#24302A'},mesa);
+txt(cx,cy-84,N+1,{'text-anchor':'middle',fill:'#FFB000','font-family':"Doto, 'Big Shoulders Display', monospace",'font-weight':900,'font-size':40,'letter-spacing':2},mesa);
+txt(cx,cy-72,'DEPUTADOS EM EXERCÍCIO',{'text-anchor':'middle',fill:'#8C9298','font-size':8,'letter-spacing':1.6,'font-family':'Archivo, sans-serif'},mesa);
+mk('path',{d:`M ${cx-92} ${cy-34} Q ${cx} ${cy-58} ${cx+92} ${cy-34} L ${cx+86} ${cy-20} Q ${cx} ${cy-42} ${cx-86} ${cy-20} Z`,fill:'url(#wood)',stroke:'#7A5A3E','stroke-width':1},mesa);
+// cadeira da presidência, no centro, de frente para o plenário
+const PRES=__PRES__;
+const NEWS=__NEWS__;
+const pg=document.createElementNS(NS,'g'); pg.setAttribute('class','pres'); pg.setAttribute('tabindex','0'); pg.setAttribute('role','button');
+pg.setAttribute('aria-label',`${PRES.n}, presidente da Câmara`);
+pg.setAttribute('transform',`translate(${cx} ${cy+2}) rotate(180)`);
+pg.innerHTML=`<g class="in"><use href="#pol" x="-17" y="-17" width="34" height="34" style="color:#FFB000"/></g>`;
+document.getElementById('mesa').appendChild(pg);
+txt(cx,cy+34,'PRESIDÊNCIA',{...lab,'text-anchor':'middle','font-size':10,'letter-spacing':2.5,fill:'#FFB000','font-weight':600},mesa);
+// filtro de partidos, do mais governista ao mais oposicionista
+const pm={}; deps.forEach(d=>{(pm[d.p]=pm[d.p]||[]).push(d.s)});
+const sel=document.getElementById('party');
+Object.entries(pm).map(([p,a])=>[p,a.reduce((x,y)=>x+y,0)/a.length,a.length]).sort((a,b)=>a[1]-b[1])
+ .forEach(([p,m,n])=>{const o=document.createElement('option');o.value=p;o.textContent=`${p} (${n})`;sel.appendChild(o)});
+
+const tip=document.getElementById('tip'), card=document.getElementById('card'), q=document.getElementById('q');
+let selected=-1;
+const hl=document.getElementById('hl'); let hov=-1;
+function lift(i){drop(); hov=i; const g=els[i]; g.classList.add('hov'); hl.innerHTML=`<g transform="${g.getAttribute('transform')}">${g.innerHTML}</g>`; if(g.classList.contains('sel')) hl.querySelector('use').style.stroke='var(--focus)', hl.querySelector('use').style.strokeWidth='1.4';}
+function drop(){if(hov>=0) els[hov].classList.remove('hov'); hov=-1; hl.innerHTML=''; document.getElementById('h').classList.remove('focusing');}
+const svgH=document.getElementById('h');
+function showTip(i,ev){tip.style.maxWidth='';lift(i); svgH.classList.add('focusing'); const d=deps[i]; tip.className='tip hovcard'; tip.innerHTML=face(d)+`<div><b>${esc(d.n)}</b><span>${d.p}-${d.uf} · ${posLabel(d.s)}${d.e?' (estimado)':''}</span><em>Clique para abrir</em></div>`; tip.hidden=false; moveTip(ev)}
+function moveTip(ev){tip.style.left=Math.min(ev.clientX+16, innerWidth-tip.offsetWidth-8)+'px'; tip.style.top=Math.max(8,ev.clientY-tip.offsetHeight-14)+'px'}
+const arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+const drawer=document.getElementById('drawer');
+function openDrawer(){drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); drawer.scrollTop=0;}
+function closeDrawer(){drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); pg.classList.remove('sel'); if(selected>=0) els[selected].classList.remove('sel'); selected=-1;}
+document.getElementById('closeBtn').addEventListener('click',closeDrawer);
+addEventListener('keydown',e=>{if(e.key==='Escape') closeDrawer()});
+document.querySelector('.hall').addEventListener('click',e=>{if(!e.target.closest('.seat,.pres')) closeDrawer()});
+function pick(i){ pg.classList.remove('sel'); if(selected>=0) els[selected].classList.remove('sel'); selected=i; els[i].classList.add('sel');
+  const d=deps[i], h=HIST.deps[d.id], pct=((d.s-smin)/(smax-smin)*100).toFixed(1);
+  card.innerHTML = face(d) + `<div style="min-width:0"><h2>${esc(d.n)}</h2><div class="meta">${d.p}-${d.uf} · ${posLabel(d.s)}${d.e?' (estimado)':''}</div>${estNote(d)}
+   <div class="bar" title="Lugar pelo voto"><i style="left:${pct}%"></i></div>
+   <div class="facts">
+    <div class="fact"><small>Votou em</small><strong>${d.v} de ${TOT}</strong><em>votações de plenário, 2025–26</em></div>
+    <div class="fact"><small>Segue o partido</small><strong>${h.f!=null?h.f+'%':'—'}</strong><em>dos votos Sim/Não, 2025–26</em></div>
+    <div class="fact"><small>Votou com o governo</small><strong>${h.gov!=null?h.gov+'%':'—'}</strong><em>orientação do líder do governo, 2025–26</em></div>
+    <div class="fact"><small>Na Câmara desde</small><strong>${h.y0}</strong><em>${tenure(h)}</em></div>
+    <div class="fact"><small>Emendas pagas</small><strong>${h.em?brl(h.em.pago):'—'}</strong><em>individuais, 2023–26</em></div>
+    <div class="fact" style="grid-column:1/-1"><small>Eleição de 2026</small><strong style="font-size:22px">${h.tse?SIT(h.tse.sit):'—'}</strong><em>${h.tse?`para ${esc(h.tse.cargo)}${h.tse.uf==='BR'?'':' ('+h.tse.uf+')'} · patrimônio declarado ${brl(h.tse.bens)}`:'sem candidatura encontrada no TSE'}</em></div>
+   </div>
+   <a class="go" href="#dep/${d.id}">VER HISTÓRICO COMPLETO ${arrow}</a></div>`;
+  openDrawer();
+}
+els.forEach((g,i)=>{g.addEventListener('mouseenter',e=>showTip(i,e)); g.addEventListener('mousemove',moveTip); g.addEventListener('mouseleave',()=>{tip.hidden=true;drop()});
+  g.addEventListener('click',()=>pick(i)); g.addEventListener('dblclick',()=>location.hash='dep/'+deps[i].id);
+  g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(i)}});
+  g.addEventListener('focus',()=>{if(!g.matches(':focus-visible')) return; const b=g.getBoundingClientRect(); showTip(i,{clientX:b.right,clientY:b.top})}); g.addEventListener('blur',()=>{tip.hidden=true;drop()});});
+// rede de segurança: some com o cartão sempre que o ponteiro não estiver sobre uma poltrona
+function hideHover(){tip.hidden=true; drop();}
+document.addEventListener('pointermove',e=>{if(document.body.classList.contains('dep')) return; if(!tip.hidden && !e.target.closest('.seat,.pres')) hideHover();},{passive:true});
+document.addEventListener('pointerleave',hideHover); document.documentElement.addEventListener('mouseleave',hideHover);
+addEventListener('blur',hideHover); addEventListener('scroll',()=>{if(!document.body.classList.contains('dep')) hideHover()},{passive:true});
+document.querySelector('.hall').addEventListener('scroll',hideHover,{passive:true});
+function pickPres(){ if(selected>=0) els[selected].classList.remove('sel'); selected=-1; pg.classList.add('sel');
+  const d={n:PRES.n,id:PRES.id,s:0}; const f=`<div class="face" style="background:#FFB000;width:104px;height:132px;font-size:40px" aria-hidden="true">HM<img alt="" src="https://www.camara.leg.br/internet/deputado/bandep/${PRES.id}.jpg" onerror="this.remove()"></div>`;
+  const rows=PRES.pautas.map(x=>`<a href="https://www.camara.leg.br/propostas-legislativas/${x.prop}" target="_blank" rel="noopener"><time datetime="${x.d}">${fdate(x.d)}</time><div style="min-width:0"><b>${esc(x.tit)}</b> <span>· ${esc(x.res)}</span><br><span>${esc(x.em)}</span></div><span>${x.n} ${x.n>1?'votações':'votação'} ↗</span></a>`).join('');
+  card.innerHTML = f + `<div style="min-width:0"><h2>${PRES.n}</h2><div class="meta">${PRES.p}-${PRES.uf} · natural de ${PRES.nasc}</div><span class="role">Presidente da Câmara</span>
+   <div class="facts">
+    <div class="fact"><small>Presidiu</small><strong>${PRES.nv}</strong><em>votações nominais desde ${fdate(PRES.desde)}</em></div>
+    <div class="fact"><small>Na Câmara desde</small><strong>${PRES.y0}</strong><em>${tenure(PRES)}</em></div>
+    <div class="fact"><small>Vota no plenário?</small><strong>Raramente</strong><em>quem preside registra "art. 17", por isso fica fora da meia-lua</em></div>
+   </div>
+   <p class="sec" style="margin-top:18px">Últimas pautas que ele pôs em votação</p><div class="plist">${rows}</div>${newsBlock(PRES.id,PRES.n)}</div>`;
+  openDrawer();
+}
+pg.addEventListener('click',pickPres); pg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pickPres()}});
+pg.addEventListener('mouseenter',e=>{tip.className='tip';tip.innerHTML=`<b>${PRES.n}</b><span>Presidente da Câmara · ${PRES.p}-${PRES.uf}</span>`;tip.hidden=false;moveTip(e)});
+pg.addEventListener('mousemove',moveTip); pg.addEventListener('mouseleave',()=>tip.hidden=true);
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+function filter(){const t=norm(q.value.trim()), p=sel.value; let first=-1;
+  deps.forEach((d,i)=>{const ok=(!t||norm(d.n).includes(t))&&(!p||d.p===p); els[i].classList.toggle('dim',!ok); if(ok&&first<0&&(t||p)) first=i;});
+  if(t&&first>=0) pick(first);}
+q.addEventListener('input',filter); sel.addEventListener('change',filter);
+
+// página de histórico
+const vw=w=>/^(a favor|contra)$/.test(w)?'Votou '+w:'Votou por '+w;
+const BADGE={S:k=>vw(k.sim), N:k=>vw(k.nao), A:()=>'Não votou (ausente)', B:()=>'Absteve-se', P:()=>'Presidia (art. 17)', X:()=>'Voto secreto', '-':()=>'Fora do mandato'};
+const perfil=document.getElementById('perfil');
+function favBlock(e){ if(!e.fav||!e.fav.length) return '';
+  const li=e.fav.map(([n,m,v,ar])=>`<li><span>${esc(n)}<br><small class="emuted">${esc(m)}${(ar||[]).length?' · '+ar.map(([a])=>esc(AREA[a]||a)).join(', '):''}</small></span><b>${brl(v)}</b></li>`).join('');
+  return `<details class="whatis"><summary>Ver para onde foi</summary>
+   <p>Pagamentos de 2023 a 2026 para <strong>${e.nfav} recebedores</strong> em <strong>${e.nmun} municípios</strong>. Os 5 maiores:</p>
+   <ul class="areas">${li}</ul>
+   <p>Bancos aparecem quando só operam o repasse. Lista completa no <a href="https://portaldatransparencia.gov.br/emendas" target="_blank" rel="noopener" style="color:var(--fg)">Portal da Transparência ↗</a>.</p></details>`}
+const SIT=s=>/^ELEITO/.test(s)?'Venceu':s==='SUPLENTE'?'Ficou como suplente':s==='NÃO ELEITO'?'Não venceu':s==='2º TURNO'?'Disputa o 2º turno':'Sem resultado registrado';
+const SITC=s=>/^ELEITO/.test(s)?'b-S':s==='2º TURNO'?'b-A':'b-N';
+function idade(n){if(!n) return null; const [d,m,y]=n.split('/').map(Number); const t=new Date(2026,9,9); let a=t.getFullYear()-y; if(t.getMonth()+1<m||(t.getMonth()+1===m&&t.getDate()<d)) a--; return a;}
+function tseShort(h){const x=h.tse; return x?`${x.cargo} ${x.uf==='BR'?'':'('+x.uf+')'} · ${SIT(x.sit)}`:'Não encontramos candidatura';}
+const HCS=s=>/^Eleito/i.test(s)?['Eleito','b-S']:/^Suplente/i.test(s)?['Suplente','b-N']:/^Não eleito/i.test(s)?['Não eleito','b-N']:/2º turno/i.test(s)?['2º turno','b-A']:[s==='#NULO'?'Sem resultado':s,'b-A'];
+function hcBlock(h){const L=h.hc||[]; if(!L.length) return '';
+  return `<p class="sec">Candidaturas desde 2004</p><ol class="tl">${L.map(([a,c,l,p,s])=>{const [lab,cls]=HCS(s); return `<li><time>${a}</time><div><b>${esc(c)}</b><span>${esc(l)} · ${esc(p)}</span></div><span class="badge ${cls}">${esc(lab)}</span></li>`}).join('')}</ol>
+   <p class="note" style="margin:0">Fonte: TSE, histórico de candidaturas ligado à candidatura de 2026. Eleições anteriores a 2004 não estão na base; mandatos antigos aparecem em "Na Câmara desde".</p>`}
+function tseBlock(h){const x=h.tse;
+  if(!x) return `<p class="sec">Eleição de 2026</p><div class="todo">Não encontramos candidatura deste deputado nos dados do TSE de 2026. Pode não ter disputado, ou o nome não bateu nos registros.</div>`;
+  const mx=Math.max(...x.cats.map(c=>c[1]),1);
+  return `<p class="sec">Eleição de 2026</p>
+   <div class="elei"><div><small>Disputou</small><b>${esc(x.cargo)}${x.uf==='BR'?'':' · '+x.uf}</b><span>pelo ${esc(x.partido)}</span></div><span class="badge ${SITC(x.sit)}">${SIT(x.sit)}</span></div>
+   <div class="facts" style="margin-top:4px">
+    <div class="fact"><small>Profissão declarada</small><strong style="font-size:22px">${esc(x.ocup)}</strong></div>
+    <div class="fact"><small>Escolaridade</small><strong style="font-size:22px">${esc(x.esc)}</strong></div>
+    <div class="fact"><small>Idade</small><strong style="font-size:22px">${idade(x.nasc)??'—'} anos</strong></div>
+   </div>
+   <p class="sec">Patrimônio declarado ao TSE em 2026</p>
+   <div class="emb"><div><div class="ebig">${x.bens?brl(x.bens):'R$ 0'}</div><em class="emuted">${x.nbens} ${x.nbens===1?'bem declarado':'bens declarados'}</em></div>
+    <div>${x.cats.length?x.cats.map(([c,v])=>`<div class="ebar" style="grid-template-columns:150px 1fr 90px"><span>${esc(c==='Outros'?'Outros bens e direitos':c)}</span><div><i style="width:${(v/mx*100).toFixed(1)}%"></i></div><b>${brl(v)}</b></div>`).join(''):'<span class="emuted">Nenhum bem declarado.</span>'}</div></div>
+   <p class="note" style="margin:0">Fonte: TSE, Eleições 2026. O valor é o que o próprio candidato declarou, em geral pelo preço de compra e não pelo valor de mercado; por isso imóveis antigos costumam aparecer baratos.</p>`}
+function cotaBlock(d,h){const c=h.cota; if(!c) return '';
+  const mx=Math.max(...c.cats.map(x=>x[1]),1), MES2=['','jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  return `<p class="sec">Cota parlamentar (verba de gabinete)</p>
+   <details class="whatis"><summary>O que é a cota parlamentar?</summary><p>Além do salário, cada deputado tem uma verba mensal para despesas do mandato: passagens, escritório no estado, aluguel de carro, combustível, divulgação. Ele paga, apresenta a nota fiscal e a Câmara reembolsa. O limite muda por estado, porque viajar a Brasília custa mais para quem mora longe; por isso comparamos cada deputado com os do mesmo estado.</p></details>
+   <div class="emb"><div><div class="ebig">${brl(c.y25)}</div><em class="emuted">gastos em 2025${c.pos?` · ${c.pos}º que mais gastou entre os ${c.n} deputados de ${d.uf}`:''}</em>
+     <div class="fact" style="margin-top:16px"><small>Em 2026 (jan a ${MES2[c.m26]})</small><strong style="font-size:24px">${brl(c.y26)}</strong></div></div>
+    <div><small class="emuted" style="letter-spacing:1.5px;text-transform:uppercase;font-size:11px">Com o quê (2025–26)</small>
+     ${c.cats.map(([k,v])=>`<div class="ebar" style="grid-template-columns:150px 1fr 80px"><span>${esc(k)}</span><div><i style="width:${(v/mx*100).toFixed(1)}%"></i></div><b>${brl(v)}</b></div>`).join('')}</div></div>
+   <details class="whatis"><summary>Para quem foi o dinheiro</summary><p>Os 5 fornecedores que mais receberam, 2025–26:</p><ul class="areas">${c.forn.map(([n,v])=>`<li><span>${esc(n)}</span><b>${brl(v)}</b></li>`).join('')}</ul>
+    <p>Cada despesa tem nota fiscal pública no <a href="https://www.camara.leg.br/deputados/${d.id}" target="_blank" rel="noopener" style="color:var(--fg)">site da Câmara ↗</a>.</p></details>
+   <p class="note" style="margin:0">Fonte: Câmara dos Deputados, dados da cota parlamentar (CEAP), valores líquidos.</p>`}
+function newsBlock(id,nome){const n=NEWS[id]; const q=encodeURIComponent(`"${nome}" deputado`);
+  if(!n||!n.length) return `<p class="sec">Últimas notícias</p><div class="todo">Ainda não acompanhamos as notícias deste deputado. <a href="https://news.google.com/search?q=${q}&hl=pt-BR&gl=BR&ceid=BR:pt-419" target="_blank" rel="noopener" style="color:var(--fg)">Buscar no Google Notícias ↗</a></div>`;
+  return `<p class="sec">Últimas notícias</p><div class="news">${n.slice(0,3).map(x=>`<a class="nitem" href="${esc(x.url)}" target="_blank" rel="noopener"><small>${esc(x.veiculo)}${x.data?' · '+fdate(x.data):''}</small><b>${esc(x.titulo)} ↗</b><p>${esc(x.resumo)}</p></a>`).join('')}</div>
+   <p class="note" style="margin:0">Resumos do Voto Aberto; a matéria completa está no site de cada veículo. Notícias escolhidas pela data, não pelo tom. Atualizado em ${fdate(NEWS.atualizado)}.</p>`}
+const OQF=`<details class="whatis"><summary>O que faz um deputado federal?</summary><ul class="oqf">
+ <li><strong>Vota leis.</strong> Projetos, mudanças na Constituição (PECs) e medidas provisórias passam pelo plenário. É o que você vê aqui.</li>
+ <li><strong>Propõe leis.</strong> Cada deputado pode apresentar projetos, que passam por comissões antes de chegar ao plenário.</li>
+ <li><strong>Fiscaliza o governo.</strong> Convoca ministros, abre CPIs e pede informações a órgãos públicos.</li>
+ <li><strong>Manda dinheiro para a base.</strong> Pelas emendas parlamentares, escolhe para onde vai uma parte do orçamento federal.</li>
+ <li><strong>Representa o estado.</strong> São 513, divididos pela população: SP tem 70, estados menores têm 8.</li></ul></details>`;
+function estNote(d){return d.e?'<p class="estn">Pouco tempo no cargo nesta legislatura (ex-ministro, licenciado ou suplente recente): votos insuficientes para calcular o lugar. Posição estimada pela média do partido.</p>':''}
+function emBlock(h){ if(!h.em) return '<p class="sec">Emendas parlamentares</p><div class="todo">Nenhuma emenda individual em nome dele entre 2023 e 2026. É comum em quem passou a legislatura como ministro ou entrou como suplente: as emendas da vaga ficam em nome de quem ocupava a cadeira.</div>';
+  const e=h.em, anos=['2023','2024','2025','2026'], mx=Math.max(...anos.map(a=>e.ano[a]||0),1);
+  const bars=anos.map(a=>`<div class="ebar"><span>${a}</span><div><i style="width:${((e.ano[a]||0)/mx*100).toFixed(1)}%"></i></div><b>${e.ano[a]?brl(e.ano[a]):'—'}</b></div>`).join('');
+  const areas=e.area.map(([a,v])=>`<li><button type="button" class="ainfo" data-tip="${esc(AREA_TXT[a]||'')}">${esc(AREA[a]||a)} <i aria-hidden="true">?</i></button><b>${brl(v)}</b></li>`).join('');
+  return `<p class="sec">Emendas parlamentares individuais</p>
+   <details class="whatis"><summary>O que é emenda parlamentar?</summary><p>Todo ano o Congresso aprova o Orçamento da União. Emenda é a parte dele que <strong>cada deputado escolhe para onde vai</strong>: prefeituras, hospitais, o governo do estado, entidades. As individuais são obrigatórias: o governo tem que pagar, por isso todos recebem valores parecidos, perto de R$ 35 mi por ano. O que muda é <strong>para onde</strong> cada um manda.</p></details>
+   <div class="emb"><div><div class="ebig">${brl(e.pago)}</div><em class="emuted">pagos de ${brl(e.emp)} prometidos (empenhados), emendas de 2023 a 2026</em>${bars}</div>
+   <div><small class="emuted" style="letter-spacing:1.5px;text-transform:uppercase;font-size:11px">Em que área</small><ul class="areas">${areas}</ul></div></div>
+   ${favBlock(e)}
+   <p class="note" style="margin:0">Fonte: Portal da Transparência. Conta o que já foi pago, inclusive restos a pagar. Quem estreou em 2023 só tem emendas a partir de 2024, porque o orçamento de 2023 foi feito pelo Congresso anterior.</p>`}
+function renderPerfil(id){const i=byId[id]; if(i==null){location.hash='';return}
+  const d=deps[i], h=HIST.deps[id], pct=((d.s-smin)/(smax-smin)*100).toFixed(1);
+  const cnt={S:0,N:0,A:0}; [...h.k].forEach(c=>{if(c in cnt)cnt[c]++});
+  const rows=HIST.key.map((k,j)=>{const c=h.k[j]; return `<details class="vdet"><summary class="vrow" data-tip="${esc(k.desc)}"><time datetime="${k.d}">${fdate(k.d)}</time>
+    <div><b>${esc(k.t)} <i class="plus" aria-hidden="true">+</i></b><span>${esc(k.r)}</span></div><span class="badge b-${c}">${BADGE[c](k)}</span></summary>
+    <div class="vmore"><p>${esc(k.desc)}</p>${k.dep?`<p class="emuted">${esc(k.dep)}</p>`:''}<p class="emuted">${esc(k.m)}</p>
+    <a href="https://www.camara.leg.br/propostas-legislativas/${k.prop}" target="_blank" rel="noopener">Ver a proposta e a tramitação na Câmara ↗</a></div></details>`}).join('');
+  perfil.innerHTML=`<a class="back" href="#">Voltar ao plenário</a>
+   <div class="hero">${face(d)}<div><div class="brand" style="font-size:16px"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-8px"></i>VOTO ABERTO</div>
+    <h1>${esc(d.n)}</h1><div class="meta" style="font-size:16px">${d.p}-${d.uf} · ${posLabel(d.s)}${h.nasc?' · natural de '+esc(h.nasc):''}</div>${estNote(d)}
+    <div class="bar" style="max-width:420px"><i style="left:${pct}%"></i></div></div></div>
+   <div class="facts">
+    <div class="fact"><small>Votou em</small><strong>${d.v} de ${TOT}</strong><em>votações de plenário, 2025–26</em></div>
+    <div class="fact"><small>Segue o partido</small><strong>${h.f!=null?h.f+'%':'—'}</strong><em>quando o partido tem maioria</em></div>
+    <div class="fact"><small>Votou com o governo</small><strong>${h.gov!=null?h.gov+'%':'—'}</strong><em>orientação do líder do governo, 2025–26</em></div>
+    <div class="fact"><small>Na Câmara desde</small><strong>${h.y0}</strong><em>${tenure(h)}</em></div>
+    <div class="fact"><small>Nas ${HIST.key.length} votações abaixo</small><strong>${cnt.S} · ${cnt.N} · ${cnt.A}</strong><em>Sim · Não · ausente</em></div>
+   </div>
+   ${tseBlock(h)}
+   ${hcBlock(h)}
+   ${OQF}
+   <p class="sec">Como votou nos temas que o Voto Aberto mostrou <span class="hint">· passe o mouse para resumo, clique para detalhes</span></p>
+   <div class="votes">${rows}</div>
+   ${emBlock(h)}
+   ${cotaBlock(d,h)}
+   ${newsBlock(d.id,d.n)}
+   <p class="note">Fonte: dados abertos da Câmara dos Deputados. "Não votou (ausente)" = registrou voto em outras sessões da mesma semana, mas não nesta. "Fora do mandato" = não estava em exercício na data. "Na Câmara desde" = primeira legislatura em que exerceu mandato, inclusive como suplente; pode ter havido intervalos.</p>`;
+}
+function areaTip(el,html){tip.className='tip';tip.innerHTML=html||`<p>${el.dataset.tip}</p>`; tip.style.maxWidth='300px'; tip.hidden=false; const b=el.getBoundingClientRect();
+  tip.style.left=Math.max(8,Math.min(b.left, innerWidth-tip.offsetWidth-8))+'px'; tip.style.top=(b.top-tip.offsetHeight-8<8? b.bottom+8 : b.top-tip.offsetHeight-8)+'px';}
+perfil.addEventListener('mouseover',e=>{const a=e.target.closest('.ainfo'); if(a) return areaTip(a); const v=e.target.closest('summary.vrow'); if(v&&!v.parentElement.open&&matchMedia('(hover:hover)').matches){areaTip(v.querySelector('b'),`<p>${v.dataset.tip}</p><p class="emuted" style="margin-top:6px">Clique para ver mais</p>`);}});
+perfil.addEventListener('mouseout',e=>{if(e.target.closest('.ainfo')||e.target.closest('summary.vrow')) tip.hidden=true});
+perfil.addEventListener('toggle',()=>tip.hidden=true,true);
+perfil.addEventListener('focusin',e=>{const a=e.target.closest('.ainfo'); if(a) areaTip(a)});
+perfil.addEventListener('focusout',e=>{if(e.target.closest('.ainfo')) tip.hidden=true});
+perfil.addEventListener('click',e=>{const a=e.target.closest('.ainfo'); if(a){ if(tip.hidden) areaTip(a); else tip.hidden=true; }});
+addEventListener('scroll',()=>{if(document.body.classList.contains('dep')) tip.hidden=true},{passive:true});
+// ================= TESTE: quem vota como você =================
+// eixos da teia (0 a 100). "dir" de cada pergunta: +1 = concordar puxa o eixo para cima.
+const AXES=[
+ {id:'social',nm:'Estado social',hi:'Você quer um Estado que garanta renda, direitos e serviços para quem precisa, mesmo custando mais.',lo:'Você desconfia de ampliar benefícios e direitos pagos pelo Estado.'},
+ {id:'mercado',nm:'Economia de mercado',hi:'Você confia no mercado e na iniciativa privada: menos impostos, menos estatais, menos regras.',lo:'Você prefere o Estado regulando a economia e cobrando mais de quem tem mais.'},
+ {id:'fiscal',nm:'Contas públicas rígidas',hi:'Para você, o governo precisa gastar só o que arrecada, mesmo que isso exija cortes.',lo:'Você aceita gastar mais e flexibilizar regras fiscais para investir e proteger programas.'},
+ {id:'ordem',nm:'Lei e ordem',hi:'Você defende penas mais duras e mais poder para a polícia e a Justiça punirem.',lo:'Você desconfia de endurecer penas e prefere controlar abusos da força policial.'},
+ {id:'liberal',nm:'Sociedade liberal',hi:'Nos costumes, você defende liberdades individuais: aborto, drogas, direitos LGBT, Estado laico.',lo:'Nos costumes, você valoriza tradição, família e religião, e é contra liberar aborto e drogas.'},
+ {id:'ambiente',nm:'Proteção ambiental',hi:'Você põe o meio ambiente à frente, mesmo que isso freie obras e o agronegócio.',lo:'Você prioriza produção, obras e agronegócio, com menos amarras ambientais.'},
+ {id:'mundo',nm:'Abertura ao mundo',hi:'Você quer o Brasil mais aberto: comércio livre e acolhida de imigrantes.',lo:'Você prefere proteger a indústria nacional e controlar a entrada de estrangeiros.'},
+ {id:'controle',nm:'Controle sobre os políticos',hi:'Você quer menos privilégios e mais controle sobre deputados, partidos e emendas.',lo:'Você é mais tolerante com as regras e proteções atuais da classe política.'}
+];
+// v = id da votação real (compara com deputados); x = economia (−esquerda, +direita); y = costumes (−progressista, +conservador)
+const QUIZ=[
+ // ---- Parte 1: votações reais ----
+ {v:'2233802-438',tema:'Trabalho',q:'A jornada máxima de trabalho deveria cair de 44 para 40 horas semanais, em cinco dias, sem redução de salário?',ax:{social:1,mercado:-1},x:-1,pro:'Mais descanso e convivência familiar; outros países reduziram a jornada sem perder produtividade.',contra:'Aumenta o custo de contratar, sobretudo para pequenas empresas, e pode gerar demissões ou informalidade.'},
+ {v:'2383287-43',tema:'Impostos',q:'Rendimentos de investimentos no exterior (offshores) e de fundos exclusivos, usados por grandes investidores, deveriam passar a pagar Imposto de Renda?',ax:{social:1,mercado:-1},x:-1,pro:'Quem tem mais dinheiro deixaria de adiar o imposto por anos; a arrecadação ajuda a fechar as contas.',contra:'Mais imposto sobre investimento afasta capital e pode levar dinheiro para fora do Brasil.'},
+ {v:'2196833-373',tema:'Impostos',q:'Cinco impostos sobre consumo (PIS, Cofins, IPI, ICMS e ISS) deveriam ser trocados por um imposto único sobre valor agregado, dividido entre União, estados e municípios?',ax:{},pro:'Simplifica um dos sistemas mais complicados do mundo e acaba com a guerra fiscal entre estados.',contra:'A alíquota final pode ficar entre as mais altas do mundo e estados e municípios perdem autonomia.'},
+ {v:'2357053-47',tema:'Contas públicas',q:'O teto de gastos deveria ser trocado por uma regra em que a despesa cresce até 70% do aumento da arrecadação?',ax:{fiscal:-1,social:1},x:-1,pro:'Regra mais realista que o teto, que permite investir e manter programas sociais com metas fiscais.',contra:'Depende de arrecadar cada vez mais e é frouxa demais para controlar a dívida pública.'},
+ {v:'2473375-59',tema:'Contas públicas',q:'O aumento real do salário mínimo deveria ter um limite de 2,5% ao ano, para conter os gastos públicos?',ax:{fiscal:1,social:-1},pro:'Aposentadorias e benefícios acompanham o mínimo; sem limite, os gastos crescem mais que a arrecadação.',contra:'Reduz o ganho de quem recebe o mínimo e de aposentados; o ajuste deveria vir de outros gastos.'},
+ {v:'2515648-44',tema:'Impostos',q:'O Congresso deveria derrubar o aumento do IOF, imposto sobre crédito, câmbio e alguns investimentos, feito por decreto do governo?',ax:{mercado:1,fiscal:-1},x:1,pro:'Aumento de imposto sem passar pelo Congresso, que encarece o crédito para empresas e famílias.',contra:'A arrecadação era necessária para cumprir a meta fiscal sem cortar programas.'},
+ {v:'2525180-26',tema:'Impostos',q:'O Congresso deveria derrubar a medida provisória que aumentava impostos sobre bets e sobre aplicações como LCI, LCA e JCP?',ax:{mercado:1,fiscal:-1},x:1,pro:'O governo deveria cortar gastos em vez de aumentar impostos; a medida atingia investimentos populares.',contra:'A MP cobrava mais de bets e de aplicações hoje isentas; sem ela, faltam cerca de R$ 17 bilhões no Orçamento.'},
+ {v:'2355135-49',tema:'Saneamento',q:'O Congresso deveria derrubar os decretos do governo que mudavam o Marco do Saneamento e davam mais espaço para empresas estatais?',ax:{mercado:1},x:1,pro:'Os decretos enfraqueciam a concorrência e o investimento privado necessário para universalizar água e esgoto.',contra:'O governo dizia que os decretos davam segurança às empresas estaduais que já atendem muitos municípios.'},
+ {v:'257161-454',tema:'Meio ambiente',q:'Empreendimentos de médio porte deveriam poder tirar licença ambiental por autodeclaração, com menos etapas?',ax:{ambiente:-1,mercado:1},x:1,pro:'Destrava obras e investimentos parados por anos na burocracia.',contra:'Reduz a fiscalização e aumenta o risco de desmatamento e desastres; críticos o chamaram de “PL da devastação”.'},
+ {v:'345311-270',tema:'Terras indígenas',q:'A demarcação de terras indígenas deveria se limitar às áreas que esses povos ocupavam em 5 de outubro de 1988?',ax:{ambiente:-1},x:1,pro:'Dá segurança jurídica a produtores rurais e encerra disputas sobre áreas ocupadas há décadas.',contra:'Ignora povos expulsos de suas terras antes de 1988; o STF considerou a tese inconstitucional.'},
+ {v:'2351506-122',tema:'Religião',q:'Igrejas e entidades assistenciais sem fins lucrativos deveriam ficar isentas de impostos também na compra de bens e serviços?',ax:{liberal:-1},y:1,pro:'Essas entidades prestam serviços sociais; o imposto embutido nas compras pesa no trabalho que fazem.',contra:'Amplia um benefício que já existe, reduz a arrecadação e favorece instituições religiosas num Estado laico.'},
+ {v:'2482078-57',tema:'Aborto legal',q:'A Câmara deveria derrubar a resolução do Conanda que orientava o atendimento ao aborto legal de meninas de até 14 anos vítimas de violência sexual?',ax:{liberal:-1},y:1,pro:'O Conanda teria ido além do seu papel e criado regras sobre aborto que caberiam ao Congresso.',contra:'A resolução só organizava o atendimento em casos que a lei já permite e protegia meninas vítimas de estupro.'},
+ {v:'2579832-62',tema:'Segurança',q:'As penas para integrantes de facções criminosas deveriam aumentar, com a criação de novos crimes?',ax:{ordem:1},y:1,pro:'Penas maiores e novos crimes dão mais instrumentos para enfrentar facções como PCC e Comando Vermelho.',contra:'Críticos, incluindo o governo, diziam que o texto aprovado tinha problemas técnicos e mudou demais o projeto original.'},
+ {v:'2258828-105',tema:'Segurança',q:'Condenados por pedofilia deveriam ser submetidos à castração química?',ax:{ordem:1,liberal:-1},y:1,pro:'Reduz o risco de novos crimes e endurece a punição para um crime grave.',contra:'Há dúvidas sobre a eficácia e a constitucionalidade de uma pena que interfere no corpo do condenado.'},
+ {v:'2358548-89',tema:'8 de janeiro',q:'As penas dos condenados pelos atos de 8 de janeiro deveriam ser reduzidas, mudando o cálculo das penas de crimes contra a democracia?',ax:{},pro:'As penas aplicadas foram desproporcionais, somando crimes parecidos para a mesma conduta.',contra:'Reduzir as penas enfraquece a punição de um ataque às instituições e pode estimular novos episódios.'},
+ {v:'2423268-40',tema:'Caso Marielle',q:'A Câmara deveria manter a prisão do deputado Chiquinho Brazão, acusado de ser um dos mandantes do assassinato de Marielle Franco?',ax:{},pro:'A acusação é grave e a prisão foi decidida pelo STF com base nas investigações.',contra:'A Constituição só permite prender parlamentar em flagrante de crime inafiançável; a regra protege todos os mandatos.'},
+ {v:'2270800-160',tema:'Congresso',q:'Para abrir processo criminal contra deputados e senadores, o STF deveria precisar de autorização da própria Casa, em voto secreto?',ax:{controle:-1},pro:'Protege o mandato de perseguição judicial e garante a independência do Legislativo.',contra:'Dificulta investigar parlamentares e cria proteção especial para políticos; o voto secreto reduz a transparência.'},
+ {v:'2352476-168',tema:'Partidos',q:'Os partidos que não cumpriram as cotas de recursos para candidaturas de mulheres e de pessoas negras deveriam ter as multas perdoadas?',ax:{controle:-1},pro:'As regras eram novas e confusas; as multas poderiam inviabilizar partidos.',contra:'Perdoar as multas esvazia as cotas e premia quem descumpriu a lei.'},
+ {v:'2383019-54',tema:'Congresso',q:'O número de deputados federais deveria subir de 513 para 531 a partir de 2027?',ax:{controle:-1,fiscal:-1},pro:'Estados que cresceram ganham representação sem que outros percam cadeiras.',contra:'Aumenta o custo do Congresso; o certo seria redistribuir as 513 vagas pela população.'},
+ {v:'2525122-81',tema:'Congresso',q:'A deputada Carla Zambelli, condenada pelo STF, deveria ter o mandato cassado pela Câmara?',ax:{},pro:'Uma condenação criminal definitiva é incompatível com o exercício do mandato.',contra:'Cabe à Câmara, e não ao STF, decidir sobre o mandato; parte dos deputados via a condenação como injusta.'},
+ // ---- Parte 2: suas ideias ----
+ {tema:'Economia e trabalho',q:'Empresas como os Correios deveriam continuar sendo estatais, em vez de privatizadas?',ax:{mercado:-1},x:-1,pro:'Serviços essenciais chegam a lugares que não dão lucro; o controle público garante o atendimento.',contra:'Empresas privadas tendem a ser mais eficientes e o Estado deixa de cobrir prejuízos.'},
+ {tema:'Economia e trabalho',q:'O governo deveria usar a Petrobras para segurar o preço da gasolina e do diesel?',ax:{mercado:-1},x:-1,pro:'O Brasil produz petróleo; o preço poderia ser menor e proteger o consumidor de choques externos.',contra:'Gera prejuízo à empresa e interferência política nos preços, e quem paga a conta é o contribuinte.'},
+ {tema:'Economia e trabalho',q:'Quem ganha mais deveria pagar uma alíquota de Imposto de Renda maior do que paga hoje?',ax:{social:1,mercado:-1},x:-1,pro:'Hoje os mais ricos pagam proporcionalmente menos; mais progressividade reduz a desigualdade.',contra:'Desestimula quem produz e investe e estimula a fuga de capital e a sonegação.'},
+ {tema:'Economia e trabalho',q:'Trabalhadores de aplicativo deveriam ter ganho mínimo por hora e contribuição ao INSS paga em parte pelas plataformas?',ax:{social:1,mercado:-1},x:-1,pro:'Garante proteção mínima a milhões de pessoas que trabalham sem nenhum direito.',contra:'Encarece o serviço, reduz as vagas e tira a flexibilidade que muitos motoristas valorizam.'},
+ {tema:'Economia e trabalho',q:'A reforma trabalhista de 2017, que flexibilizou regras da CLT, deveria ser mantida?',ax:{mercado:1,social:-1},x:1,pro:'Modernizou as relações de trabalho e reduziu processos trabalhistas.',contra:'Enfraqueceu sindicatos e direitos sem gerar os empregos prometidos.'},
+ {tema:'Economia e trabalho',q:'O salário mínimo deveria ter aumento acima da inflação todos os anos?',ax:{social:1,fiscal:-1},x:-1,pro:'Aumenta a renda dos mais pobres e movimenta a economia.',contra:'Pesa nas contas públicas, que pagam aposentadorias atreladas ao mínimo, e pode dificultar contratações.'},
+ {tema:'Economia e trabalho',q:'O Banco Central deveria continuar independente do governo para definir os juros?',ax:{mercado:1,fiscal:1},x:1,pro:'Protege o combate à inflação de pressões políticas de curto prazo.',contra:'Juros decididos sem controle do governo eleito podem travar o crescimento e o emprego.'},
+ {tema:'Economia e trabalho',q:'A propaganda e o funcionamento das bets deveriam ser fortemente restringidos?',ax:{mercado:-1},pro:'As apostas endividam famílias e viciam, sobretudo os mais pobres.',contra:'Adultos devem decidir como gastar o próprio dinheiro; proibir empurra o jogo para a ilegalidade.'},
+ {tema:'Estado e serviços',q:'O Bolsa Família deveria ter regras de saída mais duras, com prazo máximo e exigência de trabalho?',ax:{social:-1,fiscal:1},x:1,pro:'Incentiva a busca por emprego e reduz a dependência do Estado e o gasto público.',contra:'Muitas famílias não acham trabalho formal; cortar o benefício empurra crianças de volta à fome.'},
+ {tema:'Estado e serviços',q:'O governo deveria cortar gastos para reduzir a dívida pública, mesmo que isso atinja programas sociais?',ax:{fiscal:1,social:-1},x:1,pro:'Dívida alta mantém os juros altos e prejudica todo mundo, inclusive os mais pobres.',contra:'Cortar programas sociais pesa sobre quem mais precisa; há outros gastos e privilégios a rever.'},
+ {tema:'Estado e serviços',q:'As universidades públicas deveriam continuar gratuitas para todos os alunos, inclusive os de famílias ricas?',ax:{mercado:-1},x:-1,pro:'A educação pública deve ser gratuita para todos; cobrar abre caminho para privatizar o ensino.',contra:'Quem pode pagar ajudaria a financiar vagas e a permanência de alunos pobres.'},
+ {tema:'Estado e serviços',q:'O SUS deveria contratar mais hospitais e clínicas privadas para reduzir as filas?',ax:{mercado:1},x:1,pro:'Usa a estrutura que já existe para atender mais rápido.',contra:'Desvia dinheiro do sistema público e deixa o SUS dependente do setor privado.'},
+ {tema:'Estado e serviços',q:'As cotas raciais em universidades e concursos deveriam ser trocadas por cotas só de renda?',ax:{liberal:-1},y:1,pro:'A renda já alcança quem mais precisa, sem distinguir pessoas pela cor.',contra:'O racismo pesa além da renda; as cotas raciais corrigem desigualdades históricas e aumentaram a diversidade.'},
+ {tema:'Estado e serviços',q:'Servidores públicos deveriam poder ser demitidos por mau desempenho, com avaliação periódica?',ax:{mercado:1,fiscal:1},x:1,pro:'Valoriza bons servidores e melhora o atendimento à população.',contra:'A estabilidade protege o servidor de perseguição política a cada troca de governo.'},
+ {tema:'Estado e serviços',q:'As escolas cívico-militares deveriam ser ampliadas na rede pública?',ax:{ordem:1,liberal:-1},y:1,pro:'Trazem disciplina e segurança e são aprovadas por muitas famílias.',contra:'Não há evidência de melhor aprendizagem e militarizam um espaço que é da educação.'},
+ {tema:'Estado e serviços',q:'O ensino domiciliar (homeschooling) deveria ser permitido?',ax:{},y:1,pro:'As famílias devem poder escolher como educar os filhos.',contra:'A escola é espaço de convivência e de proteção da criança, inclusive contra abusos em casa.'},
+ {tema:'Segurança e justiça',q:'A maioridade penal deveria continuar em 18 anos?',ax:{ordem:-1},y:-1,pro:'Prender jovens em presídios lotados alimenta facções e não reduz a violência.',contra:'Jovens de 16 anos sabem o que fazem e não deveriam ficar impunes por crimes graves.'},
+ {tema:'Segurança e justiça',q:'As regras para comprar e andar com armas de fogo deveriam ficar mais rígidas?',ax:{ordem:1},y:-1,pro:'Mais armas em circulação aumentam homicídios, acidentes e o desvio para o crime.',contra:'É direito do cidadão se defender quando o Estado não consegue protegê-lo.'},
+ {tema:'Segurança e justiça',q:'Condenados em segunda instância deveriam começar a cumprir pena antes de esgotar todos os recursos?',ax:{ordem:1,controle:1},y:1,pro:'Acaba com a impunidade de quem pode pagar advogados para recorrer por anos.',contra:'A Constituição garante a presunção de inocência até o fim do processo.'},
+ {tema:'Segurança e justiça',q:'As saídas temporárias de presos em feriados (“saidinhas”) deveriam ser mantidas?',ax:{ordem:-1},y:-1,pro:'A saída ajuda a reintegrar o preso, e a grande maioria volta no prazo.',contra:'Muitos presos não voltam ou cometem crimes durante a saída.'},
+ {tema:'Segurança e justiça',q:'Policiais deveriam usar câmeras corporais durante todo o trabalho?',ax:{ordem:-1,controle:1},y:-1,pro:'Reduz abusos e mortes e também protege o policial de acusações falsas.',contra:'Expõe a operação, custa caro e passa desconfiança sobre o trabalho policial.'},
+ {tema:'Segurança e justiça',q:'Quem for pego com pequena quantidade de maconha para uso próprio deveria deixar de ser tratado como criminoso?',ax:{liberal:1,ordem:-1},y:-1,pro:'Evita prender usuários e superlotar presídios, e foca a polícia no tráfico.',contra:'Facilita o consumo e acaba fortalecendo o tráfico.'},
+ {tema:'Segurança e justiça',q:'Facções criminosas como PCC e Comando Vermelho deveriam ser classificadas como organizações terroristas?',ax:{ordem:1},y:1,pro:'Permitiria penas maiores e mais instrumentos de investigação e cooperação internacional.',contra:'Terrorismo tem outra definição; a mudança pode abrir espaço para interferência estrangeira e abusos.'},
+ {tema:'Segurança e justiça',q:'As penas para crimes de corrupção deveriam ser maiores?',ax:{ordem:1,controle:1},pro:'A corrupção desvia recursos da saúde e da educação e precisa de punição exemplar.',contra:'O problema é a punição lenta e incerta, não o tamanho da pena.'},
+ {tema:'Sociedade',q:'O aborto deveria ser permitido até a 12ª semana de gestação, por decisão da mulher?',ax:{liberal:1},y:-1,pro:'A mulher deve decidir sobre o próprio corpo; a proibição não impede abortos inseguros.',contra:'A vida começa na concepção e deve ser protegida desde o início.'},
+ {tema:'Sociedade',q:'O casamento entre pessoas do mesmo sexo deveria ser garantido por lei, e não só por decisão judicial?',ax:{liberal:1},y:-1,pro:'Dá segurança jurídica a casais que já têm esse direito reconhecido pelo STF.',contra:'O casamento é entre homem e mulher, segundo a tradição e a religião de muitos brasileiros.'},
+ {tema:'Sociedade',q:'O cultivo de cannabis para fins medicinais deveria ser liberado no Brasil?',ax:{liberal:1},y:-1,pro:'Barateia remédios que hoje custam caro ou precisam ser importados.',contra:'Abre caminho para a liberação da maconha e é difícil de fiscalizar.'},
+ {tema:'Sociedade',q:'Cassinos e o jogo do bicho deveriam ser legalizados e cobrar impostos?',ax:{liberal:1,mercado:1},pro:'Tira o jogo da ilegalidade, gera empregos e arrecadação.',contra:'Estimula o vício e a lavagem de dinheiro.'},
+ {tema:'Sociedade',q:'As escolas deveriam ter aulas de educação sexual e discutir igualdade de gênero?',ax:{liberal:1},y:-1,pro:'Ajuda a prevenir abuso, gravidez precoce e preconceito.',contra:'Esse tipo de tema é responsabilidade da família, não da escola.'},
+ {tema:'Sociedade',q:'Símbolos religiosos, como crucifixos, deveriam poder continuar em prédios públicos?',ax:{liberal:-1},y:1,pro:'Fazem parte da história e da cultura do país e não obrigam ninguém a nada.',contra:'O Estado é laico e deve tratar todas as religiões igualmente.'},
+ {tema:'Sociedade',q:'Pessoas trans deveriam poder usar o banheiro de acordo com sua identidade de gênero?',ax:{liberal:1},y:-1,pro:'É questão de dignidade e evita constrangimento e violência.',contra:'Mulheres podem se sentir inseguras; o tema deveria considerar outros direitos.'},
+ {tema:'Sociedade',q:'A religião deveria ter mais influência nas decisões do governo?',ax:{liberal:-1},y:1,pro:'Os valores da maioria religiosa do país deveriam orientar as políticas públicas.',contra:'Num Estado laico, nenhuma religião deve impor regras a quem não segue sua fé.'},
+ {tema:'Meio ambiente e mundo',q:'O Brasil deveria explorar petróleo na Margem Equatorial, perto da foz do Amazonas?',ax:{ambiente:-1,mercado:1},x:1,pro:'Gera riqueza, empregos e receita para estados pobres do Norte.',contra:'Ameaça uma região de alta biodiversidade e vai contra a transição energética.'},
+ {tema:'Meio ambiente e mundo',q:'O desmatamento deveria ter punições mais duras, mesmo que isso freie a expansão do agronegócio?',ax:{ambiente:1},x:-1,pro:'A floresta regula a chuva da qual o próprio agro depende.',contra:'Já existem regras rígidas; mais punição atinge produtores que cumprem a lei.'},
+ {tema:'Meio ambiente e mundo',q:'Carros a gasolina e diesel deveriam ter uma data para deixar de ser vendidos no Brasil?',ax:{ambiente:1},x:-1,pro:'Acelera a transição para carros elétricos e o etanol e reduz a poluição.',contra:'Encarece o carro e prejudica a indústria e quem depende de transporte individual.'},
+ {tema:'Meio ambiente e mundo',q:'O Brasil deveria aumentar impostos sobre produtos importados para proteger a indústria nacional?',ax:{mundo:-1,mercado:-1},x:-1,pro:'Protege empregos da indústria brasileira da concorrência de produtos muito baratos de fora.',contra:'Encarece produtos para o consumidor e deixa a indústria acomodada, sem competir.'},
+ {tema:'Meio ambiente e mundo',q:'O Brasil deveria acolher mais imigrantes e refugiados, como venezuelanos e haitianos?',ax:{mundo:1},y:-1,pro:'É dever humanitário, e imigrantes trabalham e contribuem com a economia.',contra:'O país já tem desemprego e serviços públicos sobrecarregados.'},
+ {tema:'Democracia',q:'O valor das emendas parlamentares deveria ser reduzido?',ax:{controle:1},pro:'Hoje uma fatia grande do Orçamento é decidida por interesses eleitorais de cada deputado.',contra:'As emendas levam recursos a municípios que o governo federal não enxerga.'},
+ {tema:'Democracia',q:'O fundo eleitoral, dinheiro público para campanhas, deveria ser mantido?',ax:{controle:-1,fiscal:-1},pro:'Sem ele, as campanhas dependeriam de grandes doadores, e candidatos ricos teriam vantagem.',contra:'São bilhões de reais de impostos gastos em campanha política.'},
+ {tema:'Democracia',q:'Deputados e senadores deveriam perder o foro privilegiado e ser julgados como qualquer cidadão?',ax:{controle:1},pro:'Acaba com um privilégio e com a demora dos processos contra políticos.',contra:'O foro protege o mandato de perseguição por juízes locais.'}
+];
+const KIDX=Object.fromEntries(HIST.key.map((k,i)=>[k.id,i]));
+const OPTS=[[2,'Muito a favor'],[1,'A favor'],[-1,'Contra'],[-2,'Muito contra']];
+const NREAL=QUIZ.filter(Q=>Q.v).length;
+const quizEl=document.getElementById('teste'); let QA=[], qi=0, QSET=[];
+const qHead=()=>`<a class="back" href="#">Voltar ao plenário</a>`;
+function quizIntro(){
+  quizEl.innerHTML=qHead()+`<div class="qintro">
+   <h1>Quais deputados votam como você?</h1>
+   <p class="lead">Você responde sobre votações que aconteceram de verdade na Câmara. No fim, vê quais deputados e partidos votaram mais parecido com você, e onde você fica no mapa político.</p>
+   <div class="qchoose">
+    <button type="button" class="qver" data-n="${NREAL}"><b>Rápido</b><span>${NREAL} votações reais</span><em>uns 5 minutos</em></button>
+    <button type="button" class="qver" data-n="${QUIZ.length}"><b>Completo</b><span>${NREAL} votações reais e ${QUIZ.length-NREAL} perguntas sobre suas ideias</span><em>uns 15 minutos · teia e mapa político mais precisos</em></button>
+   </div>
+   <p class="note">O resultado de cada votação só aparece no final, para não influenciar sua resposta. Nada do que você responde é guardado: fechou a página, sumiu.</p></div>`;
+  quizEl.querySelectorAll('.qver').forEach(b=>b.onclick=()=>{QSET=QUIZ.slice(0,+b.dataset.n); QA=new Array(QSET.length).fill(null); quizQ(0);});}
+function quizQ(i){qi=i; const Q=QSET[i], K=Q.v?HIST.key[KIDX[Q.v]]:null, part=Q.v?'Votação real':'Suas ideias';
+  quizEl.innerHTML=qHead()+`<div class="qprog"><button type="button" class="qback" id="qPrev" ${i?'':'disabled'} aria-label="Pergunta anterior">‹</button><div><i style="width:${(i/QSET.length*100).toFixed(1)}%"></i></div><span class="led">${String(i+1).padStart(2,'0')}/${String(QSET.length).padStart(2,'0')}</span></div>
+   <div class="qcard">
+    <span class="qtema">${part} · ${esc(Q.tema)}</span>
+    <h2 class="qq">${esc(Q.q)}</h2>
+    <div class="qtabs">${K?'<button type="button" class="qtab" data-p="info">Mais informação</button>':''}<button type="button" class="qtab" data-p="pc">Prós e contras</button></div>
+    ${K?`<div class="qpanel" id="p-info" hidden><p>${esc(K.desc)}</p><a href="https://www.camara.leg.br/propostas-legislativas/${K.prop}" target="_blank" rel="noopener">Ver a proposta na Câmara</a></div>`:''}
+    <div class="qpanel qpc" id="p-pc" hidden><div><b>Quem é a favor diz</b><p>${esc(Q.pro)}</p></div><div><b>Quem é contra diz</b><p>${esc(Q.contra)}</p></div></div>
+    <div class="urna" role="group" aria-label="Sua resposta">${OPTS.map(([v,l])=>`<button type="button" class="tecla${QA[i]===v?' on':''}" data-v="${v}">${l}</button>`).join('')}
+     <button type="button" class="tecla branco${QA[i]===0?' on':''}" data-v="0">Branco <small>não sei</small></button></div>
+   </div>`;
+  const go=v=>{QA[i]=v; quizEl.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on',+x.dataset.v===v));
+    setTimeout(()=>{ i+1<QSET.length? quizQ(i+1) : quizResult(); scrollTo(0,0);},180);};
+  quizEl.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>go(+b.dataset.v));
+  quizEl.querySelectorAll('.qtab').forEach(b=>b.onclick=()=>{const id='p-'+b.dataset.p, open=!document.getElementById(id).hidden;
+    quizEl.querySelectorAll('.qpanel').forEach(p=>p.hidden=true); quizEl.querySelectorAll('.qtab').forEach(x=>x.classList.remove('on'));
+    if(!open){document.getElementById(id).hidden=false; b.classList.add('on');}});
+  document.getElementById('qPrev').onclick=()=>{if(i) quizQ(i-1)};}
+// concordância com votos: só perguntas de votação real
+function agree(codeOf){let num=0,den=0,n=0; QSET.forEach((Q,j)=>{const a=QA[j]; if(!a||!Q.v) return; const c=codeOf(KIDX[Q.v]); if(c!=='S'&&c!=='N') return;
+  const w=Math.abs(a); den+=w; n++; if((a>0)===(c==='S')) num+=w;}); return den?{p:num/den,n}:{p:null,n:0};}
+// posição no mapa (−1..1). Usuário: todas as perguntas com x/y. Deputado: votos nas perguntas reais com x/y.
+function userXY(){let sx=0,nx=0,sy=0,ny=0; QSET.forEach((Q,j)=>{const a=QA[j]; if(!a) return; if(Q.x){sx+=Q.x*a/2;nx++} if(Q.y){sy+=Q.y*a/2;ny++}}); return {x:sx/(nx+2),y:sy/(ny+2),nx,ny};}
+const REALXY=QUIZ.filter(Q=>Q.v&&(Q.x||Q.y));
+function depXY(k){let sx=0,nx=0,sy=0,ny=0; REALXY.forEach(Q=>{const c=k[KIDX[Q.v]]; if(c!=='S'&&c!=='N') return; const s=c==='S'?1:-1; if(Q.x){sx+=Q.x*s;nx++} if(Q.y){sy+=Q.y*s;ny++}}); return (nx>=3&&ny>=2)?{x:sx/(nx+2),y:sy/(ny+2)}:null;}
+function spider(){return AXES.map(A=>{let s=0,n=0; QSET.forEach((Q,j)=>{const a=QA[j],d=Q.ax&&Q.ax[A.id]; if(!a||!d) return; s+=d*a/2; n++;}); return {...A,v:n?Math.round(50+50*s/n):null,n};});}
+function quizResult(){
+  const answered=QA.filter((a,j)=>a&&QSET[j].v).length;
+  if(answered<3){quizEl.innerHTML=qHead()+`<div class="qcard"><h2 class="qq">Responda pelo menos 3 votações reais com opinião</h2><p class="lead">Com tantos votos em branco, não dá para comparar você com os deputados.</p><button class="go" type="button" id="qRe">Voltar ao início</button></div>`; document.getElementById('qRe').onclick=quizIntro; return;}
+  const minN=Math.min(6,answered);
+  const dc=deps.map(d=>{const k=HIST.deps[d.id].k; return {d,...agree(i=>k[i]),xy:depXY(k)};}).filter(x=>x.p!=null&&x.n>=minN).sort((a,b)=>((b.p*b.n+1)/(b.n+2))-((a.p*a.n+1)/(a.n+2)));
+  const byP={}; deps.forEach(d=>{(byP[d.p]=byP[d.p]||[]).push(d)});
+  const parts=Object.entries(byP).filter(([,ds])=>ds.length>=3).map(([nm,ds])=>{
+    const r=agree(i=>{let s=0,n=0; ds.forEach(d=>{const c=HIST.deps[d.id].k[i]; if(c==='S')s++; else if(c==='N')n++;}); return s+n<2?'-':(s>n?'S':s<n?'N':'-');});
+    const xs=ds.map(d=>depXY(HIST.deps[d.id].k)).filter(Boolean);
+    return {nm,size:ds.length,...r,xy:xs.length?{x:xs.reduce((a,b)=>a+b.x,0)/xs.length,y:xs.reduce((a,b)=>a+b.y,0)/xs.length}:null};}).filter(x=>x.p!=null).sort((a,b)=>b.p-a.p);
+  const U=userXY(), SP=spider();
+  const xl=U.x<-.33?'à esquerda':U.x>.33?'à direita':'no centro', yl=U.y<-.33?'progressista':U.y>.33?'conservador':'moderado';
+  const near=parts.filter(p=>p.xy).map(p=>({...p,dist:Math.hypot(p.xy.x-U.x,p.xy.y-U.y)})).sort((a,b)=>a.dist-b.dist);
+  const nearDeps=dc.filter(x=>x.xy).map(x=>({...x,dist:Math.hypot(x.xy.x-U.x,x.xy.y-U.y)})).sort((a,b)=>a.dist-b.dist).slice(0,6);
+  const strong=SP.filter(a=>a.v!=null).map(a=>({...a,f:Math.abs(a.v-50)})).sort((a,b)=>b.f-a.f).slice(0,3);
+  const row=x=>`<a class="qdep" href="#dep/${x.d.id}">${face(x.d)}<div><b>${esc(x.d.n)}</b><span>${x.d.p}-${x.d.uf}, ${x.n} votações comparadas</span></div><strong class="led">${Math.round(x.p*100)}%</strong></a>`;
+  const ans=v=>({2:'Muito a favor',1:'A favor',0:'Branco',null:'Branco','-1':'Contra','-2':'Muito contra'})[v];
+  quizEl.innerHTML=qHead()+`<div class="qres">
+   <h1>Seu resultado</h1>
+   <p class="lead">Na economia você fica <b>${xl}</b> e nos costumes é <b>${yl}</b>. Os partidos mais perto de você no mapa são <b>${near.slice(0,3).map(p=>esc(p.nm)).join(', ')}</b>.</p>
+   <nav class="qnavtabs" role="tablist">${['Deputados','Partidos','Teia','Mapa','Respostas'].map((t,i)=>`<button type="button" role="tab" class="qnt${i?'':' on'}" data-t="${i}">${t}</button>`).join('')}</nav>
+   <section class="qpane" data-t="0"><p class="qhint">Quem votou mais parecido com as suas respostas nas ${answered} votações reais em que você opinou.</p><div class="qdeps">${dc.slice(0,12).map(row).join('')}</div>
+     <details class="whatis"><summary>Os mais distantes de você</summary><div class="qdeps" style="margin-top:10px">${dc.slice(-6).reverse().map(row).join('')}</div></details></section>
+   <section class="qpane" data-t="1" hidden><p class="qhint">Posição da maioria dos deputados de cada partido nas mesmas votações.</p><div class="qparts">${parts.map(x=>`<div class="qpart"><span>${esc(x.nm)} <small class="emuted">${x.size}</small></span><div><i style="width:${Math.round(x.p*100)}%"></i></div><b class="led">${Math.round(x.p*100)}%</b></div>`).join('')}</div></section>
+   <section class="qpane" data-t="2" hidden><div class="spwrap">${spiderSVG(SP)}<div class="sptext">${strong.map(a=>`<p><b>${esc(a.nm)}: ${a.v}</b><br>${esc(a.v>=50?a.hi:a.lo)}</p>`).join('')}<p class="emuted">Cada eixo vai de 0 a 100. Quanto mais longe do centro, mais você concorda com aquela ideia. ${SP.some(a=>a.n<3)?'Alguns eixos têm poucas perguntas na versão rápida; o teste completo deixa a teia mais precisa.':''}</p></div></div></section>
+   <section class="qpane" data-t="3" hidden><div class="mapwrap">${mapSVG(U,parts,dc)}<div class="sptext"><p><b>Partidos mais perto de você</b><br>${near.slice(0,4).map(p=>esc(p.nm)).join(', ')}</p><p><b>Deputados mais perto de você no mapa</b><br>${nearDeps.map(x=>`<a href="#dep/${x.d.id}">${esc(x.d.n)}</a> (${x.d.p})`).join(', ')}</p><p class="emuted">Horizontal: economia, da esquerda (Estado forte, mais impostos sobre os ricos) à direita (mercado, menos impostos). Vertical: costumes, de progressista a conservador. Deputados e partidos aparecem pelos votos reais; você, por todas as suas respostas.</p></div></div></section>
+   <section class="qpane" data-t="4" hidden>${QSET.map((Q,j)=>{const K=Q.v?HIST.key[KIDX[Q.v]]:null; return `<div class="qrev"><b>${esc(Q.q)}</b><span>Você: <em>${ans(QA[j])}</em>${K?`. Na Câmara: ${esc(K.r.toLowerCase())}, em ${fdate(K.d)}`:''}</span></div>`}).join('')}</section>
+   <div class="qnav"><button type="button" class="ghost" id="qAgain">Refazer o teste</button><a class="go" href="#">Ver o plenário</a></div>
+   <p class="note">Como calculamos: em cada votação real, comparamos sua resposta com o voto do deputado. “Muito a favor” e “muito contra” valem 2; “a favor” e “contra” valem 1; branco e faltas do deputado não entram na conta. Partidos: posição da maioria dos seus deputados atuais.</p></div>`;
+  quizEl.querySelectorAll('.qnt').forEach(b=>b.onclick=()=>{quizEl.querySelectorAll('.qnt').forEach(x=>x.classList.toggle('on',x===b)); quizEl.querySelectorAll('.qpane').forEach(p=>p.hidden=p.dataset.t!==b.dataset.t);});
+  document.getElementById('qAgain').onclick=quizIntro; scrollTo(0,0);}
+function spiderSVG(SP){const c=200,R=150,n=SP.length, pt=(i,r)=>[c+r*Math.sin(2*Math.PI*i/n), c-r*Math.cos(2*Math.PI*i/n)];
+  let g=''; [25,50,75,100].forEach(v=>{g+=`<polygon points="${SP.map((_,i)=>pt(i,R*v/100).join(',')).join(' ')}" fill="none" stroke="var(--line)" stroke-width="1"/>`;});
+  SP.forEach((a,i)=>{const [x,y]=pt(i,R), [lx,ly]=pt(i,R+28); g+=`<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="var(--line)"/><text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" class="spl">${esc(a.nm)}</text>`;});
+  const P=SP.map((a,i)=>pt(i,R*(a.v??50)/100));
+  g+=`<polygon points="${P.map(p=>p.join(',')).join(' ')}" fill="rgba(255,176,0,.22)" stroke="var(--led)" stroke-width="2"/>`;
+  P.forEach((p,i)=>{g+=`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="${SP[i].v==null?'var(--line)':'var(--led)'}"/>`;});
+  return `<svg viewBox="-70 -10 540 420" class="spider" role="img" aria-label="Teia com seus 8 eixos">${g}</svg>`;}
+function mapSVG(U,parts,dc){const S=170,c=200, P=(x,y)=>[c+x*S, c+y*S];
+  let g=`<rect x="${c-S}" y="${c-S}" width="${2*S}" height="${2*S}" fill="none" stroke="var(--line)"/>`;
+  [-.5,0,.5].forEach(v=>{g+=`<line x1="${c+v*S}" y1="${c-S}" x2="${c+v*S}" y2="${c+S}" stroke="var(--line)" ${v?'stroke-dasharray="2 4"':''}/><line x1="${c-S}" y1="${c+v*S}" x2="${c+S}" y2="${c+v*S}" stroke="var(--line)" ${v?'stroke-dasharray="2 4"':''}/>`;});
+  g+=`<text x="${c}" y="${c-S-10}" text-anchor="middle" class="spl">Progressista</text><text x="${c}" y="${c+S+20}" text-anchor="middle" class="spl">Conservador</text><text x="${c-S-8}" y="${c}" text-anchor="end" dominant-baseline="middle" class="spl">Esquerda</text><text x="${c+S+8}" y="${c}" dominant-baseline="middle" class="spl">Direita</text>`;
+  const jit=id=>{let h=0; for(const ch of id) h=(h*31+ch.charCodeAt(0))%1000; return (h/1000-.5)*10;};
+  dc.forEach(x=>{if(!x.xy) return; let [px,py]=P(x.xy.x,x.xy.y); px+=jit(x.d.id); py+=jit(x.d.id+'y'); g+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="2.2" fill="${color(x.d.s)}" opacity=".35"/>`;});
+  const [ux0,uy0]=P(U.x,U.y); const placed=[[ux0-22,uy0-27,ux0+22,uy0+10]]; parts.filter(p=>p.xy&&p.size>=4).sort((a,b)=>b.size-a.size).forEach(p=>{const [px,py]=P(p.xy.x,p.xy.y), r=4+Math.sqrt(p.size)*.9;
+    g+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${r.toFixed(1)}" fill="rgba(238,240,232,.06)" stroke="var(--fg)" stroke-width="1.2"/>`;
+    const w=p.nm.length*6.4+4, cand=[[px+r+3,py+4,'start'],[px-r-3,py+4,'end'],[px,py-r-4,'middle'],[px,py+r+11,'middle'],[px+r+3,py-8,'start'],[px-r-3,py+16,'end'],[px+r+3,py+16,'start'],[px-r-3,py-8,'end']];
+    const box=([x,y,a])=>{const x0=a==='start'?x:a==='end'?x-w:x-w/2; return [x0,y-10,x0+w,y+2];};
+    const hit=b=>placed.some(q=>b[0]<q[2]&&b[2]>q[0]&&b[1]<q[3]&&b[3]>q[1]);
+    const c=cand.find(c=>!hit(box(c))); if(!c) return; placed.push(box(c));
+    g+=`<text x="${c[0].toFixed(1)}" y="${c[1].toFixed(1)}" text-anchor="${c[2]}" class="mpl">${esc(p.nm)}</text>`;});
+  const [ux,uy]=P(U.x,U.y); g+=`<circle cx="${ux}" cy="${uy}" r="9" fill="var(--led)" stroke="#000" stroke-width="1.5"/><text x="${ux}" y="${uy-14}" text-anchor="middle" class="mpl you">Você</text>`;
+  return `<svg viewBox="-60 0 520 410" class="pmap" role="img" aria-label="Mapa político com sua posição e a dos partidos">${g}</svg>`;}
+
+function route(){const m=location.hash.match(/^#dep\/(\d+)/); tip.hidden=true; drop(); document.body.classList.remove('quiz');
+  if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);}
+  else if(location.hash==='#teste'){document.body.classList.add('dep','quiz'); quizIntro(); scrollTo(0,0);}
+  else {document.body.classList.remove('dep');}}
+addEventListener('hashchange',route);
+document.getElementById('oqf-top').outerHTML=OQF;
+document.getElementById('infoBtn').addEventListener('click',()=>document.getElementById('info').showModal());
+{const hall=document.querySelector('.hall'); requestAnimationFrame(()=>{hall.scrollLeft=(hall.scrollWidth-hall.clientWidth)/2;});}
+route();
+</script>
+</body>
+</html>
