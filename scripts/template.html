@@ -280,12 +280,13 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
 .qtab{border-color:var(--line)}.qtab:hover,.qtab.on{background:#1D3127;border-color:var(--muted)}
 .qpanel{background:#11201A;border-color:var(--line)}
 .qpc b{text-transform:none;letter-spacing:0;font-size:13px}
-.urna{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:720px;margin-top:4px}
+.urna{display:grid;grid-template-columns:1fr 1fr 18px 1fr 1fr;gap:10px;width:100%;max-width:720px;margin-top:4px}
 .tecla{font:600 16px/1.2 var(--body);color:#F4F4EF;background:linear-gradient(#2A2C2F,#151618);border:1px solid #3B3E42;border-radius:9px;padding:24px 8px;cursor:pointer;box-shadow:0 4px 0 #050606,inset 0 1px 0 #ffffff17;transition:transform .07s,box-shadow .07s,background .12s}
 .tecla:hover{background:linear-gradient(#323539,#1B1C1F)}
 .tecla:active{transform:translateY(3px);box-shadow:0 1px 0 #050606}
 .tecla.on{background:var(--confirma);border-color:#62D486;color:#fff}
-.tecla.branco{grid-column:2/span 2;background:linear-gradient(#FBFBF6,#E3E3DA);color:#151618;border-color:#fff;padding:14px 8px;box-shadow:0 4px 0 #8C8C84}
+.tecla[data-v="-1"]{grid-column:4}.tecla[data-v="-2"]{grid-column:5}
+.tecla.branco{grid-column:2/span 3;background:linear-gradient(#FBFBF6,#E3E3DA);color:#151618;border-color:#fff;padding:14px 8px;box-shadow:0 4px 0 #8C8C84}
 .tecla.branco small{font-weight:400;color:#5A5D57;margin-left:4px}
 .tecla.branco.on{background:var(--confirma);color:#fff}
 .qnavtabs{display:flex;gap:4px;border-bottom:2px solid var(--line);margin-top:18px;overflow-x:auto}
@@ -301,7 +302,7 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
 .spl{fill:var(--muted);font:500 12.5px var(--body)}
 .mpl{fill:var(--fg);font:600 11px var(--body)}.mpl.you{fill:var(--led);font-size:13px;font-weight:700}
 .sptext p{margin:0 0 14px;line-height:1.5;font-size:15px}.sptext a{color:var(--fg)}
-@media (max-width:700px){.cta .lg{display:none}.cta .sm{display:inline}.qchoose{grid-template-columns:1fr}.urna{grid-template-columns:1fr 1fr}.tecla.branco{grid-column:1/-1}.spwrap,.mapwrap{grid-template-columns:1fr}}
+@media (max-width:700px){.cta .lg{display:none}.cta .sm{display:inline}.qchoose{grid-template-columns:1fr}.urna{grid-template-columns:1fr 1fr}.tecla[data-v="-1"],.tecla[data-v="-2"]{grid-column:auto}.tecla.branco{grid-column:1/-1}.spwrap,.mapwrap{grid-template-columns:1fr}}
 select option{background:#15241D;color:#EEF0E8}
 .more{display:inline-block;margin-top:10px;font:600 14px var(--body);color:var(--led);text-decoration:none;cursor:pointer;list-style:none}
 .more::-webkit-details-marker{display:none}
@@ -729,7 +730,7 @@ const QUIZ=[
  {tema:'Democracia',q:'Deputados e senadores deveriam perder o foro privilegiado e ser julgados como qualquer cidadão?',ax:{controle:1},pro:'Acaba com um privilégio e com a demora dos processos contra políticos.',contra:'O foro protege o mandato de perseguição por juízes locais.'}
 ];
 const KIDX=Object.fromEntries(HIST.key.map((k,i)=>[k.id,i]));
-const OPTS=[[2,'Sim'],[1,'Mais sim'],[-1,'Mais não'],[-2,'Não']];
+const OPTS=[[2,'Com certeza sim'],[1,'Acho que sim'],[-1,'Acho que não'],[-2,'Com certeza não']];
 const NREAL=QUIZ.filter(Q=>Q.v).length;
 const quizEl=document.getElementById('teste'); let QA=[], qi=0, QSET=[];
 const qHead=()=>`<a class="back" href="#">Voltar ao plenário</a>`;
@@ -785,7 +786,7 @@ function quizResult(){
   const nearDeps=dc.filter(x=>x.xy).map(x=>({...x,dist:Math.hypot(x.xy.x-U.x,x.xy.y-U.y)})).sort((a,b)=>a.dist-b.dist).slice(0,6);
   const strong=SP.filter(a=>a.v!=null).map(a=>({...a,f:Math.abs(a.v-50)})).sort((a,b)=>b.f-a.f).slice(0,3);
   const row=x=>`<a class="qdep" href="#dep/${x.d.id}">${face(x.d)}<div><b>${esc(x.d.n)}</b><span>${x.d.p}-${x.d.uf}, ${x.n} votações comparadas</span></div><strong class="led">${Math.round(x.p*100)}%</strong></a>`;
-  const ans=v=>({2:'Sim',1:'Mais sim',0:'Branco',null:'Branco','-1':'Mais não','-2':'Não'})[v];
+  const ans=v=>({2:'Com certeza sim',1:'Acho que sim',0:'Branco',null:'Branco','-1':'Acho que não','-2':'Com certeza não'})[v];
   quizEl.innerHTML=qHead()+`<div class="qres">
    <h1>Seu resultado</h1>
    <p class="lead">Na economia você fica <b>${xl}</b> e nos costumes é <b>${yl}</b>. Os partidos mais perto de você no mapa são <b>${near.slice(0,3).map(p=>esc(p.nm)).join(', ')}</b>.</p>
@@ -797,7 +798,7 @@ function quizResult(){
    <section class="qpane" data-t="3" hidden><div class="mapwrap">${mapSVG(U,parts,dc)}<div class="sptext"><p><b>Partidos mais perto de você</b><br>${near.slice(0,4).map(p=>esc(p.nm)).join(', ')}</p><p><b>Deputados mais perto de você no mapa</b><br>${nearDeps.map(x=>`<a href="#dep/${x.d.id}">${esc(x.d.n)}</a> (${x.d.p})`).join(', ')}</p><p class="emuted">Horizontal: economia, da esquerda (Estado forte, mais impostos sobre os ricos) à direita (mercado, menos impostos). Vertical: costumes, de progressista a conservador. Deputados e partidos aparecem pelos votos reais; você, por todas as suas respostas.</p></div></div></section>
    <section class="qpane" data-t="4" hidden>${QSET.map((Q,j)=>{const K=Q.v?HIST.key[KIDX[Q.v]]:null; return `<div class="qrev"><b>${esc(Q.q)}</b><span>Você: <em>${ans(QA[j])}</em>${K?`. Na Câmara: ${esc(K.r.toLowerCase())}, em ${fdate(K.d)}`:''}</span></div>`}).join('')}</section>
    <div class="qnav"><button type="button" class="ghost" id="qAgain">Refazer o teste</button><a class="go" href="#">Ver o plenário</a></div>
-   <p class="note">Como calculamos: em cada votação real, comparamos sua resposta com o voto do deputado. “Sim” e “Não” valem 2; “Mais sim” e “Mais não” valem 1; branco e faltas do deputado não entram na conta. Partidos: posição da maioria dos seus deputados atuais.</p></div>`;
+   <p class="note">Como calculamos: em cada votação real, comparamos sua resposta com o voto do deputado. “Com certeza” vale 2; “acho que” vale 1; branco e faltas do deputado não entram na conta. Partidos: posição da maioria dos seus deputados atuais.</p></div>`;
   quizEl.querySelectorAll('.qnt').forEach(b=>b.onclick=()=>{quizEl.querySelectorAll('.qnt').forEach(x=>x.classList.toggle('on',x===b)); quizEl.querySelectorAll('.qpane').forEach(p=>p.hidden=p.dataset.t!==b.dataset.t);});
   document.getElementById('qAgain').onclick=quizIntro; scrollTo(0,0);}
 function spiderSVG(SP){const c=200,R=150,n=SP.length, pt=(i,r)=>[c+r*Math.sin(2*Math.PI*i/n), c-r*Math.cos(2*Math.PI*i/n)];
