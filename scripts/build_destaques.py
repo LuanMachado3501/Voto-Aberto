@@ -102,9 +102,16 @@ for p in recentes:
     p['indice'] = round(100 * (PESO_ATENCAO * a + PESO_DISPUTA * p['disputa']))
 recentes.sort(key=lambda p: p['indice'], reverse=True)
 
-vv = pd.read_csv(RAW + 'votacoesVotos-2026.csv', sep=';', encoding='utf-8-sig', dtype=str,
-                 usecols=['idVotacao', 'voto', 'deputado_siglaPartido'])
-vv = vv[vv.idVotacao.isin([p['vid'] for p in recentes[:TOP]]) & vv.voto.isin(['Sim', 'Não'])]
+vall = pd.read_csv(RAW + 'votacoesVotos-2026.csv', sep=';', encoding='utf-8-sig', dtype=str,
+                   usecols=['idVotacao', 'voto', 'deputado_siglaPartido', 'deputado_nome', 'deputado_siglaUf'])
+vall = vall[vall.idVotacao.isin([p['vid'] for p in recentes[:TOP]])]
+vv = vall[vall.voto.isin(['Sim', 'Não'])]
+ED = json.load(open('editorial.json', encoding='utf-8')) if os.path.exists('editorial.json') else {'destaques': {}}
+def nomes(vid):
+    g = vall[vall.idVotacao == vid].set_index('deputado_nome')
+    return {lado: [[n, (f"{g.loc[n, 'deputado_siglaPartido']}-{g.loc[n, 'deputado_siglaUf']}" if n in g.index else ''),
+                    (g.loc[n, 'voto'] if n in g.index else 'não votou')] for n in L]
+            for lado, L in ED.get('destaques', {}).items()}
 por = vv.groupby(['idVotacao', 'deputado_siglaPartido']).voto.value_counts().unstack(fill_value=0)
 def partidos(vid):
     if vid not in por.index.get_level_values(0):
@@ -120,7 +127,8 @@ for p in recentes[:TOP]:
                                             'aprovada', 'noticias', 'atencao', 'disputa', 'indice')},
                          'data': p['data'].strftime('%Y-%m-%d'),
                          'nome': (APELIDOS.get((p['titulo'] or '').upper()) or [None])[0],
-                         'partidos': partidos(p['vid'])})
+                         'partidos': partidos(p['vid']),
+                         'nomes': nomes(p['vid'])})
 json.dump(out, open('destaques.json', 'w'), ensure_ascii=False, indent=1)
 
 linhas = ['## Pauta da semana: votações com mais destaque', '',
