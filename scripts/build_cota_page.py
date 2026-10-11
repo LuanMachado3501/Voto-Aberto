@@ -1,6 +1,8 @@
 """Página Cota: média mensal de cada deputado em exercício vs. mediana da bancada do estado."""
 import pandas as pd, json, statistics as st
-w=pd.concat([pd.read_csv(f'/mnt/user-data/uploads/Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,
+import os
+RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
+w=pd.concat([pd.read_csv(RAW+f'Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,
    usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor','txtCNPJCPF']) for a in (2023,2024,2025,2026)])
 w=w[w.ideCadastro.notna()&(w.ideCadastro!='')&~w.txtDescricao.str.contains('AUXÍLIO-MORADIA',na=False)]
 w['v']=pd.to_numeric(w.vlrLiquido.str.replace(',','.'),errors='coerce').fillna(0)

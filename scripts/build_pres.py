@@ -1,11 +1,12 @@
 import re
 import pandas as pd, json
-U='/root/.claude/uploads/4ca0478c-f08e-50ae-9016-3a44578f0aff/'
-w=pd.concat([pd.read_csv(f,sep=';',encoding='utf-8-sig',dtype=str,usecols=['idVotacao','dataHoraVoto','voto','deputado_id']) for f in ['/mnt/user-data/uploads/votacoesVotos-2025__1_.csv',U+'d5d70b6b-votacoesVotos-2026.csv']])
+import os
+RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
+w=pd.concat([pd.read_csv(f,sep=';',encoding='utf-8-sig',dtype=str,usecols=['idVotacao','dataHoraVoto','voto','deputado_id']) for f in [RAW+'votacoesVotos-2025.csv',RAW+'votacoesVotos-2026.csv']])
 w['t']=pd.to_datetime(w.dataHoraVoto)
 pres=w[(w.deputado_id=='160674')&(w.voto=='Artigo 17')].groupby('idVotacao').t.min().reset_index()
-vp=pd.read_csv(U+'7e8aeb3a-votacoesProposicoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str)
-v=pd.read_csv(U+'62571816-votacoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str)
+vp=pd.read_csv(RAW+'votacoesProposicoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str)
+v=pd.read_csv(RAW+'votacoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str)
 vp['pref']=vp.idVotacao.str.split('-').str[0]; vp['main']=(vp.proposicao_id==vp.pref)
 vp=vp.sort_values('main',ascending=False).drop_duplicates('idVotacao')
 x=pres.merge(vp[['idVotacao','proposicao_id','proposicao_titulo','proposicao_ementa']],on='idVotacao',how='left').merge(v[['id','descricao']],left_on='idVotacao',right_on='id',how='left')

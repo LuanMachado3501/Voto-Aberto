@@ -1,14 +1,16 @@
 import pandas as pd, json, re
+import os
+RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
 from build_emendas_norm import N
 num=lambda c:pd.to_numeric(c.str.replace('.','',regex=False).str.replace(',','.',regex=False),errors='coerce').fillna(0)
-it=pd.read_csv('/mnt/user-data/uploads/EmendasParlamentares_PorFavorecido.csv',sep=';',encoding='latin1',dtype=str,chunksize=500000,
+it=pd.read_csv(RAW+'EmendasParlamentares_PorFavorecido.csv',sep=';',encoding='latin1',dtype=str,chunksize=500000,
    usecols=['Código da Emenda','Nome do Autor da Emenda','Tipo de Emenda','Ano/Mês','Favorecido','Município Favorecido','UF Favorecido','Valor Recebido'])
 parts=[]
 for c in it:
     c=c[c['Tipo de Emenda'].str.contains('Individual',na=False)&(c['Ano/Mês'].str[:4].astype(int)>=2023)]
     parts.append(c)
 f=pd.concat(parts)
-em_area=pd.read_csv('/mnt/user-data/uploads/EmendasParlamentares.csv',sep=';',encoding='latin1',dtype=str,usecols=['Código da Emenda','Nome Função']).drop_duplicates('Código da Emenda')
+em_area=pd.read_csv(RAW+'EmendasParlamentares.csv',sep=';',encoding='latin1',dtype=str,usecols=['Código da Emenda','Nome Função']).drop_duplicates('Código da Emenda')
 f=f.merge(em_area,on='Código da Emenda',how='left'); f['Nome Função']=f['Nome Função'].fillna('Sem informação'); f['v']=num(f['Valor Recebido']); f['k']=f['Nome do Autor da Emenda'].map(N)
 hem=json.load(open('hemiciclo_data.json'))
 ALIAS={'220660':'YURY DO PAREDAO'}

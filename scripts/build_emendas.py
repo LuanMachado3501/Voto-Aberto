@@ -1,4 +1,6 @@
 import pandas as pd, json, unicodedata, re
+import os
+RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
 def N(s):
     s=unicodedata.normalize('NFD',str(s)).encode('ascii','ignore').decode().upper()
     s=re.sub(r'\(.*','',s); s=s.replace('.',' ')
@@ -6,7 +8,7 @@ def N(s):
     s=re.sub(r'\bCEL\b','CORONEL',s); s=re.sub(r'\bSGT\b','SARGENTO',s); s=re.sub(r'\bCAP\b','CAPITAO',s); s=re.sub(r'\bPR\b','PASTOR',s)
     return re.sub(r'[^A-Z ]','',re.sub(r'\s+',' ',s)).strip()
 num=lambda c:pd.to_numeric(c.str.replace('.','',regex=False).str.replace(',','.',regex=False),errors='coerce').fillna(0)
-e=pd.read_csv('/mnt/user-data/uploads/EmendasParlamentares.csv',sep=';',encoding='latin1',dtype=str)
+e=pd.read_csv(RAW+'EmendasParlamentares.csv',sep=';',encoding='latin1',dtype=str)
 e=e[e['Ano da Emenda'].astype(int).between(2023,2026)&e['Tipo de Emenda'].str.contains('Individual')].copy()
 e['pago']=num(e['Valor Pago'])+num(e['Valor Restos A Pagar Pagos']); e['emp']=num(e['Valor Empenhado'])
 e['k']=e['Nome do Autor da Emenda'].map(N)

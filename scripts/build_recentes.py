@@ -1,14 +1,15 @@
 """Últimas votações de 2026 (com título) e presença nas votações nominais de 2026."""
 import pandas as pd, json, re
-U='/root/.claude/uploads/4ca0478c-f08e-50ae-9016-3a44578f0aff/'
-w=pd.read_csv(U+'d5d70b6b-votacoesVotos-2026.csv',sep=';',encoding='utf-8-sig',dtype=str,usecols=['idVotacao','voto','deputado_id','dataHoraVoto'])
+import os
+RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
+w=pd.read_csv(RAW+'votacoesVotos-2026.csv',sep=';',encoding='utf-8-sig',dtype=str,usecols=['idVotacao','voto','deputado_id','dataHoraVoto'])
 w['t']=pd.to_datetime(w.dataHoraVoto); n=w.groupby('idVotacao').size(); w=w[w.idVotacao.isin(n[n>=300].index)]
 w['wk']=w.t.dt.strftime('%G-%V')
 vt=w.groupby('idVotacao').agg(t=('t','min'),wk=('wk','first'))
 # presença: votação conta para o deputado se ele votou em alguma votação da mesma semana
 act=w.groupby('wk').deputado_id.agg(set); votou=w.groupby('idVotacao').deputado_id.agg(set)
-v=pd.read_csv(U+'62571816-votacoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str).set_index('id')
-vp=pd.read_csv(U+'7e8aeb3a-votacoesProposicoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str)
+v=pd.read_csv(RAW+'votacoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str).set_index('id')
+vp=pd.read_csv(RAW+'votacoesProposicoes-2026.csv',sep=';',encoding='utf-8-sig',dtype=str)
 vp['pref']=vp.idVotacao.str.split('-').str[0]; vp['main']=vp.proposicao_id==vp.pref
 vp=vp.sort_values('main',ascending=False).drop_duplicates('idVotacao').set_index('idVotacao')
 def short(t):

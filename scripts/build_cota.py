@@ -1,6 +1,8 @@
 """Cota parlamentar (CEAP) 2025-26 por deputado."""
 import pandas as pd, json
-w=pd.concat([pd.read_csv(f'/mnt/user-data/uploads/Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor']) for a in (2023,2024,2025,2026)])
+import os
+RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
+w=pd.concat([pd.read_csv(RAW+f'Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor']) for a in (2023,2024,2025,2026)])
 w=w[w.ideCadastro.notna()&(w.ideCadastro!='')&~w.txtDescricao.str.contains('AUXÍLIO-MORADIA',na=False)]
 w=w[(w.numAno+'-'+w.numMes.str.zfill(2))>='2023-02']
 w['v']=pd.to_numeric(w.vlrLiquido.str.replace(',','.'),errors='coerce').fillna(0)

@@ -1,9 +1,10 @@
 """% de votos alinhados à orientação do líder do governo (2025-26), por deputado."""
 import pandas as pd, json
-U='/root/.claude/uploads/4ca0478c-f08e-50ae-9016-3a44578f0aff/'
-o=pd.concat([pd.read_csv(U+f,sep=';',encoding='utf-8-sig',dtype=str) for f in ['2caec7cf-votacoesOrientacoes-2025.csv','22adbd58-votacoesOrientacoes-2026.csv']])
+import os
+RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
+o=pd.concat([pd.read_csv(RAW+f,sep=';',encoding='utf-8-sig',dtype=str) for f in ['votacoesOrientacoes-2025.csv','votacoesOrientacoes-2026.csv']])
 g=o[(o.siglaBancada=='Governo')&o.orientacao.isin(['Sim','Não'])][['idVotacao','orientacao']].drop_duplicates('idVotacao')
-w=pd.concat([pd.read_csv(f,sep=';',encoding='utf-8-sig',dtype=str,usecols=['idVotacao','voto','deputado_id']) for f in ['/mnt/user-data/uploads/votacoesVotos-2025__1_.csv',U+'d5d70b6b-votacoesVotos-2026.csv']])
+w=pd.concat([pd.read_csv(f,sep=';',encoding='utf-8-sig',dtype=str,usecols=['idVotacao','voto','deputado_id']) for f in [RAW+'votacoesVotos-2025.csv',RAW+'votacoesVotos-2026.csv']])
 n=w.groupby('idVotacao').size(); w=w[w.idVotacao.isin(n[n>=300].index)&w.voto.isin(['Sim','Não'])]
 m=w.merge(g,on='idVotacao'); m['ok']=m.voto==m.orientacao
 r=m.groupby('deputado_id').ok.agg(['mean','size'])

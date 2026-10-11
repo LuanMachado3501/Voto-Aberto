@@ -22,7 +22,15 @@ Plataforma de acompanhamento de votos e notícias no parlamento brasileiro: como
 - `data/`: os dados já processados (JSON)
 - `scripts/`: scripts Python que geram os dados a partir dos arquivos oficiais, e o `template.html` do site
 
-> Os scripts ainda apontam para os arquivos baixados manualmente. O próximo passo é automatizar o download e a atualização com GitHub Actions.
+## Atualização automática
+Toda segunda às 6h (Brasília) o robô em `.github/workflows/atualizar-dados.yml` roda `scripts/atualizar.sh`:
+1. `scripts/fetch.py` baixa da Câmara (votações, votos, orientações, cota) e do Portal da Transparência (emendas);
+2. os scripts recalculam presença, últimas votações, alinhamento com o governo, cota e emendas;
+3. se algo mudou, o `index.html` e a pasta `data/` são atualizados e o site é publicado.
+
+Se uma fonte estiver fora do ar, só aquela parte deixa de atualizar e o resto segue; o robô marca a rodada com aviso. Para rodar na hora: aba **Actions → Atualizar dados → Run workflow**.
+
+Continuam manuais: posição das cadeiras no plenário, as 20 votações em destaque, dados do TSE (eleição de 2026) e as notícias destacadas.
 
 ## Licença
 - **Dados e textos:** CC BY 4.0. Pode usar e republicar, citando "Centro Político (centropolitico.com.br)".
