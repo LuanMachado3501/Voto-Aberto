@@ -73,6 +73,10 @@ jobs:
         working-directory: tribuna
         run: |
           URL=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1)
+          if [ -z "$URL" ]; then
+            SUB=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | python3 -c "import json,sys; print((json.load(sys.stdin).get('result') or {}).get('subdomain',''))")
+            [ -n "$SUB" ] && URL="https://tribuna.$SUB.workers.dev"
+          fi
           echo "## Tribuna publicada" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "- Servidor: $URL" >> "$GITHUB_STEP_SUMMARY"
