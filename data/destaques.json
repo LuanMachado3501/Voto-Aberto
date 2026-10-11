@@ -1,0 +1,112 @@
+{
+ "gerado": "2026-10-11",
+ "pesos": {
+  "atencao": 0.7,
+  "disputa": 0.3
+ },
+ "noticias_ok": true,
+ "itens": [
+  {
+   "id": "2618177",
+   "titulo": "PLP 114/2026",
+   "ementa": "Dispõe sobre regras para renúncias de receita com o objetivo de mitigar os impactos econômicos causados pelo choque no mercado internacional de energia decorrente do conflito no Oriente Médio.",
+   "placar": [
+    318,
+    113
+   ],
+   "votacoes": 3,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 33,
+   "atencao": 1.0,
+   "disputa": 0.382,
+   "indice": 81,
+   "data": "2026-08-12"
+  },
+  {
+   "id": "2611313",
+   "titulo": "PLP 74/2026",
+   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
+   "placar": [
+    346,
+    46
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 18,
+   "atencao": 0.835,
+   "disputa": 0.157,
+   "indice": 63,
+   "data": "2026-09-03"
+  },
+  {
+   "id": "2645346",
+   "titulo": "PDL 995/2026",
+   "ementa": "Escolhe o Senhor Rodrigo Otávio Soares Pacheco para o cargo de Ministro do Tribunal de Contas da União, nos termos do inciso II do § 2º do art. 73 da Constituição Federal, do inciso II do art. 105 da Lei nº 8.443, de 16 de julho de 1992, e do art. 2º do Decreto Legislativo nº 6, de 1993.",
+   "placar": [
+    404,
+    61
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 6,
+   "atencao": 0.552,
+   "disputa": 0.171,
+   "indice": 44,
+   "data": "2026-09-02"
+  },
+  {
+   "id": "2580259",
+   "titulo": "PLP 230/2025",
+   "ementa": "Altera a Lei Complementar nº 101, de 4 de maio de 2000, para vedar a limitação de empenho e movimentação financeira das despesas relativas ao Fundo de Universalização dos Serviços de Telecomunicações, e a Lei nº 9.998, de 17 de agosto de 2000, para os fins que especifica.",
+   "placar": [
+    333,
+    91
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 5,
+   "atencao": 0.508,
+   "disputa": 0.255,
+   "indice": 43,
+   "data": "2026-08-12"
+  },
+  {
+   "id": "2611992",
+   "titulo": "PLP 80/2026",
+   "ementa": "Altera a Lei nº 14.301, de 7 de janeiro de 2022, para prorrogar o prazo de vigência da não incidência do Adicional ao Frete para Renovação da Marinha Mercante (AFRMM) prevista no art. 17 da Lei nº 9.432, de 8 de janeiro de 1997, nas navegações de cabotagem, interior fluvial e lacustre, desde que a origem ou o destino seja porto localizado na Região Norte ou Nordeste do País.",
+   "placar": [
+    327,
+    26
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 5,
+   "atencao": 0.508,
+   "disputa": 0.114,
+   "indice": 39,
+   "data": "2026-08-12"
+  },
+  {
+   "id": "2642167",
+   "titulo": "PL 4921/2026",
+   "ementa": "Dispõe sobre a transformação de cargos vagos no quadro permanente do Tribunal Regional do Trabalho da 18 Região, sem aumento de despesas.",
+   "placar": [
+    320,
+    67
+   ],
+   "votacoes": 1,
+   "dividido": true,
+   "aprovada": true,
+   "noticias": 0,
+   "atencao": 0.0,
+   "disputa": 0.513,
+   "indice": 15,
+   "data": "2026-09-01"
+  }
+ ]
+}
