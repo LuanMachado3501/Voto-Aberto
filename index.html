@@ -298,11 +298,24 @@ body.cota #cotapg{display:flex}
 .cbar u{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--led);text-decoration:none}
 .crel{font-size:12px;color:var(--muted);margin-top:6px;white-space:nowrap}
 .crow .val{white-space:nowrap;text-align:right;font-family:var(--display);font-weight:800;font-size:20px;line-height:1}.crow .val small{display:block;font-family:var(--body);font-weight:400;font-size:11px;color:var(--muted)}
+.cview{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;align-self:flex-start}
+.cview button{font:inherit;font-size:14px;color:var(--muted);background:none;border:0;border-radius:999px;padding:7px 16px;cursor:pointer}
+.cview button.on{background:var(--led);color:#1A1200;font-weight:700}
+button.crow{font:inherit;text-align:left;width:100%;cursor:pointer}
+.pbadge{width:46px;height:46px;border-radius:8px;display:grid;place-items:center;background:#ffffff10;border:1px solid var(--line);font-size:11px;font-weight:700;text-align:center;line-height:1.05;overflow:hidden;padding:2px}
+.csort[hidden]{display:none!important}
 .cmore{font:inherit;align-self:center;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer}
 @media (max-width:700px){.cstats{grid-template-columns:1fr 1fr}.cstats div:last-child{grid-column:span 2}
-  .crow{grid-template-columns:40px 1fr auto;grid-template-areas:"f n v" "c c c";gap:8px 10px}.crow .rk{display:none}.crow .face{grid-area:f;width:40px;height:50px}.crow>div:nth-of-type(2){grid-area:n}.crow .cmp{grid-area:c}.crow .val{grid-area:v;font-size:18px}}
+  .crow{grid-template-columns:40px 1fr auto;grid-template-areas:"f n v" "c c c";gap:8px 10px}.crow .rk{display:none}.crow .pbadge{grid-area:f;width:40px;height:40px}.crow .face{grid-area:f;width:40px;height:50px}.crow .cname{grid-area:n}.cctl input{flex:1 1 100%}.cctl select{flex:1 1 0;min-width:0}.crow .cmp{grid-area:c}.crow .val{grid-area:v;font-size:18px}}
 .cyears{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}.cyears small{display:block;font-size:12px;color:var(--muted)}.cyears b{font-size:15px}
 @media (max-width:700px){.cyears{grid-template-columns:1fr 1fr}}
+.upbar{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:7;display:flex;gap:6px;padding:5px;background:#0F1B16ee;backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;box-shadow:0 10px 30px #0009;transition:opacity .25s,transform .25s;max-width:calc(100vw - 24px)}
+.upbar.gone{opacity:0;pointer-events:none;transform:translate(-50%,-10px)}
+.upbar a,.upbar button{font:inherit;font-size:14px;border-radius:999px;padding:8px 14px;text-decoration:none;cursor:pointer;white-space:nowrap}
+.upbar .ub-back{color:var(--fg);border:1px solid var(--line);background:none}
+.upbar .ub-up{color:#1A1200;background:var(--led);border:0;font-weight:700;animation:nudge 1.6s ease-in-out 3}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media (max-width:700px){.upbar .lg{display:none}}
 /* ===== Centro Político: navegação e rodapé ===== */
 .sitenav{display:flex;flex-direction:row;align-items:center;gap:22px;padding:12px 20px 0;flex-wrap:wrap}
 .sitenav .brand{color:var(--fg);text-decoration:none;font-size:20px;margin-right:auto}
@@ -704,10 +717,10 @@ function cotaBlock(d,h){const c=h.cota; if(!c) return '';
   const mx=Math.max(...c.cats.map(x=>x[1]),1), MES2=['','jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
   const A=c.anos||{}, tot=Object.values(A).reduce((a,b)=>a+b,0), r=COTAby[d.id];
   const yl={'2023':'2023 (fev–dez)','2024':'2024','2025':'2025','2026':`2026 (jan–${MES2[c.m26]})`};
-  return `<p class="sec">Cota parlamentar (verba de gabinete)</p>
+  return `<p class="sec" id="cotasec">Cota parlamentar (verba de gabinete)</p>
    <details class="whatis"><summary>O que é a cota parlamentar?</summary><p>Além do salário, cada deputado tem uma verba mensal para despesas do mandato: passagens, escritório no estado, aluguel de carro, combustível, divulgação. Ele paga, apresenta a nota fiscal e a Câmara reembolsa. O limite muda por estado, porque viajar a Brasília custa mais para quem mora longe; por isso comparamos cada deputado com os do mesmo estado.</p></details>
    <div class="emb"><div><div class="ebig">${brl(tot)}</div><em class="emuted">gastos nesta legislatura, desde fev/2023</em>
-     ${r?`<div class="fact" style="margin-top:16px"><small>Por mês, em média</small><strong style="font-size:24px">${brl1(r[1])}</strong><em>${cotaRel(r[2],d.uf)}${COTA.med[d.uf]?` (${brl1(COTA.med[d.uf])})`:''} · <a href="#cota" style="color:var(--fg)" onclick="CS.uf='${d.uf}';CS.q='';CS.lim=20">ver a bancada</a></em></div>`:''}
+     ${r?`<div class="fact" style="margin-top:16px"><small>Por mês, em média</small><strong style="font-size:24px">${brl1(r[1])}</strong><em>${cotaRel(r[2],d.uf)}${COTA.med[d.uf]?` (${brl1(COTA.med[d.uf])})`:''} · <a href="#cota" style="color:var(--fg)" onclick="CS.uf='${d.uf}';CS.p='';CS.view='dep';CS.q='';CS.lim=20">ver a bancada</a></em></div>`:''}
      <div class="cyears">${['2023','2024','2025','2026'].map(y=>`<div><small>${yl[y]}</small><b>${A[y]?brl(A[y]):'—'}</b></div>`).join('')}</div></div>
     <div><small class="emuted" style="letter-spacing:1.5px;text-transform:uppercase;font-size:11px">Com o quê (desde fev/2023)</small>
      ${c.cats.map(([k,v])=>`<div class="ebar" style="grid-template-columns:150px 1fr 80px"><span>${esc(k)}</span><div><i style="width:${(v/mx*100).toFixed(1)}%"></i></div><b>${brl(v)}</b></div>`).join('')}</div></div>
@@ -959,37 +972,42 @@ const brl1=v=>'R$ '+(v/1e3).toLocaleString('pt-BR',{minimumFractionDigits:1,maxi
 function cotaRel(r,uf){if(r==null) return 'pouco tempo no cargo para comparar'; const p=Math.round((r-1)*100);
   return Math.abs(p)<3?`na mediana de ${uf}`:p>0?`${p}% acima da mediana de ${uf}`:`${-p}% abaixo da mediana de ${uf}`}
 function cotaDep(id){const i=byId[id]; if(i!=null) return deps[i]; if(String(PRES.id)===id) return {id,n:PRES.n,p:PRES.p||'',uf:PRES.uf||'',s:0}; return null}
-let CS={uf:'',q:'',sort:'r',lim:20};
+let CS={uf:'',p:'',q:'',sort:'r',lim:20,view:'dep'};
 function cotaPage(){const el=document.getElementById('cotapg');
   const all=COTA.deps.map(r=>({r,d:cotaDep(r[0])})).filter(x=>x.d);
   const meds=Object.values(COTA.med).sort((a,b)=>a-b), mBR=meds[Math.floor(meds.length/2)];
-  const ufs=[...new Set(all.map(x=>x.d.uf))].sort();
+  const ufs=[...new Set(all.map(x=>x.d.uf))].sort(), pts=[...new Set(all.map(x=>x.d.p).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt'));
   el.innerHTML=`<div class="cintro"><a class="back" href="#">Voltar ao plenário</a>
    <p class="led" style="margin:18px 0 0;font-size:20px;letter-spacing:3px">COTA</p>
    <h1>Quanto cada deputado gasta da cota</h1>
    <p class="lead">Além do salário, cada deputado tem uma verba mensal para as despesas do mandato: passagens, escritório no estado, carro, divulgação. Ele paga, apresenta a nota fiscal e a Câmara reembolsa. É legal e público. O limite muda por estado, então comparamos cada deputado com os colegas do mesmo estado. O período é o mandato atual inteiro, desde a posse em fevereiro de 2023.</p></div>
    <div class="cstats" id="cst"></div>
    <div class="cctl"><label class="sr" for="cq">Buscar deputado</label><input id="cq" type="search" placeholder="Buscar deputado" value="${esc(CS.q)}">
-    <label class="sr" for="cuf">Estado</label><select id="cuf"><option value="">Todos os estados</option>${ufs.map(u=>`<option${u===CS.uf?' selected':''}>${u}</option>`).join('')}</select></div>
-   <div class="csort" role="group" aria-label="Ordenar">${[['r','Mais acima da mediana do estado'],['men','Maior gasto por mês'],['forn','Mais concentrado num fornecedor'],['low','Menor gasto por mês']].map(([k,l])=>`<button type="button" data-k="${k}" class="${CS.sort===k?'on':''}">${l}</button>`).join('')}</div>
+    <label class="sr" for="cuf">Estado</label><select id="cuf"><option value="">Todos os estados</option>${ufs.map(u=>`<option${u===CS.uf?' selected':''}>${u}</option>`).join('')}</select>
+    <label class="sr" for="cpa">Partido</label><select id="cpa"><option value="">Todos os partidos</option>${pts.map(u=>`<option${u===CS.p?' selected':''}>${u}</option>`).join('')}</select></div>
+   <div class="cview" role="tablist" aria-label="Ver por">${[['dep','Por deputado'],['par','Por partido']].map(([k,l])=>`<button type="button" role="tab" data-v="${k}" aria-selected="${CS.view===k}" class="${CS.view===k?'on':''}">${l}</button>`).join('')}</div>
+   <div class="csort" id="csort" role="group" aria-label="Ordenar">${[['r','Mais acima da mediana do estado'],['men','Maior gasto por mês'],['forn','Mais concentrado num fornecedor'],['low','Menor gasto por mês']].map(([k,l])=>`<button type="button" data-k="${k}" class="${CS.sort===k?'on':''}">${l}</button>`).join('')}</div>
    <div class="clist" id="clist"></div>
    <details class="whatis"><summary>Como calculamos</summary>
     <p><b>Gasto por mês:</b> tudo o que o deputado pediu de reembolso de ${ym(COTA.de)} a ${ym(COTA.ate)} (valor líquido, depois de glosas), dividido pelos meses em que ele teve alguma despesa. Assim quem entrou ou saiu no meio do caminho não fica com número distorcido. Auxílio-moradia não entra.</p>
     <p><b>Mediana do estado:</b> o valor do deputado “do meio” da bancada, quando todos são colocados em ordem. Usamos a mediana, e não a média, para que um único gasto muito alto não puxe a referência. Só entram nela deputados com 3 meses ou mais de despesas.</p>
+    <p><b>Partidos:</b> para não comparar partido grande com pequeno nem estado caro com barato, cada deputado vira um índice (quanto ele gasta em relação à mediana do próprio estado) e o partido recebe a média desses índices. Entram partidos com 3 deputados ou mais; o filtro de estado também vale para essa visão.</p>
     <p><b>Fornecedor principal:</b> a parte do total que foi para uma mesma empresa ou pessoa, identificada pelo CNPJ ou CPF. Mostramos o aviso quando passa de 40%.</p>
     <p><b>O que isso não diz:</b> gastar acima da mediana ou concentrar num fornecedor não é irregular. Pode refletir a distância até Brasília, o tamanho do estado ou escolhas do mandato, como manter escritório no interior. Os números servem para você comparar e, se quiser, conferir as notas fiscais, que são públicas no site da Câmara.</p></details>
    <p class="note" style="margin:0">Fonte: Câmara dos Deputados, dados abertos da cota parlamentar (CEAP), ${ym(COTA.de)} a ${ym(COTA.ate)}. O mês mais recente pode estar incompleto.</p>`;
   const draw=()=>{const q=CS.q.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-    let L=all.filter(x=>(!CS.uf||x.d.uf===CS.uf)&&(!q||x.d.n.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q)));
+    let L=all.filter(x=>(!CS.uf||x.d.uf===CS.uf)&&(!CS.p||x.d.p===CS.p)&&(!q||x.d.n.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q)));
+    document.getElementById('csort').hidden=CS.view==='par';
+    if(CS.view==='par') return drawPar(L);
     const key={r:x=>-(x.r[2]??-1),men:x=>-x.r[1],forn:x=>-x.r[6],low:x=>x.r[1]}[CS.sort]; L.sort((a,b)=>key(a)-key(b));
     const med=CS.uf?COTA.med[CS.uf]:mBR;
     document.getElementById('cst').innerHTML=`<div><small>${CS.uf?'Mediana da bancada de '+CS.uf:'Mediana nacional'}</small><strong>${brl1(med)}</strong><small>por deputado, por mês</small></div>
-     <div><small>${CS.uf?'Deputados de '+CS.uf:'Deputados'}</small><strong>${L.length}</strong><small>${q?'na busca':'com despesas no período'}</small></div>
+     <div><small>${'Deputados'+(CS.p?' do '+CS.p:'')+(CS.uf?' de '+CS.uf:'')}</small><strong>${L.length}</strong><small>${q?'na busca':'com despesas no período'}</small></div>
      <div><small>Período</small><strong style="font-size:24px">${ym(COTA.de)} a ${ym(COTA.ate)}</strong></div>`;
     const MAX=1.6;
     document.getElementById('clist').innerHTML=L.slice(0,CS.lim).map((x,j)=>{const [id,men,r,m,tot,fn,fp]=x.r;
-      return `<a class="crow" href="#dep/${id}"><span class="rk">${j+1}</span>${face(x.d)}
-       <div style="min-width:0"><b>${esc(x.d.n)}</b><span class="meta">${esc(x.d.p)}-${x.d.uf}</span>${fp>=.4?`<br><span class="chip" title="${esc(fn)}">${Math.round(fp*100)}% com um só fornecedor</span>`:''}</div>
+      return `<a class="crow" href="${byId[id]!=null?`#dep/${id}/cota`:`https://www.camara.leg.br/deputados/${id}`}"${byId[id]!=null?'':' target="_blank" rel="noopener"'}><span class="rk">${j+1}</span>${face(x.d)}
+       <div class="cname" style="min-width:0"><b>${esc(x.d.n)}</b><span class="meta">${esc(x.d.p)}-${x.d.uf}</span>${fp>=.4?`<br><span class="chip" title="${esc(fn)}">${Math.round(fp*100)}% com um só fornecedor</span>`:''}</div>
        <div class="cmp">${r!=null?`<div class="cbar" aria-hidden="true"><i style="width:${(Math.min(r,MAX)/MAX*100).toFixed(1)}%"></i><u style="left:${(100/MAX).toFixed(1)}%"></u></div>`:''}<div class="crel">${cotaRel(r,x.d.uf)}</div></div>
        <div class="val">${brl1(men)}<small>por mês</small></div></a>`}).join('')
       +(L.length>CS.lim?`<button type="button" class="cmore" id="cmore">Ver mais ${Math.min(20,L.length-CS.lim)} de ${L.length-CS.lim}</button>`:'')
@@ -997,17 +1015,38 @@ function cotaPage(){const el=document.getElementById('cotapg');
     const mb=document.getElementById('cmore'); if(mb) mb.onclick=()=>{CS.lim+=20; draw();};};
   document.getElementById('cq').oninput=e=>{CS.q=e.target.value; CS.lim=20; draw();};
   document.getElementById('cuf').onchange=e=>{CS.uf=e.target.value; CS.lim=20; draw();};
+  document.getElementById('cpa').onchange=e=>{CS.p=e.target.value; CS.lim=20; if(CS.p) setView('dep'); else draw();};
+  const setView=v=>{CS.view=v; el.querySelectorAll('.cview button').forEach(o=>{o.classList.toggle('on',o.dataset.v===v);o.setAttribute('aria-selected',o.dataset.v===v)}); draw();};
+  el.querySelectorAll('.cview button').forEach(b=>b.onclick=()=>setView(b.dataset.v));
+  const drawPar=L=>{const G={}; L.forEach(x=>{if(x.r[2]==null) return; (G[x.d.p]=G[x.d.p]||[]).push(x)});
+    const P=Object.entries(G).filter(([,v])=>v.length>=3).map(([p,v])=>({p,n:v.length,idx:v.reduce((a,x)=>a+x.r[2],0)/v.length,men:v.reduce((a,x)=>a+x.r[1],0)/v.length})).sort((a,b)=>b.idx-a.idx);
+    const fora=Object.values(G).filter(v=>v.length<3).length, MAX=1.6;
+    document.getElementById('clist').innerHTML=`<p class="hint" style="margin:0">Média dos deputados de cada partido, cada um comparado com a mediana do próprio estado${CS.uf?` (só ${CS.uf})`:''}. Toque num partido para ver os deputados dele.</p>`
+     +P.map((x,j)=>`<button type="button" class="crow cpar" data-p="${esc(x.p)}"><span class="rk">${j+1}</span><span class="pbadge">${esc(x.p)}</span>
+       <div class="cname" style="min-width:0"><b>${esc(x.p)}</b><span class="meta">${x.n} deputado${x.n>1?'s':''}</span></div>
+       <div class="cmp"><div class="cbar" aria-hidden="true"><i style="width:${(Math.min(x.idx,MAX)/MAX*100).toFixed(1)}%"></i><u style="left:${(100/MAX).toFixed(1)}%"></u></div><div class="crel">${(()=>{const p=Math.round((x.idx-1)*100);return Math.abs(p)<1?'na mediana dos estados, em média':p>0?`em média ${p}% acima da mediana do estado`:`em média ${-p}% abaixo da mediana do estado`})()}</div></div>
+       <div class="val">${brl1(x.men)}<small>por mês, em média</small></div></button>`).join('')
+     +(fora?`<p class="hint" style="margin:0">${fora} partido${fora>1?'s':''} com menos de 3 deputados ${fora>1?'ficaram':'ficou'} de fora da comparação.</p>`:'')
+     +(P.length?'':'<p class="hint">Nenhum partido com 3 deputados ou mais neste filtro.</p>');
+    el.querySelectorAll('.cpar').forEach(b=>b.onclick=()=>{CS.p=b.dataset.p; document.getElementById('cpa').value=CS.p; CS.lim=20; setView('dep'); document.getElementById('cst').scrollIntoView({behavior:'smooth'});});};
   el.querySelectorAll('.csort button').forEach(b=>b.onclick=()=>{CS.sort=b.dataset.k; CS.lim=20; el.querySelectorAll('.csort button').forEach(o=>o.classList.toggle('on',o===b)); draw();});
   draw();}
-function route(){const m=location.hash.match(/^#dep\/(\d+)/); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota');
+function route(){const m=location.hash.match(/^#dep\/(\d+)(\/cota)?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota');
   const pg=m?'dep':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
   document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===pg));
   document.title=pg==='cota'?'Cota: quanto gastam os deputados · Centro Político':pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
-  if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);}
+  if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);
+    if(m[2]){const s=document.getElementById('cotasec'); if(s){requestAnimationFrame(()=>{scrollTo(0,s.getBoundingClientRect().top+scrollY-(innerWidth<700?72:80)); upBar(true,deps[byId[m[1]]].n);});}}}
   else if(location.hash==='#cota'){document.body.classList.add('dep','cota'); cotaPage(); scrollTo(0,0);}
   else if(/^#(teste|urna)$/.test(location.hash)){document.body.classList.add('dep','quiz'); quizIntro(); scrollTo(0,0);}
   else {document.body.classList.remove('dep');}}
 addEventListener('hashchange',route);
+/* botão flutuante: veio da Cota direto para a cota do deputado; avisa que há mais informação acima */
+const UB=document.createElement('div'); UB.className='upbar'; UB.hidden=true; document.body.appendChild(UB);
+function upBar(on,nome){UB.hidden=!on; if(!on) return;
+  UB.innerHTML=`<a href="#cota" class="ub-back">‹ Cota</a><button type="button" class="ub-up">↑ Ver o perfil completo<span class="lg"> de ${esc(nome.split(' ')[0])}: votos, presença e emendas</span></button>`;
+  UB.querySelector('.ub-up').onclick=()=>scrollTo({top:0,behavior:'smooth'});}
+addEventListener('scroll',()=>{if(!UB.hidden&&UB.innerHTML&&scrollY<200) UB.classList.add('gone'); else UB.classList.remove('gone');},{passive:true});
 document.getElementById('oqf-top').outerHTML=OQF;
 document.getElementById('infoBtn').addEventListener('click',()=>document.getElementById('info').showModal());
 {const hall=document.querySelector('.hall'); requestAnimationFrame(()=>{hall.scrollLeft=(hall.scrollWidth-hall.clientWidth)/2;});}
