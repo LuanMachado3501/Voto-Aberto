@@ -316,6 +316,46 @@ button.crow{font:inherit;text-align:left;width:100%;cursor:pointer}
 .upbar .ub-up{color:#1A1200;background:var(--led);border:0;font-weight:700;animation:nudge 1.6s ease-in-out 3}
 @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @media (max-width:700px){.upbar .lg{display:none}}
+/* ===== Bancada ===== */
+#bancpg{display:none;max-width:1000px}
+body.banc #perfil,body.banc #quiz,body.banc #cotapg{display:none!important}
+body.banc #bancpg{display:flex}
+.bpick{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bpick select{font-size:18px;padding:12px 16px;min-width:230px}
+.bufs{display:flex;flex-wrap:wrap;gap:6px}
+.bufs button{font:inherit;font-size:13px;font-weight:600;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:6px;padding:6px 9px;cursor:pointer;min-width:42px}
+.bufs button:hover{border-color:#4a5d53}.bufs button.on{background:var(--led);color:#1A1200;border-color:var(--led)}
+.bstats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.bstats div{border-top:2px solid var(--line);padding-top:10px}.bstats small{display:block;font-size:13px;color:var(--muted)}.bstats strong{font-family:var(--display);font-size:32px;font-weight:800;line-height:1.1}.bstats em{display:block;font-style:normal;font-size:12px;color:var(--muted)}
+.bparts{display:flex;height:22px;border-radius:6px;overflow:hidden;gap:2px}
+.bparts span{display:block;height:100%;min-width:3px}
+.blegend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin-top:8px}.blegend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.bstrip{position:relative;height:56px;margin-top:6px}
+.bstrip .ax{position:absolute;left:0;right:0;top:27px;height:2px;background:linear-gradient(90deg,var(--gov),var(--mid),var(--opo));opacity:.5}
+.bstrip a{position:absolute;top:18px;width:18px;height:18px;margin-left:-9px;border-radius:50%;border:2px solid #0F1B16;display:block}
+.bstrip a:hover{transform:scale(1.35);z-index:2}
+.bstripl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.belei{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.belei details{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+.belei summary{cursor:pointer;list-style:none}.belei summary::-webkit-details-marker{display:none}
+.belei b{display:block;font-family:var(--display);font-size:30px;font-weight:800;line-height:1}.belei small{font-size:13px;color:var(--muted)}
+.belei ul{list-style:none;margin:10px 0 0;padding:0;font-size:13px;display:flex;flex-direction:column;gap:4px}.belei ul a{color:var(--fg)}
+.bvot{display:flex;flex-direction:column;gap:6px}
+.bvot details{background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.bvot summary{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(120px,1fr) 104px;gap:12px;align-items:center;padding:10px 12px;cursor:pointer;list-style:none;font-size:14px}
+.bvot summary::-webkit-details-marker{display:none}
+.bvot .vb{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line)}
+.bvot .vb .s{background:var(--fg)}.bvot .vb .n{background:#6f7d76}.bvot .vb .a{background:transparent}
+.bvot em{font-style:normal;font-size:12px;color:var(--muted);text-align:right;white-space:nowrap}
+.bvot .vn{padding:0 12px 12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:13px}
+.bvot .vn b{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-bottom:4px}
+.bvot .vn a{color:var(--fg)}.bvot .vn div div,.belei li{line-height:1.35;margin-bottom:3px}
+.bdeps{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.bdeps a{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--fg);text-decoration:none}
+.bdeps a:hover{border-color:#4a5d53}
+.bdeps .face{width:44px;height:54px;font-size:16px;border-radius:6px}
+.bdeps b{display:block;font-size:14px}.bdeps span{font-size:12px;color:var(--muted)}
+@media (max-width:700px){.bstats{grid-template-columns:1fr 1fr}.bstats strong{font-size:26px}.belei{grid-template-columns:1fr 1fr}.bvot summary{grid-template-columns:1fr 92px}.bvot summary .vb{grid-column:1/-1;order:3}.bvot .vn{grid-template-columns:1fr}}
 /* ===== Em destaque ===== */
 .destq{max-width:1100px;margin:0 auto;padding:40px 20px 10px}
 body.dep .destq{display:none!important}
@@ -427,7 +467,7 @@ select option{background:#15241D;color:#EEF0E8}
     <a href="#" data-nav="plen" title="Como cada deputado vota">Voto Aberto<small class="lg"> · como votam</small></a>
     <a href="#teste" data-nav="teste" title="Quem vota como você">Urna<small class="lg"> · quem vota como você</small></a>
     <a href="#cota" data-nav="cota" title="Quanto gastam">Cota<small class="lg"> · quanto gastam</small></a>
-    <span title="Quem representa seu estado">Bancada<em class="soon">em breve</em></span>
+    <a href="#bancada" data-nav="bancada" title="Quem representa seu estado">Bancada<small class="lg"> · seu estado</small></a>
   </nav>
 </header>
 <div id="plen">
@@ -488,6 +528,7 @@ select option{background:#15241D;color:#EEF0E8}
 <div class="wrap" id="perfil"></div>
 <div class="wrap" id="quiz"></div>
 <div class="wrap" id="cotapg"></div>
+<div class="wrap" id="bancpg"></div>
 <div id="tip" class="tip" hidden></div>
 <footer class="sitefoot">
   <div>
@@ -503,7 +544,7 @@ select option{background:#15241D;color:#EEF0E8}
         <li><a href="#"><b>Voto Aberto</b> · como cada deputado vota</a></li>
         <li><a href="#teste"><b>Urna</b> · quem vota como você</a></li>
         <li><a href="#cota"><b>Cota</b> · quanto gastam</a></li>
-        <li><b>Bancada</b> · quem representa seu estado <em class="soon">em breve</em></li>
+        <li><a href="#bancada"><b>Bancada</b> · quem representa seu estado</a></li>
       </ul>
     </section>
     <section>
@@ -1060,12 +1101,76 @@ function cotaPage(){const el=document.getElementById('cotapg');
    <div class="dgrid">${I.slice(0,3).map(card).join('')}</div>
    ${I.length>3?`<details class="dmore"><summary>Ver as outras ${I.length-3}</summary><ul class="dlist">${I.slice(3).map(x=>`<li><a href="https://www.camara.leg.br/propostas-legislativas/${x.id}" target="_blank" rel="noopener" style="color:var(--fg)">${esc(nome(x))} <span>${esc(x.titulo)}</span></a><span>${x.placar[0]} × ${x.placar[1]}</span><span>${fdate(x.data)}</span></li>`).join('')}</ul></details>`:''}`;
   el.hidden=false;})();
-function route(){const m=location.hash.match(/^#dep\/(\d+)(\/cota)?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota');
-  const pg=m?'dep':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
+
+/* ===== Bancada: quem representa seu estado ===== */
+const UFN={AC:'Acre',AL:'Alagoas',AP:'Amapá',AM:'Amazonas',BA:'Bahia',CE:'Ceará',DF:'Distrito Federal',ES:'Espírito Santo',GO:'Goiás',MA:'Maranhão',MT:'Mato Grosso',MS:'Mato Grosso do Sul',MG:'Minas Gerais',PA:'Pará',PB:'Paraíba',PR:'Paraná',PE:'Pernambuco',PI:'Piauí',RJ:'Rio de Janeiro',RN:'Rio Grande do Norte',RS:'Rio Grande do Sul',RO:'Rondônia',RR:'Roraima',SC:'Santa Catarina',SP:'São Paulo',SE:'Sergipe',TO:'Tocantins'};
+const ART=u=>['AC','AM','AP','CE','ES','MA','PA','PI','PR','RJ','RN','RS','TO','DF'].includes(u)?'o':['BA','PB'].includes(u)?'a':'';
+const DE=u=>({o:'do ',a:'da ','':'de '})[ART(u)]+UFN[u];
+// cores neutras (sem vermelho/azul, que no plenário indicam lado)
+const PCOL=['#EEF0E8','#FFB000','#8FB8A0','#C9CFC4','#5F7F70','#D8C77A','#A7B5AD','#B59A5A','#7E9A8B','#E3D9B8','#4F6A5E','#9DA9A2'];
+const median=a=>{const b=a.filter(x=>x!=null).sort((x,y)=>x-y); if(!b.length) return null; const m=b.length>>1; return b.length%2?b[m]:(b[m-1]+b[m])/2};
+function eleiCat(h){const T=h&&h.tse; if(!T) return ['nao','Não concorreu'];
+  if(T.cargo==='Deputado Federal'){ if(/^ELEITO/.test(T.sit)) return ['re','Reeleito']; if(T.sit==='SUPLENTE') return ['sup','Suplente']; return ['nre',T.sit==='#NULO'?'Votos anulados':'Não reeleito'];}
+  return ['out',`${T.cargo}: ${T.sit==='2º TURNO'?'disputa o 2º turno':T.sit.toLowerCase()}`];}
+function bancPage(uf){const el=document.getElementById('bancpg');
+  const L=deps.filter(d=>d.uf===uf).map(d=>({d,h:HIST.deps[d.id]||{}})).sort((a,b)=>a.d.s-b.d.s);
+  const pres=String(PRES.uf)===uf;
+  const pick=`<div class="bpick"><label class="sr" for="buf">Estado</label><select id="buf"><option value="">Escolha o seu estado</option>${Object.keys(UFN).sort((a,b)=>UFN[a].localeCompare(UFN[b],'pt')).map(u=>`<option value="${u}"${u===uf?' selected':''}>${UFN[u]}</option>`).join('')}</select></div>
+   <div class="bufs" role="group" aria-label="Estados">${Object.keys(UFN).sort().map(u=>`<button type="button" data-u="${u}" class="${u===uf?'on':''}" title="${UFN[u]}">${u}</button>`).join('')}</div>`;
+  let body='';
+  if(uf&&UFN[uf]){
+    const n=L.length+(pres?1:0);
+    const P={}; L.forEach(x=>P[x.d.p]=(P[x.d.p]||0)+1); if(pres) P[PRES.p]=(P[PRES.p]||0)+1;
+    const PE=Object.entries(P).sort((a,b)=>b[1]-a[1]);
+    const presM=median(L.map(x=>x.h.pres&&x.h.pres[1]?x.h.pres[0]/x.h.pres[1]*100:null));
+    const govM=median(L.map(x=>x.h.gov));
+    const cotaM=COTA.med[uf];
+    const xs=L.map(x=>x.d.s), lo=Math.min(smin,...xs), hi=Math.max(smax,...xs);
+    const cats={re:[],sup:[],nre:[],out:[],nao:[]}; L.forEach(x=>{const [k,l]=eleiCat(x.h); cats[k].push([x,l]);});
+    const EL=[['re','reeleitos','Vão continuar na Câmara em 2027'],['sup','suplentes','Ficaram na fila; podem assumir se alguém sair'],['nre','não reeleitos','Tentaram a reeleição e não conseguiram'],['out','outro cargo','Concorreram a senador, governador etc.'],['nao','não concorreram','Sem candidatura em 2026']];
+    const lnk=x=>`<div><a href="#dep/${x.d.id}">${esc(x.d.n)}</a> <span class="emuted">${esc(x.d.p)}</span></div>`;
+    const vot=HIST.key.map((k,j)=>{const g={S:[],N:[],A:[]}; let fora=0; L.forEach(x=>{const c=(x.h.k||'')[j]; if(c==='S'||c==='N'||c==='A') g[c].push(x); else fora++;});
+      const tot=g.S.length+g.N.length+g.A.length||1;
+      return `<details><summary><span><b style="font-weight:600">${esc(k.t)}</b> <span class="emuted" style="font-size:12px">${fdate(k.d)}</span></span>
+        <div class="vb" aria-hidden="true"><i class="s" style="width:${g.S.length/tot*100}%"></i><i class="n" style="width:${g.N.length/tot*100}%"></i></div>
+        <em>${g.S.length} sim · ${g.N.length} não${g.A.length?` · ${g.A.length} aus.`:''}</em></summary>
+        <div class="vn">${[['S','Votaram sim'],['N','Votaram não'],['A','Ausentes']].map(([c,l])=>`<div><b>${l} (${g[c].length})</b>${g[c].map(lnk).join('')||'<span class="emuted">ninguém</span>'}</div>`).join('')}</div>
+        ${fora?`<p class="emuted" style="font-size:12px;margin:0 12px 10px">${fora} deputado${fora>1?'s':''} ainda não estava${fora>1?'m':''} no cargo nessa data.</p>`:''}</details>`}).join('');
+    body=`<div class="bstats">
+      <div><small>Deputados federais</small><strong>${n}</strong><em>${UFN[uf]}</em></div>
+      <div><small>Presença em 2026</small><strong>${presM!=null?Math.round(presM)+'%':'—'}</strong><em>mediana da bancada</em></div>
+      <div><small>Votou com o governo</small><strong>${govM!=null?Math.round(govM)+'%':'—'}</strong><em>mediana da bancada</em></div>
+      <div><small>Cota por mês</small><strong>${cotaM?brl1(cotaM):'—'}</strong><em><a href="#cota" style="color:var(--fg)" onclick="CS.uf='${uf}';CS.p='';CS.view='dep';CS.q='';CS.lim=20">ver na Cota</a></em></div></div>
+     <p class="sec" style="margin-top:20px">Partidos</p>
+     <div class="bparts" role="img" aria-label="${PE.map(([p,c])=>p+' '+c).join(', ')}">${PE.map(([p,c],i)=>`<span style="flex:${c};background:${PCOL[i%PCOL.length]}" title="${esc(p)}: ${c}"></span>`).join('')}</div>
+     <div class="blegend">${PE.map(([p,c],i)=>`<span><i style="background:${PCOL[i%PCOL.length]}"></i>${esc(p)} <b>${c}</b></span>`).join('')}</div>
+     <p class="sec">Onde cada um senta no plenário</p><p class="hint" style="margin:0">A posição vem de como cada um votou em 2025 e 2026, igual ao plenário. Toque num ponto para abrir o deputado.</p>
+     <div class="bstrip"><div class="ax"></div>${L.map(x=>`<a href="#dep/${x.d.id}" style="left:${((x.d.s-lo)/(hi-lo)*96+2).toFixed(1)}%;background:${color(x.d.s)}" title="${esc(x.d.n)} (${esc(x.d.p)})" aria-label="${esc(x.d.n)}"></a>`).join('')}</div>
+     <div class="bstripl"><span>Vota mais como PT e aliados</span><span>Vota mais como PL e aliados</span></div>
+     <p class="sec">Eleição de 2026: quem volta</p><p class="hint" style="margin:0">Resultado do TSE para os deputados que estão no cargo hoje. Toque num número para ver os nomes.</p>
+     <div class="belei">${EL.map(([k,l,dsc])=>`<details><summary><b>${cats[k].length}</b><small>${l}</small></summary><p class="emuted" style="font-size:12px;margin:8px 0 0">${dsc}</p><ul>${cats[k].map(([x,lab])=>`<li>${lnk(x)}${k==='out'||lab==='Votos anulados'?`<br><span class="emuted">${esc(lab)}</span>`:''}</li>`).join('')||'<li class="emuted">ninguém</li>'}</ul></details>`).join('')}</div>
+     ${pres?`<p class="hint" style="margin:6px 0 0">${esc(PRES.n)} (${esc(PRES.p)}), presidente da Câmara, também é ${DE(uf)} e entra na contagem de deputados e partidos; como preside, não vota.</p>`:''}
+     <p class="sec">Como a bancada votou</p><p class="hint" style="margin:0">As 20 votações em destaque do Voto Aberto. Branco = sim, cinza = não. Toque para ver quem votou como.</p>
+     <div class="bvot">${vot}</div>
+     <p class="sec">Os deputados ${DE(uf)}</p>
+     <div class="bdeps">${L.map(x=>`<a href="#dep/${x.d.id}">${face(x.d)}<div style="min-width:0"><b>${esc(x.d.n)}</b><span>${esc(x.d.p)} · presença ${x.h.pres&&x.h.pres[1]?Math.round(x.h.pres[0]/x.h.pres[1]*100)+'%':'—'}</span></div></a>`).join('')}</div>
+     <p class="note" style="margin:0">Fontes: Câmara dos Deputados (votações, presença, cota) e TSE (Eleições 2026). Presença conta as votações nominais de 2026 nas semanas em que o deputado estava no cargo; não separa faltas justificadas.</p>`;
+  }
+  el.innerHTML=`<div class="cintro"><a class="back" href="#">Voltar ao plenário</a>
+    <p class="led" style="margin:18px 0 0;font-size:20px;letter-spacing:3px">BANCADA</p>
+    <h1>${uf&&UFN[uf]?`Quem representa ${ART(uf)?ART(uf)+' ':''}${UFN[uf]}`:'Quem representa o seu estado'}</h1>
+    <p class="lead">Os deputados federais eleitos pelo seu estado: de que partido são, onde sentam no plenário, como votaram nas votações em destaque e quem volta em 2027.</p></div>${pick}${body}`;
+  const go=u=>{location.hash=u?'#bancada/'+u:'#bancada'};
+  document.getElementById('buf').onchange=e=>go(e.target.value);
+  el.querySelectorAll('.bufs button').forEach(b=>b.onclick=()=>go(b.dataset.u));}
+function route(){const m=location.hash.match(/^#dep\/(\d+)(\/cota)?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota','banc');
+  const bm=location.hash.match(/^#bancada(?:\/([A-Z]{2}))?$/);
+  const pg=m?'dep':bm?'bancada':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
   document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===pg));
-  document.title=pg==='cota'?'Cota: quanto gastam os deputados · Centro Político':pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
+  document.title=pg==='bancada'?(bm[1]&&UFN[bm[1]]?'Bancada '+DE(bm[1]):'Bancada: quem representa seu estado')+' · Centro Político':pg==='cota'?'Cota: quanto gastam os deputados · Centro Político':pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
   if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);
     if(m[2]){const s=document.getElementById('cotasec'); if(s){requestAnimationFrame(()=>{scrollTo(0,s.getBoundingClientRect().top+scrollY-(innerWidth<700?72:80)); upBar(true,deps[byId[m[1]]].n);});}}}
+  else if(bm){document.body.classList.add('dep','banc'); bancPage(bm[1]||''); scrollTo(0,0);}
   else if(location.hash==='#cota'){document.body.classList.add('dep','cota'); cotaPage(); scrollTo(0,0);}
   else if(/^#(teste|urna)$/.test(location.hash)){document.body.classList.add('dep','quiz'); quizIntro(); scrollTo(0,0);}
   else {document.body.classList.remove('dep');}}

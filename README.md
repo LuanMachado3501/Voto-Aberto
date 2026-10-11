@@ -9,6 +9,7 @@ Plataforma de acompanhamento de votos e notícias no parlamento brasileiro: como
 ## O que tem
 - **Voto Aberto (plenário):** as 513 cadeiras da Câmara, posicionadas pelo voto real de cada deputado em 2025–26 (bloco do PT à esquerda, bloco do PL à direita), e a cadeira da presidência.
 - **Página de cada deputado:** votos em 20 votações importantes, quanto segue o partido e o governo, emendas parlamentares e para onde foram, cota parlamentar, eleição de 2026, patrimônio declarado, histórico de candidaturas e notícias.
+- **Bancada (seu estado):** partidos, posição no plenário, quem volta em 2027 (TSE) e como a bancada votou nas 20 votações em destaque.
 - **Cota (quanto gastam):** gasto médio por mês de cada deputado com a cota parlamentar, comparado com a mediana da bancada do próprio estado, e quanto do total foi para um só fornecedor.
 - **Urna (teste) "Quais deputados votam como você?":** 20 votações reais + 40 perguntas de opinião, com resultado por deputado, partido, teia de 8 eixos e mapa político. Nada é guardado.
 
