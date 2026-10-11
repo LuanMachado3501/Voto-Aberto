@@ -10,8 +10,23 @@ const UFS = 'AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO R
 const ORIGENS = ['https://centropolitico.com.br', 'https://www.centropolitico.com.br', 'https://luanmachado3501.github.io'];
 const DIA = 86400000, PRAZO_DIAS = 14;
 const PUBLICOS = ['enviada', 'respondida'];
-// sinais para a triagem (não recusam sozinhos: só avisam o moderador)
-const SINAIS = [/https?:\/\//i, /www\./i, /\b(porra|caralho|merda|puta|fdp|vagabund|lixo|canalha|safad|ladr[aã]o|bandid|corrupt[oa] de merda|vai se f)/i];
+// 1ª camada (instantânea): palavrões, xingamentos e ameaças -> recusa automática, nem chega à moderação
+const sem = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const OFENSA = /\b(porra|caralho|c[a@]r[a@]lh|merd[a@]|put[a@]|putinh|fdp|filh[oa] d[a@] put|vagabund|arrombad|desgracad|cuzao|cuz[aã]o|babac|otari[oa]|imbecil|idiota|retardad|escroto|canalh|safad|verme|lixo humano|vai se f|vai tomar no|tomar no cu|vtnc|vsf|pqp|viad[oa]|bicha\b|sapatao|traveco|vou te matar|te matar|vai morrer|morra|merece morrer|vou te pegar|te pegar na|bala nele|tiro na)/;
+// sinais que só avisam o moderador
+const SINAIS = [/https?:\/\//i, /www\./i];
+// 2ª camada: IA da Cloudflare (Workers AI) para ofensas que a lista não pega. Se a IA falhar, segue só com a lista.
+async function ofensivaIA(env, texto) {
+  if (!env.AI) return false;
+  try {
+    const r = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', { max_tokens: 20, temperature: 0, messages: [
+      { role: 'system', content: 'Você modera perguntas de eleitores para deputados federais no Brasil. Responda só OFENSIVA ou OK. ' +
+        'OFENSIVA = xingamento, insulto pessoal, palavrão, ameaça, incitação à violência, discurso de ódio (raça, religião, gênero, orientação sexual, origem, deficiência) ou conteúdo sexual. ' +
+        'OK = qualquer pergunta respeitosa, inclusive crítica dura a votos, gastos, projetos ou posições, e perguntas sobre investigações públicas.' },
+      { role: 'user', content: texto }] });
+    return /OFENSIV/i.test(String(r?.response || ''));
+  } catch { return false; }
+}
 
 const cors = (req) => {
   const o = req.headers.get('Origin') || '';
@@ -57,7 +72,15 @@ async function perguntar(req, env) {
     .bind(dep, agora - 7 * DIA, agora - DIA, h).first();
   if ((lim?.semana || 0) >= 1) return json(req, { erro: 'Você já fez uma pergunta para este deputado nesta semana.' }, 429);
   if ((lim?.dia || 0) >= 3) return json(req, { erro: 'Limite de 3 perguntas por dia. Volte amanhã.' }, 429);
-  const aviso = SINAIS.some(r => r.test(texto)) ? 'conferir linguagem/link' : (texto === texto.toUpperCase() && /[A-Z]/.test(texto) ? 'tudo em maiúsculas' : null);
+  // recusa automática: não vai para a moderação; conta só no limite diário (a pessoa pode reescrever para o mesmo deputado)
+  if (OFENSA.test(sem(texto)) || await ofensivaIA(env, texto)) {
+    await env.DB.batch([
+      env.DB.prepare("INSERT INTO perguntas (dep,tema,texto,uf,status,motivo,criada,decidida) VALUES (?1,?2,?3,?4,'recusada','ofensa (automático)',?5,?5)").bind(dep, tema, texto, uf || null, agora),
+      env.DB.prepare('INSERT INTO limites (h,dep,criada) VALUES (?1,?2,?3)').bind(h, '-', agora),
+    ]);
+    return json(req, { erro: 'Sua pergunta foi recusada automaticamente porque tem ofensa, palavrão ou ameaça. Reescreva de forma respeitosa: crítica ao mandato é bem-vinda.' }, 422);
+  }
+  const aviso = SINAIS.some(r => r.test(texto)) ? 'contém link' : (texto === texto.toUpperCase() && /[A-Z]/.test(texto) ? 'tudo em maiúsculas' : null);
   await env.DB.batch([
     env.DB.prepare('INSERT INTO perguntas (dep,tema,texto,uf,aviso,criada) VALUES (?1,?2,?3,?4,?5,?6)').bind(dep, tema, texto, uf || null, aviso, agora),
     env.DB.prepare('INSERT INTO limites (h,dep,criada) VALUES (?1,?2,?3)').bind(h, dep, agora),
