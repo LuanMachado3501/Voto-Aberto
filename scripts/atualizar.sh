@@ -19,7 +19,7 @@ run() {  # run <grupo> <script...>
     python3 "$ROOT/scripts/$s.py" > /dev/null || { echo "✗ $s falhou"; echo "$s" >> "$RAW/falhas.txt"; }
   done
 }
-run votos   build_recentes build_pres build_governo
+run votos   build_recentes build_pres build_governo build_destaques
 run cota    build_cota build_cota_page
 run emendas build_emendas build_favorecidos
 
