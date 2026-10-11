@@ -1,4 +1,6 @@
-# Voto Aberto
+# Centro Político
+
+Centro de informação, não posição política. **Voto Aberto** é a parte do projeto sobre como os deputados votam.
 
 Plataforma de acompanhamento de votos e notícias no parlamento brasileiro: como cada deputado federal vota, quanto recebe e gasta, e com quem você vota parecido.
 
@@ -20,3 +22,7 @@ Plataforma de acompanhamento de votos e notícias no parlamento brasileiro: como
 - `scripts/`: scripts Python que geram os dados a partir dos arquivos oficiais, e o `template.html` do site
 
 > Os scripts ainda apontam para os arquivos baixados manualmente. O próximo passo é automatizar o download e a atualização com GitHub Actions.
+
+## Licença
+- **Dados e textos:** CC BY 4.0. Pode usar e republicar, citando "Centro Político (centropolitico.com.br)".
+- **Código, visual e marca:** todos os direitos reservados. O código está aberto para conferência; reutilizar exige autorização. Detalhes em [LICENSE](LICENSE).

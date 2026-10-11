@@ -4,11 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0A0C0D">
-<title>Hemiciclo Voto Aberto</title>
+<title>Centro Político · Como votam os deputados</title>
+<meta name="description" content="Como cada deputado federal vota, gasta e se elege, com dados oficiais da Câmara, do Portal da Transparência e do TSE. E um teste para ver quem vota como você.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Centro Político">
+<meta property="og:title" content="Centro Político · Como votam os deputados">
+<meta property="og:description" content="Os 513 deputados federais no plenário, posicionados pelo voto real. Dados oficiais, sem lado.">
+<meta property="og:url" content="https://centropolitico.com.br/">
+<link rel="canonical" href="https://centropolitico.com.br/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Doto:wght@700;900&display=swap">
 <style>
-/* Plenário em meia-lua com cadeiras-poltrona; painel do deputado; página de histórico por #dep/ID. Marca Voto Aberto, tema escuro único. */
+/* Plenário em meia-lua com cadeiras-poltrona; painel do deputado; página de histórico por #dep/ID. Marca Centro Político (Voto Aberto = segmento de votos), tema escuro único. */
 :root{
   --bg:#0F1B16; --panel:#15241D; --line:#2A3C33; --fg:#EEF0E8; --muted:#9DA9A2; --led:#FFB000; --confirma:#2FA24F;
   --gov:#EF3B36; --mid:#7D838B; --opo:#2F7BFF; --focus:#FFB000; --abs:#5A6B62;
@@ -120,7 +127,7 @@ body:not(.dep){padding:0;background:radial-gradient(ellipse 120% 90% at 50% 92%,
 .tools select{background:#ffffff0d;border-color:#ffffff1a}
 .ghost{font:inherit;font-size:14px;color:var(--fg);background:transparent;border:1px solid #ffffff2a;border-radius:6px;padding:9px 12px;cursor:pointer}
 .ghost:hover{background:#ffffff12}
-.topbar .brand{flex:1}
+.topbar .tools{flex:1}
 #infoBtn{order:3}
 #infoBtn .sm{display:none}
 .swipe{display:none}
@@ -152,7 +159,7 @@ dialog#info h2{font-family:var(--display);font-weight:900;margin:0}
   .drawer{top:auto;left:0;width:100vw;height:82svh;border-left:0;border-top:1px solid var(--line);border-radius:16px 16px 0 0;transform:translateY(105%)}
   .hall{overflow-x:auto;align-items:flex-start;justify-content:flex-start;padding-top:4px;flex:none}.hall svg{min-width:600px;max-height:none}
   .topbar{padding:10px 14px}.topbar .brand{font-size:17px}
-  .tools{order:4;width:100%;flex-wrap:nowrap}.tools input{flex:1;width:auto;min-width:0}.tools select{max-width:30%;padding-inline:8px}
+  .tools{order:1;flex:1;width:auto;flex-wrap:nowrap}.tools input{flex:1;width:auto;min-width:0}.tools select{max-width:30%;padding-inline:8px}
   #infoBtn{order:2;width:38px;height:38px;padding:0;border-radius:50%;font-weight:600}#infoBtn .lg{display:none}#infoBtn .sm{display:inline}
   .swipe{display:block;position:sticky;left:0;width:calc(100vw - 24px);text-align:center;font-size:12px;color:#7d838b;margin:2px 0 6px}
   .legend,.hintline{position:sticky;left:0;width:calc(100vw - 24px)}.legend{flex-wrap:wrap}.legend .grad{flex-basis:100%;order:-1}
@@ -161,7 +168,7 @@ dialog#info h2{font-family:var(--display);font-weight:900;margin:0}
 /* teste */
 .cta{order:2;font-size:14px;font-weight:600;color:#101214;background:var(--focus);border-radius:6px;padding:9px 14px;text-decoration:none;white-space:nowrap}
 .cta:hover{filter:brightness(1.08)}
-#teste{max-width:920px}
+#quiz{max-width:920px}
 .qbox .qtema{color:var(--focus);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
 .qbox .qq{font-family:var(--display);font-weight:900;font-size:clamp(28px,4.4vw,40px);line-height:1.08}
 .qintro{display:flex;flex-direction:column;gap:14px;padding-top:20px}
@@ -217,9 +224,9 @@ dialog#info h2{font-family:var(--display);font-weight:900;margin:0}
 .tl .badge{font-size:13px;padding:5px 9px}
 .tl .b-S{background:var(--fg);color:#101214}.tl .b-N{color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--abs)}.tl .b-A{color:var(--focus);box-shadow:inset 0 0 0 1.5px var(--focus)}
 /* página do deputado */
-#perfil,#teste{display:none}
+#perfil,#quiz{display:none}
 body.quiz #perfil{display:none!important}
-body.quiz #teste{display:flex}
+body.quiz #quiz{display:flex}
 body.dep #plen{display:none}
 body.dep #perfil{display:flex}
 .back{align-self:flex-start;color:var(--muted);text-decoration:none;font-size:14px;display:inline-flex;gap:8px;align-items:center}
@@ -265,6 +272,34 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
 .cta{background:var(--led);color:#1A1200;border-radius:999px;padding:9px 16px;font-weight:700}
 .back{font-size:14px}
 .back::before{content:'‹ ';font-size:18px}
+/* ===== Centro Político: navegação e rodapé ===== */
+.sitenav{display:flex;flex-direction:row;align-items:center;gap:22px;padding:12px 20px 0;flex-wrap:wrap}
+.sitenav .brand{color:var(--fg);text-decoration:none;font-size:20px;margin-right:auto}
+.sitenav .brand i{width:22px;height:7px}
+.sitenav nav{display:flex;gap:4px;align-items:center}
+.sitenav nav a,.sitenav nav>span{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:999px;white-space:nowrap}
+.sitenav nav a:hover{color:var(--fg);background:#ffffff0f}
+.sitenav nav a.on{color:#1A1200;background:var(--led);font-weight:700}
+.sitenav nav>span{opacity:.6;cursor:default}
+.sitenav nav a[data-nav=teste]:not(.on){color:var(--led);box-shadow:inset 0 0 0 1px #FFB00066}
+.sitenav nav a[data-nav=teste]:not(.on):hover{background:#FFB0001a}
+.soon{font-style:normal;font-size:10px;letter-spacing:.5px;text-transform:uppercase;border:1px solid currentColor;border-radius:3px;padding:1px 4px;margin-left:6px;vertical-align:2px;color:var(--muted)}
+.sitenav .sm{display:none}
+body.dep .sitenav{max-width:1100px;margin:-10px auto 22px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+@media (max-width:700px){.sitenav{padding:10px 14px 0;gap:10px}.sitenav .brand{font-size:16px;gap:8px}.sitenav .brand i{width:16px;height:6px}
+  .sitenav nav{width:100%}.sitenav nav a{padding:6px 12px;font-size:14px}.sitenav nav>span{display:none}}
+.sitefoot{border-top:1px solid var(--line);margin-top:56px;padding:28px 20px 36px;font-size:14px;color:var(--muted)}
+.sitefoot>div{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
+body.dep .sitefoot{padding-inline:0}
+body:not(.dep) .sitefoot{margin-top:0}
+.sitefoot h3{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:.3px;color:var(--fg);margin:0 0 10px}
+.sitefoot p{margin:0 0 8px;line-height:1.5}
+.sitefoot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.sitefoot a{color:var(--fg);text-decoration:none}.sitefoot a:hover{text-decoration:underline}
+.sitefoot .brand{font-size:18px;margin-bottom:10px;color:var(--fg)}
+.sitefoot .brand i{width:18px;height:6px}
+@media (max-width:700px){.sitefoot>div{grid-template-columns:1fr;gap:22px}}
+@media (max-width:700px){.topbar{flex-wrap:nowrap;gap:8px}.topbar .tools{flex:1 1 0;min-width:0;gap:6px}.topbar .tools input{flex:1 1 0;width:auto;min-width:0}.topbar .tools select{flex:0 1 auto;width:auto;max-width:31%;padding-inline:8px}#infoBtn{flex:none;order:2}}
 /* teste */
 .qintro h1,.qres h1{font-family:var(--display);font-weight:900;font-size:clamp(46px,8vw,86px);line-height:.92;margin:8px 0 0;letter-spacing:.3px;text-wrap:balance}
 .qintro .lead,.qres .lead{font-size:18px;line-height:1.5;color:var(--fg);max-width:62ch}
@@ -313,20 +348,26 @@ select option{background:#15241D;color:#EEF0E8}
 </head>
 <body>
 
+<header class="sitenav">
+  <a class="brand" href="#" aria-label="Centro Político, início"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-6px"></i>CENTRO POLÍTICO</a>
+  <nav aria-label="Ferramentas">
+    <a href="#" data-nav="plen">Plenário</a>
+    <a href="#teste" data-nav="teste"><span class="lg">Quem vota como você</span><span class="sm">Teste</span></a>
+    <span>Gastos<em class="soon">em breve</em></span>
+  </nav>
+</header>
 <div id="plen">
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="Voto Aberto, início"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-8px"></i>VOTO ABERTO</a>
+  <div class="topbar">
     <div class="tools">
       <label class="sr" for="q">Buscar deputado</label>
-      <input id="q" type="search" placeholder="Buscar nome" autocomplete="off">
+      <input id="q" type="search" placeholder="Buscar deputado" autocomplete="off">
       <label class="sr" for="party">Partido</label>
       <select id="party"><option value="">Partidos</option></select>
       <label class="sr" for="uf">Estado</label>
       <select id="uf"><option value="">Estados</option></select>
     </div>
-    <a class="cta" href="#teste"><span class="lg">Quais deputados votam como você?</span><span class="sm">Quem vota como você?</span></a>
-    <button type="button" class="ghost" id="infoBtn"><span class="lg">Como funciona</span><span class="sm" aria-hidden="true">?</span><span class="sr sm">Como funciona</span></button>
-  </header>
+        <button type="button" class="ghost" id="infoBtn"><span class="lg">Como funciona</span><span class="sm" aria-hidden="true">?</span><span class="sr sm">Como funciona</span></button>
+  </div>
   <main class="hall">
     <svg id="h" viewBox="0 0 1000 560" role="group" aria-label="Plenário da Câmara dos Deputados">
       <defs>
@@ -370,8 +411,36 @@ select option{background:#15241D;color:#EEF0E8}
 </div>
 
 <div class="wrap" id="perfil"></div>
-<div class="wrap" id="teste"></div>
+<div class="wrap" id="quiz"></div>
 <div id="tip" class="tip" hidden></div>
+<footer class="sitefoot">
+  <div>
+    <section>
+      <div class="brand"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-6px"></i>CENTRO POLÍTICO</div>
+      <p>Centro de informação, não posição política. Mostramos como os deputados votam, gastam e se elegem, só com dados oficiais e sem tomar lado.</p>
+      <p>Nada do que você faz aqui é guardado.</p>
+    </section>
+    <section>
+      <h3>Ferramentas</h3>
+      <ul>
+        <li><a href="#">Plenário: como cada deputado vota</a></li>
+        <li><a href="#teste">Teste: quem vota como você</a></li>
+        <li>Gasta fora do padrão <em class="soon">em breve</em></li>
+        <li>Seu estado no mapa <em class="soon">em breve</em></li>
+      </ul>
+    </section>
+    <section>
+      <h3>Fontes</h3>
+      <ul>
+        <li><a href="https://dadosabertos.camara.leg.br/" target="_blank" rel="noopener">Câmara dos Deputados ↗</a></li>
+        <li><a href="https://portaldatransparencia.gov.br/" target="_blank" rel="noopener">Portal da Transparência ↗</a></li>
+        <li><a href="https://dadosabertos.tse.jus.br/" target="_blank" rel="noopener">TSE ↗</a></li>
+        <li><a href="https://github.com/LuanMachado3501/Voto-Aberto" target="_blank" rel="noopener">Código e dados no GitHub ↗</a></li>
+      </ul>
+      <p style="margin-top:12px;font-size:13px">Pode usar os dados e textos, citando o Centro Político (CC BY 4.0).</p>
+    </section>
+  </div>
+</footer>
 
 <script>
 const DATA = __HEM__;
@@ -595,7 +664,7 @@ function recBlock(h,id){ if(!HIST.rec||!h.rk) return '';
 function newsBlock(id,nome){const n=NEWS[id]; const q=encodeURIComponent(`"${nome}" deputado`);
   if(!n||!n.length) return `<p class="sec">Últimas notícias</p><div class="todo">Ainda não acompanhamos as notícias deste deputado. <a href="https://news.google.com/search?q=${q}&hl=pt-BR&gl=BR&ceid=BR:pt-419" target="_blank" rel="noopener" style="color:var(--fg)">Buscar no Google Notícias ↗</a></div>`;
   return `<p class="sec">Últimas notícias</p><div class="news">${n.slice(0,3).map(x=>`<a class="nitem" href="${esc(x.url)}" target="_blank" rel="noopener"><small>${esc(x.veiculo)}${x.data?' · '+fdate(x.data):''}</small><b>${esc(x.titulo)} ↗</b><p>${esc(x.resumo)}</p></a>`).join('')}</div>
-   <p class="note" style="margin:0">Resumos do Voto Aberto; a matéria completa está no site de cada veículo. Notícias escolhidas pela data, não pelo tom. Atualizado em ${fdate(NEWS.atualizado)}.</p>`}
+   <p class="note" style="margin:0">Resumos do Centro Político; a matéria completa está no site de cada veículo. Notícias escolhidas pela data, não pelo tom. Atualizado em ${fdate(NEWS.atualizado)}.</p>`}
 const OQF=`<details class="whatis"><summary>O que faz um deputado federal?</summary><ul class="oqf">
  <li><strong>Vota leis.</strong> Projetos, mudanças na Constituição (PECs) e medidas provisórias passam pelo plenário. É o que você vê aqui.</li>
  <li><strong>Propõe leis.</strong> Cada deputado pode apresentar projetos, que passam por comissões antes de chegar ao plenário.</li>
@@ -621,8 +690,7 @@ function renderPerfil(id){const i=byId[id]; if(i==null){location.hash='';return}
     <div class="vmore"><p>${esc(k.desc)}</p>${k.dep?`<p class="emuted">${esc(k.dep)}</p>`:''}<p class="emuted">${esc(k.m)}</p>
     <a href="https://www.camara.leg.br/propostas-legislativas/${k.prop}" target="_blank" rel="noopener">Ver a proposta e a tramitação na Câmara ↗</a></div></details>`});
   perfil.innerHTML=`<a class="back" href="#">Voltar ao plenário</a>
-   <div class="hero">${face(d)}<div><div class="brand" style="font-size:16px"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-8px"></i>VOTO ABERTO</div>
-    <h1>${esc(d.n)}</h1><div class="meta" style="font-size:16px">${d.p}-${d.uf} · ${posLabel(d.s)}${h.nasc?' · natural de '+esc(h.nasc):''}</div>${estNote(d)}
+   <div class="hero">${face(d)}<div><h1>${esc(d.n)}</h1><div class="meta" style="font-size:16px">${d.p}-${d.uf} · ${posLabel(d.s)}${h.nasc?' · natural de '+esc(h.nasc):''}</div>${estNote(d)}
     <div class="bar" style="max-width:420px"><i style="left:${pct}%"></i></div></div></div>
    <div class="facts">
     <div class="fact"><small>Presença em 2026</small><strong>${h.pres&&h.pres[1]?Math.round(h.pres[0]/h.pres[1]*100)+'%':'—'}</strong><em>${h.pres?`votou em ${h.pres[0]} das ${h.pres[1]} votações nominais em que estava no cargo`:''}</em></div>
@@ -732,7 +800,7 @@ const QUIZ=[
 const KIDX=Object.fromEntries(HIST.key.map((k,i)=>[k.id,i]));
 const OPTS=[[2,'Com certeza sim'],[1,'Acho que sim'],[-1,'Acho que não'],[-2,'Com certeza não']];
 const NREAL=QUIZ.filter(Q=>Q.v).length;
-const quizEl=document.getElementById('teste'); let QA=[], qi=0, QSET=[];
+const quizEl=document.getElementById('quiz'); let QA=[], qi=0, QSET=[];
 const qHead=()=>`<a class="back" href="#">Voltar ao plenário</a>`;
 function quizIntro(){
   quizEl.innerHTML=qHead()+`<div class="qintro">
@@ -825,6 +893,9 @@ function mapSVG(U,parts,dc){const S=170,c=200, P=(x,y)=>[c+x*S, c+y*S];
   return `<svg viewBox="-60 0 520 410" class="pmap" role="img" aria-label="Mapa político com sua posição e a dos partidos">${g}</svg>`;}
 
 function route(){const m=location.hash.match(/^#dep\/(\d+)/); tip.hidden=true; drop(); document.body.classList.remove('quiz');
+  const pg=m?'dep':location.hash==='#teste'?'teste':'plen';
+  document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===pg));
+  document.title=pg==='teste'?'Quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
   if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);}
   else if(location.hash==='#teste'){document.body.classList.add('dep','quiz'); quizIntro(); scrollTo(0,0);}
   else {document.body.classList.remove('dep');}}
