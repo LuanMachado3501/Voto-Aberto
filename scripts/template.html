@@ -301,6 +301,8 @@ body.cota #cotapg{display:flex}
 .cmore{font:inherit;align-self:center;color:var(--fg);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer}
 @media (max-width:700px){.cstats{grid-template-columns:1fr 1fr}.cstats div:last-child{grid-column:span 2}
   .crow{grid-template-columns:40px 1fr auto;grid-template-areas:"f n v" "c c c";gap:8px 10px}.crow .rk{display:none}.crow .face{grid-area:f;width:40px;height:50px}.crow>div:nth-of-type(2){grid-area:n}.crow .cmp{grid-area:c}.crow .val{grid-area:v;font-size:18px}}
+.cyears{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}.cyears small{display:block;font-size:12px;color:var(--muted)}.cyears b{font-size:15px}
+@media (max-width:700px){.cyears{grid-template-columns:1fr 1fr}}
 /* ===== Centro Político: navegação e rodapé ===== */
 .sitenav{display:flex;flex-direction:row;align-items:center;gap:22px;padding:12px 20px 0;flex-wrap:wrap}
 .sitenav .brand{color:var(--fg);text-decoration:none;font-size:20px;margin-right:auto}
@@ -682,16 +684,18 @@ function tseBlock(h){const x=h.tse;
    <p class="note" style="margin:0">Fonte: TSE, Eleições 2026. O valor é o que o próprio candidato declarou, em geral pelo preço de compra e não pelo valor de mercado; por isso imóveis antigos costumam aparecer baratos.</p>`}
 function cotaBlock(d,h){const c=h.cota; if(!c) return '';
   const mx=Math.max(...c.cats.map(x=>x[1]),1), MES2=['','jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const A=c.anos||{}, tot=Object.values(A).reduce((a,b)=>a+b,0), r=COTAby[d.id];
+  const yl={'2023':'2023 (fev–dez)','2024':'2024','2025':'2025','2026':`2026 (jan–${MES2[c.m26]})`};
   return `<p class="sec">Cota parlamentar (verba de gabinete)</p>
    <details class="whatis"><summary>O que é a cota parlamentar?</summary><p>Além do salário, cada deputado tem uma verba mensal para despesas do mandato: passagens, escritório no estado, aluguel de carro, combustível, divulgação. Ele paga, apresenta a nota fiscal e a Câmara reembolsa. O limite muda por estado, porque viajar a Brasília custa mais para quem mora longe; por isso comparamos cada deputado com os do mesmo estado.</p></details>
-   <div class="emb"><div><div class="ebig">${brl(c.y25)}</div><em class="emuted">gastos em 2025${c.pos?` · ${c.pos}º que mais gastou entre os ${c.n} deputados de ${d.uf}`:''}</em>
-     <div class="fact" style="margin-top:16px"><small>Em 2026 (jan a ${MES2[c.m26]})</small><strong style="font-size:24px">${brl(c.y26)}</strong></div>
-     ${(()=>{const r=COTAby[d.id]; if(!r) return ''; return `<div class="fact" style="margin-top:12px"><small>Por mês, em média</small><strong style="font-size:24px">${brl1(r[1])}</strong><em>${cotaRel(r[2],d.uf)}${COTA.med[d.uf]?` (${brl1(COTA.med[d.uf])})`:''} · <a href="#cota" style="color:var(--fg)" onclick="CS.uf='${d.uf}';CS.q='';CS.lim=20">ver a bancada</a></em></div>`})()}</div>
-    <div><small class="emuted" style="letter-spacing:1.5px;text-transform:uppercase;font-size:11px">Com o quê (2025–26)</small>
+   <div class="emb"><div><div class="ebig">${brl(tot)}</div><em class="emuted">gastos nesta legislatura, desde fev/2023</em>
+     ${r?`<div class="fact" style="margin-top:16px"><small>Por mês, em média</small><strong style="font-size:24px">${brl1(r[1])}</strong><em>${cotaRel(r[2],d.uf)}${COTA.med[d.uf]?` (${brl1(COTA.med[d.uf])})`:''} · <a href="#cota" style="color:var(--fg)" onclick="CS.uf='${d.uf}';CS.q='';CS.lim=20">ver a bancada</a></em></div>`:''}
+     <div class="cyears">${['2023','2024','2025','2026'].map(y=>`<div><small>${yl[y]}</small><b>${A[y]?brl(A[y]):'—'}</b></div>`).join('')}</div></div>
+    <div><small class="emuted" style="letter-spacing:1.5px;text-transform:uppercase;font-size:11px">Com o quê (desde fev/2023)</small>
      ${c.cats.map(([k,v])=>`<div class="ebar" style="grid-template-columns:150px 1fr 80px"><span>${esc(k)}</span><div><i style="width:${(v/mx*100).toFixed(1)}%"></i></div><b>${brl(v)}</b></div>`).join('')}</div></div>
-   <details class="whatis"><summary>Para quem foi o dinheiro</summary><p>Os 5 fornecedores que mais receberam, 2025–26:</p><ul class="areas">${c.forn.map(([n,v])=>`<li><span>${esc(n)}</span><b>${brl(v)}</b></li>`).join('')}</ul>
+   <details class="whatis"><summary>Para quem foi o dinheiro</summary><p>Os 5 fornecedores que mais receberam desde fev/2023:</p><ul class="areas">${c.forn.map(([n,v])=>`<li><span>${esc(n)}</span><b>${brl(v)}</b></li>`).join('')}</ul>
     <p>Cada despesa tem nota fiscal pública no <a href="https://www.camara.leg.br/deputados/${d.id}" target="_blank" rel="noopener" style="color:var(--fg)">site da Câmara ↗</a>.</p></details>
-   <p class="note" style="margin:0">Fonte: Câmara dos Deputados, dados da cota parlamentar (CEAP), valores líquidos.</p>`}
+   <p class="note" style="margin:0">Fonte: Câmara dos Deputados, dados da cota parlamentar (CEAP), valores líquidos, desde o início desta legislatura (1º/fev/2023). Quem chegou depois, como suplente, tem só os meses em que exerceu o mandato.</p>`}
 function recBlock(h,id){ if(!HIST.rec||!h.rk) return '';
   const L={S:['Votou sim','b-S'],N:['Votou não','b-N'],A:['Não votou (ausente)','b-A'],B:['Absteve-se','b-A'],P:['Presidia','b-A'],X:['Voto secreto','b-A'],'-':['Fora do mandato','b--']};
   return `<p class="sec">Últimas votações no plenário</p><p class="hint" style="margin:0">As 3 votações nominais mais recentes de 2026, fora requerimentos.</p>
@@ -945,7 +949,7 @@ function cotaPage(){const el=document.getElementById('cotapg');
   el.innerHTML=`<div class="cintro"><a class="back" href="#">Voltar ao plenário</a>
    <p class="led" style="margin:18px 0 0;font-size:20px;letter-spacing:3px">COTA</p>
    <h1>Quanto cada deputado gasta da cota</h1>
-   <p class="lead">Além do salário, cada deputado tem uma verba mensal para as despesas do mandato: passagens, escritório no estado, carro, divulgação. Ele paga, apresenta a nota fiscal e a Câmara reembolsa. É legal e público. O limite muda por estado, então comparamos cada deputado com os colegas do mesmo estado.</p></div>
+   <p class="lead">Além do salário, cada deputado tem uma verba mensal para as despesas do mandato: passagens, escritório no estado, carro, divulgação. Ele paga, apresenta a nota fiscal e a Câmara reembolsa. É legal e público. O limite muda por estado, então comparamos cada deputado com os colegas do mesmo estado. O período é o mandato atual inteiro, desde a posse em fevereiro de 2023.</p></div>
    <div class="cstats" id="cst"></div>
    <div class="cctl"><label class="sr" for="cq">Buscar deputado</label><input id="cq" type="search" placeholder="Buscar deputado" value="${esc(CS.q)}">
     <label class="sr" for="cuf">Estado</label><select id="cuf"><option value="">Todos os estados</option>${ufs.map(u=>`<option${u===CS.uf?' selected':''}>${u}</option>`).join('')}</select></div>

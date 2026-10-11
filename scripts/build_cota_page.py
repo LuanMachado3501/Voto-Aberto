@@ -1,10 +1,11 @@
 """Página Cota: média mensal de cada deputado em exercício vs. mediana da bancada do estado."""
 import pandas as pd, json, statistics as st
 w=pd.concat([pd.read_csv(f'/mnt/user-data/uploads/Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,
-   usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor','txtCNPJCPF']) for a in (2025,2026)])
+   usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor','txtCNPJCPF']) for a in (2023,2024,2025,2026)])
 w=w[w.ideCadastro.notna()&(w.ideCadastro!='')&~w.txtDescricao.str.contains('AUXÍLIO-MORADIA',na=False)]
 w['v']=pd.to_numeric(w.vlrLiquido.str.replace(',','.'),errors='coerce').fillna(0)
 w['ym']=w.numAno+'-'+w.numMes.str.zfill(2)
+w=w[w.ym>='2023-02']  # legislatura 57 começou em 1º/fev/2023
 hem=json.load(open('hemiciclo_data.json')); pres=json.load(open('presidente_data.json'))
 uf={d['id']:d['uf'] for d in hem['deps']}; uf[str(pres['id'])]=pres.get('uf','PB')
 CAT={'DIVULGAÇÃO':'Divulgação do mandato','VEÍCULOS AUTOMOTORES':'Aluguel de carros','ESCRITÓRIO':'Escritório no estado','COMBUSTÍVEIS':'Combustível',

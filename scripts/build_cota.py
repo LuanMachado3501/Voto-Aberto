@@ -1,7 +1,8 @@
 """Cota parlamentar (CEAP) 2025-26 por deputado."""
 import pandas as pd, json
-w=pd.concat([pd.read_csv(f'/mnt/user-data/uploads/Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor']) for a in (2025,2026)])
+w=pd.concat([pd.read_csv(f'/mnt/user-data/uploads/Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor']) for a in (2023,2024,2025,2026)])
 w=w[w.ideCadastro.notna()&(w.ideCadastro!='')&~w.txtDescricao.str.contains('AUXÍLIO-MORADIA',na=False)]
+w=w[(w.numAno+'-'+w.numMes.str.zfill(2))>='2023-02']
 w['v']=pd.to_numeric(w.vlrLiquido.str.replace(',','.'),errors='coerce').fillna(0)
 CAT={'DIVULGAÇÃO':'Divulgação do mandato','VEÍCULOS AUTOMOTORES':'Aluguel de carros','ESCRITÓRIO':'Escritório no estado','COMBUSTÍVEIS':'Combustível',
      'PASSAGEM AÉREA':'Passagens aéreas','HOSPEDAGEM':'Hospedagem','TELEFONIA':'Telefone','AERONAVES':'Fretamento de aviões','SEGURANÇA':'Segurança privada',
@@ -27,7 +28,8 @@ n=0
 for i,d in H['deps'].items():
     if i not in y25.index and i not in y26.index: d['cota']=None; continue
     c=cats.loc[i].sort_values(ascending=False); f=forn.loc[i].sort_values(ascending=False)
-    d['cota']={'y25':round(float(y25.get(i,0))),'y26':round(float(y26.get(i,0))),'m26':mx26,
+    yr={a:round(float(v)) for a,v in w[w.ideCadastro==i].groupby('numAno').v.sum().items()}
+    d['cota']={'anos':yr,'y25':round(float(y25.get(i,0))),'y26':round(float(y26.get(i,0))),'m26':mx26,
       'pos':int(pos.loc[i,'pos']) if i in pos.index else None,'n':int(pos.loc[i,'n']) if i in pos.index else None,
       'cats':[[k,round(v)] for k,v in c.items() if v>0][:6],'forn':[[tc(k),round(v)] for k,v in f.items() if v>0][:5]}
     n+=1
