@@ -2,7 +2,7 @@
 
 Plataforma de acompanhamento de votos e notícias no parlamento brasileiro: como cada deputado federal vota, quanto recebe e gasta, e com quem você vota parecido.
 
-**Site:** https://luanmachado3501.github.io/Voto-Aberto/
+**Site:** https://centropolitico.com.br
 
 ## O que tem
 - **Plenário:** as 513 cadeiras da Câmara, posicionadas pelo voto real de cada deputado em 2025–26 (bloco do PT à esquerda, bloco do PL à direita), e a cadeira da presidência.
