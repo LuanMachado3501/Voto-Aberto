@@ -326,8 +326,8 @@ button.crow{font:inherit;text-align:left;width:100%;cursor:pointer}
 .sitenav nav a:hover{color:var(--fg);background:#ffffff0f}
 .sitenav nav a.on{color:#1A1200;background:var(--led);font-weight:700}
 .sitenav nav>span{opacity:.6;cursor:default}
-.sitenav nav a[data-nav=teste]:not(.on){color:var(--led);box-shadow:inset 0 0 0 1px #FFB00066}
-.sitenav nav a[data-nav=teste]:not(.on):hover{background:#FFB0001a}
+.sitenav nav a[data-nav]:not(.on){color:var(--led);box-shadow:inset 0 0 0 1px #FFB00066}
+.sitenav nav a[data-nav]:not(.on):hover{background:#FFB0001a}
 .soon{white-space:nowrap;font-style:normal;font-size:10px;letter-spacing:.5px;text-transform:uppercase;border:1px solid currentColor;border-radius:3px;padding:1px 4px;margin-left:6px;vertical-align:2px;color:var(--muted)}
 .sitenav .sm{display:none}
 .sitenav nav small{font-size:13px;font-weight:400;opacity:.85}
@@ -973,7 +973,7 @@ function cotaPage(){const el=document.getElementById('cotapg');
    <details class="whatis"><summary>Como calculamos</summary>
     <p><b>Gasto por mês:</b> tudo o que o deputado pediu de reembolso de ${ym(COTA.de)} a ${ym(COTA.ate)} (valor líquido, depois de glosas), dividido pelos meses em que ele teve alguma despesa. Assim quem entrou ou saiu no meio do caminho não fica com número distorcido. Auxílio-moradia não entra.</p>
     <p><b>Mediana do estado:</b> o valor do deputado “do meio” da bancada, quando todos são colocados em ordem. Usamos a mediana, e não a média, para que um único gasto muito alto não puxe a referência. Só entram nela deputados com 3 meses ou mais de despesas.</p>
-    <p><b>Partidos:</b> para não comparar partido grande com pequeno nem estado caro com barato, cada deputado vira um índice (quanto ele gasta em relação à mediana do próprio estado) e o partido recebe a média desses índices. Entram partidos com 3 deputados ou mais; o filtro de estado também vale para essa visão.</p>
+    <p><b>Partidos:</b> para não comparar partido grande com pequeno nem estado caro com barato, cada deputado vira um índice (quanto ele gasta em relação à mediana do próprio estado) e o partido recebe a média desses índices. Entram todos os partidos; nos que têm 1 ou 2 deputados o número reflete poucas pessoas, e avisamos isso na linha. O filtro de estado também vale para essa visão.</p>
     <p><b>Fornecedor principal:</b> a parte do total que foi para uma mesma empresa ou pessoa, identificada pelo CNPJ ou CPF. Mostramos o aviso quando passa de 40%.</p>
     <p><b>O que isso não diz:</b> gastar acima da mediana ou concentrar num fornecedor não é irregular. Pode refletir a distância até Brasília, o tamanho do estado ou escolhas do mandato, como manter escritório no interior. Os números servem para você comparar e, se quiser, conferir as notas fiscais, que são públicas no site da Câmara.</p></details>
    <p class="note" style="margin:0">Fonte: Câmara dos Deputados, dados abertos da cota parlamentar (CEAP), ${ym(COTA.de)} a ${ym(COTA.ate)}. O mês mais recente pode estar incompleto.</p>`;
@@ -1001,15 +1001,14 @@ function cotaPage(){const el=document.getElementById('cotapg');
   const setView=v=>{CS.view=v; el.querySelectorAll('.cview button').forEach(o=>{o.classList.toggle('on',o.dataset.v===v);o.setAttribute('aria-selected',o.dataset.v===v)}); draw();};
   el.querySelectorAll('.cview button').forEach(b=>b.onclick=()=>setView(b.dataset.v));
   const drawPar=L=>{const G={}; L.forEach(x=>{if(x.r[2]==null) return; (G[x.d.p]=G[x.d.p]||[]).push(x)});
-    const P=Object.entries(G).filter(([,v])=>v.length>=3).map(([p,v])=>({p,n:v.length,idx:v.reduce((a,x)=>a+x.r[2],0)/v.length,men:v.reduce((a,x)=>a+x.r[1],0)/v.length})).sort((a,b)=>b.idx-a.idx);
-    const fora=Object.values(G).filter(v=>v.length<3).length, MAX=1.6;
+    const P=Object.entries(G).map(([p,v])=>({p,n:v.length,idx:v.reduce((a,x)=>a+x.r[2],0)/v.length,men:v.reduce((a,x)=>a+x.r[1],0)/v.length})).sort((a,b)=>b.idx-a.idx);
+    const MAX=1.6;
     document.getElementById('clist').innerHTML=`<p class="hint" style="margin:0">Média dos deputados de cada partido, cada um comparado com a mediana do próprio estado${CS.uf?` (só ${CS.uf})`:''}. Toque num partido para ver os deputados dele.</p>`
-     +P.map((x,j)=>`<button type="button" class="crow cpar" data-p="${esc(x.p)}"><span class="rk">${j+1}</span><span class="pbadge">${esc(x.p)}</span>
-       <div class="cname" style="min-width:0"><b>${esc(x.p)}</b><span class="meta">${x.n} deputado${x.n>1?'s':''}</span></div>
+     +P.map((x,j)=>`<button type="button" class="crow cpar" data-p="${esc(x.p)}"><span class="rk">${j+1}</span><span class="pbadge">${esc(({Republicanos:"REP",Solidariedade:"SD",Cidadania:"CID",Podemos:"PODE"})[x.p]||x.p)}</span>
+       <div class="cname" style="min-width:0"><b>${esc(x.p)}</b><span class="meta">${x.n} deputado${x.n>1?'s':''}</span>${x.n<3?`<br><span class="chip" style="color:var(--muted);border-color:var(--line)">${x.n===1?'só 1 deputado: reflete o gasto dele':'poucos deputados: compare com cuidado'}</span>`:''}</div>
        <div class="cmp"><div class="cbar" aria-hidden="true"><i style="width:${(Math.min(x.idx,MAX)/MAX*100).toFixed(1)}%"></i><u style="left:${(100/MAX).toFixed(1)}%"></u></div><div class="crel">${(()=>{const p=Math.round((x.idx-1)*100);return Math.abs(p)<1?'na mediana dos estados, em média':p>0?`em média ${p}% acima da mediana do estado`:`em média ${-p}% abaixo da mediana do estado`})()}</div></div>
        <div class="val">${brl1(x.men)}<small>por mês, em média</small></div></button>`).join('')
-     +(fora?`<p class="hint" style="margin:0">${fora} partido${fora>1?'s':''} com menos de 3 deputados ${fora>1?'ficaram':'ficou'} de fora da comparação.</p>`:'')
-     +(P.length?'':'<p class="hint">Nenhum partido com 3 deputados ou mais neste filtro.</p>');
+     +(P.length?'':'<p class="hint">Nenhum partido neste filtro.</p>');
     el.querySelectorAll('.cpar').forEach(b=>b.onclick=()=>{CS.p=b.dataset.p; document.getElementById('cpa').value=CS.p; CS.lim=20; setView('dep'); document.getElementById('cst').scrollIntoView({behavior:'smooth'});});};
   el.querySelectorAll('.csort button').forEach(b=>b.onclick=()=>{CS.sort=b.dataset.k; CS.lim=20; el.querySelectorAll('.csort button').forEach(o=>o.classList.toggle('on',o===b)); draw();});
   draw();}
