@@ -6,6 +6,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash   # com pipefail: se um comando falhar no meio de um "|", o passo falha
+
 jobs:
   publicar:
     runs-on: ubuntu-24.04
@@ -58,7 +62,7 @@ jobs:
 
       - name: Publicar o servidor
         working-directory: tribuna
-        run: npx --yes wrangler@4.40.0 deploy | tee deploy.log
+        run: npx --yes wrangler@4.40.0 deploy 2>&1 | tee deploy.log
 
       - name: Guardar as senhas no servidor
         working-directory: tribuna
@@ -82,3 +86,16 @@ jobs:
           echo "- Servidor: $URL" >> "$GITHUB_STEP_SUMMARY"
           echo "- Moderação: $URL/admin" >> "$GITHUB_STEP_SUMMARY"
           echo "Servidor: $URL"
+
+      - name: Testar se a Tribuna responde
+        working-directory: tribuna
+        run: |
+          URL=$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1)
+          if [ -z "$URL" ]; then
+            SUB=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | python3 -c "import json,sys; print((json.load(sys.stdin).get('result') or {}).get('subdomain',''))")
+            URL="https://tribuna.$SUB.workers.dev"
+          fi
+          sleep 10
+          R=$(curl -s "$URL/")
+          echo "$URL -> $R"
+          echo "$R" | grep -q 'Tribuna' || { echo "::error::A Tribuna não respondeu em $URL. Veja o passo 'Publicar o servidor'."; exit 1; }
