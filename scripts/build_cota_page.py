@@ -3,7 +3,7 @@ import pandas as pd, json, statistics as st
 import os
 RAW=os.environ.get('RAW','/home/claude/voto_aberto/raw')+'/'
 w=pd.concat([pd.read_csv(RAW+f'Ano-{a}.csv',sep=';',encoding='utf-8-sig',dtype=str,
-   usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor','txtCNPJCPF']) for a in (2023,2024,2025,2026)])
+   usecols=['ideCadastro','txtDescricao','vlrLiquido','numAno','numMes','txtFornecedor','txtCNPJCPF']) for a in (2023,2024,2025,2026)],ignore_index=True)
 w=w[w.ideCadastro.notna()&(w.ideCadastro!='')&~w.txtDescricao.str.contains('AUXÍLIO-MORADIA',na=False)]
 w['v']=pd.to_numeric(w.vlrLiquido.str.replace(',','.'),errors='coerce').fillna(0)
 w['ym']=w.numAno+'-'+w.numMes.str.zfill(2)
@@ -21,8 +21,9 @@ def cat(s):
 w['cat']=w.txtDescricao.map(cat)
 w=w[w.ideCadastro.isin(uf)]
 # fornecedor pelo CNPJ/CPF (nomes variam); nome mais frequente
-w['fk']=w.txtCNPJCPF.fillna('').str.replace(r'\D','',regex=True); w.loc[w.fk=='','fk']=w.txtFornecedor
-nome=w.groupby('fk').txtFornecedor.agg(lambda s:s.mode().iat[0])
+w=w.reset_index(drop=True)
+w['fk']=w.txtCNPJCPF.fillna('').str.replace(r'\D','',regex=True); w['fk']=w.fk.where(w.fk!='',w.txtFornecedor.fillna('?'))
+nome=w.groupby('fk').txtFornecedor.agg(lambda s:s.mode().iat[0] if s.notna().any() else '?')
 SMALL={'DE','DA','DO','DAS','DOS','E'}
 def tc(s): return ' '.join(x.lower() if x.upper() in SMALL and i else (x if x in ('LTDA','S/A','SA','ME','EIRELI','EPP') else x.capitalize()) for i,x in enumerate(str(s).split()))
 rows=[]
@@ -36,13 +37,6 @@ for i,g in w.groupby('ideCadastro'):
 df=pd.DataFrame(rows)
 ok=df[df.m>=3]
 med=ok.groupby('uf').men.median()
-# mediana por categoria/estado (R$/mês), para comparar na página
-cm={}
-for (u,k),s in w[w.ideCadastro.isin(ok.id)].groupby(['ideCadastro','cat']).v.sum().rename('v').reset_index().assign(uf=lambda x:x.ideCadastro.map(uf)).groupby(['uf','cat']):
-    pass
-pc=w[w.ideCadastro.isin(ok.id)].groupby(['ideCadastro','cat']).v.sum().unstack(fill_value=0)
-pc=pc.div(ok.set_index('id').m,axis=0); pc['uf']=pc.index.map(uf)
-catmed={u:{k:round(v) for k,v in g.drop(columns='uf').median().items()} for u,g in pc.groupby('uf')}
 df['r']=df.apply(lambda x:x.men/med[x.uf] if x.m>=3 and x.uf in med else None,axis=1)
 df['pos']=df.groupby('uf').men.rank(ascending=False,method='min').astype(int); df['n']=df.groupby('uf').men.transform('size')
 yms=sorted(w.ym.unique())
