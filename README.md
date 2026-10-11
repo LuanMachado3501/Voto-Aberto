@@ -28,7 +28,7 @@ Toda segunda às 6h (Brasília) o robô em `.github/workflows/atualizar-dados.ym
 2. os scripts recalculam presença, últimas votações, alinhamento com o governo, cota e emendas;
 3. se algo mudou, o `index.html` e a pasta `data/` são atualizados e o site é publicado.
 
-Na mesma rodada, `scripts/build_destaques.py` calcula o **índice de destaque** das votações recentes do plenário (70% atenção pública, medida pelo número de notícias que citam a proposta; 30% disputa, medida por placar apertado, governo e oposição em lados opostos e número de votações) e grava `data/destaques.json`. A lista aparece no resumo de cada rodada do robô.
+Na mesma rodada, `scripts/build_destaques.py` calcula o **índice de destaque** das votações recentes do plenário (70% atenção pública, medida pelo número de notícias que citam a proposta; 30% disputa, medida por placar apertado, governo e oposição em lados opostos e número de votações) e grava `data/destaques.json`. A lista aparece no resumo de cada rodada do robô e as 3 primeiras ficam na seção **Em destaque** do site. Para a imprensa que chama uma proposta por apelido ("Pacheco TCU"), edite `data/apelidos.txt`: o robô passa a contar as notícias também pelo apelido.
 
 Se uma fonte estiver fora do ar, só aquela parte deixa de atualizar e o resto segue; o robô marca a rodada com aviso. Para rodar na hora: aba **Actions → Atualizar dados → Run workflow**.
 

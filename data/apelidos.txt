@@ -1,0 +1,7 @@
+# Apelidos das propostas: como a imprensa costuma chamar cada uma.
+# O robô conta as notícias pelo número E pelos apelidos, e o site mostra o primeiro apelido como nome.
+# Formato: NÚMERO = apelido 1; apelido 2
+# Exemplo:  PDL 995/2026 = Pacheco TCU; Pacheco no TCU
+# Use apelidos que só sirvam para essa proposta (nada genérico como "reforma").
+
+PDL 995/2026 = Pacheco TCU; Pacheco no TCU

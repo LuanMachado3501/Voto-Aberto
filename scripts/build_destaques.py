@@ -15,6 +15,15 @@ RAW = os.environ.get('RAW', '/home/claude/voto_aberto/raw') + '/'
 PESO_ATENCAO, PESO_DISPUTA = 0.7, 0.3
 JANELA_DIAS, MIN_ITENS, TOP = 45, 6, 10
 
+# apelidos editáveis no GitHub (data/apelidos.txt)
+APELIDOS = {}
+if os.path.exists('apelidos.txt'):
+    for ln in open('apelidos.txt', encoding='utf-8'):
+        ln = ln.strip()
+        if ln and not ln.startswith('#') and '=' in ln:
+            k, v = ln.split('=', 1)
+            APELIDOS[re.sub(r'\s+', ' ', k.strip().upper())] = [a.strip() for a in v.split(';') if a.strip()]
+
 v = pd.read_csv(RAW + 'votacoes-2026.csv', sep=';', encoding='utf-8-sig', dtype=str)
 v = v[v.siglaOrgao == 'PLEN'].copy()
 for c in ('votosSim', 'votosNao'):
@@ -42,7 +51,7 @@ for pid, g in x.groupby('proposicao_id'):
     principal = g.loc[(g.votosSim + g.votosNao).idxmax()]
     s, n = int(principal.votosSim), int(principal.votosNao)
     dividido = any(i in gov.index and i in opo.index and gov[i] != opo[i] for i in g.id)
-    props.append(dict(id=pid, titulo=principal.proposicao_titulo, ementa=principal.proposicao_ementa,
+    props.append(dict(id=pid, vid=principal.id, titulo=principal.proposicao_titulo, ementa=principal.proposicao_ementa,
                       data=g.t.max(), placar=[s, n], votacoes=len(g), dividido=dividido,
                       aprovada=principal.aprovacao == '1'))
 props.sort(key=lambda p: p['data'], reverse=True)
@@ -57,7 +66,8 @@ def noticias(titulo, data):
     if not m:
         return None
     tipo, num, ano = m.groups()
-    q = f'"{tipo} {num}/{ano}" OR "{tipo} {num}/{ano[2:]}"'
+    termos = [f'{tipo} {num}/{ano}', f'{tipo} {num}/{ano[2:]}'] + APELIDOS.get(f'{tipo} {num}/{ano}'.upper(), [])
+    q = ' OR '.join(f'"{x}"' for x in termos)
     url = 'https://news.google.com/rss/search?' + urllib.parse.urlencode(
         {'q': q, 'hl': 'pt-BR', 'gl': 'BR', 'ceid': 'BR:pt-419'})
     try:
@@ -92,12 +102,25 @@ for p in recentes:
     p['indice'] = round(100 * (PESO_ATENCAO * a + PESO_DISPUTA * p['disputa']))
 recentes.sort(key=lambda p: p['indice'], reverse=True)
 
+vv = pd.read_csv(RAW + 'votacoesVotos-2026.csv', sep=';', encoding='utf-8-sig', dtype=str,
+                 usecols=['idVotacao', 'voto', 'deputado_siglaPartido'])
+vv = vv[vv.idVotacao.isin([p['vid'] for p in recentes[:TOP]]) & vv.voto.isin(['Sim', 'Não'])]
+por = vv.groupby(['idVotacao', 'deputado_siglaPartido']).voto.value_counts().unstack(fill_value=0)
+def partidos(vid):
+    if vid not in por.index.get_level_values(0):
+        return []
+    g = por.loc[vid]
+    g = g.assign(t=g.sum(axis=1)).sort_values('t', ascending=False)
+    return [[pt, int(r.get('Sim', 0)), int(r.get('Não', 0))] for pt, r in g.iterrows()]
+
 out = {'gerado': dt.date.today().isoformat(), 'pesos': {'atencao': PESO_ATENCAO, 'disputa': PESO_DISPUTA},
        'noticias_ok': bool(conta), 'itens': []}
 for p in recentes[:TOP]:
     out['itens'].append({**{k: p[k] for k in ('id', 'titulo', 'ementa', 'placar', 'votacoes', 'dividido',
                                             'aprovada', 'noticias', 'atencao', 'disputa', 'indice')},
-                         'data': p['data'].strftime('%Y-%m-%d')})
+                         'data': p['data'].strftime('%Y-%m-%d'),
+                         'nome': (APELIDOS.get((p['titulo'] or '').upper()) or [None])[0],
+                         'partidos': partidos(p['vid'])})
 json.dump(out, open('destaques.json', 'w'), ensure_ascii=False, indent=1)
 
 linhas = ['## Pauta da semana: votações com mais destaque', '',

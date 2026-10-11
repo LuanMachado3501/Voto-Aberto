@@ -316,6 +316,32 @@ button.crow{font:inherit;text-align:left;width:100%;cursor:pointer}
 .upbar .ub-up{color:#1A1200;background:var(--led);border:0;font-weight:700;animation:nudge 1.6s ease-in-out 3}
 @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 @media (max-width:700px){.upbar .lg{display:none}}
+/* ===== Em destaque ===== */
+.destq{max-width:1100px;margin:0 auto;padding:40px 20px 10px}
+body.dep .destq{display:none!important}
+.destq h2{font-family:var(--display);font-weight:900;font-size:clamp(30px,4.5vw,46px);line-height:1;margin:6px 0 8px}
+.destq .hint a{color:var(--fg)}
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.dcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.dcard .dtop{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted)}
+.dcard .res{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:3px;box-shadow:inset 0 0 0 1px currentColor}
+.dcard h3{margin:0;font-size:18px;line-height:1.3;font-weight:600}
+.dcard h3 small{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:4px}
+.dplacar{display:flex;gap:10px;align-items:baseline;background:#0A0F0C;border-radius:8px;padding:10px 14px;font-family:var(--ledf);font-weight:900;color:var(--led)}
+.dplacar b{font-size:30px}.dplacar span{font-size:12px;letter-spacing:1px}
+.dpart{display:flex;flex-direction:column;gap:5px;font-size:12px}
+.dpart div{display:grid;grid-template-columns:62px 1fr 54px;gap:8px;align-items:center}
+.dpart i{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--line)}
+.dpart i s{display:block;height:100%;background:var(--fg);text-decoration:none}
+.dpart em{font-style:normal;color:var(--muted);text-align:right;white-space:nowrap}
+.dwhy{font-size:12px;color:var(--muted)}
+.dlinks{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:auto}.dlinks a{color:var(--fg)}
+.dmore{margin-top:14px}.dmore summary{cursor:pointer;font-size:14px;color:var(--led);font-weight:600}
+.dlist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.dlist li{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;font-size:14px;padding:8px 12px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.dlist li span{color:var(--muted);font-size:13px;white-space:nowrap}
+@media (max-width:900px){.dgrid{grid-template-columns:1fr}}
+@media (max-width:600px){.destq{padding:28px 14px 6px}.dlist li{grid-template-columns:1fr auto}.dlist li span:last-child{display:none}}
 /* ===== Centro Político: navegação e rodapé ===== */
 .sitenav{display:flex;flex-direction:row;align-items:center;gap:22px;padding:12px 20px 0;flex-wrap:wrap}
 .sitenav .brand{color:var(--fg);text-decoration:none;font-size:20px;margin-right:auto}
@@ -458,6 +484,7 @@ select option{background:#15241D;color:#EEF0E8}
   </dialog>
 </div>
 
+<section id="dest" class="destq" aria-labelledby="destT" hidden></section>
 <div class="wrap" id="perfil"></div>
 <div class="wrap" id="quiz"></div>
 <div class="wrap" id="cotapg"></div>
@@ -575,6 +602,7 @@ mk('path',{d:`M ${cx-92} ${cy-34} Q ${cx} ${cy-58} ${cx+92} ${cy-34} L ${cx+86} 
 // cadeira da presidência, no centro, de frente para o plenário
 const PRES=__PRES__;
 const NEWS=__NEWS__;
+const DEST=__DEST__;
 const COTA=__COTA__; const COTAby=Object.fromEntries(COTA.deps.map(r=>[r[0],r]));
 const pg=document.createElementNS(NS,'g'); pg.setAttribute('class','pres'); pg.setAttribute('tabindex','0'); pg.setAttribute('role','button');
 pg.setAttribute('aria-label',`${PRES.n}, presidente da Câmara`);
@@ -1013,6 +1041,25 @@ function cotaPage(){const el=document.getElementById('cotapg');
     el.querySelectorAll('.cpar').forEach(b=>b.onclick=()=>{CS.p=b.dataset.p; document.getElementById('cpa').value=CS.p; CS.lim=20; setView('dep'); document.getElementById('cst').scrollIntoView({behavior:'smooth'});});};
   el.querySelectorAll('.csort button').forEach(b=>b.onclick=()=>{CS.sort=b.dataset.k; CS.lim=20; el.querySelectorAll('.csort button').forEach(o=>o.classList.toggle('on',o===b)); draw();});
   draw();}
+
+/* ===== Em destaque (índice: 70% atenção na imprensa + 30% disputa no plenário) ===== */
+(function(){const el=document.getElementById('dest'); const I=(DEST&&DEST.itens)||[]; if(!I.length) return;
+  const nome=x=>x.nome||(x.ementa||'').split(/(?<=[.;])\s/)[0].replace(/^Dispõe sobre /,'').replace(/^./,c=>c.toUpperCase()).replace(/^(.{0,110})\s.*$/s,(m,g)=>m.length>115?g+'…':m);
+  const termos=x=>{const m=(x.titulo||'').match(/(\w+) (\d+)\/(\d{4})/); return m?`"${m[1]} ${m[2]}/${m[3]}" OR "${m[1]} ${m[2]}/${m[3].slice(2)}"`+(x.nome?` OR "${x.nome}"`:''):x.titulo};
+  const gn=x=>'https://news.google.com/search?q='+encodeURIComponent(termos(x))+'&hl=pt-BR&gl=BR&ceid=BR:pt-419';
+  const card=x=>{const P=(x.partidos||[]).slice(0,6);
+    return `<article class="dcard"><div class="dtop"><time datetime="${x.data}">${fdate(x.data)}</time><span class="res" style="color:${x.aprovada?'var(--fg)':'var(--muted)'}">${x.aprovada?'Aprovada':'Rejeitada'}</span></div>
+     <h3>${esc(nome(x))}<small>${esc(x.titulo)}</small></h3>
+     <div class="dplacar" aria-label="${x.placar[0]} votos sim, ${x.placar[1]} votos não"><b>${x.placar[0]}</b><span>SIM</span><b style="margin-left:8px">${x.placar[1]}</b><span>NÃO</span></div>
+     ${P.length?`<div class="dpart" aria-label="Como votaram os maiores partidos">${P.map(([p,s,n])=>`<div><b>${esc(({REPUBLICANOS:'REP',SOLIDARIEDADE:'SD',CIDADANIA:'CID',PODEMOS:'PODE'})[p]||p)}</b><i title="${s} sim, ${n} não"><s style="width:${(s/(s+n)*100).toFixed(1)}%"></s></i><em>${s} × ${n}</em></div>`).join('')}</div><p class="dwhy" style="margin:-4px 0 0">Barra cheia = todos do partido votaram sim.</p>`:''}
+     <p class="dwhy" style="margin:0">${x.noticias!=null?`${x.noticias} notícia${x.noticias===1?'':'s'} citando a proposta`:''}${x.dividido?' · governo e oposição em lados opostos':''}${x.votacoes>1?` · ${x.votacoes} votações no plenário`:''}</p>
+     <div class="dlinks"><a href="https://www.camara.leg.br/propostas-legislativas/${x.id}" target="_blank" rel="noopener">Ver na Câmara ↗</a><a href="${gn(x)}" target="_blank" rel="noopener">Notícias ↗</a></div></article>`};
+  el.innerHTML=`<p class="led" style="margin:0;font-size:18px;letter-spacing:3px">EM DESTAQUE</p>
+   <h2 id="destT">As votações que mais chamaram atenção</h2>
+   <p class="hint" style="margin:0;max-width:70ch">Escolhidas por conta, não por opinião: 70% pelo número de notícias que citam a proposta e 30% pela disputa no plenário (placar apertado, governo e oposição em lados opostos). Atualizado toda segunda.</p>
+   <div class="dgrid">${I.slice(0,3).map(card).join('')}</div>
+   ${I.length>3?`<details class="dmore"><summary>Ver as outras ${I.length-3}</summary><ul class="dlist">${I.slice(3).map(x=>`<li><a href="https://www.camara.leg.br/propostas-legislativas/${x.id}" target="_blank" rel="noopener" style="color:var(--fg)">${esc(nome(x))} <span>${esc(x.titulo)}</span></a><span>${x.placar[0]} × ${x.placar[1]}</span><span>${fdate(x.data)}</span></li>`).join('')}</ul></details>`:''}`;
+  el.hidden=false;})();
 function route(){const m=location.hash.match(/^#dep\/(\d+)(\/cota)?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota');
   const pg=m?'dep':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
   document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===pg));
