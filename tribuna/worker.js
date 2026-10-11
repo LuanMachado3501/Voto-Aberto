@@ -38,7 +38,7 @@ const publico = (r, agora) => ({ id: r.id, dep: r.dep, tema: r.tema, texto: r.te
 async function perguntar(req, env) {
   let b; try { b = await req.json(); } catch { return json(req, { erro: 'Pedido inválido.' }, 400); }
   const dep = String(b.dep || ''), texto = String(b.texto || '').replace(/\s+/g, ' ').trim(), tema = String(b.tema || ''), uf = String(b.uf || '');
-  if (!REE.includes(dep)) return json(req, { erro: 'A Tribuna aceita perguntas só para deputados reeleitos.' }, 400);
+  if (!Object.prototype.hasOwnProperty.call(REE, dep)) return json(req, { erro: 'A Tribuna aceita perguntas só para deputados reeleitos.' }, 400);
   if (!TEMAS.includes(tema)) return json(req, { erro: 'Escolha um tema.' }, 400);
   if (uf && !UFS.includes(uf)) return json(req, { erro: 'Estado inválido.' }, 400);
   if (texto.length < 15 || texto.length > 300) return json(req, { erro: 'A pergunta precisa ter entre 15 e 300 caracteres.' }, 400);
@@ -70,7 +70,7 @@ async function adminApi(req, env, path) {
   const agora = Date.now();
   if (path === '/admin/api/fila') {
     const { results } = await env.DB.prepare("SELECT * FROM perguntas WHERE status IN ('pendente','aprovada') OR (status='enviada') ORDER BY status, criada").all();
-    return json(req, { perguntas: results });
+    return json(req, { perguntas: results.map(r => ({ ...r, nome: REE[r.dep] || r.dep })) });
   }
   let b = {}; try { b = await req.json(); } catch {}
   if (path === '/admin/api/decidir') {
@@ -140,7 +140,7 @@ const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const dt=t=>t?new Date(t).toLocaleDateString('pt-BR'):'';
 async function load(){const r=await call('/admin/api/fila'); if(r.erro){app.innerHTML='<p>'+esc(r.erro)+'</p>';return}
  document.getElementById('login').hidden=true; const P=r.perguntas, g=s=>P.filter(x=>x.status===s);
- const card=(x,btns)=>'<div class="c"><b>Deputado '+esc(x.dep)+'</b> <span class="m">· '+esc(x.tema)+(x.uf?' · eleitor de '+esc(x.uf):'')+' · '+dt(x.criada)+'</span>'+(x.aviso?'<div class="av">⚠ '+esc(x.aviso)+'</div>':'')+'<p>'+esc(x.texto)+'</p>'+btns(x)+'</div>';
+ const card=(x,btns)=>'<div class="c"><b>'+esc(x.nome||('Deputado '+x.dep))+'</b> <span class="m">· '+esc(x.tema)+(x.uf?' · eleitor de '+esc(x.uf):'')+' · '+dt(x.criada)+'</span>'+(x.aviso?'<div class="av">⚠ '+esc(x.aviso)+'</div>':'')+'<p>'+esc(x.texto)+'</p>'+btns(x)+'</div>';
  app.innerHTML='<h2>Na triagem ('+g('pendente').length+')</h2>'+g('pendente').map(x=>card(x,x=>'<div class="row"><button class="ok" onclick="dec('+x.id+',\\'aprovar\\')">Aprovar</button><button onclick="dec('+x.id+',\\'recusar\\',prompt(\\'Motivo (ofensiva, fora do mandato, repetida, não é pergunta)\\'))">Recusar</button></div>')).join('')
   +'<h2>Aprovadas, a enviar ('+g('aprovada').length+')</h2><p class="m">Depois de mandar os e-mails da semana aos deputados, clique abaixo para começar a contar o prazo de 14 dias.</p>'+g('aprovada').map(x=>card(x,()=>'')).join('')+(g('aprovada').length?'<button class="ok" onclick="env()">Marcar todas como enviadas</button>':'')
   +'<h2>Enviadas, esperando resposta ('+g('enviada').length+')</h2>'+g('enviada').map(x=>card(x,x=>'<p class="m">Prazo: '+dt(x.prazo)+'</p><textarea id="r'+x.id+'" placeholder="Cole aqui a resposta do gabinete, na íntegra"></textarea><div class="row"><button class="ok" onclick="resp('+x.id+')">Publicar resposta</button></div>')).join('');}
