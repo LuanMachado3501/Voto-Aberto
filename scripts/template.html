@@ -11,6 +11,7 @@
 <meta property="og:title" content="Centro Político · Como votam os deputados">
 <meta property="og:description" content="Os 513 deputados federais no plenário, posicionados pelo voto real. Dados oficiais, sem lado.">
 <meta property="og:url" content="https://centropolitico.com.br/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-4%20-12%2056%2056%22%3E%3Crect%20x%3D%22-4%22%20y%3D%22-12%22%20width%3D%2256%22%20height%3D%2256%22%20rx%3D%2212%22%20fill%3D%22%230F1B16%22/%3E%3Cpath%20d%3D%22M2%2022%20Q11%206%2020%2022%20Z%22%20fill%3D%22%23FFB000%22/%3E%3Cpath%20d%3D%22M28%2013%20Q37%2030%2046%2013%20Z%22%20fill%3D%22%23FFB000%22/%3E%3Crect%20x%3D%2219.6%22%20y%3D%221%22%20width%3D%224%22%20height%3D%2221%22%20rx%3D%22.5%22%20fill%3D%22%23EEF0E8%22/%3E%3Crect%20x%3D%2224.4%22%20y%3D%221%22%20width%3D%224%22%20height%3D%2221%22%20rx%3D%22.5%22%20fill%3D%22%23EEF0E8%22/%3E%3Crect%20x%3D%2219.6%22%20y%3D%229%22%20width%3D%228.8%22%20height%3D%221.8%22%20fill%3D%22%23EEF0E8%22/%3E%3Crect%20x%3D%220%22%20y%3D%2222%22%20width%3D%2248%22%20height%3D%223%22%20rx%3D%221.5%22%20fill%3D%22%23EEF0E8%22/%3E%3C/svg%3E">
 <link rel="canonical" href="https://centropolitico.com.br/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=Doto:wght@700;900&display=swap">
@@ -275,7 +276,8 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
 /* ===== Centro Político: navegação e rodapé ===== */
 .sitenav{display:flex;flex-direction:row;align-items:center;gap:22px;padding:12px 20px 0;flex-wrap:wrap}
 .sitenav .brand{color:var(--fg);text-decoration:none;font-size:20px;margin-right:auto}
-.sitenav .brand i{width:22px;height:7px}
+.sitenav .brand .logo,.sitefoot .brand .logo{height:24px;width:auto;flex:none}
+.sitefoot .brand{display:flex;align-items:center;gap:12px}
 .sitenav nav{display:flex;gap:4px;align-items:center}
 .sitenav nav a,.sitenav nav>span{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:999px;white-space:nowrap}
 .sitenav nav a:hover{color:var(--fg);background:#ffffff0f}
@@ -288,7 +290,7 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
 .sitenav nav small{font-size:13px;font-weight:400;opacity:.85}
 @media (max-width:1000px){.sitenav nav small{display:none}}
 body.dep .sitenav{max-width:1100px;margin:-10px auto 22px;padding:0 0 12px;border-bottom:1px solid var(--line)}
-@media (max-width:700px){.sitenav{padding:10px 14px 0;gap:10px}.sitenav .brand{font-size:16px;gap:8px}.sitenav .brand i{width:16px;height:6px}
+@media (max-width:700px){.sitenav{padding:10px 14px 0;gap:10px}.sitenav .brand{font-size:16px;gap:8px}.sitenav .brand .logo{height:20px}
   .sitenav nav{width:100%}.sitenav nav a{padding:6px 12px;font-size:14px}.sitenav nav>span{display:none}}
 .sitefoot{border-top:1px solid var(--line);margin-top:56px;padding:28px 20px 36px;font-size:14px;color:var(--muted)}
 .sitefoot>div{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}
@@ -351,7 +353,7 @@ select option{background:#15241D;color:#EEF0E8}
 <body>
 
 <header class="sitenav">
-  <a class="brand" href="#" aria-label="Centro Político, início"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-6px"></i>CENTRO POLÍTICO</a>
+  <a class="brand" href="#" aria-label="Centro Político, início"><svg class="logo" viewBox="0 0 48 30" aria-hidden="true"><path d="M2 22 Q11 6 20 22 Z" fill="#FFB000"/><path d="M28 13 Q37 30 46 13 Z" fill="#FFB000"/><rect x="19.6" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="24.4" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="19.6" y="9" width="8.8" height="1.8" fill="#EEF0E8"/><rect x="0" y="22" width="48" height="3" rx="1.5" fill="#EEF0E8"/></svg>CENTRO POLÍTICO</a>
   <nav aria-label="Ferramentas">
     <a href="#" data-nav="plen" title="Como cada deputado vota">Plenário</a>
     <a href="#teste" data-nav="teste" title="Quem vota como você">Urna<small class="lg"> · quem vota como você</small></a>
@@ -419,7 +421,7 @@ select option{background:#15241D;color:#EEF0E8}
 <footer class="sitefoot">
   <div>
     <section>
-      <div class="brand"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-6px"></i>CENTRO POLÍTICO</div>
+      <div class="brand"><svg class="logo" viewBox="0 0 48 30" aria-hidden="true"><path d="M2 22 Q11 6 20 22 Z" fill="#FFB000"/><path d="M28 13 Q37 30 46 13 Z" fill="#FFB000"/><rect x="19.6" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="24.4" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="19.6" y="9" width="8.8" height="1.8" fill="#EEF0E8"/><rect x="0" y="22" width="48" height="3" rx="1.5" fill="#EEF0E8"/></svg>CENTRO POLÍTICO</div>
       <p>Centro de informação, não posição política. Mostramos como os deputados votam, gastam e se elegem, só com dados oficiais e sem tomar lado.</p>
       <p>Nada do que você faz aqui é guardado.</p>
     </section>
