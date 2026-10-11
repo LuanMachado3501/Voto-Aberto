@@ -283,8 +283,10 @@ body:not(.dep){background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%
 .sitenav nav>span{opacity:.6;cursor:default}
 .sitenav nav a[data-nav=teste]:not(.on){color:var(--led);box-shadow:inset 0 0 0 1px #FFB00066}
 .sitenav nav a[data-nav=teste]:not(.on):hover{background:#FFB0001a}
-.soon{font-style:normal;font-size:10px;letter-spacing:.5px;text-transform:uppercase;border:1px solid currentColor;border-radius:3px;padding:1px 4px;margin-left:6px;vertical-align:2px;color:var(--muted)}
+.soon{white-space:nowrap;font-style:normal;font-size:10px;letter-spacing:.5px;text-transform:uppercase;border:1px solid currentColor;border-radius:3px;padding:1px 4px;margin-left:6px;vertical-align:2px;color:var(--muted)}
 .sitenav .sm{display:none}
+.sitenav nav small{font-size:13px;font-weight:400;opacity:.85}
+@media (max-width:1000px){.sitenav nav small{display:none}}
 body.dep .sitenav{max-width:1100px;margin:-10px auto 22px;padding:0 0 12px;border-bottom:1px solid var(--line)}
 @media (max-width:700px){.sitenav{padding:10px 14px 0;gap:10px}.sitenav .brand{font-size:16px;gap:8px}.sitenav .brand i{width:16px;height:6px}
   .sitenav nav{width:100%}.sitenav nav a{padding:6px 12px;font-size:14px}.sitenav nav>span{display:none}}
@@ -351,16 +353,17 @@ select option{background:#15241D;color:#EEF0E8}
 <header class="sitenav">
   <a class="brand" href="#" aria-label="Centro Político, início"><i style="background:var(--opo)"></i><i style="background:var(--gov);margin-left:-6px"></i>CENTRO POLÍTICO</a>
   <nav aria-label="Ferramentas">
-    <a href="#" data-nav="plen">Plenário</a>
-    <a href="#teste" data-nav="teste"><span class="lg">Quem vota como você</span><span class="sm">Teste</span></a>
-    <span>Gastos<em class="soon">em breve</em></span>
+    <a href="#" data-nav="plen" title="Como cada deputado vota">Plenário</a>
+    <a href="#teste" data-nav="teste" title="Quem vota como você">Urna<small class="lg"> · quem vota como você</small></a>
+    <span title="Quanto gastam">Cota<em class="soon">em breve</em></span>
+    <span title="Quem representa seu estado">Bancada<em class="soon">em breve</em></span>
   </nav>
 </header>
 <div id="plen">
   <div class="topbar">
     <div class="tools">
       <label class="sr" for="q">Buscar deputado</label>
-      <input id="q" type="search" placeholder="Buscar deputado" autocomplete="off">
+      <input id="q" type="search" placeholder="Buscar" autocomplete="off">
       <label class="sr" for="party">Partido</label>
       <select id="party"><option value="">Partidos</option></select>
       <label class="sr" for="uf">Estado</label>
@@ -423,10 +426,10 @@ select option{background:#15241D;color:#EEF0E8}
     <section>
       <h3>Ferramentas</h3>
       <ul>
-        <li><a href="#">Plenário: como cada deputado vota</a></li>
-        <li><a href="#teste">Teste: quem vota como você</a></li>
-        <li>Gasta fora do padrão <em class="soon">em breve</em></li>
-        <li>Seu estado no mapa <em class="soon">em breve</em></li>
+        <li><a href="#"><b>Plenário</b> · como cada deputado vota</a></li>
+        <li><a href="#teste"><b>Urna</b> · quem vota como você</a></li>
+        <li><b>Cota</b> · quanto gastam <em class="soon">em breve</em></li>
+        <li><b>Bancada</b> · quem representa seu estado <em class="soon">em breve</em></li>
       </ul>
     </section>
     <section>
@@ -804,6 +807,7 @@ const quizEl=document.getElementById('quiz'); let QA=[], qi=0, QSET=[];
 const qHead=()=>`<a class="back" href="#">Voltar ao plenário</a>`;
 function quizIntro(){
   quizEl.innerHTML=qHead()+`<div class="qintro">
+   <p class="led" style="margin:0;font-size:20px;letter-spacing:3px">URNA</p>
    <h1>Quais deputados votam como você?</h1>
    <p class="lead">Você responde sobre votações que aconteceram de verdade na Câmara. No fim, vê quais deputados e partidos votaram mais parecido com você, e onde você fica no mapa político.</p>
    <div class="qchoose">
@@ -893,11 +897,11 @@ function mapSVG(U,parts,dc){const S=170,c=200, P=(x,y)=>[c+x*S, c+y*S];
   return `<svg viewBox="-60 0 520 410" class="pmap" role="img" aria-label="Mapa político com sua posição e a dos partidos">${g}</svg>`;}
 
 function route(){const m=location.hash.match(/^#dep\/(\d+)/); tip.hidden=true; drop(); document.body.classList.remove('quiz');
-  const pg=m?'dep':location.hash==='#teste'?'teste':'plen';
+  const pg=m?'dep':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
   document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===pg));
-  document.title=pg==='teste'?'Quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
+  document.title=pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
   if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);}
-  else if(location.hash==='#teste'){document.body.classList.add('dep','quiz'); quizIntro(); scrollTo(0,0);}
+  else if(/^#(teste|urna)$/.test(location.hash)){document.body.classList.add('dep','quiz'); quizIntro(); scrollTo(0,0);}
   else {document.body.classList.remove('dep');}}
 addEventListener('hashchange',route);
 document.getElementById('oqf-top').outerHTML=OQF;
