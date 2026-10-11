@@ -373,6 +373,36 @@ body.banc #bancpg{display:flex}
 .bdeps .face{width:44px;height:54px;font-size:16px;border-radius:6px}
 .bdeps b{display:block;font-size:14px}.bdeps span{font-size:12px;color:var(--muted)}
 @media (max-width:700px){.bstats{grid-template-columns:1fr 1fr}.bstats strong{font-size:26px}.belei{grid-template-columns:1fr 1fr}.bvot summary{grid-template-columns:1fr 92px}.bvot summary .vb{grid-column:1/-1;order:3}.bvot .vn{grid-template-columns:1fr}}
+/* ===== Você na Tribuna ===== */
+#tribpg{display:none;max-width:900px}
+body.trib #perfil,body.trib #quiz,body.trib #cotapg,body.trib #bancpg{display:none!important}
+body.trib #tribpg{display:flex}
+.tbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.tbox h3{margin:0;font-size:18px}
+.tform{display:flex;flex-direction:column;gap:10px}
+.tform textarea{font:inherit;font-size:15px;background:#0F1B16;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:96px;resize:vertical}
+.tform .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tform select{flex:1;min-width:150px}
+.tcount{font-size:12px;color:var(--muted);text-align:right}
+.tbtn{font:inherit;font-size:15px;font-weight:700;color:#1A1200;background:var(--led);border:0;border-radius:999px;padding:11px 20px;cursor:pointer;align-self:flex-start}
+.tbtn:disabled{opacity:.5;cursor:default}
+.tmsg{font-size:14px;padding:10px 12px;border-radius:8px;background:#0F1B16;border:1px solid var(--line)}
+.tq{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.tq .tt{font-size:12px;color:var(--muted)}
+.tq p{margin:0;line-height:1.45}
+.tq .st{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:3px;align-self:flex-start;box-shadow:inset 0 0 0 1px currentColor}
+.tq blockquote{margin:4px 0 0;padding:8px 12px;border-left:3px solid var(--led);background:#0F1B16;border-radius:0 8px 8px 0;line-height:1.45}
+.tsteps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.tsteps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;line-height:1.4}
+.tsteps li::before{content:counter(s);display:block;font-family:var(--ledf);font-weight:900;color:var(--led);font-size:22px;margin-bottom:4px}
+.tsearch{display:flex;flex-direction:column;gap:6px}
+.tres{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.tres a{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:center;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--fg);text-decoration:none}
+.tres .face{width:40px;height:50px;font-size:15px;border-radius:6px}
+.tres span{font-size:12px;color:var(--muted)}
+.tnums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tnums div{border-top:2px solid var(--line);padding-top:8px}.tnums small{display:block;font-size:13px;color:var(--muted)}.tnums strong{font-family:var(--display);font-size:30px;font-weight:800}
+@media (max-width:700px){.tsteps{grid-template-columns:1fr 1fr}.tnums{grid-template-columns:1fr 1fr}}
 /* ===== Em destaque ===== */
 .destq{max-width:1100px;margin:0 auto;padding:40px 20px 10px}
 body.dep .destq{display:none!important}
@@ -414,7 +444,7 @@ body.dep .destq{display:none!important}
 .soon{white-space:nowrap;font-style:normal;font-size:10px;letter-spacing:.5px;text-transform:uppercase;border:1px solid currentColor;border-radius:3px;padding:1px 4px;margin-left:6px;vertical-align:2px;color:var(--muted)}
 .sitenav .sm{display:none}
 .sitenav nav small{font-size:13px;font-weight:400;opacity:.85}
-@media (max-width:1000px){.sitenav nav small{display:none}}
+@media (max-width:1500px){.sitenav nav small{display:none}}
 body.dep .sitenav{max-width:1100px;margin:-10px auto 22px;padding:0 0 12px;border-bottom:1px solid var(--line)}
 @media (max-width:700px){.sitenav{padding:10px 14px 0;gap:10px}.sitenav .brand{font-size:16px;gap:8px}.sitenav .brand .logo{height:20px}
   .sitenav nav{width:100%}.sitenav nav a{padding:6px 12px;font-size:14px}.sitenav nav>span{display:none}}
@@ -485,6 +515,7 @@ select option{background:#15241D;color:#EEF0E8}
     <a href="#teste" data-nav="teste" title="Quem vota como você">Urna<small class="lg"> · quem vota como você</small></a>
     <a href="#cota" data-nav="cota" title="Quanto gastam">Cota<small class="lg"> · quanto gastam</small></a>
     <a href="#bancada" data-nav="bancada" title="Quem representa seu estado">Bancada<small class="lg"> · seu estado</small></a>
+    <a href="#tribuna" data-nav="tribuna" title="Pergunte ao deputado">Tribuna<small class="lg"> · pergunte ao deputado</small></a>
   </nav>
 </header>
 <div id="plen">
@@ -546,6 +577,7 @@ select option{background:#15241D;color:#EEF0E8}
 <div class="wrap" id="quiz"></div>
 <div class="wrap" id="cotapg"></div>
 <div class="wrap" id="bancpg"></div>
+<div class="wrap" id="tribpg"></div>
 <div id="tip" class="tip" hidden></div>
 <footer class="sitefoot">
   <div>
@@ -562,6 +594,7 @@ select option{background:#15241D;color:#EEF0E8}
         <li><a href="#teste"><b>Urna</b> · quem vota como você</a></li>
         <li><a href="#cota"><b>Cota</b> · quanto gastam</a></li>
         <li><a href="#bancada"><b>Bancada</b> · quem representa seu estado</a></li>
+        <li><a href="#tribuna"><b>Você na Tribuna</b> · pergunte ao deputado</a></li>
       </ul>
     </section>
     <section>
@@ -661,6 +694,7 @@ mk('path',{d:`M ${cx-92} ${cy-34} Q ${cx} ${cy-58} ${cx+92} ${cy-34} L ${cx+86} 
 const PRES=__PRES__;
 const NEWS=__NEWS__;
 const DEST=__DEST__;
+const CFG=__CFG__;
 const COTA=__COTA__; const COTAby=Object.fromEntries(COTA.deps.map(r=>[r[0],r]));
 const pg=document.createElementNS(NS,'g'); pg.setAttribute('class','pres'); pg.setAttribute('tabindex','0'); pg.setAttribute('role','button');
 pg.setAttribute('aria-label',`${PRES.n}, presidente da Câmara`);
@@ -848,6 +882,7 @@ function renderPerfil(id){const i=byId[id]; if(i==null){location.hash='';return}
    <details class="vmorewrap"><summary class="more">Ver as outras ${rows.length-3} votações em destaque</summary><div class="votes">${rows.slice(3).join('')}</div></details>
    ${emBlock(h)}
    ${cotaBlock(d,h)}
+   ${tribBlock(d,h)}
    ${newsBlock(d.id,d.n)}
    <p class="note">Fonte: dados abertos da Câmara dos Deputados. "Não votou (ausente)" = registrou voto em outras sessões da mesma semana, mas não nesta. "Fora do mandato" = não estava em exercício na data. "Presença" conta as votações nominais de 2026 nas semanas em que o deputado estava no cargo; os dados não separam faltas justificadas, como missão oficial ou licença médica. "Na Câmara desde" = primeira legislatura em que exerceu mandato, inclusive como suplente; pode ter havido intervalos.</p>`;
 }
@@ -1205,13 +1240,84 @@ function bancMap(uf,go){const svg=document.getElementById('bmap'); if(!svg) retu
     if(NE.includes(u)&&!zoom&&!fine){zoomIn(); return;}
     go(u);});
   svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const t=e.target.closest('[data-u]'); if(t){e.preventDefault(); go(t.dataset.u);}}});}
-function route(){const m=location.hash.match(/^#dep\/(\d+)(\/cota)?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota','banc');
+
+/* ===== Você na Tribuna ===== */
+const reeleito=h=>!!(h&&h.tse&&h.tse.cargo==='Deputado Federal'&&/^ELEITO/.test(h.tse.sit||''));
+const TEMAS=['Saúde','Educação','Segurança','Economia e impostos','Emprego e renda','Meio ambiente','Transporte e cidades','Direitos e costumes','Corrupção e transparência','Agro e campo','Gastos do mandato','Outro'];
+const tdate=ms=>{const d=new Date(ms); return `${d.getDate()} ${MES[d.getMonth()]} ${d.getFullYear()}`};
+function tribBlock(d,h){
+  if(!reeleito(h)) return `<p class="sec" id="tribsec">Você na Tribuna</p><p class="hint" style="margin:0">A Tribuna recebe perguntas só para deputados reeleitos em 2026, que continuam no cargo em 2027. <a href="#tribuna" style="color:var(--fg)">Como funciona</a></p>`;
+  setTimeout(()=>tribLoad(d),0);
+  return `<p class="sec" id="tribsec">Você na Tribuna <span class="hint">pergunte a ${esc(d.n)}</span></p>
+   <div class="tbox"><p class="hint" style="margin:0">Sua pergunta passa por uma triagem, vai para o gabinete por e-mail e aparece aqui com a resposta, ou com o aviso de que não respondeu em 14 dias. Não pedimos nome nem e-mail. <a href="#tribuna" style="color:var(--fg)">Regras</a></p>
+    <div id="tlist"><p class="hint" style="margin:0">Carregando perguntas…</p></div>
+    ${CFG.tribuna_api&&CFG.turnstile_sitekey?`<button type="button" class="tbtn" id="topen">Fazer uma pergunta</button><div id="tform" hidden></div>`:`<p class="hint" style="margin:0">O envio de perguntas abre em breve.</p>`}</div>`}
+async function tribLoad(d){const L=document.getElementById('tlist'); if(!L) return;
+  const op=document.getElementById('topen'); if(op) op.onclick=()=>tribForm(d);
+  if(!CFG.tribuna_api){L.innerHTML='<p class="hint" style="margin:0">Ainda não há perguntas publicadas.</p>'; return;}
+  try{const r=await (await fetch(CFG.tribuna_api+'/perguntas?dep='+d.id)).json(); const P=r.perguntas||[];
+    L.innerHTML=P.length?P.map(q=>{const st={respondida:['Respondeu','var(--fg)'],aguardando:['Aguardando resposta até '+tdate(q.prazo),'var(--led)'],sem_resposta:['Não respondeu no prazo','var(--muted)']}[q.status]||['','var(--muted)'];
+      return `<div class="tq"><span class="tt">${esc(q.tema)}${q.uf?` · eleitor de ${esc(q.uf)}`:''} · enviada em ${tdate(q.enviada)}</span><p>${esc(q.texto)}</p><span class="st" style="color:${st[1]}">${st[0]}</span>${q.resposta?`<blockquote>${esc(q.resposta)}<br><span class="tt">Resposta do gabinete em ${tdate(q.respondida)}</span></blockquote>`:''}</div>`}).join('')
+      :'<p class="hint" style="margin:0">Ainda não há perguntas publicadas para este deputado.</p>';}
+  catch(e){L.innerHTML='<p class="hint" style="margin:0">Não foi possível carregar as perguntas agora.</p>';}}
+let TS=null;
+function tribForm(d){const F=document.getElementById('tform'), op=document.getElementById('topen'); op.hidden=true; F.hidden=false;
+  F.innerHTML=`<div class="tform"><label class="sr" for="ttema">Tema</label>
+    <div class="row"><select id="ttema"><option value="">Tema da pergunta</option>${TEMAS.map(x=>`<option>${x}</option>`).join('')}</select>
+     <select id="tuf"><option value="">Seu estado (opcional)</option>${Object.keys(UFN).sort().map(u=>`<option value="${u}">${UFN[u]}</option>`).join('')}</select></div>
+    <label class="sr" for="ttxt">Pergunta</label><textarea id="ttxt" maxlength="300" placeholder="Escreva uma pergunta sobre o mandato: votos, projetos, gastos, posições. Seja direto e respeitoso."></textarea>
+    <div class="tcount" id="tcnt">0/300</div><div id="tts"></div>
+    <button type="button" class="tbtn" id="tsend" disabled>Enviar para a triagem</button><div id="tmsg"></div></div>`;
+  const tx=document.getElementById('ttxt'), sb=document.getElementById('tsend'), msg=document.getElementById('tmsg'); let tok='';
+  const ok=()=>{sb.disabled=!(tok&&document.getElementById('ttema').value&&tx.value.trim().length>=15)};
+  tx.oninput=()=>{document.getElementById('tcnt').textContent=tx.value.length+'/300'; ok()}; document.getElementById('ttema').onchange=ok;
+  const render=()=>{TS=turnstile.render('#tts',{sitekey:CFG.turnstile_sitekey,theme:'dark',language:'pt-br',callback:t=>{tok=t;ok()},'expired-callback':()=>{tok='';ok()}})};
+  if(window.turnstile) render(); else {const s=document.createElement('script'); s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; s.onload=render; document.head.appendChild(s);}
+  sb.onclick=async()=>{sb.disabled=true; msg.innerHTML='<div class="tmsg">Enviando…</div>';
+    try{const r=await fetch(CFG.tribuna_api+'/perguntar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({dep:d.id,tema:document.getElementById('ttema').value,uf:document.getElementById('tuf').value,texto:tx.value,token:tok})});
+      const j=await r.json();
+      if(j.ok){F.innerHTML='<div class="tmsg"><b>Pergunta recebida.</b> Ela passa pela triagem e, se aprovada, vai para o gabinete na próxima segunda. Volte aqui para ver a resposta.</div>';}
+      else {msg.innerHTML=`<div class="tmsg">${esc(j.erro||'Não foi possível enviar.')}</div>`; tok=''; if(window.turnstile&&TS!=null) turnstile.reset(TS); ok();}}
+    catch(e){msg.innerHTML='<div class="tmsg">Sem conexão com a Tribuna agora. Tente de novo em instantes.</div>'; sb.disabled=false;}};}
+async function tribPage(){const el=document.getElementById('tribpg');
+  const R=deps.filter(x=>reeleito(HIST.deps[x.id])).sort((a,b)=>a.n.localeCompare(b.n,'pt'));
+  el.innerHTML=`<div class="cintro"><a class="back" href="#">Voltar ao plenário</a>
+    <p class="led" style="margin:18px 0 0;font-size:20px;letter-spacing:3px">TRIBUNA</p>
+    <h1>Você na Tribuna</h1>
+    <p class="lead">A tribuna é de onde o deputado fala. Aqui, quem fala é você: faça uma pergunta a um deputado reeleito e acompanhe se ele responde.</p></div>
+   <div class="tnums" id="tnums"></div>
+   <div class="tsearch"><p class="sec" style="margin-top:6px">Para quem você quer perguntar?</p>
+    <input id="tq" type="search" placeholder="Nome do deputado, partido ou estado" autocomplete="off"><div class="tres" id="tres"></div>
+    <p class="hint" style="margin:0">${R.length} deputados reeleitos em 2026 podem receber perguntas. Quem não se reelegeu deixa o cargo em janeiro.</p></div>
+   <p class="sec">Como funciona</p>
+   <ol class="tsteps"><li>Você escolhe o deputado, o tema e escreve a pergunta (até 300 caracteres).</li><li>A pergunta passa por uma triagem: ofensas e assuntos fora do mandato não seguem.</li><li>Toda segunda, as perguntas aprovadas vão por e-mail para o gabinete.</li><li>O deputado tem 14 dias para responder.</li><li>A resposta aparece no perfil dele, na íntegra. Sem resposta, aparece o aviso.</li></ol>
+   <p class="sec">Regras</p>
+   <div class="tbox" style="gap:6px;font-size:14px;line-height:1.5">
+    <p style="margin:0"><b>Não seguem para o gabinete:</b> ofensas e ataques pessoais; vida pessoal sem relação com o mandato; propaganda ou links; textos que não são pergunta. Perguntas muito parecidas são juntadas numa só.</p>
+    <p style="margin:0"><b>Limites:</b> 1 pergunta por deputado por semana e 3 por dia, por pessoa.</p>
+    <p style="margin:0"><b>Sua privacidade:</b> não pedimos nome nem e-mail. Para o limite funcionar, o servidor guarda só um código embaralhado do seu acesso, que não identifica você e é apagado em 7 dias. O estado é opcional.</p>
+    <p style="margin:0"><b>Equilíbrio:</b> a contagem de perguntas e respostas de cada deputado é pública, para qualquer um conferir que todos os lados são cobrados do mesmo jeito.</p></div>
+   <div id="tmais"></div>`;
+  const draw=()=>{const q=document.getElementById('tq').value.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+    const L=q?R.filter(x=>(x.n+' '+x.p+' '+x.uf+' '+(UFN[x.uf]||'')).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q)):[];
+    document.getElementById('tres').innerHTML=L.slice(0,12).map(x=>`<a href="#dep/${x.id}/tribuna">${face(x)}<div style="min-width:0"><b>${esc(x.n)}</b><br><span>${esc(x.p)}-${x.uf}</span></div></a>`).join('')+(q&&!L.length?'<p class="hint">Nenhum deputado reeleito com esse nome.</p>':'');};
+  document.getElementById('tq').oninput=draw;
+  const N=document.getElementById('tnums');
+  if(!CFG.tribuna_api){N.innerHTML='<p class="hint" style="margin:0;grid-column:1/-1">O envio de perguntas abre em breve. Enquanto isso, veja como vai funcionar.</p>'; return;}
+  try{const r=await (await fetch(CFG.tribuna_api+'/resumo')).json(), T=r.totais||{}, D=r.deps||[];
+    const resp=D.reduce((a,x)=>a+(x.resp||0),0), sem=D.reduce((a,x)=>a+(x.sem||0),0);
+    N.innerHTML=`<div><small>Perguntas publicadas</small><strong>${T.publicadas||0}</strong></div><div><small>Respondidas</small><strong>${resp}</strong></div><div><small>Sem resposta no prazo</small><strong>${sem}</strong></div><div><small>Na triagem</small><strong>${T.triagem||0}</strong></div>`;
+    const top=D.map(x=>({...x,d:deps[byId[x.dep]]})).filter(x=>x.d).sort((a,b)=>b.n-a.n).slice(0,15);
+    if(top.length) document.getElementById('tmais').innerHTML=`<p class="sec">Quem mais recebeu perguntas</p><div class="bplist">${top.map(x=>`<div><a href="#dep/${x.dep}/tribuna" style="color:var(--fg)">${esc(x.d.n)}</a><i style="width:${(x.n/top[0].n*100).toFixed(1)}%"></i><b>${x.n}</b></div>`).join('')}</div><p class="hint" style="margin:6px 0 0">Número de perguntas publicadas. Toque no nome para ver as perguntas e respostas.</p>`;}
+  catch(e){N.innerHTML='<p class="hint" style="margin:0;grid-column:1/-1">Não foi possível carregar os números agora.</p>';}}
+function route(){const m=location.hash.match(/^#dep\/(\d+)(?:\/(cota|tribuna))?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota','banc','trib');
   const bm=location.hash.match(/^#bancada(?:\/([A-Z]{2}))?$/);
-  const pg=m?'dep':bm?'bancada':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
+  const pg=m?'dep':bm?'bancada':location.hash==='#tribuna'?'tribuna':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
   document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===pg));
-  document.title=pg==='bancada'?(bm[1]&&UFN[bm[1]]?'Bancada '+DE(bm[1]):'Bancada: quem representa seu estado')+' · Centro Político':pg==='cota'?'Cota: quanto gastam os deputados · Centro Político':pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
+  document.title=pg==='tribuna'?'Você na Tribuna: pergunte ao deputado · Centro Político':pg==='bancada'?(bm[1]&&UFN[bm[1]]?'Bancada '+DE(bm[1]):'Bancada: quem representa seu estado')+' · Centro Político':pg==='cota'?'Cota: quanto gastam os deputados · Centro Político':pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
   if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);
-    if(m[2]){const s=document.getElementById('cotasec'); if(s){requestAnimationFrame(()=>{scrollTo(0,s.getBoundingClientRect().top+scrollY-(innerWidth<700?72:80)); upBar(true,deps[byId[m[1]]].n);});}}}
+    if(m[2]){const s=document.getElementById(m[2]==='cota'?'cotasec':'tribsec'); if(s){requestAnimationFrame(()=>{scrollTo(0,s.getBoundingClientRect().top+scrollY-(innerWidth<700?72:80)); upBar(true,deps[byId[m[1]]].n,m[2]);});}}}
+  else if(location.hash==='#tribuna'){document.body.classList.add('dep','trib'); tribPage(); scrollTo(0,0);}
   else if(bm){document.body.classList.add('dep','banc'); bancPage(bm[1]||''); scrollTo(0,0);}
   else if(location.hash==='#cota'){document.body.classList.add('dep','cota'); cotaPage(); scrollTo(0,0);}
   else if(/^#(teste|urna)$/.test(location.hash)){document.body.classList.add('dep','quiz'); quizIntro(); scrollTo(0,0);}
@@ -1219,8 +1325,8 @@ function route(){const m=location.hash.match(/^#dep\/(\d+)(\/cota)?$/); upBar(fa
 addEventListener('hashchange',route);
 /* botão flutuante: veio da Cota direto para a cota do deputado; avisa que há mais informação acima */
 const UB=document.createElement('div'); UB.className='upbar'; UB.hidden=true; document.body.appendChild(UB);
-function upBar(on,nome){UB.hidden=!on; if(!on) return;
-  UB.innerHTML=`<a href="#cota" class="ub-back">‹ Cota</a><button type="button" class="ub-up">↑ Ver o perfil completo<span class="lg"> de ${esc(nome.split(' ')[0])}: votos, presença e emendas</span></button>`;
+function upBar(on,nome,de){UB.hidden=!on; if(!on) return;
+  UB.innerHTML=`<a href="#${de==='tribuna'?'tribuna':'cota'}" class="ub-back">‹ ${de==='tribuna'?'Tribuna':'Cota'}</a><button type="button" class="ub-up">↑ Ver o perfil completo<span class="lg"> de ${esc(nome.split(' ')[0])}: votos, presença e emendas</span></button>`;
   UB.querySelector('.ub-up').onclick=()=>scrollTo({top:0,behavior:'smooth'});}
 addEventListener('scroll',()=>{if(!UB.hidden&&UB.innerHTML&&scrollY<200) UB.classList.add('gone'); else UB.classList.remove('gone');},{passive:true});
 document.getElementById('oqf-top').outerHTML=OQF;

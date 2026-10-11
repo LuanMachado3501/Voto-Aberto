@@ -1,0 +1,5 @@
+wrangler.toml
+reeleitos.json
+deploy.log
+.wrangler/
+.dev.vars
