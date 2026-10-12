@@ -2,7 +2,7 @@ name: Atualizar dados
 
 on:
   schedule:
-    - cron: '0 9 * * 1'   # toda segunda, 6h em Brasília
+    - cron: '17 4 * * 1'  # toda segunda, 1h17 em Brasília (minuto quebrado: o GitHub atrasa menos)
   workflow_dispatch:       # botão "Run workflow" para rodar na hora
 
 permissions:

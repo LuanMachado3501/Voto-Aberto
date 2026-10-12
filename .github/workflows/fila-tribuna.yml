@@ -1,0 +1,45 @@
+name: Fila da Tribuna
+
+# Copia para o repositório a fila de perguntas aprovadas e os e-mails
+# oficiais dos deputados, para os agentes agendados lerem pelo GitHub.
+on:
+  schedule:
+    - cron: '43 22 * * 0'   # domingo, 19h43 em Brasília (antes da Tribuna da semana)
+    - cron: '43 9 * * *'    # todo dia, 6h43 em Brasília
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados
+  cancel-in-progress: false
+
+jobs:
+  fila:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Baixar fila e contatos
+        run: python scripts/fila_tribuna.py
+
+      - name: Publicar se algo mudou
+        run: |
+          git config user.name "Centro Político (robô)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/deputados_contato.json data/tribuna_fila.json
+          if git diff --cached --quiet; then
+            echo "Nada mudou."
+          else
+            git commit -m "Fila da Tribuna em $(TZ=America/Sao_Paulo date +%d/%m/%Y)"
+            git pull --rebase -q && git push
+          fi
