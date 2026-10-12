@@ -1,5 +1,5 @@
 {
- "gerado": "2026-10-11",
+ "gerado": "2026-10-12",
  "pesos": {
   "atencao": 0.7,
   "disputa": 0.3
@@ -21,24 +21,181 @@
    "atencao": 1.0,
    "disputa": 0.382,
    "indice": 81,
-   "data": "2026-08-12"
-  },
-  {
-   "id": "2611313",
-   "titulo": "PLP 74/2026",
-   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
-   "placar": [
-    346,
-    46
+   "data": "2026-08-12",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     6,
+     79
+    ],
+    [
+     "PT",
+     56,
+     0
+    ],
+    [
+     "UNIÃO",
+     36,
+     4
+    ],
+    [
+     "PSD",
+     38,
+     2
+    ],
+    [
+     "PP",
+     37,
+     2
+    ],
+    [
+     "REPUBLICANOS",
+     33,
+     2
+    ],
+    [
+     "MDB",
+     31,
+     2
+    ],
+    [
+     "PODE",
+     15,
+     4
+    ],
+    [
+     "PSDB",
+     16,
+     0
+    ],
+    [
+     "PSB",
+     14,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     12
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PV",
+     5,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     3,
+     1
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
+     "AVANTE",
+     3,
+     0
+    ],
+    [
+     "PRD",
+     2,
+     0
+    ],
+    [
+     "REDE",
+     2,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ]
    ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 18,
-   "atencao": 0.835,
-   "disputa": 0.157,
-   "indice": 63,
-   "data": "2026-09-03"
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Não"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Não"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ],
+     [
+      "Zucco",
+      "PL-RS",
+      "Não"
+     ],
+     [
+      "André Ferreira",
+      "PL-PE",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "",
+      "não votou"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ],
+     [
+      "Júnior Mano",
+      "",
+      "não votou"
+     ],
+     [
+      "Duda Salabert",
+      "PSOL-MG",
+      "Não"
+     ]
+    ]
+   }
   },
   {
    "id": "2645346",
@@ -51,11 +208,275 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 6,
-   "atencao": 0.552,
+   "noticias": 30,
+   "atencao": 0.974,
    "disputa": 0.171,
-   "indice": 44,
-   "data": "2026-09-02"
+   "indice": 73,
+   "data": "2026-09-02",
+   "nome": "Pacheco TCU",
+   "partidos": [],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      NaN
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      NaN
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      NaN
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      NaN
+     ],
+     [
+      "Zucco",
+      "PL-RS",
+      NaN
+     ],
+     [
+      "André Ferreira",
+      "PL-PE",
+      NaN
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      NaN
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      NaN
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      NaN
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      NaN
+     ],
+     [
+      "Júnior Mano",
+      "PSB-CE",
+      NaN
+     ],
+     [
+      "Duda Salabert",
+      "PSOL-MG",
+      NaN
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2611313",
+   "titulo": "PLP 74/2026",
+   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
+   "placar": [
+    346,
+    46
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 17,
+   "atencao": 0.82,
+   "disputa": 0.157,
+   "indice": 62,
+   "data": "2026-09-03",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     45,
+     23
+    ],
+    [
+     "PT",
+     52,
+     0
+    ],
+    [
+     "PSD",
+     37,
+     0
+    ],
+    [
+     "UNIÃO",
+     35,
+     2
+    ],
+    [
+     "PP",
+     32,
+     1
+    ],
+    [
+     "REPUBLICANOS",
+     31,
+     1
+    ],
+    [
+     "MDB",
+     30,
+     0
+    ],
+    [
+     "PODE",
+     17,
+     2
+    ],
+    [
+     "PSDB",
+     15,
+     1
+    ],
+    [
+     "PSB",
+     15,
+     0
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     10
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PV",
+     6,
+     0
+    ],
+    [
+     "NOVO",
+     0,
+     5
+    ],
+    [
+     "AVANTE",
+     4,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     2,
+     0
+    ],
+    [
+     "REDE",
+     2,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ],
+    [
+     "CIDADANIA",
+     1,
+     0
+    ],
+    [
+     "PRD",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "",
+      "não votou"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ],
+     [
+      "Zucco",
+      "PL-RS",
+      "Sim"
+     ],
+     [
+      "André Ferreira",
+      "PL-PE",
+      "Sim"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "",
+      "não votou"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ],
+     [
+      "Júnior Mano",
+      "",
+      "não votou"
+     ],
+     [
+      "Duda Salabert",
+      "",
+      "não votou"
+     ]
+    ]
+   }
   },
   {
    "id": "2580259",
@@ -72,7 +493,186 @@
    "atencao": 0.508,
    "disputa": 0.255,
    "indice": 43,
-   "data": "2026-08-12"
+   "data": "2026-08-12",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     68,
+     12
+    ],
+    [
+     "PT",
+     12,
+     41
+    ],
+    [
+     "UNIÃO",
+     46,
+     1
+    ],
+    [
+     "PSD",
+     35,
+     4
+    ],
+    [
+     "PP",
+     34,
+     3
+    ],
+    [
+     "REPUBLICANOS",
+     35,
+     1
+    ],
+    [
+     "MDB",
+     27,
+     2
+    ],
+    [
+     "PODE",
+     18,
+     0
+    ],
+    [
+     "PSDB",
+     16,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     13
+    ],
+    [
+     "PSB",
+     11,
+     1
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PDT",
+     7,
+     1
+    ],
+    [
+     "PV",
+     1,
+     4
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
+     "SOLIDARIEDADE",
+     4,
+     0
+    ],
+    [
+     "PRD",
+     3,
+     0
+    ],
+    [
+     "AVANTE",
+     3,
+     0
+    ],
+    [
+     "REDE",
+     0,
+     3
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "CIDADANIA",
+     1,
+     0
+    ],
+    [
+     "DC",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Não"
+     ],
+     [
+      "André Fernandes",
+      "",
+      "não votou"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ],
+     [
+      "Zucco",
+      "PL-RS",
+      "Sim"
+     ],
+     [
+      "André Ferreira",
+      "PL-PE",
+      "Sim"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ],
+     [
+      "Júnior Mano",
+      "",
+      "não votou"
+     ],
+     [
+      "Duda Salabert",
+      "PSOL-MG",
+      "Não"
+     ]
+    ]
+   }
   },
   {
    "id": "2611992",
@@ -89,7 +689,181 @@
    "atencao": 0.508,
    "disputa": 0.114,
    "indice": 39,
-   "data": "2026-08-12"
+   "data": "2026-08-12",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     73,
+     3
+    ],
+    [
+     "PT",
+     42,
+     1
+    ],
+    [
+     "PSD",
+     34,
+     1
+    ],
+    [
+     "UNIÃO",
+     32,
+     1
+    ],
+    [
+     "PP",
+     29,
+     3
+    ],
+    [
+     "REPUBLICANOS",
+     27,
+     0
+    ],
+    [
+     "MDB",
+     19,
+     0
+    ],
+    [
+     "PODE",
+     19,
+     0
+    ],
+    [
+     "PSDB",
+     12,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     12
+    ],
+    [
+     "PSB",
+     11,
+     0
+    ],
+    [
+     "PDT",
+     8,
+     0
+    ],
+    [
+     "PCdoB",
+     8,
+     0
+    ],
+    [
+     "PV",
+     4,
+     0
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
+     "AVANTE",
+     3,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     3,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ],
+    [
+     "PRD",
+     1,
+     0
+    ],
+    [
+     "REDE",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Sim"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ],
+     [
+      "Zucco",
+      "PL-RS",
+      "Sim"
+     ],
+     [
+      "André Ferreira",
+      "PL-PE",
+      "Sim"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "",
+      "não votou"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ],
+     [
+      "Júnior Mano",
+      "",
+      "não votou"
+     ],
+     [
+      "Duda Salabert",
+      "PSOL-MG",
+      "Não"
+     ]
+    ]
+   }
   },
   {
    "id": "2642167",
@@ -106,7 +880,181 @@
    "atencao": 0.0,
    "disputa": 0.513,
    "indice": 15,
-   "data": "2026-09-01"
+   "data": "2026-09-01",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     43,
+     30
+    ],
+    [
+     "PT",
+     51,
+     0
+    ],
+    [
+     "UNIÃO",
+     36,
+     3
+    ],
+    [
+     "PP",
+     24,
+     11
+    ],
+    [
+     "PSD",
+     28,
+     4
+    ],
+    [
+     "MDB",
+     23,
+     5
+    ],
+    [
+     "REPUBLICANOS",
+     26,
+     2
+    ],
+    [
+     "PODE",
+     15,
+     6
+    ],
+    [
+     "PSB",
+     15,
+     0
+    ],
+    [
+     "PSDB",
+     14,
+     1
+    ],
+    [
+     "PSOL",
+     10,
+     0
+    ],
+    [
+     "PCdoB",
+     10,
+     0
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PV",
+     5,
+     0
+    ],
+    [
+     "AVANTE",
+     4,
+     0
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
+     "REDE",
+     3,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     2,
+     0
+    ],
+    [
+     "DC",
+     1,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "PRD",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "",
+      "não votou"
+     ],
+     [
+      "André Fernandes",
+      "",
+      "não votou"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ],
+     [
+      "Zucco",
+      "PL-RS",
+      "Não"
+     ],
+     [
+      "André Ferreira",
+      "",
+      "não votou"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "",
+      "não votou"
+     ],
+     [
+      "Júnior Mano",
+      "",
+      "não votou"
+     ],
+     [
+      "Duda Salabert",
+      "PSOL-MG",
+      "Sim"
+     ]
+    ]
+   }
   }
  ]
 }
