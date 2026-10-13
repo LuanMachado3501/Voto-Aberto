@@ -20,6 +20,7 @@
 :root{
   --bg:#0F1B16; --panel:#15241D; --line:#2A3C33; --fg:#EEF0E8; --muted:#9DA9A2; --led:#FFB000; --confirma:#2FA24F;
   --gov:#EF3B36; --mid:#7D838B; --opo:#2F7BFF; --focus:#FFB000; --abs:#5A6B62;
+  --onled:#1A1200; --onfg:#101214; --ledA:rgba(255,176,0,.22); --dotA:rgba(238,240,232,.06);
   --display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
   --ledf:'Doto','Big Shoulders Display',monospace;
   --body:'Archivo',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -504,6 +505,67 @@ select option{background:#15241D;color:#EEF0E8}
 .vmorewrap[open]>summary.more{margin-bottom:6px}
 .vmorewrap>summary.more::after{content:" +"}
 .vmorewrap[open]>summary.more::after{content:" −"}
+
+/* ===== tema claro (verde) ===== */
+html.claro{
+  --bg:#F5F6F1; --panel:#FFFFFF; --line:#D9DFD8; --fg:#14211B; --muted:#5B6A62; --led:#0B6B43; --focus:#0B6B43; --confirma:#2FA24F;
+  --gov:#D0342C; --mid:#8A9097; --opo:#2463C6; --abs:#A3ADA7;
+  --onled:#FFFFFF; --onfg:#FFFFFF; --ledA:rgba(11,107,67,.16); --dotA:rgba(20,33,27,.04);
+  color-scheme:light;
+}
+html.claro body:not(.dep){background:radial-gradient(ellipse 120% 80% at 50% 70%,#E7F0EA 0%,#F5F6F1 60%) fixed}
+html.claro .logo path{fill:var(--led)} html.claro .logo rect{fill:var(--fg)}
+html.claro .go,html.claro .vrow .b-S,html.claro .elei .badge.b-S,html.claro .tl .b-S,html.claro .csort button.on,html.claro .qopt.on,html.claro .qskip.on,html.claro .role{color:var(--onfg)}
+html.claro .cta,html.claro .cview button.on,html.claro .upbar .ub-up,html.claro .bufs button.on,html.claro .tbtn,html.claro .sitenav nav a.on{color:var(--onled)}
+html.claro .bmap text.on{fill:var(--onled)}
+html.claro .sitenav nav a[data-nav]:not(.on){box-shadow:inset 0 0 0 1px rgba(11,107,67,.45)}
+html.claro .sitenav nav a[data-nav]:not(.on):hover{background:rgba(11,107,67,.08)}
+html.claro .sitenav nav a:hover{background:rgba(11,107,67,.08)}
+html.claro .crow .chip{border-color:rgba(11,107,67,.35)}
+html.claro .vrow .b-N{background:#EEF1EE}
+html.claro .topbar{background:linear-gradient(#F5F6F1ee,#F5F6F100)}
+html.claro .tools input,html.claro .tools select{background:var(--panel);border-color:var(--line)}
+html.claro .ghost{border-color:var(--line);background:var(--panel)} html.claro .ghost:hover{background:#EEF3EF}
+html.claro .drawer{background:#FFFFFFF5;box-shadow:-12px 0 40px rgba(20,33,27,.12)}
+html.claro .close{background:var(--panel)}
+html.claro .tip{box-shadow:0 8px 24px rgba(20,33,27,.14)}
+html.claro dialog#info::backdrop{background:rgba(20,33,27,.35)}
+html.claro .qopt{background:#E4EEE8;color:var(--fg)} html.claro .qopt:hover{background:#D2E3D9}
+html.claro .qtab:hover,html.claro .qtab.on{background:#E9F1EC}
+html.claro .qpanel{background:#F2F6F3}
+html.claro .pbadge{background:var(--bg)}
+html.claro .upbar{background:#FFFFFFee;box-shadow:0 10px 30px rgba(20,33,27,.15)}
+html.claro .bmap path{fill:#DCE6DF;stroke:#FFFFFF} html.claro .bmap path:hover,html.claro .bmap path:focus{fill:#BFD3C6}
+html.claro .bmap path.on{fill:var(--led)}
+html.claro .bmap circle.df{fill:#DCE6DF} html.claro .bmap circle.df.on{fill:var(--led)}
+html.claro .bstrip a{border-color:#FFFFFF}
+html.claro .bvot .vb .n{background:#A3B0A8}
+html.claro .crow:hover,html.claro .bdeps a:hover,html.claro .bufs button:hover{border-color:#9FB0A6}
+html.claro .tform textarea{background:var(--bg)}
+html.claro .tmsg,html.claro .tq blockquote{background:#F0F4F1}
+html.claro .dplacar{background:#0E1612;color:#FFB000}
+html.claro select option{background:#FFFFFF;color:var(--fg)}
+html.claro .tecla{box-shadow:0 4px 0 #9AA29E,inset 0 1px 0 #ffffff17}
+html.claro .tecla.branco{border-color:#CFCFC6}
+html.claro .qcard,html.claro .card,html.claro .dcard,html.claro .tbox{box-shadow:0 1px 2px rgba(20,33,27,.05)}
+/* plenário claro */
+html.claro:not(.plen-escuro) #carpet stop:nth-child(1){stop-color:#DCEADF} html.claro:not(.plen-escuro) #carpet stop:nth-child(2){stop-color:#E6EFE8} html.claro:not(.plen-escuro) #carpet stop:nth-child(3){stop-color:#EEF3EF}
+html.claro:not(.plen-escuro) #floor path:not([fill^="url"]){stroke:#CFDDD3}
+html.claro:not(.plen-escuro) #floor line{stroke:#F8FAF7}
+/* variante: plenário escuro dentro da página clara */
+html.claro.plen-escuro #plen{
+  --bg:#0F1B16; --panel:#15241D; --line:#2A3C33; --fg:#EEF0E8; --muted:#9DA9A2; --led:#FFB000; --focus:#FFB000;
+  --gov:#EF3B36; --mid:#7D838B; --opo:#2F7BFF; --abs:#5A6B62; --onled:#1A1200; --onfg:#101214;
+  color:var(--fg);margin:10px 16px 0;border-radius:18px;overflow:clip;min-height:calc(100svh - 70px);
+  background:radial-gradient(ellipse 120% 90% at 50% 92%,#1A3326 0%,#0F1B16 55%,#0B1410 100%);
+}
+html.claro.plen-escuro #plen .topbar{background:linear-gradient(#0F1B16ee,#0F1B1600)}
+html.claro.plen-escuro #plen .tools input,html.claro.plen-escuro #plen .tools select{background:#ffffff0d;border-color:#ffffff1a;color:var(--fg)}
+html.claro.plen-escuro #plen .ghost{background:transparent;border-color:#ffffff2a;color:var(--fg)}
+html.claro.plen-escuro #plen .drawer{background:#121517f2}
+html.claro.plen-escuro #plen .close{background:#0006}
+html.claro.plen-escuro #plen .tip{box-shadow:0 8px 24px rgba(0,0,0,.45)}
+@media (max-width:700px){html.claro.plen-escuro #plen{margin:8px 8px 0;border-radius:14px;min-height:0;padding-bottom:14px}}
 </style>
 </head>
 <body>
@@ -1049,7 +1111,7 @@ function spiderSVG(SP){const c=200,R=150,n=SP.length, pt=(i,r)=>[c+r*Math.sin(2*
   let g=''; [25,50,75,100].forEach(v=>{g+=`<polygon points="${SP.map((_,i)=>pt(i,R*v/100).join(',')).join(' ')}" fill="none" stroke="var(--line)" stroke-width="1"/>`;});
   SP.forEach((a,i)=>{const [x,y]=pt(i,R), [lx,ly]=pt(i,R+28); g+=`<line x1="${c}" y1="${c}" x2="${x}" y2="${y}" stroke="var(--line)"/><text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" class="spl">${esc(a.nm)}</text>`;});
   const P=SP.map((a,i)=>pt(i,R*(a.v??50)/100));
-  g+=`<polygon points="${P.map(p=>p.join(',')).join(' ')}" fill="rgba(255,176,0,.22)" stroke="var(--led)" stroke-width="2"/>`;
+  g+=`<polygon points="${P.map(p=>p.join(',')).join(' ')}" fill="var(--ledA)" stroke="var(--led)" stroke-width="2"/>`;
   P.forEach((p,i)=>{g+=`<circle cx="${p[0]}" cy="${p[1]}" r="4.5" fill="${SP[i].v==null?'var(--line)':'var(--led)'}"/>`;});
   return `<svg viewBox="-70 -10 540 420" class="spider" role="img" aria-label="Teia com seus 8 eixos">${g}</svg>`;}
 function mapSVG(U,parts,dc){const S=170,c=200, P=(x,y)=>[c+x*S, c+y*S];
@@ -1059,7 +1121,7 @@ function mapSVG(U,parts,dc){const S=170,c=200, P=(x,y)=>[c+x*S, c+y*S];
   const jit=id=>{let h=0; for(const ch of id) h=(h*31+ch.charCodeAt(0))%1000; return (h/1000-.5)*10;};
   dc.forEach(x=>{if(!x.xy) return; let [px,py]=P(x.xy.x,x.xy.y); px+=jit(x.d.id); py+=jit(x.d.id+'y'); g+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="2.2" fill="${color(x.d.s)}" opacity=".35"/>`;});
   const [ux0,uy0]=P(U.x,U.y); const placed=[[ux0-22,uy0-27,ux0+22,uy0+10]]; parts.filter(p=>p.xy&&p.size>=4).sort((a,b)=>b.size-a.size).forEach(p=>{const [px,py]=P(p.xy.x,p.xy.y), r=4+Math.sqrt(p.size)*.9;
-    g+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${r.toFixed(1)}" fill="rgba(238,240,232,.06)" stroke="var(--fg)" stroke-width="1.2"/>`;
+    g+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${r.toFixed(1)}" fill="var(--dotA)" stroke="var(--fg)" stroke-width="1.2"/>`;
     const w=p.nm.length*6.4+4, cand=[[px+r+3,py+4,'start'],[px-r-3,py+4,'end'],[px,py-r-4,'middle'],[px,py+r+11,'middle'],[px+r+3,py-8,'start'],[px-r-3,py+16,'end'],[px+r+3,py+16,'start'],[px-r-3,py-8,'end']];
     const box=([x,y,a])=>{const x0=a==='start'?x:a==='end'?x-w:x-w/2; return [x0,y-10,x0+w,y+2];};
     const hit=b=>placed.some(q=>b[0]<q[2]&&b[2]>q[0]&&b[1]<q[3]&&b[3]>q[1]);
@@ -1161,7 +1223,7 @@ const NE=['MA','PI','CE','RN','PB','PE','AL','SE','BA'];
 const ART=u=>['AC','AM','AP','CE','ES','MA','PA','PI','PR','RJ','RN','RS','TO','DF'].includes(u)?'o':['BA','PB'].includes(u)?'a':'';
 const DE=u=>({o:'do ',a:'da ','':'de '})[ART(u)]+UFN[u];
 // cores neutras (sem vermelho/azul, que no plenário indicam lado)
-const PCOL=['#EEF0E8','#FFB000','#8FB8A0','#C9CFC4','#5F7F70','#D8C77A','#A7B5AD','#B59A5A','#7E9A8B','#E3D9B8','#4F6A5E','#9DA9A2'];
+const PCOL=document.documentElement.classList.contains('claro')?['#14211B','#0B6B43','#6A9A80','#9AA59F','#2F5A47','#B08A2E','#C9D3CC','#7A5A3E','#4E7F67','#D6C38E','#1F3A2E','#7F8C85']:['#EEF0E8','#FFB000','#8FB8A0','#C9CFC4','#5F7F70','#D8C77A','#A7B5AD','#B59A5A','#7E9A8B','#E3D9B8','#4F6A5E','#9DA9A2'];
 const median=a=>{const b=a.filter(x=>x!=null).sort((x,y)=>x-y); if(!b.length) return null; const m=b.length>>1; return b.length%2?b[m]:(b[m-1]+b[m])/2};
 function eleiCat(h){const T=h&&h.tse; if(!T) return ['nao','Não concorreu'];
   if(T.cargo==='Deputado Federal'){ if(/^ELEITO/.test(T.sit)) return ['re','Reeleito']; if(T.sit==='SUPLENTE') return ['sup','Suplente']; return ['nre',T.sit==='#NULO'?'Votos anulados':'Não reeleito'];}
