@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="claro">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0A0C0D">
+<meta name="theme-color" content="#0B6B43">
 <title>Centro Político · Como votam os deputados</title>
 <meta name="description" content="Como cada deputado federal vota, gasta e se elege, com dados oficiais da Câmara, do Portal da Transparência e do TSE. E um teste para ver quem vota como você.">
 <meta property="og:type" content="website">
@@ -566,6 +566,16 @@ html.claro.plen-escuro #plen .drawer{background:#121517f2}
 html.claro.plen-escuro #plen .close{background:#0006}
 html.claro.plen-escuro #plen .tip{box-shadow:0 8px 24px rgba(0,0,0,.45)}
 @media (max-width:700px){html.claro.plen-escuro #plen{margin:8px 8px 0;border-radius:14px;min-height:0;padding-bottom:14px}}
+
+/* cabeçalho verde (como o da Câmara) */
+html.claro .sitenav{background:#0B6B43;padding:12px 20px;margin:0}
+html.claro body.dep .sitenav{max-width:none;margin:-24px -16px 22px;padding:12px max(16px,calc((100vw - 1100px)/2));border-bottom:0}
+html.claro .sitenav .brand{color:#FFFFFF}
+html.claro .sitenav .logo path{fill:#FFC233} html.claro .sitenav .logo rect{fill:#FFFFFF}
+html.claro .sitenav nav a[data-nav]:not(.on){color:#FFFFFF;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
+html.claro .sitenav nav a[data-nav]:not(.on):hover,html.claro .sitenav nav a:hover{background:rgba(255,255,255,.12);color:#FFFFFF}
+html.claro .sitenav nav a.on{background:#FFFFFF;color:#0B6B43}
+@media (max-width:700px){html.claro .sitenav{padding:10px 14px}html.claro body.dep .sitenav{padding:10px 16px}.sitenav nav{gap:4px;overflow-x:auto;scrollbar-width:none}.sitenav nav a{padding:6px 9px!important;font-size:13px!important}}
 </style>
 </head>
 <body>
