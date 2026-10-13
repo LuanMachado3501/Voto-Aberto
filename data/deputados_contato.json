@@ -2394,6 +2394,13 @@
    "sexo": "M",
    "uf": "RJ"
   },
+  "220616": {
+   "email": "dep.lucianovieira@camara.leg.br",
+   "nome": "Luciano Vieira",
+   "partido": "PSDB",
+   "sexo": "M",
+   "uf": "RJ"
+  },
   "220617": {
    "email": "dep.murillogouvea@camara.leg.br",
    "nome": "Murillo Gouvea",
@@ -3108,20 +3115,6 @@
    "sexo": "M",
    "uf": "RO"
   },
-  "235800": {
-   "email": "dep.jorgearaujo@camara.leg.br",
-   "nome": "Jorge Araújo",
-   "partido": "PP",
-   "sexo": "M",
-   "uf": "BA"
-  },
-  "236375": {
-   "email": "dep.marcosbraz@camara.leg.br",
-   "nome": "Marcos Braz",
-   "partido": "PSDB",
-   "sexo": "M",
-   "uf": "RJ"
-  },
   "62881": {
    "email": "dep.daniloforte@camara.leg.br",
    "nome": "Danilo Forte",
@@ -3465,6 +3458,13 @@
    "sexo": "M",
    "uf": "BA"
   },
+  "74550": {
+   "email": "dep.joaoleao@camara.leg.br",
+   "nome": "João Leão",
+   "partido": "PP",
+   "sexo": "M",
+   "uf": "BA"
+  },
   "74554": {
    "email": "dep.joserocha@camara.leg.br",
    "nome": "José Rocha",
@@ -3593,5 +3593,5 @@
   }
  },
  "fonte": "Câmara dos Deputados, dados abertos",
- "gerado": "2026-10-12 20:04"
+ "gerado": "2026-10-13 14:08"
 }
