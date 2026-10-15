@@ -54,8 +54,20 @@ def emendas():
     save_csv(from_zip(z, 'EmendasParlamentares.csv'), 'EmendasParlamentares.csv', 'Código da Emenda')
     save_csv(from_zip(z, 'EmendasParlamentares_PorFavorecido.csv'), 'EmendasParlamentares_PorFavorecido.csv', 'Favorecido')
 
+def senado():
+    S = 'https://legis.senado.leg.br/dadosabertos'
+    for nome, url, chave in [('senado_lista.json', f'{S}/senador/lista/atual.json', 'ListaParlamentarEmExercicio'),
+                             ('senado_nominal_2025.json', f'{S}/plenario/votacao/nominal/2025.json', 'ListaVotacoes'),
+                             ('senado_nominal_2026.json', f'{S}/plenario/votacao/nominal/2026.json', 'ListaVotacoes')]:
+        data = get(url)
+        if len(data) < 1000 or chave.encode() not in data[:500]:
+            raise RuntimeError(f'{nome}: resposta inesperada do Senado')
+        with open(os.path.join(RAW, nome), 'wb') as f:
+            f.write(data)
+        print(f'  ok {nome} ({len(data)/1e6:.1f} MB)', flush=True)
+
 ok = []
-for nome, f in [('votos', votos), ('cota', cota), ('emendas', emendas)]:
+for nome, f in [('votos', votos), ('senado', senado), ('cota', cota), ('emendas', emendas)]:
     print(f'▶ {nome}', flush=True)
     try:
         f(); ok.append(nome)

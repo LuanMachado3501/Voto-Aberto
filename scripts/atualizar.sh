@@ -20,6 +20,7 @@ run() {  # run <grupo> <script...>
   done
 }
 run votos   build_recentes build_pres build_governo build_destaques
+run senado  build_senado
 run cota    build_cota build_cota_page
 run emendas build_emendas build_favorecidos
 
