@@ -1,0 +1,14 @@
+name: Sondar Senado
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  sondar:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - run: python3 scripts/sondar_senado.py
+      - run: |
+          git config user.name "Centro Político (robô)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add raw_senado && git commit -m "Sonda do Senado" && git pull --rebase -q && git push || true
