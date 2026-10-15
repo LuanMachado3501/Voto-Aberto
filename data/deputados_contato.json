@@ -280,13 +280,6 @@
    "sexo": "M",
    "uf": "SP"
   },
-  "154700": {
-   "email": "dep.paulosoares@camara.leg.br",
-   "nome": "Paulo Soares",
-   "partido": "PODE",
-   "sexo": "M",
-   "uf": "SP"
-  },
   "156190": {
    "email": "dep.marcelvanhattem@camara.leg.br",
    "nome": "Marcel van Hattem",
@@ -971,6 +964,13 @@
    "nome": "Orlando Silva",
    "partido": "PCdoB",
    "sexo": "M",
+   "uf": "SP"
+  },
+  "178989": {
+   "email": "dep.renataabreu@camara.leg.br",
+   "nome": "Renata Abreu",
+   "partido": "PODE",
+   "sexo": "F",
    "uf": "SP"
   },
   "178992": {
@@ -3593,5 +3593,5 @@
   }
  },
  "fonte": "Câmara dos Deputados, dados abertos",
- "gerado": "2026-10-13 14:08"
+ "gerado": "2026-10-15 11:25"
 }
