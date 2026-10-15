@@ -1419,7 +1419,9 @@ const sface=(x,cls)=>`<div class="face ${cls||''}" style="background:${scolor(x.
 const SV={'Sim':['b-S','Sim'],'Não':['b-N','Não'],'Abstenção':['b-A','Abstenção'],'P-NRV':['b-A','Presente, não votou'],'NCom':['b--','Não compareceu'],
   'AP':['b-J','Atividade parlamentar'],'LS':['b-J','Licença saúde'],'MIS':['b-J','Missão oficial'],'LP':['b-J','Licença'],'LAP':['b-J','Licença'],'NA':['b--','Não votou']};
 const svl=c=>c==null?['b--','Fora do cargo']:c.startsWith('Presidente')?['b-J','Presidiu']:(SV[c]||['b--',c]);
-const sTitle=r=>r.nome||r.ident;
+const sEtapa=r=>{const d=r.desc.toLowerCase(); return /segundo turno|2º turno/.test(d)?'2º turno':/primeiro turno|1º turno/.test(d)?'1º turno':/destacad|destaque/.test(d)&&!/ressalvad/.test(d)?'destaque':/emenda/.test(d)&&!/ressalvad/.test(d)?'emenda':'texto principal'};
+const sTitle=r=>(r.nome||r.ident)+' · '+sEtapa(r);
+const sGrupos=()=>{const G=[]; SEN.rec.forEach(r=>{const g=G.find(g=>g[0].mat===r.mat&&g[0].d===r.d); g?g.push(r):G.push([r]);}); return G;};
 const sCasa=on=>`<div class="casa" role="group" aria-label="Casa legislativa"><a href="#"${on==='c'?' class="on"':''}>Câmara</a><a href="#senado"${on==='s'?' class="on"':''}>Senado</a></div>`;
 function senSeats(){const N=SEN.sens.length, rows=[14,18,22,N-54], cx=450, cy=330, R=[150,195,240,285];
   const P=[]; rows.forEach((k,r)=>{for(let i=0;i<k;i++){const a=Math.PI*(1-(i+.5)/k); P.push({x:cx+R[r]*Math.cos(a),y:cy-R[r]*Math.sin(a),a});}});
@@ -1427,14 +1429,15 @@ function senSeats(){const N=SEN.sens.length, rows=[14,18,22,N-54], cx=450, cy=33
   return SEN.sens.map((x,i)=>{const p=P[i];return `<g class="seat" tabindex="0" role="link" data-id="${x.id}" aria-label="${esc(x.n)}, ${x.p}-${x.uf}" transform="translate(${p.x.toFixed(1)},${p.y.toFixed(1)}) rotate(${(90-p.a*180/Math.PI).toFixed(1)})"><g class="in"><use href="#pol" x="${-SZ/2}" y="${-SZ/2}" width="${SZ}" height="${SZ}" style="color:${scolor(x.s)}"${x.e?' fill-opacity=".45" stroke="#A9ADB3" stroke-width=".9" stroke-dasharray="2 1.5"':''}/></g></g>`}).join('')
    +`<rect x="${cx-70}" y="${cy-66}" width="140" height="50" rx="6" fill="#06090A"/><text x="${cx}" y="${cy-31}" text-anchor="middle" fill="#FFB000" font-family="Doto, 'Big Shoulders Display', monospace" font-weight="900" font-size="28" dy="-4" letter-spacing="2">${N+1}</text><text x="${cx}" y="${cy-22}" text-anchor="middle" fill="#8C9298" font-size="6.5" letter-spacing="1.4" font-family="Archivo, sans-serif">SENADORES EM EXERCÍCIO</text>`
    +`<g transform="translate(${cx},${cy+2})"><use href="#pol" x="-12" y="-12" width="24" height="24" style="color:#FFB000"/></g><text class="smesa" x="${cx}" y="${cy+30}">PRESIDÊNCIA</text>`;}
-function senVotos(lim){return SEN.rec.slice(0,lim).map((r,j)=>{const g={S:[],N:[],A:[]};
+function senVotos(lim){return sGrupos().slice(0,lim).map((G,j)=>{const r=G[0], g={S:[],N:[],A:[]};
   SEN.sens.forEach(x=>{const c=r.vt[x.id]; if(c==='Sim')g.S.push(x); else if(c==='Não')g.N.push(x); else if(c!=null&&!c.startsWith('Presidente'))g.A.push([x,c]);});
   const tot=g.S.length+g.N.length||1, ln=x=>`<div><a href="#sen/${x.id}">${esc(x.n)}</a> <span class="emuted">${esc(x.p)}-${x.uf}</span></div>`;
-  return `<details${j>=6?' hidden':''}><summary><span><b style="font-weight:600">${esc(sTitle(r))}</b> <span class="emuted" style="font-size:12px">${fdate(r.d)}${r.nome?' · '+esc(r.ident):''}</span><br><span class="emuted" style="font-size:12px">${esc(r.desc)}</span></span>
+  return `<details${j>=6?' hidden':''}><summary><span><b style="font-weight:600">${esc(r.nome||r.ident)}</b> <span class="emuted" style="font-size:12px">${fdate(r.d)}${r.nome?' · '+esc(r.ident):''}</span><br><span class="emuted" style="font-size:12px">${G.length>1?G.length+' votações no dia; placar abaixo é a última ('+sEtapa(r)+')':'Votação do '+sEtapa(r)}</span></span>
     <div class="vb" aria-hidden="true"><i class="s" style="width:${g.S.length/tot*100}%"></i><i class="n" style="width:${g.N.length/tot*100}%"></i></div>
     <em>${r.pl[0]} sim · ${r.pl[1]} não${r.pl[2]?` · ${r.pl[2]} abst.`:''}</em></summary>
     <div class="vn"><div><b>Votaram sim (${g.S.length})</b>${g.S.map(ln).join('')||'<span class="emuted">ninguém</span>'}</div><div><b>Votaram não (${g.N.length})</b>${g.N.map(ln).join('')||'<span class="emuted">ninguém</span>'}</div>
     <div><b>Não votaram (${g.A.length})</b>${g.A.map(([x,c])=>`<div><a href="#sen/${x.id}">${esc(x.n)}</a> <span class="emuted">${esc(x.p)}-${x.uf} · ${esc(svl(c)[1].toLowerCase())}</span></div>`).join('')||'<span class="emuted">ninguém</span>'}</div></div>
+    ${G.length>1?`<p class="emuted" style="font-size:12px;margin:0 12px 6px">Todas as votações desta proposta no dia: ${G.slice().reverse().map(x=>`${sEtapa(x)} ${x.pl[0]} a ${x.pl[1]}`).join(' · ')}. As listas acima são da última.</p>`:''}
     <p class="emuted" style="font-size:12px;margin:0 12px 10px"><a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/${r.mat}" target="_blank" rel="noopener" style="color:var(--fg)">Ver no Senado ↗</a></p></details>`}).join('');}
 function senPage(){const el=document.getElementById('senpg'), P=SEN.pres;
   el.innerHTML=`<a class="back" href="#">Voltar ao plenário da Câmara</a>
@@ -1459,11 +1462,11 @@ function senPage(){const el=document.getElementById('senpg'), P=SEN.pres;
   const norm=t=>t.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
   el.querySelector('#sq').addEventListener('input',e=>{const t=norm(e.target.value.trim());
     svg.querySelectorAll('.seat').forEach(g=>{const x=SBY[g.dataset.id]; g.classList.toggle('dim',!!t&&!norm(x.n+' '+x.p+' '+x.uf+' '+(UFN[x.uf]||'')).includes(t));});});
-  el.querySelector('#svmais').onclick=e=>{el.querySelectorAll('#svot details[hidden]').forEach(d=>d.hidden=false); e.target.remove();};}
+  if(sGrupos().length<=6) el.querySelector('#svmais').remove(); else el.querySelector('#svmais').onclick=e=>{el.querySelectorAll('#svot details[hidden]').forEach(d=>d.hidden=false); e.target.remove();};}
 function senPerfil(id){const el=document.getElementById('senpg'), x=SBY[id];
   if(!x){el.innerHTML=`<a class="back" href="#senado">Voltar ao Senado</a><p class="empty">Senador não encontrado. Ele pode ter saído do cargo.</p>`;return}
   const [vt,tot,jus]=x.pr, pres=tot?Math.round(vt/tot*100):null;
-  const rows=SEN.rec.map(r=>{const [cls,l]=svl(r.vt[x.id]); return `<div class="vrow"><time>${fdate(r.d)}</time><div><b>${esc(sTitle(r))}</b><span>${r.nome?esc(r.ident)+' · ':''}${esc(r.desc)} · placar ${r.pl[0]} a ${r.pl[1]}</span></div><span class="badge ${cls}">${esc(l)}</span></div>`}).join('');
+  const rows=SEN.rec.map(r=>{const [cls,l]=svl(r.vt[x.id]); return `<div class="vrow"><time>${fdate(r.d)}</time><div><b>${esc(sTitle(r))}</b><span>${r.nome?esc(r.ident)+' · ':''}placar ${r.pl[0]} a ${r.pl[1]}</span></div><span class="badge ${cls}">${esc(l)}</span></div>`}).join('');
   el.innerHTML=`<a class="back" href="#senado">Voltar ao Senado</a>
   <div class="hero">${sface(x)}<div><span class="led" style="font-size:18px">SENADO</span><h1>${esc(x.n)}</h1><div class="meta">${esc(x.p)}-${x.uf} · ${posLabel(x.s)}${x.e?' (estimado)':''}${x.sup?' · suplente em exercício':''}</div>
   <div class="bar" style="max-width:420px"><i style="left:${((x.s-ssmin)/(ssmax-ssmin)*100).toFixed(1)}%"></i></div></div></div>
