@@ -3305,6 +3305,7 @@ function senSeats(){const N=SEN.sens.length, cx=450, cy=372, SZ=24;
    +`<text class="smesa" x="${cx}" y="${cy+20}">MESA · PRESIDÊNCIA</text>`;}
 function senVotos(lim){return sGrupos().slice(0,lim).map((G,j)=>{const r=G[0], g={S:[],N:[],A:[]};
   SEN.sens.forEach(x=>{const c=r.vt[x.id]; if(c==='Sim')g.S.push(x); else if(c==='Não')g.N.push(x); else if(c!=null&&!c.startsWith('Presidente'))g.A.push([x,c]);});
+  const abc=(a,b)=>a.n.localeCompare(b.n,'pt-BR',{sensitivity:'base'}); g.S.sort(abc); g.N.sort(abc); g.A.sort((a,b)=>abc(a[0],b[0]));
   const tot=g.S.length+g.N.length||1, ln=x=>`<div><a href="#sen/${x.id}">${esc(x.n)}</a> <span class="emuted">${esc(x.p)}-${x.uf}</span></div>`;
   return `<details${j>=3?' hidden':''}><summary><span><b style="font-weight:600">${esc(r.nome||r.ident)}</b> <span class="emuted" style="font-size:12px">${fdate(r.d)}${r.nome?' · '+esc(r.ident):''}</span><br><span class="emuted" style="font-size:12px">${G.length>1?G.length+' votações no dia; placar abaixo é a última ('+sEtapa(r)+')':'Votação do '+sEtapa(r)}</span></span>
     <div class="vb" aria-hidden="true"><i class="s" style="width:${g.S.length/tot*100}%"></i><i class="n" style="width:${g.N.length/tot*100}%"></i></div>
