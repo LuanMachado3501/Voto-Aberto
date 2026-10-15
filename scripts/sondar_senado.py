@@ -2,6 +2,7 @@
 import os, urllib.request, json
 os.makedirs('raw_senado', exist_ok=True)
 URLS = {
+ 'nominal_2025': 'https://legis.senado.leg.br/dadosabertos/plenario/votacao/nominal/2025.json',
  'lista_atual': 'https://legis.senado.leg.br/dadosabertos/senador/lista/atual.json',
  'votacao_v2_out': 'https://legis.senado.leg.br/dadosabertos/votacao?dataInicio=2026-10-01&dataFim=2026-10-31',
  'votacao_v2_ano': 'https://legis.senado.leg.br/dadosabertos/votacao?ano=2026',
