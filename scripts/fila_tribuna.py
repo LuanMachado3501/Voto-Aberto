@@ -39,8 +39,10 @@ def salvar(caminho, obj):
         velho = open(caminho, encoding='utf-8').read()
     except FileNotFoundError:
         velho = ''
-    # ignora o carimbo de hora na comparação, para não gerar commit à toa
-    tira = lambda s: '\n'.join(l for l in s.splitlines() if '"gerado"' not in l)
+    # ignora a hora do carimbo (mantém só o dia): no máximo um commit por dia,
+    # e o campo "gerado" mostra aos agentes que a fila foi conferida hoje
+    import re
+    tira = lambda s: re.sub(r'("gerado": "\d{4}-\d{2}-\d{2})[^"]*"', r'\1"', s)
     if tira(novo) != tira(velho):
         open(caminho, 'w', encoding='utf-8').write(novo + '\n')
         print('atualizado:', caminho)
