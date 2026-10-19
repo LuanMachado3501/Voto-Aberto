@@ -20,9 +20,9 @@
 ## Formato do carrossel (Instagram, 1080×1350)
 1. **Capa:** selo (ex.: "LEMBRE-SE" para votação antiga, "VOTOU ESTA SEMANA" para nova), nome popular da proposta, número oficial · casa · data, resumo de 1 frase do que muda, **RESULTADO** com placar e contexto curto (veto, Senado etc.). Rodapé: "Arraste: como votaram direita e esquerda" e "Fonte: Câmara dos Deputados".
 2. **Direita: como votaram os partidos** (partidos do critério, a favor / contra / ausente e somados).
-3–4. **Direita: os nomes em destaque** (de `editorial.json`), 2 por card, com "VOTOU A FAVOR" / "VOTOU CONTRA" / "NÃO VOTOU".
+3–4. **Direita: os nomes em destaque** (os 4 nomes de `editorial.json`, sempre 4 por lado), 2 por card, com "VOTOU A FAVOR" / "VOTOU CONTRA" / "NÃO VOTOU".
 5. **Esquerda: como votaram os partidos.**
-6–7. **Esquerda: os nomes em destaque.**
+6–7. **Esquerda: os nomes em destaque** (os 4 nomes de `editorial.json`, 2 por card).
 8. (opcional) **O que acontece agora:** próxima etapa (Senado, sanção, veto).
 Cores: direita = azul, esquerda = vermelho, a favor = branco. Fontes no rodapé de cada card.
 

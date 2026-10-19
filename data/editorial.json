@@ -1,11 +1,34 @@
 {
-  "_sobre": "Critérios editoriais usados nos posts. Mude aqui e o robô e os agentes seguem.",
-  "espectros": {
-    "direita": ["PL", "NOVO", "MISSÃO"],
-    "esquerda": ["PT", "PSB", "PCdoB", "PV", "PSOL", "REDE", "PDT"]
-  },
-  "destaques": {
-    "direita": ["Nikolas Ferreira", "André Fernandes", "Julia Zanatta", "Kim Kataguiri", "Zucco", "André Ferreira"],
-    "esquerda": ["Erika Hilton", "Sâmia Bomfim", "Tabata Amaral", "Fernanda Melchionna", "Júnior Mano", "Duda Salabert"]
-  }
+ "_sobre": "Critérios editoriais usados nos posts. Mude aqui e o robô e os agentes seguem.",
+ "espectros": {
+  "direita": [
+   "PL",
+   "NOVO",
+   "MISSÃO"
+  ],
+  "esquerda": [
+   "PT",
+   "PSB",
+   "PCdoB",
+   "PV",
+   "PSOL",
+   "REDE",
+   "PDT"
+  ]
+ },
+ "destaques": {
+  "direita": [
+   "Nikolas Ferreira",
+   "André Fernandes",
+   "Julia Zanatta",
+   "Kim Kataguiri"
+  ],
+  "esquerda": [
+   "Erika Hilton",
+   "Sâmia Bomfim",
+   "Tabata Amaral",
+   "Fernanda Melchionna"
+  ]
+ },
+ "_sobre_destaques": "4 nomes por lado, 2 por card (2 cards de nomes para cada lado). A ordem vale para todos os posts."
 }
