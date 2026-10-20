@@ -1,0 +1,36 @@
+name: Sondar TSE
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  sondar:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Baixar configuração e testar CORS
+        run: |
+          mkdir -p raw_tse && cd raw_tse
+          B=https://resultados.tse.jus.br/oficial
+          for u in "$B/comum/config/ele-c.json" "$B/comum/config/ele-s.json"; do
+            n=$(basename $u); curl -s -D "$n.headers" -H "Origin: https://centropolitico.com.br" -o "$n" "$u"; echo "== $u"; head -c 400 "$n"; echo; grep -i "access-control\|cache-control\|content-type\|^HTTP" "$n.headers"
+          done
+          python3 - <<'PY'
+          import json,subprocess,os
+          try: c=json.load(open('ele-c.json'))
+          except Exception as e: print('sem config',e); raise SystemExit
+          print(json.dumps(c,ensure_ascii=False)[:3000])
+          B='https://resultados.tse.jus.br/oficial'
+          for ci in c.get('c',[]):
+            cic=ci.get('ci') or ci.get('cd')
+            for el in ci.get('e',[]):
+              cd=el.get('cd'); print('eleicao',cic,cd,el.get('nm'),el.get('t'),el.get('dt'))
+              for cargo in ('0001','0003'):
+                u=f"{B}/{cic}/{cd}/dados-simplificados/br/br-c{cargo}-e{int(cd):06d}-r.json"
+                f=f"br-c{cargo}-e{cd}.json"
+                subprocess.run(['curl','-s','-D',f+'.headers','-H','Origin: https://centropolitico.com.br','-o',f,u])
+                print(' ',u,os.path.getsize(f) if os.path.exists(f) else 0, open(f+'.headers').read().split('\n')[0])
+          PY
+      - run: |
+          git config user.name "Centro Político (robô)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add raw_tse && git commit -qm "Sonda do TSE" && git pull --rebase -q && git push -q || true
