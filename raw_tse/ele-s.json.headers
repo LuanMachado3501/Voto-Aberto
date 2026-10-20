@@ -1,0 +1,18 @@
+HTTP/2 404 
+content-length: 246
+x-amz-request-id: tx00000a51371bdaad58fca-006ad76f0d-99eb25-default
+accept-ranges: bytes
+x-ratelimit-limit: 5000, 5000;w=1
+x-ratelimit-remaining: 4947
+x-ratelimit-reset: 1
+cache-control: max-age=60
+expires: Tue, 20 Oct 2026 13:40:25 GMT
+date: Tue, 20 Oct 2026 13:39:25 GMT
+alt-svc: h3=":443"; ma=93600
+content-type: application/json
+strict-transport-security: max-age=63072000 ; includeSubDomains ; preload
+akamai-grn: 0.160cc417.1792503565.448fdeb4
+cdn-cache-status: Hit from child
+access-control-allow-origin: https://centropolitico.com.br
+vary: Origin
+
