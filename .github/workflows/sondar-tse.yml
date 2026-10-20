@@ -7,23 +7,15 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-      - name: Testar nomes de arquivo
+      - name: Baixar todos os estados
         run: |
-          mkdir -p raw_tse && cd raw_tse
+          mkdir -p raw_tse/m && cd raw_tse/m
           B=https://resultados.tse.jus.br/oficial/ele2026
-          : > teste.txt
-          for p in \
-            "6257/dados-simplificados/br/br-c0001-e006257-r.json" \
-            "6257/dados/br/br-c0001-e006257-u.json" "6257/dados/br/br-c0001-e006257-v.json" "6257/dados/br/br-c0001-e006257-e.json" \
-            "6257/dados/br/br-c0001-e006257-ab.json" "6257/dados/sp/sp-c0001-e006257-u.json" "6257/dados/sp/sp-c0001-e006257-v.json" \
-            "6257/dados/sp/sp71072-c0001-e006257-u.json" "6257/dados/sp/sp71072-c0001-e006257-v.json" \
-            "6257/config/br-e006257-c.json" "6257/config/mun-e006257-cm.json" "6257/config/br/br-e006257-c.json" \
-            "6258/dados/br/br-c0001-e006258-u.json" "6258/dados/br/br-c0001-e006258-v.json" "6258/dados-simplificados/br/br-c0001-e006258-r.json" "6258/config/mun-e006258-cm.json" \
-            "6260/dados/df/df-c0003-e006260-u.json" "6260/dados/df/df-c0003-e006260-v.json" \
-            "6259/dados/df/df-c0003-e006259-u.json" "6259/dados/df/df-c0003-e006259-v.json" "6259/dados-simplificados/df/df-c0003-e006259-r.json" ; do
-            f=$(echo $p | tr '/' '_'); code=$(curl -s -o "$f" -w "%{http_code} %{size_download}" -H "Origin: https://centropolitico.com.br" "$B/$p"); echo "$code $p" | tee -a teste.txt
-            if [ "${code%% *}" != "200" ]; then rm -f "$f"; fi
-          done
+          for e in 6257 6258; do for u in br ac al am ap ba ce df es go ma mg ms mt pa pb pe pi pr rj rn ro rr rs sc se sp to; do
+            curl -s -f -o "$e-$u-c0001.json" "$B/$e/dados/$u/$u-c0001-e00$e-u.json" || echo "falhou $e $u"; done; done
+          for e in 6259 6260; do for u in am rn df; do curl -s -f -o "$e-$u-c0003.json" "$B/$e/dados/$u/$u-c0003-e00$e-u.json" || echo "falhou $e $u"; done; done
+          curl -s -o foto.jpeg -w "foto %{http_code} %{content_type}\n" "$B/6258/fotos/br/280002542548.jpeg"
+          ls | wc -l
       - run: |
           git config user.name "Centro Político (robô)"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
