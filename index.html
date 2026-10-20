@@ -603,6 +603,46 @@ body.sen #senpg{display:flex}
 .sctl input{flex:1;min-width:160px}
 .vrow .b-J{color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--abs);font-size:12px}
 @media (max-width:700px){#plen .topbar{flex-wrap:wrap!important}#plen .topbar .casa{flex:1 1 100%;display:flex}.casa a{flex:1;text-align:center}}
+
+/* ===== Apuração ===== */
+#appg{display:none;max-width:1000px}
+body.ap #perfil,body.ap #quiz,body.ap #cotapg,body.ap #bancpg,body.ap #tribpg,body.ap #senpg{display:none!important}
+body.ap #appg{display:flex}
+.aovivo{display:inline-block;width:8px;height:8px;border-radius:50%;background:#E5322D;margin-right:6px;vertical-align:1px;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.apst{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:14px;color:var(--muted)}
+.apst b{color:var(--fg)}
+.apbar{height:10px;background:var(--line);border-radius:5px;overflow:hidden;margin-top:6px}.apbar i{display:block;height:100%;background:var(--led);transition:width .6s}
+.apcands{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.apc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;position:relative;overflow:hidden}
+.apc .face{width:84px;height:104px;font-size:30px;border-radius:10px}
+.apc b{display:block;font-family:var(--display);font-weight:900;font-size:30px;line-height:1}
+.apc span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+.apc strong{display:block;font-family:var(--ledf);font-weight:900;font-size:52px;line-height:1.05;margin-top:8px;font-variant-numeric:tabular-nums}
+.apc em{font-style:normal;font-size:14px;color:var(--muted)}
+.apc .el{display:inline-block!important;margin:0 0 8px!important;font-family:var(--display);font-weight:900;font-size:15px;letter-spacing:1px;padding:5px 10px;border-radius:4px;background:var(--led);color:var(--onled)}
+.aptug{position:relative;display:flex;height:26px;border-radius:6px;overflow:hidden;background:var(--line)}
+.aptug i{display:block;height:100%;transition:width .6s}
+.aptug u{position:absolute;left:50%;top:-4px;bottom:-4px;width:2px;background:var(--fg);text-decoration:none}
+.aptugl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.apnums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.apnums div{border-top:2px solid var(--line);padding-top:8px}.apnums small{display:block;font-size:13px;color:var(--muted)}.apnums strong{font-family:var(--display);font-size:26px;font-weight:800}
+.apmapw{display:grid;grid-template-columns:minmax(260px,480px) 1fr;gap:24px;align-items:start}
+.apmap{width:100%;height:auto;aspect-ratio:613/639}
+.apmap path{stroke:#fff;stroke-width:1.2;cursor:pointer}
+.apmap path:hover{stroke:var(--fg);stroke-width:2}
+.aptab{width:100%;border-collapse:collapse;font-size:14px}
+.aptab th{font-weight:600;text-align:right;color:var(--muted);font-size:12px;padding:6px 6px;border-bottom:1px solid var(--line)}
+.aptab th:first-child,.aptab td:first-child{text-align:left}
+.aptab td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+.aptab tr.lead td b{font-weight:700}
+.apgov{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.apgov>div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.apgov h3{margin:0 0 8px;font-family:var(--display);font-weight:900;font-size:22px}
+.apgov p{margin:6px 0 0;font-size:14px;display:flex;justify-content:space-between;gap:8px}
+.apgov p b{font-variant-numeric:tabular-nums}
+.apnote{font-size:13px;color:var(--muted);line-height:1.55;max-width:80ch;margin:0}
+@media (max-width:760px){.apcands{grid-template-columns:1fr}.apnums{grid-template-columns:1fr 1fr}.apmapw{grid-template-columns:1fr}.apgov{grid-template-columns:1fr}.apc strong{font-size:44px}}
 </style>
 </head>
 <body>
@@ -614,6 +654,7 @@ body.sen #senpg{display:flex}
     <a href="#teste" data-nav="teste" title="Quem vota como você">Urna<small class="lg"> · quem vota como você</small></a>
     <a href="#cota" data-nav="cota" title="Quanto gastam">Cota<small class="lg"> · quanto gastam</small></a>
     <a href="#bancada" data-nav="bancada" title="Quem representa seu estado">Bancada<small class="lg"> · seu estado</small></a>
+    <a href="#apuracao" data-nav="apuracao" id="navap" title="Apuração do 2º turno, ao vivo" hidden><i class="aovivo" aria-hidden="true"></i>Apuração<small class="lg"> · 2º turno</small></a>
     <a href="#tribuna" data-nav="tribuna" title="Pergunte ao deputado">Tribuna<small class="lg"> · pergunte ao deputado</small></a>
   </nav>
 </header>
@@ -679,6 +720,7 @@ body.sen #senpg{display:flex}
 <div class="wrap" id="bancpg"></div>
 <div class="wrap" id="tribpg"></div>
 <div class="wrap" id="senpg"></div>
+<div class="wrap" id="appg"></div>
 <div id="tip" class="tip" hidden></div>
 <footer class="sitefoot">
   <div>
@@ -686,7 +728,7 @@ body.sen #senpg{display:flex}
       <div class="brand"><svg class="logo" viewBox="0 0 56 30" aria-hidden="true"><path d="M3.5 22 Q12.5 6 21.5 22 Z" fill="#FFB000"/><path d="M34.5 13 Q43.5 30 52.5 13 Z" fill="#FFB000"/><rect x="23.6" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="28.4" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="23.6" y="9" width="8.8" height="1.8" fill="#EEF0E8"/><rect x="1.5" y="22" width="53" height="3" rx="1.5" fill="#EEF0E8"/></svg>CENTRO POLÍTICO</div>
       <p>Centro de informação, não posição política. Mostramos como os deputados votam, gastam e se elegem, só com dados oficiais e sem tomar lado.</p>
       <p>Nada do que você faz aqui é guardado.</p>
-      <p style="font-size:13px">Dados atualizados em 19/10/2026.</p>
+      <p style="font-size:13px">Dados atualizados em 20/10/2026.</p>
     </section>
     <section>
       <h3>Ferramentas</h3>
@@ -3355,13 +3397,72 @@ function senPerfil(id){const el=document.getElementById('senpg'), x=SBY[id];
   <p class="snote">Fonte: Senado Federal, dados abertos. Ausência justificada inclui licença médica, missão oficial e atividade parlamentar registrada.</p>
   <p class="snote"><a href="https://www25.senado.leg.br/web/senadores/senador/-/perfil/${x.id}" target="_blank" rel="noopener" style="color:var(--fg)">Página oficial no Senado ↗</a></p>`;
   el.querySelector('#spmais').onclick=e=>{el.querySelectorAll('#spv .vrow[hidden]').forEach(d=>d.hidden=false); e.target.remove(); el.querySelector('#spsen').hidden=false;};}
-function route(){const m=location.hash.match(/^#dep\/(\d+)(?:\/(cota|tribuna))?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota','banc','trib','sen');
-  const bm=location.hash.match(/^#bancada(?:\/([A-Z]{2}))?$/), sm=location.hash.match(/^#sen(?:ado|\/(\d+))$/);
-  const pg=m?'dep':bm?'bancada':location.hash==='#tribuna'?'tribuna':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
+
+/* ===== Apuração (dados oficiais do TSE, lidos direto do navegador) ===== */
+const AP={base:'https://resultados.tse.jus.br/oficial/ele2026', pres:'6258', gov:'6260', gufs:['am','rn','df'], t1:'6257', timer:null, uf:{}, br:null};
+const apTeste=()=>/[?&]teste=1/.test(location.search)||location.hash==='#apuracao/teste';
+const apUrl=(ele,uf,c)=>`${AP.base}/${ele}/dados/${uf}/${uf}-c${c}-e00${ele}-u.json`;
+const apN=s=>Number(String(s||'0').replace(/\./g,'').replace(',','.'));
+const apF=n=>n.toLocaleString('pt-BR');
+const apP=s=>String(s||'0,00').replace('.',',');
+function apCands(d){const L=[]; (d.carg||[]).forEach(c=>(c.agr||[]).forEach(a=>(a.par||[]).forEach(p=>(p.cand||[]).forEach(x=>L.push({n:x.n,nm:apTit(x.nmu),sg:p.sg,v:apN(x.vap),pv:apN(x.pvapn||x.pvap),pvs:x.pvap,e:x.e==='s',st:x.st,seq:+x.seq,sq:x.sqcand})))));
+  const tem=L.some(x=>x.v>0); return L.sort((a,b)=>tem?b.v-a.v:a.seq-b.seq);}
+const apTit=t=>String(t||'').toLowerCase().replace(/(^|[\s-])(\p{L})/gu,(m,a,b)=>a+b.toUpperCase()).replace(/\b(Da|De|Do|Das|Dos|E)\b/g,w=>w.toLowerCase());
+const apSel=c=>c.e?(/eleit/i.test(c.st)?'ELEITO':c.st?c.st.toUpperCase():'ELEITO'):'';
+const apCor=sg=>/PT|PSOL|PCdoB|PSB|PDT|REDE|PV/.test(sg)?'var(--gov)':/PL|NOVO/.test(sg)?'var(--opo)':'var(--mid)';
+async function apGet(u){const r=await fetch(u,{cache:'no-store'}); if(!r.ok) throw new Error(r.status); return r.json();}
+function apFace(c,ele){return `<div class="face" style="background:${apCor(c.sg)}" aria-hidden="true">${initials(c.nm)}<img alt="" src="${AP.base}/${ele}/fotos/br/${c.sq}.jpeg" onerror="this.remove()"></div>`}
+function apPage(){const el=document.getElementById('appg'); const ele=apTeste()?AP.t1:AP.pres;
+  el.innerHTML=`<a class="back" href="#">Voltar ao plenário</a>
+  <div><span class="led" style="font-size:20px">${apTeste()?'TESTE COM O 1º TURNO':(new Date()>=new Date('2026-10-25T17:00:00-03:00')?'<i class="aovivo"></i>AO VIVO · ':'')+'2º TURNO · 25 OUT 2026'}</span>
+  <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(40px,7vw,72px);line-height:.95;margin:8px 0 0">Apuração para presidente</h1>
+  <p class="lead" style="font-size:17px;margin-top:12px">Números oficiais do TSE, atualizados sozinhos a cada 30 segundos. Sem projeção e sem pesquisa: só o voto contado.</p></div>
+  <div id="apst" class="apst">Carregando os dados do TSE…</div>
+  <div id="apc"></div>
+  <p class="sec">Por estado <span class="hint">· cor de quem lidera em cada estado; toque para ver os números</span></p>
+  <div class="apmapw"><svg class="apmap" id="apmap" viewBox="${BRMAP.vb}" role="img" aria-label="Mapa do Brasil com o líder em cada estado">${Object.keys(BRMAP.p).map(u=>`<path d="${BRMAP.p[u]}" data-u="${u}" fill="var(--line)"><title>${UFN[u]}</title></path>`).join('')}</svg>
+  <div style="overflow-x:auto"><table class="aptab" id="aptab"></table></div></div>
+  <p class="sec">Governadores em 2º turno <span class="hint">· Amazonas, Rio Grande do Norte e Distrito Federal</span></p>
+  <div class="apgov" id="apgov"></div>
+  <p class="apnote">Fonte: Tribunal Superior Eleitoral, divulgação oficial de resultados. "Seções totalizadas" é a parte das urnas já contada. Só marcamos alguém como eleito quando o próprio TSE indica. Para conferir tudo, veja <a href="https://resultados.tse.jus.br" target="_blank" rel="noopener" style="color:var(--fg)">resultados.tse.jus.br ↗</a>.</p>`;
+  el.querySelector('#apmap').addEventListener('click',e=>{const u=e.target.dataset&&e.target.dataset.u; if(u){const r=document.getElementById('apr-'+u); if(r){r.scrollIntoView({block:'center',behavior:'smooth'}); r.style.background='var(--ledA)'; setTimeout(()=>r.style.background='',1600);}}});
+  apTick(true);}
+async function apTick(full){if(!document.body.classList.contains('ap')) return; const ele=apTeste()?AP.t1:AP.pres, ge=apTeste()?'6259':AP.gov;
+  try{const d=await apGet(apUrl(ele,'br','0001')); AP.br=d; apRender(d,ele);}catch(e){document.getElementById('apst').innerHTML='Não consegui ler o TSE agora. Tento de novo em 30 segundos.';}
+  if(full){const ufs=Object.keys(BRMAP.p).map(u=>u.toLowerCase());
+    await Promise.all(ufs.map(u=>apGet(apUrl(ele,u,'0001')).then(d=>AP.uf[u]=d).catch(()=>{})));
+    apUFs(); const gv=await Promise.all(AP.gufs.map(u=>apGet(apUrl(ge,u,'0003')).then(d=>[u,d]).catch(()=>[u,null]))); apGov(gv);}
+  clearTimeout(AP.timer); AP.n=(AP.n||0)+1; AP.timer=setTimeout(()=>apTick(AP.n%3===0),30000);}
+function apRender(d,ele){const C=apCands(d), pst=d.s?d.s.pst:'0,00', hora=d.ht||d.hg||'';
+  const zero=apN(pst)===0;
+  if(zero&&!AP.t1d&&!apTeste()) apGet(apUrl(AP.t1,'br','0001')).then(x=>{AP.t1d=apCands(x).slice(0,2); apRender(AP.br,ele);}).catch(()=>{});
+  document.getElementById('apst').innerHTML=(zero?`<div class="whatis" style="flex-basis:100%"><b>A apuração começa às 17h de domingo, 25 out (horário de Brasília)</b>, quando as urnas fecham em todo o país. Deixe esta página aberta: os números aparecem sozinhos.${AP.t1d?`<br><span class="emuted">No 1º turno: ${AP.t1d.map(c=>esc(c.nm)+' '+apP(c.pvs)+'%').join(' · ')} dos votos válidos.</span>`:''}</div>`:'')+`<span><b>${apP(pst)}%</b> das seções totalizadas</span><span>Atualizado pelo TSE ${d.dt?'em '+esc(d.dt)+' ':''}${hora?'às '+esc(hora):''}</span><div class="apbar" style="flex-basis:100%"><i style="width:${apN(pst)}%"></i></div>`;
+  const top=C.slice(0,2), v=d.v||{}, e=d.e||{};
+  document.getElementById('apc').innerHTML=`<div class="apcands">${top.map(c=>`<div class="apc">${apFace(c,ele)}<div>${c.e?`<span class="el">${apSel(c)}</span>`:''}<b>${esc(c.nm)}</b><span>${esc(c.sg)} · ${c.n}</span><strong style="color:${apCor(c.sg)}">${apP(c.pvs)}%</strong><em>${apF(c.v)} votos válidos</em></div></div>`).join('')}</div>
+   ${top.length===2?`<div class="aptug" style="margin-top:14px" aria-hidden="true"><i style="width:${top[0].pv}%;background:${apCor(top[0].sg)}"></i><i style="width:${top[1].pv}%;background:${apCor(top[1].sg)}"></i><u></u></div><div class="aptugl"><span>${esc(top[0].nm)}</span><span>50% dos válidos</span><span>${esc(top[1].nm)}</span></div>`:''}
+   ${C.length>2?`<p class="apnote" style="margin-top:10px">Outros candidatos: ${C.slice(2).map(c=>`${esc(c.nm)} ${apP(c.pvs)}%`).join(' · ')}</p>`:''}
+   <div class="apnums" style="margin-top:18px"><div><small>Comparecimento</small><strong>${apP(e.pc)}%</strong><small>${apF(apN(e.c))} eleitores</small></div><div><small>Abstenção</small><strong>${apP(e.pa)}%</strong><small>${apF(apN(e.a))} eleitores</small></div><div><small>Brancos</small><strong>${apP(v.pvb)}%</strong><small>${apF(apN(v.vb))} votos</small></div><div><small>Nulos</small><strong>${apP(v.ptvn)}%</strong><small>${apF(apN(v.tvn))} votos</small></div></div>`;}
+function apUFs(){const rows=[], top=AP.br?apCands(AP.br).slice(0,2):[];
+  Object.keys(BRMAP.p).sort((a,b)=>UFN[a].localeCompare(UFN[b],'pt-BR')).forEach(U=>{const d=AP.uf[U.toLowerCase()]; const path=document.querySelector(`#apmap path[data-u="${U}"]`);
+    if(!d){rows.push(`<tr id="apr-${U}"><td>${UFN[U]}</td><td colspan="3" class="emuted">sem dados</td></tr>`); return}
+    const C=apCands(d), pst=apN(d.s&&d.s.pst), L=C[0], lead=L&&L.v>0;
+    if(path){path.setAttribute('fill',lead?apCor(L.sg):'var(--line)'); path.setAttribute('fill-opacity',lead?(.45+Math.min(.55,(L.pv-(C[1]?C[1].pv:0))/40)).toFixed(2):'1');
+      path.querySelector('title').textContent=`${UFN[U]}: ${C.slice(0,2).map(c=>c.nm+' '+apP(c.pvs)+'%').join(' · ')} · ${apP(d.s.pst)}% apurado`;}
+    const by=n=>C.find(c=>c.n===n)||{pvs:'0,00',v:0};
+    rows.push(`<tr id="apr-${U}"${lead?' class="lead"':''}><td>${UFN[U]}</td>${top.map(t=>{const c=by(t.n);return `<td>${L&&L.n===t.n&&lead?'<b>':''}${apP(c.pvs)}%${L&&L.n===t.n&&lead?'</b>':''}</td>`}).join('')}<td>${apP(d.s.pst)}%</td></tr>`);});
+  document.getElementById('aptab').innerHTML=`<thead><tr><th>Estado</th>${top.map(t=>`<th>${esc(t.nm)}</th>`).join('')}<th>Apurado</th></tr></thead><tbody>${rows.join('')}</tbody>`;}
+function apGov(gv){document.getElementById('apgov').innerHTML=gv.map(([u,d])=>{if(!d) return `<div><h3>${UFN[u.toUpperCase()]}</h3><p class="emuted">sem dados ainda</p></div>`;
+  const C=apCands(d).slice(0,2); return `<div><h3>${UFN[u.toUpperCase()]}</h3>${C.map(c=>`<p><span>${esc(c.nm)} <span class="emuted">${esc(c.sg)}</span>${c.e?` <b style="color:var(--led)">· ${apSel(c)}</b>`:''}</span><b>${apP(c.pvs)}%</b></p>`).join('')}<p class="emuted" style="font-size:12px">${apP(d.s.pst)}% das seções totalizadas</p></div>`}).join('');}
+(function(){const now=new Date(), fim=new Date('2026-10-28T00:00:00-03:00'); const b=document.getElementById('navap'); if(b&&(now<fim||apTeste())) b.hidden=false;
+  const ao=new Date('2026-10-25T17:00:00-03:00'); if(b&&!(now>=ao&&now<fim)) b.querySelector('.aovivo').remove();})();
+function route(){const m=location.hash.match(/^#dep\/(\d+)(?:\/(cota|tribuna))?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota','banc','trib','sen','ap');
+  const bm=location.hash.match(/^#bancada(?:\/([A-Z]{2}))?$/), sm=location.hash.match(/^#sen(?:ado|\/(\d+))$/), am=/^#apuracao/.test(location.hash);
+  const pg=am?'apuracao':m?'dep':bm?'bancada':location.hash==='#tribuna'?'tribuna':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
   document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('on',a.dataset.nav===pg));
-  document.title=sm?(sm[1]?((SBY[sm[1]]||{}).n||'Senador')+' · Senado':'Senado: como votam os senadores')+' · Centro Político':pg==='tribuna'?'Você na Tribuna: pergunte ao deputado · Centro Político':pg==='bancada'?(bm[1]&&UFN[bm[1]]?'Bancada '+DE(bm[1]):'Bancada: quem representa seu estado')+' · Centro Político':pg==='cota'?'Cota: quanto gastam os deputados · Centro Político':pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
+  document.title=am?'Apuração do 2º turno ao vivo · Centro Político':sm?(sm[1]?((SBY[sm[1]]||{}).n||'Senador')+' · Senado':'Senado: como votam os senadores')+' · Centro Político':pg==='tribuna'?'Você na Tribuna: pergunte ao deputado · Centro Político':pg==='bancada'?(bm[1]&&UFN[bm[1]]?'Bancada '+DE(bm[1]):'Bancada: quem representa seu estado')+' · Centro Político':pg==='cota'?'Cota: quanto gastam os deputados · Centro Político':pg==='teste'?'Urna: quem vota como você · Centro Político':pg==='dep'?((deps[byId[m[1]]]||{}).n||'Deputado')+' · Centro Político':'Centro Político · Como votam os deputados';
   if(m){renderPerfil(m[1]); document.body.classList.add('dep'); scrollTo(0,0);
     if(m[2]){const s=document.getElementById(m[2]==='cota'?'cotasec':'tribsec'); if(s){requestAnimationFrame(()=>{scrollTo(0,s.getBoundingClientRect().top+scrollY-(innerWidth<700?72:80)); upBar(true,deps[byId[m[1]]].n,m[2]);});}}}
+  else if(am){document.body.classList.add('dep','ap'); apPage(); scrollTo(0,0);}
   else if(sm){document.body.classList.add('dep','sen'); sm[1]?senPerfil(sm[1]):senPage(); scrollTo(0,0);}
   else if(location.hash==='#tribuna'){document.body.classList.add('dep','trib'); tribPage(); scrollTo(0,0);}
   else if(bm){document.body.classList.add('dep','banc'); bancPage(bm[1]||''); scrollTo(0,0);}
