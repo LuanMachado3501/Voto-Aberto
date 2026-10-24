@@ -636,7 +636,7 @@ body.ap #appg{display:flex}
 .aptab th:first-child,.aptab td:first-child{text-align:left}
 .aptab td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
 .aptab tr.lead td b{font-weight:700}
-.apgov{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.apgov{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
 .apgov>div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
 .apgov h3{margin:0 0 8px;font-family:var(--display);font-weight:900;font-size:22px}
 .apgov p{margin:6px 0 0;font-size:14px;display:flex;justify-content:space-between;gap:8px}
@@ -728,7 +728,7 @@ body.ap #appg{display:flex}
       <div class="brand"><svg class="logo" viewBox="0 0 56 30" aria-hidden="true"><path d="M3.5 22 Q12.5 6 21.5 22 Z" fill="#FFB000"/><path d="M34.5 13 Q43.5 30 52.5 13 Z" fill="#FFB000"/><rect x="23.6" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="28.4" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="23.6" y="9" width="8.8" height="1.8" fill="#EEF0E8"/><rect x="1.5" y="22" width="53" height="3" rx="1.5" fill="#EEF0E8"/></svg>CENTRO POLÍTICO</div>
       <p>Centro de informação, não posição política. Mostramos como os deputados votam, gastam e se elegem, só com dados oficiais e sem tomar lado.</p>
       <p>Nada do que você faz aqui é guardado.</p>
-      <p style="font-size:13px">Dados atualizados em 20/10/2026.</p>
+      <p style="font-size:13px">Dados atualizados em 24/10/2026.</p>
     </section>
     <section>
       <h3>Ferramentas</h3>
@@ -3399,7 +3399,7 @@ function senPerfil(id){const el=document.getElementById('senpg'), x=SBY[id];
   el.querySelector('#spmais').onclick=e=>{el.querySelectorAll('#spv .vrow[hidden]').forEach(d=>d.hidden=false); e.target.remove(); el.querySelector('#spsen').hidden=false;};}
 
 /* ===== Apuração (dados oficiais do TSE, lidos direto do navegador) ===== */
-const AP={base:'https://resultados.tse.jus.br/oficial/ele2026', pres:'6258', gov:'6260', gufs:['am','rn','df'], t1:'6257', timer:null, uf:{}, br:null};
+const AP={base:'https://resultados.tse.jus.br/oficial/ele2026', pres:'6258', gov:'6260', gufs:['ac','am','df','es','rn','to'], t1:'6257', timer:null, uf:{}, br:null};
 const apTeste=()=>/[?&]teste=1/.test(location.search)||location.hash==='#apuracao/teste';
 const apUrl=(ele,uf,c)=>`${AP.base}/${ele}/dados/${uf}/${uf}-c${c}-e00${ele}-u.json`;
 const apN=s=>Number(String(s||'0').replace(/\./g,'').replace(',','.'));
@@ -3422,7 +3422,7 @@ function apPage(){const el=document.getElementById('appg'); const ele=apTeste()?
   <p class="sec">Por estado <span class="hint">· cor de quem lidera em cada estado; toque para ver os números</span></p>
   <div class="apmapw"><svg class="apmap" id="apmap" viewBox="${BRMAP.vb}" role="img" aria-label="Mapa do Brasil com o líder em cada estado">${Object.keys(BRMAP.p).map(u=>`<path d="${BRMAP.p[u]}" data-u="${u}" fill="var(--line)"><title>${UFN[u]}</title></path>`).join('')}</svg>
   <div style="overflow-x:auto"><table class="aptab" id="aptab"></table></div></div>
-  <p class="sec">Governadores em 2º turno <span class="hint">· Amazonas, Rio Grande do Norte e Distrito Federal</span></p>
+  <p class="sec">Governadores em 2º turno <span class="hint" id="apgovh"></span></p>
   <div class="apgov" id="apgov"></div>
   <p class="apnote">Fonte: Tribunal Superior Eleitoral, divulgação oficial de resultados. "Seções totalizadas" é a parte das urnas já contada. Só marcamos alguém como eleito quando o próprio TSE indica. Para conferir tudo, veja <a href="https://resultados.tse.jus.br" target="_blank" rel="noopener" style="color:var(--fg)">resultados.tse.jus.br ↗</a>.</p>`;
   el.querySelector('#apmap').addEventListener('click',e=>{const u=e.target.dataset&&e.target.dataset.u; if(u){const r=document.getElementById('apr-'+u); if(r){r.scrollIntoView({block:'center',behavior:'smooth'}); r.style.background='var(--ledA)'; setTimeout(()=>r.style.background='',1600);}}});
@@ -3431,7 +3431,11 @@ async function apTick(full){if(!document.body.classList.contains('ap')) return; 
   try{const d=await apGet(apUrl(ele,'br','0001')); AP.br=d; apRender(d,ele);}catch(e){document.getElementById('apst').innerHTML='Não consegui ler o TSE agora. Tento de novo em 30 segundos.';}
   if(full){const ufs=Object.keys(BRMAP.p).map(u=>u.toLowerCase());
     await Promise.all(ufs.map(u=>apGet(apUrl(ele,u,'0001')).then(d=>AP.uf[u]=d).catch(()=>{})));
-    apUFs(); const gv=await Promise.all(AP.gufs.map(u=>apGet(apUrl(ge,u,'0003')).then(d=>[u,d]).catch(()=>[u,null]))); apGov(gv);}
+    apUFs();
+    if(!AP.cfg&&!apTeste()){try{const c=await apGet('https://resultados.tse.jus.br/oficial/comum/config/ele-c.json'); c.pl.forEach(p=>p.e.forEach(e=>{if(e.cd===AP.gov) AP.gufs=e.abr.map(a=>a.cd).filter(u=>u!=='br');})); AP.cfg=1;}catch(e){}}
+    AP.gufs.sort((a,b)=>UFN[a.toUpperCase()].localeCompare(UFN[b.toUpperCase()],'pt-BR'));
+    const nm=AP.gufs.map(u=>UFN[u.toUpperCase()]); document.getElementById('apgovh').textContent='· '+(nm.length>1?nm.slice(0,-1).join(', ')+' e '+nm.slice(-1):nm[0]);
+    const gv=await Promise.all(AP.gufs.map(u=>apGet(apUrl(ge,u,'0003')).then(d=>[u,d]).catch(()=>[u,null]))); apGov(gv);}
   clearTimeout(AP.timer); AP.n=(AP.n||0)+1; AP.timer=setTimeout(()=>apTick(AP.n%3===0),30000);}
 function apRender(d,ele){const C=apCands(d), pst=d.s?d.s.pst:'0,00', hora=d.ht||d.hg||'';
   const zero=apN(pst)===0;
