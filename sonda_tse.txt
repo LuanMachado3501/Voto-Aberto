@@ -1,0 +1,17 @@
+== config
+gerado 18/10/2026 12:38:11
+ele2026 04/10/2026 6257 Eleição Ordinária Federal - 2026 1º Turno ['br']
+ele2026 04/10/2026 6259 Eleição Ordinária Estadual - 2026 1º Turno ['br']
+ele2026 04/10/2026 6261 Eleição Ordinária Municipal - 2026 - 04/10/2026 1º Turno ['br']
+ele2024 06/10/2024 619 Eleição Ordinária Municipal - 2024 - 06/10/2024 1º Turno ['br']
+ele2024 27/10/2024 620 Eleição Ordinária Municipal - 2024 - 27/10/2024 2º Turno ['am', 'pe', 'rn', 'mg', 'ro', 'ce', 'go', 'ms', 'mt', 'se', 'es', 'ma', 'pa', 'rs', 'pr', 'to', 'ba', 'pb', 'rj', 'sp']
+ele2026 25/10/2026 6260 Eleição Ordinária Estadual - 2026 2º Turno ['am', 'rn', 'df', 'es', 'ac', 'to']
+ele2026 25/10/2026 6258 Eleição Ordinária Federal - 2026 2º Turno ['br']
+200 | access-control-allow-origin: https://centropolitico.com.br | ele2026/6258/dados/br/br-c0001-e006258-u.json | { "ele" : "6258", "t" : "2", "f" : "o", "sup" : "n", "tpabr" : "br", "cdabr" : "br", "dg" : "15/10/2026", "hg" : "09:38:12", "idg" : "3535426", "dt" : "", "ht"
+200 | access-control-allow-origin: https://centropolitico.com.br | ele2026/6258/dados/sp/sp-c0001-e006258-u.json | { "ele" : "6258", "t" : "2", "f" : "o", "sup" : "n", "tpabr" : "uf", "cdabr" : "sp", "dg" : "13/10/2026", "hg" : "17:50:07", "idg" : "3494574", "dt" : "", "ht"
+200 | access-control-allow-origin: https://centropolitico.com.br | ele2026/6258/dados/ba/ba-c0001-e006258-u.json | { "ele" : "6258", "t" : "2", "f" : "o", "sup" : "n", "tpabr" : "uf", "cdabr" : "ba", "dg" : "13/10/2026", "hg" : "17:43:27", "idg" : "3485313", "dt" : "", "ht"
+200 | access-control-allow-origin: https://centropolitico.com.br | ele2026/6260/dados/am/am-c0003-e006260-u.json | { "ele" : "6260", "t" : "2", "f" : "o", "sup" : "n", "tpabr" : "uf", "cdabr" : "am", "dg" : "13/10/2026", "hg" : "17:43:07", "idg" : "3486888", "dt" : "", "ht"
+200 | access-control-allow-origin: https://centropolitico.com.br | ele2026/6260/dados/rn/rn-c0003-e006260-u.json | { "ele" : "6260", "t" : "2", "f" : "o", "sup" : "n", "tpabr" : "uf", "cdabr" : "rn", "dg" : "13/10/2026", "hg" : "17:48:57", "idg" : "3491063", "dt" : "", "ht"
+200 | access-control-allow-origin: https://centropolitico.com.br | ele2026/6260/dados/df/df-c0003-e006260-u.json | { "ele" : "6260", "t" : "2", "f" : "o", "sup" : "n", "tpabr" : "uf", "cdabr" : "df", "dg" : "09/10/2026", "hg" : "17:30:52", "idg" : "3380485", "dt" : "", "ht"
+/home/runner/work/_temp/07b59b30-1fb0-4a8e-852e-5bc47ac24689.sh: line 12: warning: command substitution: ignored null byte in input
+200 | access-control-allow-origin: https://centropolitico.com.br | ele2026/6258/fotos/br/280002542548.jpeg | ����JFIF��C		%# , #&')*)-0-(0%()(��C(((((((((((((((((((((((((((((((((((((((((((((((((((��
