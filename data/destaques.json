@@ -1,202 +1,11 @@
 {
- "gerado": "2026-10-19",
+ "gerado": "2026-10-26",
  "pesos": {
   "atencao": 0.7,
   "disputa": 0.3
  },
  "noticias_ok": true,
  "itens": [
-  {
-   "id": "2618177",
-   "titulo": "PLP 114/2026",
-   "ementa": "Dispõe sobre regras para renúncias de receita com o objetivo de mitigar os impactos econômicos causados pelo choque no mercado internacional de energia decorrente do conflito no Oriente Médio.",
-   "placar": [
-    318,
-    113
-   ],
-   "votacoes": 3,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 32,
-   "atencao": 1.0,
-   "disputa": 0.382,
-   "indice": 81,
-   "data": "2026-08-12",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     6,
-     79
-    ],
-    [
-     "PT",
-     56,
-     0
-    ],
-    [
-     "UNIÃO",
-     36,
-     4
-    ],
-    [
-     "PSD",
-     38,
-     2
-    ],
-    [
-     "PP",
-     37,
-     2
-    ],
-    [
-     "REPUBLICANOS",
-     33,
-     2
-    ],
-    [
-     "MDB",
-     31,
-     2
-    ],
-    [
-     "PODE",
-     15,
-     4
-    ],
-    [
-     "PSDB",
-     16,
-     0
-    ],
-    [
-     "PSB",
-     14,
-     0
-    ],
-    [
-     "PSOL",
-     0,
-     12
-    ],
-    [
-     "PCdoB",
-     11,
-     0
-    ],
-    [
-     "PDT",
-     9,
-     0
-    ],
-    [
-     "PV",
-     5,
-     0
-    ],
-    [
-     "SOLIDARIEDADE",
-     3,
-     1
-    ],
-    [
-     "NOVO",
-     0,
-     4
-    ],
-    [
-     "AVANTE",
-     3,
-     0
-    ],
-    [
-     "PRD",
-     2,
-     0
-    ],
-    [
-     "REDE",
-     2,
-     0
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Não"
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      "Não"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Não"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Não"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "",
-      "não votou"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Sim"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
-      "Não"
-     ]
-    ]
-   }
-  },
   {
    "id": "2635476",
    "titulo": "PLP 186/2026",
@@ -208,7 +17,7 @@
    "votacoes": 2,
    "dividido": false,
    "aprovada": true,
-   "noticias": 32,
+   "noticias": 42,
    "atencao": 1.0,
    "disputa": 0.089,
    "indice": 73,
@@ -347,16 +156,6 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Sim"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Sim"
      ]
     ],
     "esquerda": [
@@ -379,16 +178,6 @@
       "Fernanda Melchionna",
       "PSOL-RS",
       "Sim"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
-      "Sim"
      ]
     ]
    }
@@ -404,10 +193,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 23,
-   "atencao": 0.909,
+   "noticias": 21,
+   "atencao": 0.822,
    "disputa": 0.171,
-   "indice": 69,
+   "indice": 63,
    "data": "2026-09-02",
    "nome": "Pacheco TCU",
    "partidos": [],
@@ -432,16 +221,6 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       NaN
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      NaN
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      NaN
      ]
     ],
     "esquerda": [
@@ -464,212 +243,6 @@
       "Fernanda Melchionna",
       "PSOL-RS",
       NaN
-     ],
-     [
-      "Júnior Mano",
-      "PSB-CE",
-      NaN
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
-      NaN
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2611313",
-   "titulo": "PLP 74/2026",
-   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
-   "placar": [
-    346,
-    46
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 14,
-   "atencao": 0.775,
-   "disputa": 0.157,
-   "indice": 59,
-   "data": "2026-09-03",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     45,
-     23
-    ],
-    [
-     "PT",
-     52,
-     0
-    ],
-    [
-     "PSD",
-     37,
-     0
-    ],
-    [
-     "UNIÃO",
-     35,
-     2
-    ],
-    [
-     "PP",
-     32,
-     1
-    ],
-    [
-     "REPUBLICANOS",
-     31,
-     1
-    ],
-    [
-     "MDB",
-     30,
-     0
-    ],
-    [
-     "PODE",
-     17,
-     2
-    ],
-    [
-     "PSDB",
-     15,
-     1
-    ],
-    [
-     "PSB",
-     15,
-     0
-    ],
-    [
-     "PCdoB",
-     11,
-     0
-    ],
-    [
-     "PSOL",
-     0,
-     10
-    ],
-    [
-     "PDT",
-     9,
-     0
-    ],
-    [
-     "PV",
-     6,
-     0
-    ],
-    [
-     "NOVO",
-     0,
-     5
-    ],
-    [
-     "AVANTE",
-     4,
-     0
-    ],
-    [
-     "SOLIDARIEDADE",
-     2,
-     0
-    ],
-    [
-     "REDE",
-     2,
-     0
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ],
-    [
-     "CIDADANIA",
-     1,
-     0
-    ],
-    [
-     "PRD",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "",
-      "não votou"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Não"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Sim"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Sim"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Sâmia Bomfim",
-      "",
-      "não votou"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Sim"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "",
-      "não votou"
      ]
     ]
    }
@@ -685,10 +258,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": false,
-   "noticias": 6,
-   "atencao": 0.557,
+   "noticias": 5,
+   "atencao": 0.476,
    "disputa": 0.451,
-   "indice": 53,
+   "indice": 47,
    "data": "2026-10-14",
    "nome": null,
    "partidos": [
@@ -819,16 +392,6 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Sim"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Sim"
      ]
     ],
     "esquerda": [
@@ -851,107 +414,92 @@
       "Fernanda Melchionna",
       "PSOL-RS",
       "Não"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
-      "Não"
      ]
     ]
    }
   },
   {
-   "id": "2638483",
-   "titulo": "PL 3085/2026",
-   "ementa": "Regulamenta o regime de relevância das questões de direito federal infraconstitucional para admissão dos recursos especiais no Superior Tribunal de Justiça e altera a Lei nº 13.105, de 16 de março de 2015 (Código de Processo Civil).",
+   "id": "2618177",
+   "titulo": "PLP 114/2026",
+   "ementa": "Dispõe sobre regras para renúncias de receita com o objetivo de mitigar os impactos econômicos causados pelo choque no mercado internacional de energia decorrente do conflito no Oriente Médio.",
    "placar": [
-    134,
-    285
+    318,
+    113
    ],
-   "votacoes": 1,
+   "votacoes": 3,
    "dividido": false,
-   "aprovada": false,
-   "noticias": 6,
-   "atencao": 0.557,
-   "disputa": 0.36,
-   "indice": 50,
-   "data": "2026-07-14",
+   "aprovada": true,
+   "noticias": 5,
+   "atencao": 0.476,
+   "disputa": 0.382,
+   "indice": 45,
+   "data": "2026-08-12",
    "nome": null,
    "partidos": [
     [
      "PL",
-     2,
-     78
+     6,
+     79
     ],
     [
      "PT",
-     58,
+     56,
      0
     ],
     [
      "UNIÃO",
-     2,
-     41
+     36,
+     4
     ],
     [
      "PSD",
-     6,
-     32
-    ],
-    [
-     "REPUBLICANOS",
-     2,
-     32
-    ],
-    [
-     "PP",
-     0,
-     31
-    ],
-    [
-     "MDB",
-     4,
-     23
-    ],
-    [
-     "PODE",
-     4,
-     18
-    ],
-    [
-     "PSB",
-     13,
+     38,
      2
     ],
     [
-     "PSDB",
-     0,
-     14
+     "PP",
+     37,
+     2
     ],
     [
-     "PSOL",
-     12,
+     "REPUBLICANOS",
+     33,
+     2
+    ],
+    [
+     "MDB",
+     31,
+     2
+    ],
+    [
+     "PODE",
+     15,
+     4
+    ],
+    [
+     "PSDB",
+     16,
      0
     ],
     [
+     "PSB",
+     14,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     12
+    ],
+    [
      "PCdoB",
-     10,
+     11,
      0
     ],
     [
      "PDT",
-     8,
+     9,
      0
-    ],
-    [
-     "AVANTE",
-     2,
-     3
     ],
     [
      "PV",
@@ -960,8 +508,8 @@
     ],
     [
      "SOLIDARIEDADE",
-     2,
-     2
+     3,
+     1
     ],
     [
      "NOVO",
@@ -969,19 +517,19 @@
      4
     ],
     [
-     "REDE",
+     "AVANTE",
      3,
      0
     ],
     [
-     "CIDADANIA",
-     0,
-     2
+     "PRD",
+     2,
+     0
     ],
     [
-     "PRD",
-     0,
-     2
+     "REDE",
+     2,
+     0
     ],
     [
      "MISSÃO",
@@ -1015,28 +563,18 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Não"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Não"
      ]
     ],
     "esquerda": [
      [
       "Erika Hilton",
-      "PSOL-SP",
-      "Sim"
+      "",
+      "não votou"
      ],
      [
       "Sâmia Bomfim",
       "PSOL-SP",
-      "Sim"
+      "Não"
      ],
      [
       "Tabata Amaral",
@@ -1046,17 +584,7 @@
      [
       "Fernanda Melchionna",
       "PSOL-RS",
-      "Sim"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
-      "Sim"
+      "Não"
      ]
     ]
    }
@@ -1073,9 +601,9 @@
    "dividido": false,
    "aprovada": true,
    "noticias": 6,
-   "atencao": 0.557,
+   "atencao": 0.517,
    "disputa": 0.255,
-   "indice": 47,
+   "indice": 44,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -1211,16 +739,6 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Sim"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Sim"
      ]
     ],
     "esquerda": [
@@ -1243,15 +761,357 @@
       "Fernanda Melchionna",
       "PSOL-RS",
       "Não"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2638483",
+   "titulo": "PL 3085/2026",
+   "ementa": "Regulamenta o regime de relevância das questões de direito federal infraconstitucional para admissão dos recursos especiais no Superior Tribunal de Justiça e altera a Lei nº 13.105, de 16 de março de 2015 (Código de Processo Civil).",
+   "placar": [
+    134,
+    285
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": false,
+   "noticias": 5,
+   "atencao": 0.476,
+   "disputa": 0.36,
+   "indice": 44,
+   "data": "2026-07-14",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     2,
+     78
+    ],
+    [
+     "PT",
+     58,
+     0
+    ],
+    [
+     "UNIÃO",
+     2,
+     41
+    ],
+    [
+     "PSD",
+     6,
+     32
+    ],
+    [
+     "REPUBLICANOS",
+     2,
+     32
+    ],
+    [
+     "PP",
+     0,
+     31
+    ],
+    [
+     "MDB",
+     4,
+     23
+    ],
+    [
+     "PODE",
+     4,
+     18
+    ],
+    [
+     "PSB",
+     13,
+     2
+    ],
+    [
+     "PSDB",
+     0,
+     14
+    ],
+    [
+     "PSOL",
+     12,
+     0
+    ],
+    [
+     "PCdoB",
+     10,
+     0
+    ],
+    [
+     "PDT",
+     8,
+     0
+    ],
+    [
+     "AVANTE",
+     2,
+     3
+    ],
+    [
+     "PV",
+     5,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     2,
+     2
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
+     "REDE",
+     3,
+     0
+    ],
+    [
+     "CIDADANIA",
+     0,
+     2
+    ],
+    [
+     "PRD",
+     0,
+     2
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Não"
      ],
      [
-      "Júnior Mano",
+      "André Fernandes",
+      "PL-CE",
+      "Não"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Sim"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2611313",
+   "titulo": "PLP 74/2026",
+   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
+   "placar": [
+    346,
+    46
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 7,
+   "atencao": 0.553,
+   "disputa": 0.157,
+   "indice": 43,
+   "data": "2026-09-03",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     45,
+     23
+    ],
+    [
+     "PT",
+     52,
+     0
+    ],
+    [
+     "PSD",
+     37,
+     0
+    ],
+    [
+     "UNIÃO",
+     35,
+     2
+    ],
+    [
+     "PP",
+     32,
+     1
+    ],
+    [
+     "REPUBLICANOS",
+     31,
+     1
+    ],
+    [
+     "MDB",
+     30,
+     0
+    ],
+    [
+     "PODE",
+     17,
+     2
+    ],
+    [
+     "PSDB",
+     15,
+     1
+    ],
+    [
+     "PSB",
+     15,
+     0
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     10
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PV",
+     6,
+     0
+    ],
+    [
+     "NOVO",
+     0,
+     5
+    ],
+    [
+     "AVANTE",
+     4,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     2,
+     0
+    ],
+    [
+     "REDE",
+     2,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ],
+    [
+     "CIDADANIA",
+     1,
+     0
+    ],
+    [
+     "PRD",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
       "",
       "não votou"
      ],
      [
-      "Duda Salabert",
-      "PSOL-MG",
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "",
+      "não votou"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
       "Não"
      ]
     ]
@@ -1268,10 +1128,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 5,
-   "atencao": 0.512,
+   "noticias": 7,
+   "atencao": 0.553,
    "disputa": 0.042,
-   "indice": 37,
+   "indice": 40,
    "data": "2026-07-07",
    "nome": null,
    "partidos": [
@@ -1402,16 +1262,6 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Sim"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Sim"
      ]
     ],
     "esquerda": [
@@ -1434,16 +1284,6 @@
       "Fernanda Melchionna",
       "PSOL-RS",
       "Sim"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
-      "Sim"
      ]
     ]
    }
@@ -1459,10 +1299,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 4,
-   "atencao": 0.46,
+   "noticias": 5,
+   "atencao": 0.476,
    "disputa": 0.114,
-   "indice": 36,
+   "indice": 37,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -1593,16 +1433,6 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       "Não"
-     ],
-     [
-      "Zucco",
-      "PL-RS",
-      "Sim"
-     ],
-     [
-      "André Ferreira",
-      "PL-PE",
-      "Sim"
      ]
     ],
     "esquerda": [
@@ -1625,16 +1455,6 @@
       "Fernanda Melchionna",
       "PSOL-RS",
       "Não"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
-      "Não"
      ]
     ]
    }
@@ -1651,9 +1471,9 @@
    "dividido": true,
    "aprovada": true,
    "noticias": 1,
-   "atencao": 0.198,
+   "atencao": 0.184,
    "disputa": 0.675,
-   "indice": 34,
+   "indice": 33,
    "data": "2026-07-14",
    "nome": null,
    "partidos": [
@@ -1789,16 +1609,6 @@
       "Kim Kataguiri",
       "MISSÃO-SP",
       "Sim"
-     ],
-     [
-      "Zucco",
-      "",
-      "não votou"
-     ],
-     [
-      "André Ferreira",
-      "",
-      "não votou"
      ]
     ],
     "esquerda": [
@@ -1820,16 +1630,6 @@
      [
       "Fernanda Melchionna",
       "PSOL-RS",
-      "Não"
-     ],
-     [
-      "Júnior Mano",
-      "",
-      "não votou"
-     ],
-     [
-      "Duda Salabert",
-      "PSOL-MG",
       "Não"
      ]
     ]
