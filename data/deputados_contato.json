@@ -3297,13 +3297,6 @@
    "sexo": "M",
    "uf": "AM"
   },
-  "74140": {
-   "email": "dep.josecarlosaraujo@camara.leg.br",
-   "nome": "José Carlos Araujo",
-   "partido": "DC",
-   "sexo": "M",
-   "uf": "BA"
-  },
   "74156": {
    "email": "dep.leonardomonteiro@camara.leg.br",
    "nome": "Leonardo Monteiro",
@@ -3528,6 +3521,13 @@
    "sexo": "M",
    "uf": "RJ"
   },
+  "80815": {
+   "email": "dep.leoprates@camara.leg.br",
+   "nome": "Leo Prates",
+   "partido": "REPUBLICANOS",
+   "sexo": "M",
+   "uf": "BA"
+  },
   "81055": {
    "email": "dep.marciojerry@camara.leg.br",
    "nome": "Márcio Jerry",
@@ -3593,5 +3593,5 @@
   }
  },
  "fonte": "Câmara dos Deputados, dados abertos",
- "gerado": "2026-10-25 21:42"
+ "gerado": "2026-10-26 13:18"
 }
