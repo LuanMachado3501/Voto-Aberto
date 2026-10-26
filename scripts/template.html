@@ -624,6 +624,18 @@ body.ap #appg{display:flex}
 .aptug{position:relative;display:flex;height:26px;border-radius:6px;overflow:hidden;background:var(--line)}
 .aptug i{display:block;height:100%;transition:width .6s}
 .aptug u{position:absolute;left:50%;top:-4px;bottom:-4px;width:2px;background:var(--fg);text-decoration:none}
+/* faixa do resultado na página inicial (até quarta, 28 out) */
+.apban{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px 18px;margin:10px 20px 0;padding:12px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--fg);text-decoration:none}
+.apban[hidden]{display:none}
+.apban .led{font-size:13px;letter-spacing:1px;white-space:nowrap}
+.apban .abc{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;font-size:15px}
+.apban .abc b{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.3px}
+.apban .abc em{font-style:normal;font-family:var(--display);font-weight:900;font-size:13px;letter-spacing:1px;padding:2px 7px;border-radius:4px;background:var(--led);color:var(--onled);margin-left:6px;vertical-align:3px}
+.apban .abt{grid-column:1/-1;height:8px;border-radius:4px;overflow:hidden;display:flex;background:var(--line)}
+.apban .abt i{display:block;height:100%}
+.apban .abv{font-weight:700;font-size:14px;white-space:nowrap}
+.apban:hover .abv{text-decoration:underline}
+@media (max-width:700px){.apban{grid-template-columns:1fr;margin:8px 14px 0}.apban .abc b{font-size:19px}}
 .aptugl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
 .apnums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .apnums div{border-top:2px solid var(--line);padding-top:8px}.apnums small{display:block;font-size:13px;color:var(--muted)}.apnums strong{font-family:var(--display);font-size:26px;font-weight:800}
@@ -659,6 +671,7 @@ body.ap #appg{display:flex}
   </nav>
 </header>
 <div id="plen">
+  <a class="apban" id="apban" href="#apuracao" hidden aria-label="Resultado do 2º turno para presidente"></a>
   <div class="topbar">
     <div class="casa" role="group" aria-label="Casa legislativa"><a href="#" class="on" aria-current="page">Câmara</a><a href="#senado">Senado</a></div>
     <div class="tools">
@@ -1558,7 +1571,7 @@ async function apGet(u){const r=await fetch(u,{cache:'no-store'}); if(!r.ok) thr
 function apFace(c,ele){return `<div class="face" style="background:${apCor(c.sg)}" aria-hidden="true">${initials(c.nm)}<img alt="" src="${AP.base}/${ele}/fotos/br/${c.sq}.jpeg" onerror="this.remove()"></div>`}
 function apPage(){const el=document.getElementById('appg'); const ele=apTeste()?AP.t1:AP.pres;
   el.innerHTML=`<a class="back" href="#">Voltar ao plenário</a>
-  <div><span class="led" style="font-size:20px">${apTeste()?'TESTE COM O 1º TURNO':(new Date()>=new Date('2026-10-25T17:00:00-03:00')?'<i class="aovivo"></i>AO VIVO · ':'')+'2º TURNO · 25 OUT 2026'}</span>
+  <div><span class="led" style="font-size:20px">${apTeste()?'TESTE COM O 1º TURNO':(apAoVivo()?'<i class="aovivo"></i>AO VIVO · ':new Date()>=AP_AOVIVO[1]?'RESULTADO · ':'')+'2º TURNO · 25 OUT 2026'}</span>
   <h1 style="font-family:var(--display);font-weight:900;font-size:clamp(40px,7vw,72px);line-height:.95;margin:8px 0 0">Apuração para presidente</h1>
   <p class="lead" style="font-size:17px;margin-top:12px">Números oficiais do TSE, atualizados sozinhos a cada 30 segundos. Sem projeção e sem pesquisa: só o voto contado.</p></div>
   <div id="apst" class="apst">Carregando os dados do TSE…</div>
@@ -1601,8 +1614,19 @@ function apUFs(){const rows=[], top=AP.br?apCands(AP.br).slice(0,2):[];
   document.getElementById('aptab').innerHTML=`<thead><tr><th>Estado</th>${top.map(t=>`<th>${esc(t.nm)}</th>`).join('')}<th>Apurado</th></tr></thead><tbody>${rows.join('')}</tbody>`;}
 function apGov(gv){document.getElementById('apgov').innerHTML=gv.map(([u,d])=>{if(!d) return `<div><h3>${UFN[u.toUpperCase()]}</h3><p class="emuted">sem dados ainda</p></div>`;
   const C=apCands(d).slice(0,2); return `<div><h3>${UFN[u.toUpperCase()]}</h3>${C.map(c=>`<p><span>${esc(c.nm)} <span class="emuted">${esc(c.sg)}</span>${c.e?` <b style="color:var(--led)">· ${apSel(c)}</b>`:''}</span><b>${apP(c.pvs)}%</b></p>`).join('')}<p class="emuted" style="font-size:12px">${apP(d.s.pst)}% das seções totalizadas</p></div>`}).join('');}
-(function(){const now=new Date(), fim=new Date('2026-10-28T00:00:00-03:00'); const b=document.getElementById('navap'); if(b&&(now<fim||apTeste())) b.hidden=false;
-  const ao=new Date('2026-10-25T17:00:00-03:00'); if(b&&!(now>=ao&&now<fim)) b.querySelector('.aovivo').remove();})();
+const AP_FIM=new Date('2026-10-29T00:00:00-03:00'), AP_AOVIVO=[new Date('2026-10-25T17:00:00-03:00'),new Date('2026-10-26T06:00:00-03:00')];
+const apAoVivo=()=>{const n=new Date(); return n>=AP_AOVIVO[0]&&n<AP_AOVIVO[1];};
+(function(){const now=new Date(); const b=document.getElementById('navap'); if(b&&(now<AP_FIM||apTeste())) b.hidden=false;
+  if(b&&!apAoVivo()){b.querySelector('.aovivo').remove(); if(now>=AP_AOVIVO[1]){b.title='Resultado do 2º turno'; b.firstChild.nodeValue='Resultado';}}})();
+/* faixa com o resultado na página inicial, até o fim de quarta-feira (28 out) */
+(async function(){const el=document.getElementById('apban'); if(!el||new Date()>=AP_FIM||new Date()<AP_AOVIVO[0]) return;
+  try{const d=await apGet(apUrl(AP.pres,'br','0001')); const C=apCands(d).slice(0,2), pst=apN(d.s&&d.s.pst); if(C.length<2||!C[0].v) return;
+    const fim=pst>=100||C.some(c=>c.e);
+    el.innerHTML=`<span class="led">${fim?'RESULTADO':'<i class="aovivo"></i>APURAÇÃO'} · 2º TURNO</span>
+     <span class="abc">${C.map(c=>`<span><b style="color:${apCor(c.sg)}">${esc(c.nm)}</b> ${esc(c.sg)} · <strong>${apP(c.pvs)}%</strong>${c.e?`<em>${apSel(c)}</em>`:''}</span>`).join('')}</span>
+     <span class="abv">${fim?'Ver o resultado completo':apP(d.s.pst)+'% apurado'} ›</span>
+     <span class="abt" aria-hidden="true">${C.map(c=>`<i style="width:${c.pv}%;background:${apCor(c.sg)}"></i>`).join('')}</span>`;
+    el.hidden=false;}catch(e){}})();
 function route(){const m=location.hash.match(/^#dep\/(\d+)(?:\/(cota|tribuna))?$/); upBar(false); tip.hidden=true; drop(); document.body.classList.remove('quiz','cota','banc','trib','sen','ap');
   const bm=location.hash.match(/^#bancada(?:\/([A-Z]{2}))?$/), sm=location.hash.match(/^#sen(?:ado|\/(\d+))$/), am=/^#apuracao/.test(location.hash);
   const pg=am?'apuracao':m?'dep':bm?'bancada':location.hash==='#tribuna'?'tribuna':location.hash==='#cota'?'cota':/^#(teste|urna)$/.test(location.hash)?'teste':'plen';
