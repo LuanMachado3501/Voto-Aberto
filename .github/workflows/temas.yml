@@ -1,0 +1,27 @@
+name: Temas da Câmara
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados
+  cancel-in-progress: false
+
+jobs:
+  temas:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python scripts/temas_camara.py
+      - run: |
+          git config user.name "Centro Político (robô)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/temas_camara.json
+          git diff --cached --quiet || { git commit -m "Temas oficiais da Câmara"; git pull --rebase -q && git push; }
