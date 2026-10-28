@@ -1,0 +1,147 @@
+{
+ "rascunhos_criados": "2026-10-28",
+ "prazo_resposta": "2026-11-17",
+ "lembrete": "7 dias após o envio",
+ "deputados": [
+  {
+   "nome": "Jack Rocha",
+   "partido": "PT",
+   "uf": "ES",
+   "email": "dep.jackrocha@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Alice Portugal",
+   "partido": "PCdoB",
+   "uf": "BA",
+   "email": "dep.aliceportugal@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Airton Faleiro",
+   "partido": "PT",
+   "uf": "PA",
+   "email": "dep.airtonfaleiro@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Rubens Otoni",
+   "partido": "PT",
+   "uf": "GO",
+   "email": "dep.rubensotoni@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Fernanda Melchionna",
+   "partido": "PSOL",
+   "uf": "RS",
+   "email": "dep.fernandamelchionna@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Robério Monteiro",
+   "partido": "PSB",
+   "uf": "CE",
+   "email": "dep.roberiomonteiro@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Iza Arruda",
+   "partido": "MDB",
+   "uf": "PE",
+   "email": "dep.izaarruda@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Nely Aquino",
+   "partido": "PODE",
+   "uf": "MG",
+   "email": "dep.nelyaquino@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Andreia Siqueira",
+   "partido": "PSB",
+   "uf": "PA",
+   "email": "dep.andreiasiqueira@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Ricardo Ayres",
+   "partido": "REPUBLICANOS",
+   "uf": "TO",
+   "email": "dep.ricardoayres@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Juarez Costa",
+   "partido": "REPUBLICANOS",
+   "uf": "MT",
+   "email": "dep.juarezcosta@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Paulo Alexandre Barbosa",
+   "partido": "PSD",
+   "uf": "SP",
+   "email": "dep.pauloalexandrebarbosa@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Delegada Ione",
+   "partido": "PL",
+   "uf": "MG",
+   "email": "dep.delegadaione@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Lucio Mosquini",
+   "partido": "PL",
+   "uf": "RO",
+   "email": "dep.luciomosquini@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Alceu Moreira",
+   "partido": "MDB",
+   "uf": "RS",
+   "email": "dep.alceumoreira@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Roberta Roma",
+   "partido": "PL",
+   "uf": "BA",
+   "email": "dep.robertaroma@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Kim Kataguiri",
+   "partido": "MISSÃO",
+   "uf": "SP",
+   "email": "dep.kimkataguiri@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Adriana Ventura",
+   "partido": "NOVO",
+   "uf": "SP",
+   "email": "dep.adrianaventura@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Osmar Terra",
+   "partido": "PL",
+   "uf": "RS",
+   "email": "dep.osmarterra@camara.leg.br",
+   "status": "rascunho"
+  },
+  {
+   "nome": "Gilson Marques",
+   "partido": "NOVO",
+   "uf": "SC",
+   "email": "dep.gilsonmarques@camara.leg.br",
+   "status": "rascunho"
+  }
+ ]
+}
