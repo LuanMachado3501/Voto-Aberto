@@ -1,0 +1,197 @@
+{
+ "fonte": "Câmara dos Deputados, dados abertos",
+ "temas": [
+  {
+   "cod": "34",
+   "nome": "Administração Pública",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "35",
+   "nome": "Arte, Cultura e Religião",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "37",
+   "nome": "Comunicações",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "39",
+   "nome": "Esporte e Lazer",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "40",
+   "nome": "Economia",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "41",
+   "nome": "Cidades e Desenvolvimento Urbano",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "42",
+   "nome": "Direito Civil e Processual Civil",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "43",
+   "nome": "Direito Penal e Processual Penal",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "44",
+   "nome": "Direitos Humanos e Minorias",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "46",
+   "nome": "Educação",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "48",
+   "nome": "Meio Ambiente e Desenvolvimento Sustentável",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "51",
+   "nome": "Estrutura Fundiária",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "52",
+   "nome": "Previdência e Assistência Social",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "53",
+   "nome": "Processo Legislativo e Atuação Parlamentar",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "54",
+   "nome": "Energia, Recursos Hídricos e Minerais",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "55",
+   "nome": "Relações Internacionais e Comércio Exterior",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "56",
+   "nome": "Saúde",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "57",
+   "nome": "Defesa e Segurança",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "58",
+   "nome": "Trabalho e Emprego",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "60",
+   "nome": "Turismo",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "61",
+   "nome": "Viação, Transporte e Mobilidade",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "62",
+   "nome": "Ciência, Tecnologia e Inovação",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "64",
+   "nome": "Agricultura, Pecuária, Pesca e Extrativismo",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "66",
+   "nome": "Indústria, Comércio e Serviços",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "67",
+   "nome": "Direito e Defesa do Consumidor",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "68",
+   "nome": "Direito Constitucional",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "70",
+   "nome": "Finanças Públicas e Orçamento",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "72",
+   "nome": "Homenagens e Datas Comemorativas",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "74",
+   "nome": "Política, Partidos e Eleições",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "76",
+   "nome": "Direito e Justiça",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "85",
+   "nome": "Ciências Exatas e da Terra",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  },
+  {
+   "cod": "86",
+   "nome": "Ciências Sociais e Humanas",
+   "pl_2023_2026": null,
+   "pec_2023_2026": null
+  }
+ ]
+}
