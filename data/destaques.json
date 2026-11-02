@@ -1,11 +1,182 @@
 {
- "gerado": "2026-10-26",
+ "gerado": "2026-11-02",
  "pesos": {
   "atencao": 0.7,
   "disputa": 0.3
  },
  "noticias_ok": true,
  "itens": [
+  {
+   "id": "2618177",
+   "titulo": "PLP 114/2026",
+   "ementa": "Dispõe sobre regras para renúncias de receita com o objetivo de mitigar os impactos econômicos causados pelo choque no mercado internacional de energia decorrente do conflito no Oriente Médio.",
+   "placar": [
+    318,
+    113
+   ],
+   "votacoes": 3,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 30,
+   "atencao": 0.966,
+   "disputa": 0.382,
+   "indice": 79,
+   "data": "2026-08-12",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     6,
+     79
+    ],
+    [
+     "PT",
+     56,
+     0
+    ],
+    [
+     "UNIÃO",
+     36,
+     4
+    ],
+    [
+     "PSD",
+     38,
+     2
+    ],
+    [
+     "PP",
+     37,
+     2
+    ],
+    [
+     "REPUBLICANOS",
+     33,
+     2
+    ],
+    [
+     "MDB",
+     31,
+     2
+    ],
+    [
+     "PODE",
+     15,
+     4
+    ],
+    [
+     "PSDB",
+     16,
+     0
+    ],
+    [
+     "PSB",
+     14,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     12
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PV",
+     5,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     3,
+     1
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
+     "AVANTE",
+     3,
+     0
+    ],
+    [
+     "PRD",
+     2,
+     0
+    ],
+    [
+     "REDE",
+     2,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Não"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Não"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "",
+      "não votou"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ]
+    ]
+   }
+  },
   {
    "id": "2635476",
    "titulo": "PLP 186/2026",
@@ -17,7 +188,7 @@
    "votacoes": 2,
    "dividido": false,
    "aprovada": true,
-   "noticias": 42,
+   "noticias": 34,
    "atencao": 1.0,
    "disputa": 0.089,
    "indice": 73,
@@ -193,10 +364,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 21,
-   "atencao": 0.822,
+   "noticias": 22,
+   "atencao": 0.882,
    "disputa": 0.171,
-   "indice": 63,
+   "indice": 67,
    "data": "2026-09-02",
    "nome": "Pacheco TCU",
    "partidos": [],
@@ -248,248 +419,72 @@
    }
   },
   {
-   "id": "2236186",
-   "titulo": "PLP 281/2019",
-   "ementa": "Dispõe sobre os regimes de resolução das instituições autorizadas a funcionar pelo Banco Central do Brasil, pela Superintendência de Seguros Privados e pela Comissão de Valores Mobiliários.",
+   "id": "2611313",
+   "titulo": "PLP 74/2026",
+   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
    "placar": [
-    252,
-    176
+    346,
+    46
    ],
    "votacoes": 1,
    "dividido": false,
-   "aprovada": false,
-   "noticias": 5,
-   "atencao": 0.476,
-   "disputa": 0.451,
-   "indice": 47,
-   "data": "2026-10-14",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     77,
-     3
-    ],
-    [
-     "PT",
-     0,
-     61
-    ],
-    [
-     "PSD",
-     31,
-     9
-    ],
-    [
-     "UNIÃO",
-     9,
-     30
-    ],
-    [
-     "REPUBLICANOS",
-     33,
-     3
-    ],
-    [
-     "PP",
-     30,
-     4
-    ],
-    [
-     "MDB",
-     27,
-     5
-    ],
-    [
-     "PODE",
-     16,
-     6
-    ],
-    [
-     "PSDB",
-     15,
-     0
-    ],
-    [
-     "PSB",
-     1,
-     13
-    ],
-    [
-     "PSOL",
-     0,
-     12
-    ],
-    [
-     "PCdoB",
-     0,
-     10
-    ],
-    [
-     "PDT",
-     1,
-     7
-    ],
-    [
-     "PV",
-     0,
-     6
-    ],
-    [
-     "AVANTE",
-     4,
-     1
-    ],
-    [
-     "NOVO",
-     4,
-     0
-    ],
-    [
-     "REDE",
-     0,
-     3
-    ],
-    [
-     "SOLIDARIEDADE",
-     2,
-     1
-    ],
-    [
-     "PRD",
-     1,
-     1
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "",
-      "não votou"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Sim"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Não"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2618177",
-   "titulo": "PLP 114/2026",
-   "ementa": "Dispõe sobre regras para renúncias de receita com o objetivo de mitigar os impactos econômicos causados pelo choque no mercado internacional de energia decorrente do conflito no Oriente Médio.",
-   "placar": [
-    318,
-    113
-   ],
-   "votacoes": 3,
-   "dividido": false,
    "aprovada": true,
-   "noticias": 5,
-   "atencao": 0.476,
-   "disputa": 0.382,
-   "indice": 45,
-   "data": "2026-08-12",
+   "noticias": 7,
+   "atencao": 0.585,
+   "disputa": 0.157,
+   "indice": 46,
+   "data": "2026-09-03",
    "nome": null,
    "partidos": [
     [
      "PL",
-     6,
-     79
+     45,
+     23
     ],
     [
      "PT",
-     56,
+     52,
+     0
+    ],
+    [
+     "PSD",
+     37,
      0
     ],
     [
      "UNIÃO",
-     36,
-     4
-    ],
-    [
-     "PSD",
-     38,
+     35,
      2
     ],
     [
      "PP",
-     37,
-     2
+     32,
+     1
     ],
     [
      "REPUBLICANOS",
-     33,
-     2
+     31,
+     1
     ],
     [
      "MDB",
-     31,
-     2
+     30,
+     0
     ],
     [
      "PODE",
-     15,
-     4
+     17,
+     2
     ],
     [
      "PSDB",
-     16,
-     0
+     15,
+     1
     ],
     [
      "PSB",
-     14,
+     15,
      0
-    ],
-    [
-     "PSOL",
-     0,
-     12
     ],
     [
      "PCdoB",
@@ -497,32 +492,32 @@
      0
     ],
     [
+     "PSOL",
+     0,
+     10
+    ],
+    [
      "PDT",
      9,
      0
     ],
     [
      "PV",
-     5,
+     6,
      0
-    ],
-    [
-     "SOLIDARIEDADE",
-     3,
-     1
     ],
     [
      "NOVO",
      0,
-     4
+     5
     ],
     [
      "AVANTE",
-     3,
+     4,
      0
     ],
     [
-     "PRD",
+     "SOLIDARIEDADE",
      2,
      0
     ],
@@ -540,6 +535,16 @@
      "DC",
      1,
      0
+    ],
+    [
+     "CIDADANIA",
+     1,
+     0
+    ],
+    [
+     "PRD",
+     1,
+     0
     ]
    ],
    "nomes": {
@@ -547,12 +552,12 @@
      [
       "Nikolas Ferreira",
       "PL-MG",
-      "Não"
+      "Sim"
      ],
      [
       "André Fernandes",
-      "PL-CE",
-      "Não"
+      "",
+      "não votou"
      ],
      [
       "Julia Zanatta",
@@ -568,13 +573,13 @@
     "esquerda": [
      [
       "Erika Hilton",
-      "",
-      "não votou"
+      "PSOL-SP",
+      "Não"
      ],
      [
       "Sâmia Bomfim",
-      "PSOL-SP",
-      "Não"
+      "",
+      "não votou"
      ],
      [
       "Tabata Amaral",
@@ -601,9 +606,9 @@
    "dividido": false,
    "aprovada": true,
    "noticias": 6,
-   "atencao": 0.517,
+   "atencao": 0.547,
    "disputa": 0.255,
-   "indice": 44,
+   "indice": 46,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -777,9 +782,9 @@
    "dividido": false,
    "aprovada": false,
    "noticias": 5,
-   "atencao": 0.476,
+   "atencao": 0.504,
    "disputa": 0.36,
-   "indice": 44,
+   "indice": 46,
    "data": "2026-07-14",
    "nome": null,
    "partidos": [
@@ -942,182 +947,6 @@
    }
   },
   {
-   "id": "2611313",
-   "titulo": "PLP 74/2026",
-   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
-   "placar": [
-    346,
-    46
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 7,
-   "atencao": 0.553,
-   "disputa": 0.157,
-   "indice": 43,
-   "data": "2026-09-03",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     45,
-     23
-    ],
-    [
-     "PT",
-     52,
-     0
-    ],
-    [
-     "PSD",
-     37,
-     0
-    ],
-    [
-     "UNIÃO",
-     35,
-     2
-    ],
-    [
-     "PP",
-     32,
-     1
-    ],
-    [
-     "REPUBLICANOS",
-     31,
-     1
-    ],
-    [
-     "MDB",
-     30,
-     0
-    ],
-    [
-     "PODE",
-     17,
-     2
-    ],
-    [
-     "PSDB",
-     15,
-     1
-    ],
-    [
-     "PSB",
-     15,
-     0
-    ],
-    [
-     "PCdoB",
-     11,
-     0
-    ],
-    [
-     "PSOL",
-     0,
-     10
-    ],
-    [
-     "PDT",
-     9,
-     0
-    ],
-    [
-     "PV",
-     6,
-     0
-    ],
-    [
-     "NOVO",
-     0,
-     5
-    ],
-    [
-     "AVANTE",
-     4,
-     0
-    ],
-    [
-     "SOLIDARIEDADE",
-     2,
-     0
-    ],
-    [
-     "REDE",
-     2,
-     0
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ],
-    [
-     "CIDADANIA",
-     1,
-     0
-    ],
-    [
-     "PRD",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "",
-      "não votou"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Não"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Sâmia Bomfim",
-      "",
-      "não votou"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Sim"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ]
-    ]
-   }
-  },
-  {
    "id": "2606313",
    "titulo": "PLP 41/2026",
    "ementa": "Dispõe sobre o Sistema Nacional de Enfrentamento da Violência contra Meninas e Mulheres e a destinação de recursos às ações de enfrentamento ao feminicídio e de garantia da vida de meninas e mulheres.",
@@ -1129,9 +958,9 @@
    "dividido": false,
    "aprovada": true,
    "noticias": 7,
-   "atencao": 0.553,
+   "atencao": 0.585,
    "disputa": 0.042,
-   "indice": 40,
+   "indice": 42,
    "data": "2026-07-07",
    "nome": null,
    "partidos": [
@@ -1289,6 +1118,177 @@
    }
   },
   {
+   "id": "2236186",
+   "titulo": "PLP 281/2019",
+   "ementa": "Dispõe sobre os regimes de resolução das instituições autorizadas a funcionar pelo Banco Central do Brasil, pela Superintendência de Seguros Privados e pela Comissão de Valores Mobiliários.",
+   "placar": [
+    252,
+    176
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": false,
+   "noticias": 3,
+   "atencao": 0.39,
+   "disputa": 0.451,
+   "indice": 41,
+   "data": "2026-10-14",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     77,
+     3
+    ],
+    [
+     "PT",
+     0,
+     61
+    ],
+    [
+     "PSD",
+     31,
+     9
+    ],
+    [
+     "UNIÃO",
+     9,
+     30
+    ],
+    [
+     "REPUBLICANOS",
+     33,
+     3
+    ],
+    [
+     "PP",
+     30,
+     4
+    ],
+    [
+     "MDB",
+     27,
+     5
+    ],
+    [
+     "PODE",
+     16,
+     6
+    ],
+    [
+     "PSDB",
+     15,
+     0
+    ],
+    [
+     "PSB",
+     1,
+     13
+    ],
+    [
+     "PSOL",
+     0,
+     12
+    ],
+    [
+     "PCdoB",
+     0,
+     10
+    ],
+    [
+     "PDT",
+     1,
+     7
+    ],
+    [
+     "PV",
+     0,
+     6
+    ],
+    [
+     "AVANTE",
+     4,
+     1
+    ],
+    [
+     "NOVO",
+     4,
+     0
+    ],
+    [
+     "REDE",
+     0,
+     3
+    ],
+    [
+     "SOLIDARIEDADE",
+     2,
+     1
+    ],
+    [
+     "PRD",
+     1,
+     1
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "",
+      "não votou"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Não"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ]
+    ]
+   }
+  },
+  {
    "id": "2611992",
    "titulo": "PLP 80/2026",
    "ementa": "Altera a Lei nº 14.301, de 7 de janeiro de 2022, para prorrogar o prazo de vigência da não incidência do Adicional ao Frete para Renovação da Marinha Mercante (AFRMM) prevista no art. 17 da Lei nº 9.432, de 8 de janeiro de 1997, nas navegações de cabotagem, interior fluvial e lacustre, desde que a origem ou o destino seja porto localizado na Região Norte ou Nordeste do País.",
@@ -1299,10 +1299,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 5,
-   "atencao": 0.476,
+   "noticias": 4,
+   "atencao": 0.453,
    "disputa": 0.114,
-   "indice": 37,
+   "indice": 35,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -1460,21 +1460,21 @@
    }
   },
   {
-   "id": "2612908",
-   "titulo": "PDL 171/2026",
-   "ementa": "Susta os efeitos do Decreto nº 12.887, de 23 de março de 2026, que Amplia a Estação Ecológica de Taiamã, localizada nos Municípios de Cáceres e Poconé, Estado de Mato Grosso.",
+   "id": "2525620",
+   "titulo": "PL 2898/2025",
+   "ementa": "Altera a Lei nº 9.605, de 12 de fevereiro de 1998, que \"dispõe sobre as infrações e sanções administrativas ao meio ambiente, estabelece o processo administrativo federal para apuração destas infrações, e dá outras providências\", para estabelecer regime especial de sanções para pequenos produtores rurais que produzam para subsistência.",
    "placar": [
-    276,
-    139
+    305,
+    112
    ],
    "votacoes": 1,
    "dividido": true,
    "aprovada": true,
    "noticias": 1,
-   "atencao": 0.184,
-   "disputa": 0.675,
-   "indice": 33,
-   "data": "2026-07-14",
+   "atencao": 0.195,
+   "disputa": 0.609,
+   "indice": 32,
+   "data": "2026-07-02",
    "nome": null,
    "partidos": [
     [
@@ -1485,37 +1485,47 @@
     [
      "PT",
      0,
-     55
+     59
     ],
     [
      "UNIÃO",
-     35,
-     5
+     37,
+     3
+    ],
+    [
+     "PP",
+     36,
+     2
     ],
     [
      "PSD",
      33,
-     6
+     4
     ],
     [
      "REPUBLICANOS",
-     34,
+     28,
      1
     ],
     [
-     "PP",
-     32,
+     "PODE",
+     22,
      3
     ],
     [
      "MDB",
-     21,
-     2
+     18,
+     4
     ],
     [
-     "PODE",
-     9,
-     10
+     "PSB",
+     12,
+     3
+    ],
+    [
+     "PSDB",
+     14,
+     1
     ],
     [
      "PSOL",
@@ -1523,44 +1533,29 @@
      13
     ],
     [
-     "PSDB",
-     12,
-     1
-    ],
-    [
-     "PSB",
-     1,
-     11
+     "PDT",
+     9,
+     0
     ],
     [
      "PCdoB",
      0,
-     11
-    ],
-    [
-     "PDT",
-     0,
-     9
+     8
     ],
     [
      "PV",
      0,
-     6
-    ],
-    [
-     "AVANTE",
-     4,
-     1
-    ],
-    [
-     "SOLIDARIEDADE",
-     4,
-     0
+     5
     ],
     [
      "NOVO",
-     4,
+     5,
      0
+    ],
+    [
+     "AVANTE",
+     3,
+     1
     ],
     [
      "REDE",
@@ -1568,13 +1563,8 @@
      3
     ],
     [
-     "PRD",
-     2,
-     0
-    ],
-    [
-     "MISSÃO",
-     1,
+     "SOLIDARIEDADE",
+     3,
      0
     ],
     [
@@ -1583,7 +1573,12 @@
      0
     ],
     [
-     "DC",
+     "MISSÃO",
+     1,
+     0
+    ],
+    [
+     "PRD",
      0,
      1
     ]
