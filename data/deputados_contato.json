@@ -42,13 +42,6 @@
    "sexo": "M",
    "uf": "RJ"
   },
-  "122195": {
-   "email": "dep.leonardogadelha@camara.leg.br",
-   "nome": "Leonardo Gadelha",
-   "partido": "PODE",
-   "sexo": "M",
-   "uf": "PB"
-  },
   "122974": {
    "email": "dep.pedrolucasfernandes@camara.leg.br",
    "nome": "Pedro Lucas Fernandes",
@@ -503,6 +496,13 @@
    "partido": "PSD",
    "sexo": "M",
    "uf": "PR"
+  },
+  "160629": {
+   "email": "dep.romerorodrigues@camara.leg.br",
+   "nome": "Romero Rodrigues",
+   "partido": "PODE",
+   "sexo": "M",
+   "uf": "PB"
   },
   "160632": {
    "email": "dep.zesilva@camara.leg.br",
@@ -3593,5 +3593,5 @@
   }
  },
  "fonte": "Câmara dos Deputados, dados abertos",
- "gerado": "2026-11-05 14:39"
+ "gerado": "2026-11-07 12:55"
 }
