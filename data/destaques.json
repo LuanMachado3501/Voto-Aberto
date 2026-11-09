@@ -1,11 +1,76 @@
 {
- "gerado": "2026-11-02",
+ "gerado": "2026-11-09",
  "pesos": {
   "atencao": 0.7,
   "disputa": 0.3
  },
  "noticias_ok": true,
  "itens": [
+  {
+   "id": "2645346",
+   "titulo": "PDL 995/2026",
+   "ementa": "Escolhe o Senhor Rodrigo Otávio Soares Pacheco para o cargo de Ministro do Tribunal de Contas da União, nos termos do inciso II do § 2º do art. 73 da Constituição Federal, do inciso II do art. 105 da Lei nº 8.443, de 16 de julho de 1992, e do art. 2º do Decreto Legislativo nº 6, de 1993.",
+   "placar": [
+    404,
+    61
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 18,
+   "atencao": 1.0,
+   "disputa": 0.171,
+   "indice": 75,
+   "data": "2026-09-02",
+   "nome": "Pacheco TCU",
+   "partidos": [],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      NaN
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      NaN
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      NaN
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      NaN
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      NaN
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      NaN
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      NaN
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      NaN
+     ]
+    ]
+   }
+  },
   {
    "id": "2618177",
    "titulo": "PLP 114/2026",
@@ -17,10 +82,10 @@
    "votacoes": 3,
    "dividido": false,
    "aprovada": true,
-   "noticias": 30,
-   "atencao": 0.966,
+   "noticias": 6,
+   "atencao": 0.661,
    "disputa": 0.382,
-   "indice": 79,
+   "indice": 58,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -178,97 +243,97 @@
    }
   },
   {
-   "id": "2635476",
-   "titulo": "PLP 186/2026",
-   "ementa": "Altera a Lei Complementar nº 123, de 14 de dezembro de 2006, para dispor sobre o limite de receita bruta anual e o número de empregados do Microempreendedor Individual.",
+   "id": "2236186",
+   "titulo": "PLP 281/2019",
+   "ementa": "Dispõe sobre os regimes de resolução das instituições autorizadas a funcionar pelo Banco Central do Brasil, pela Superintendência de Seguros Privados e pela Comissão de Valores Mobiliários.",
    "placar": [
-    461,
-    4
+    252,
+    176
    ],
-   "votacoes": 2,
+   "votacoes": 1,
    "dividido": false,
-   "aprovada": true,
-   "noticias": 34,
-   "atencao": 1.0,
-   "disputa": 0.089,
-   "indice": 73,
+   "aprovada": false,
+   "noticias": 4,
+   "atencao": 0.547,
+   "disputa": 0.451,
+   "indice": 52,
    "data": "2026-10-14",
    "nome": null,
    "partidos": [
     [
      "PL",
-     88,
-     0
+     77,
+     3
     ],
     [
      "PT",
-     62,
-     0
-    ],
-    [
-     "UNIÃO",
-     48,
-     0
+     0,
+     61
     ],
     [
      "PSD",
-     43,
-     0
+     31,
+     9
     ],
     [
-     "PP",
-     41,
-     0
+     "UNIÃO",
+     9,
+     30
     ],
     [
      "REPUBLICANOS",
-     38,
-     0
+     33,
+     3
+    ],
+    [
+     "PP",
+     30,
+     4
     ],
     [
      "MDB",
-     32,
-     0
+     27,
+     5
     ],
     [
      "PODE",
-     23,
-     1
+     16,
+     6
     ],
     [
      "PSDB",
-     14,
-     2
+     15,
+     0
     ],
     [
      "PSB",
-     16,
-     0
+     1,
+     13
     ],
     [
      "PSOL",
-     13,
-     0
+     0,
+     12
     ],
     [
      "PCdoB",
-     11,
-     0
+     0,
+     10
     ],
     [
      "PDT",
-     8,
-     0
+     1,
+     7
     ],
     [
      "PV",
-     6,
-     0
+     0,
+     6
     ],
     [
      "AVANTE",
-     5,
-     0
+     4,
+     1
     ],
     [
      "NOVO",
@@ -276,24 +341,19 @@
      0
     ],
     [
-     "SOLIDARIEDADE",
-     3,
-     0
-    ],
-    [
-     "CIDADANIA",
-     2,
-     0
-    ],
-    [
      "REDE",
-     2,
-     0
+     0,
+     3
     ],
     [
-     "DC",
+     "SOLIDARIEDADE",
+     2,
+     1
+    ],
+    [
+     "PRD",
      1,
-     0
+     1
     ],
     [
      "MISSÃO",
@@ -301,7 +361,7 @@
      1
     ],
     [
-     "PRD",
+     "DC",
      1,
      0
     ]
@@ -315,8 +375,8 @@
      ],
      [
       "André Fernandes",
-      "PL-CE",
-      "Sim"
+      "",
+      "não votou"
      ],
      [
       "Julia Zanatta",
@@ -333,87 +393,22 @@
      [
       "Erika Hilton",
       "PSOL-SP",
-      "Sim"
+      "Não"
      ],
      [
       "Sâmia Bomfim",
       "PSOL-SP",
-      "Sim"
+      "Não"
      ],
      [
       "Tabata Amaral",
       "PSB-SP",
-      "Sim"
+      "Não"
      ],
      [
       "Fernanda Melchionna",
       "PSOL-RS",
-      "Sim"
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2645346",
-   "titulo": "PDL 995/2026",
-   "ementa": "Escolhe o Senhor Rodrigo Otávio Soares Pacheco para o cargo de Ministro do Tribunal de Contas da União, nos termos do inciso II do § 2º do art. 73 da Constituição Federal, do inciso II do art. 105 da Lei nº 8.443, de 16 de julho de 1992, e do art. 2º do Decreto Legislativo nº 6, de 1993.",
-   "placar": [
-    404,
-    61
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 22,
-   "atencao": 0.882,
-   "disputa": 0.171,
-   "indice": 67,
-   "data": "2026-09-02",
-   "nome": "Pacheco TCU",
-   "partidos": [],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      NaN
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      NaN
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      NaN
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      NaN
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      NaN
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      NaN
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      NaN
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      NaN
+      "Não"
      ]
     ]
    }
@@ -429,10 +424,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 7,
-   "atencao": 0.585,
+   "noticias": 6,
+   "atencao": 0.661,
    "disputa": 0.157,
-   "indice": 46,
+   "indice": 51,
    "data": "2026-09-03",
    "nome": null,
    "partidos": [
@@ -595,6 +590,529 @@
    }
   },
   {
+   "id": "2606313",
+   "titulo": "PLP 41/2026",
+   "ementa": "Dispõe sobre o Sistema Nacional de Enfrentamento da Violência contra Meninas e Mulheres e a destinação de recursos às ações de enfrentamento ao feminicídio e de garantia da vida de meninas e mulheres.",
+   "placar": [
+    470,
+    1
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 7,
+   "atencao": 0.706,
+   "disputa": 0.042,
+   "indice": 51,
+   "data": "2026-07-07",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     93,
+     0
+    ],
+    [
+     "PT",
+     63,
+     0
+    ],
+    [
+     "UNIÃO",
+     48,
+     0
+    ],
+    [
+     "PSD",
+     42,
+     0
+    ],
+    [
+     "PP",
+     39,
+     0
+    ],
+    [
+     "REPUBLICANOS",
+     39,
+     0
+    ],
+    [
+     "MDB",
+     31,
+     0
+    ],
+    [
+     "PODE",
+     25,
+     0
+    ],
+    [
+     "PSDB",
+     17,
+     0
+    ],
+    [
+     "PSB",
+     14,
+     0
+    ],
+    [
+     "PSOL",
+     13,
+     0
+    ],
+    [
+     "PDT",
+     10,
+     0
+    ],
+    [
+     "PCdoB",
+     10,
+     0
+    ],
+    [
+     "PV",
+     6,
+     0
+    ],
+    [
+     "AVANTE",
+     5,
+     0
+    ],
+    [
+     "NOVO",
+     5,
+     0
+    ],
+    [
+     "PRD",
+     3,
+     0
+    ],
+    [
+     "REDE",
+     3,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     3,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "CIDADANIA",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Sim"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Artigo 17"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Sim"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2635476",
+   "titulo": "PLP 186/2026",
+   "ementa": "Altera a Lei Complementar nº 123, de 14 de dezembro de 2006, para dispor sobre o limite de receita bruta anual e o número de empregados do Microempreendedor Individual.",
+   "placar": [
+    461,
+    4
+   ],
+   "votacoes": 2,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": 6,
+   "atencao": 0.661,
+   "disputa": 0.089,
+   "indice": 49,
+   "data": "2026-10-14",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     88,
+     0
+    ],
+    [
+     "PT",
+     62,
+     0
+    ],
+    [
+     "UNIÃO",
+     48,
+     0
+    ],
+    [
+     "PSD",
+     43,
+     0
+    ],
+    [
+     "PP",
+     41,
+     0
+    ],
+    [
+     "REPUBLICANOS",
+     38,
+     0
+    ],
+    [
+     "MDB",
+     32,
+     0
+    ],
+    [
+     "PODE",
+     23,
+     1
+    ],
+    [
+     "PSDB",
+     14,
+     2
+    ],
+    [
+     "PSB",
+     16,
+     0
+    ],
+    [
+     "PSOL",
+     13,
+     0
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PDT",
+     8,
+     0
+    ],
+    [
+     "PV",
+     6,
+     0
+    ],
+    [
+     "AVANTE",
+     5,
+     0
+    ],
+    [
+     "NOVO",
+     4,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     3,
+     0
+    ],
+    [
+     "CIDADANIA",
+     2,
+     0
+    ],
+    [
+     "REDE",
+     2,
+     0
+    ],
+    [
+     "DC",
+     1,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "PRD",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Sim"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Sim"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2638483",
+   "titulo": "PL 3085/2026",
+   "ementa": "Regulamenta o regime de relevância das questões de direito federal infraconstitucional para admissão dos recursos especiais no Superior Tribunal de Justiça e altera a Lei nº 13.105, de 16 de março de 2015 (Código de Processo Civil).",
+   "placar": [
+    134,
+    285
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": false,
+   "noticias": 4,
+   "atencao": 0.547,
+   "disputa": 0.36,
+   "indice": 49,
+   "data": "2026-07-14",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     2,
+     78
+    ],
+    [
+     "PT",
+     58,
+     0
+    ],
+    [
+     "UNIÃO",
+     2,
+     41
+    ],
+    [
+     "PSD",
+     6,
+     32
+    ],
+    [
+     "REPUBLICANOS",
+     2,
+     32
+    ],
+    [
+     "PP",
+     0,
+     31
+    ],
+    [
+     "MDB",
+     4,
+     23
+    ],
+    [
+     "PODE",
+     4,
+     18
+    ],
+    [
+     "PSB",
+     13,
+     2
+    ],
+    [
+     "PSDB",
+     0,
+     14
+    ],
+    [
+     "PSOL",
+     12,
+     0
+    ],
+    [
+     "PCdoB",
+     10,
+     0
+    ],
+    [
+     "PDT",
+     8,
+     0
+    ],
+    [
+     "AVANTE",
+     2,
+     3
+    ],
+    [
+     "PV",
+     5,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     2,
+     2
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
+     "REDE",
+     3,
+     0
+    ],
+    [
+     "CIDADANIA",
+     0,
+     2
+    ],
+    [
+     "PRD",
+     0,
+     2
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Não"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Não"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Sim"
+     ]
+    ]
+   }
+  },
+  {
    "id": "2580259",
    "titulo": "PLP 230/2025",
    "ementa": "Altera a Lei Complementar nº 101, de 4 de maio de 2000, para vedar a limitação de empenho e movimentação financeira das despesas relativas ao Fundo de Universalização dos Serviços de Telecomunicações, e a Lei nº 9.998, de 17 de agosto de 2000, para os fins que especifica.",
@@ -605,7 +1123,7 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 6,
+   "noticias": 4,
    "atencao": 0.547,
    "disputa": 0.255,
    "indice": 46,
@@ -771,524 +1289,6 @@
    }
   },
   {
-   "id": "2638483",
-   "titulo": "PL 3085/2026",
-   "ementa": "Regulamenta o regime de relevância das questões de direito federal infraconstitucional para admissão dos recursos especiais no Superior Tribunal de Justiça e altera a Lei nº 13.105, de 16 de março de 2015 (Código de Processo Civil).",
-   "placar": [
-    134,
-    285
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": false,
-   "noticias": 5,
-   "atencao": 0.504,
-   "disputa": 0.36,
-   "indice": 46,
-   "data": "2026-07-14",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     2,
-     78
-    ],
-    [
-     "PT",
-     58,
-     0
-    ],
-    [
-     "UNIÃO",
-     2,
-     41
-    ],
-    [
-     "PSD",
-     6,
-     32
-    ],
-    [
-     "REPUBLICANOS",
-     2,
-     32
-    ],
-    [
-     "PP",
-     0,
-     31
-    ],
-    [
-     "MDB",
-     4,
-     23
-    ],
-    [
-     "PODE",
-     4,
-     18
-    ],
-    [
-     "PSB",
-     13,
-     2
-    ],
-    [
-     "PSDB",
-     0,
-     14
-    ],
-    [
-     "PSOL",
-     12,
-     0
-    ],
-    [
-     "PCdoB",
-     10,
-     0
-    ],
-    [
-     "PDT",
-     8,
-     0
-    ],
-    [
-     "AVANTE",
-     2,
-     3
-    ],
-    [
-     "PV",
-     5,
-     0
-    ],
-    [
-     "SOLIDARIEDADE",
-     2,
-     2
-    ],
-    [
-     "NOVO",
-     0,
-     4
-    ],
-    [
-     "REDE",
-     3,
-     0
-    ],
-    [
-     "CIDADANIA",
-     0,
-     2
-    ],
-    [
-     "PRD",
-     0,
-     2
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Não"
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      "Não"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Não"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Sim"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Sim"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Sim"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Sim"
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2606313",
-   "titulo": "PLP 41/2026",
-   "ementa": "Dispõe sobre o Sistema Nacional de Enfrentamento da Violência contra Meninas e Mulheres e a destinação de recursos às ações de enfrentamento ao feminicídio e de garantia da vida de meninas e mulheres.",
-   "placar": [
-    470,
-    1
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 7,
-   "atencao": 0.585,
-   "disputa": 0.042,
-   "indice": 42,
-   "data": "2026-07-07",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     93,
-     0
-    ],
-    [
-     "PT",
-     63,
-     0
-    ],
-    [
-     "UNIÃO",
-     48,
-     0
-    ],
-    [
-     "PSD",
-     42,
-     0
-    ],
-    [
-     "PP",
-     39,
-     0
-    ],
-    [
-     "REPUBLICANOS",
-     39,
-     0
-    ],
-    [
-     "MDB",
-     31,
-     0
-    ],
-    [
-     "PODE",
-     25,
-     0
-    ],
-    [
-     "PSDB",
-     17,
-     0
-    ],
-    [
-     "PSB",
-     14,
-     0
-    ],
-    [
-     "PSOL",
-     13,
-     0
-    ],
-    [
-     "PDT",
-     10,
-     0
-    ],
-    [
-     "PCdoB",
-     10,
-     0
-    ],
-    [
-     "PV",
-     6,
-     0
-    ],
-    [
-     "AVANTE",
-     5,
-     0
-    ],
-    [
-     "NOVO",
-     5,
-     0
-    ],
-    [
-     "PRD",
-     3,
-     0
-    ],
-    [
-     "REDE",
-     3,
-     0
-    ],
-    [
-     "SOLIDARIEDADE",
-     3,
-     0
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "CIDADANIA",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      "Sim"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Sim"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Sim"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Sim"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Artigo 17"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Sim"
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2236186",
-   "titulo": "PLP 281/2019",
-   "ementa": "Dispõe sobre os regimes de resolução das instituições autorizadas a funcionar pelo Banco Central do Brasil, pela Superintendência de Seguros Privados e pela Comissão de Valores Mobiliários.",
-   "placar": [
-    252,
-    176
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": false,
-   "noticias": 3,
-   "atencao": 0.39,
-   "disputa": 0.451,
-   "indice": 41,
-   "data": "2026-10-14",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     77,
-     3
-    ],
-    [
-     "PT",
-     0,
-     61
-    ],
-    [
-     "PSD",
-     31,
-     9
-    ],
-    [
-     "UNIÃO",
-     9,
-     30
-    ],
-    [
-     "REPUBLICANOS",
-     33,
-     3
-    ],
-    [
-     "PP",
-     30,
-     4
-    ],
-    [
-     "MDB",
-     27,
-     5
-    ],
-    [
-     "PODE",
-     16,
-     6
-    ],
-    [
-     "PSDB",
-     15,
-     0
-    ],
-    [
-     "PSB",
-     1,
-     13
-    ],
-    [
-     "PSOL",
-     0,
-     12
-    ],
-    [
-     "PCdoB",
-     0,
-     10
-    ],
-    [
-     "PDT",
-     1,
-     7
-    ],
-    [
-     "PV",
-     0,
-     6
-    ],
-    [
-     "AVANTE",
-     4,
-     1
-    ],
-    [
-     "NOVO",
-     4,
-     0
-    ],
-    [
-     "REDE",
-     0,
-     3
-    ],
-    [
-     "SOLIDARIEDADE",
-     2,
-     1
-    ],
-    [
-     "PRD",
-     1,
-     1
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "",
-      "não votou"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Sim"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Não"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ]
-    ]
-   }
-  },
-  {
    "id": "2611992",
    "titulo": "PLP 80/2026",
    "ementa": "Altera a Lei nº 14.301, de 7 de janeiro de 2022, para prorrogar o prazo de vigência da não incidência do Adicional ao Frete para Renovação da Marinha Mercante (AFRMM) prevista no art. 17 da Lei nº 9.432, de 8 de janeiro de 1997, nas navegações de cabotagem, interior fluvial e lacustre, desde que a origem ou o destino seja porto localizado na Região Norte ou Nordeste do País.",
@@ -1299,10 +1299,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 4,
-   "atencao": 0.453,
+   "noticias": 5,
+   "atencao": 0.609,
    "disputa": 0.114,
-   "indice": 35,
+   "indice": 46,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -1471,9 +1471,9 @@
    "dividido": true,
    "aprovada": true,
    "noticias": 1,
-   "atencao": 0.195,
+   "atencao": 0.235,
    "disputa": 0.609,
-   "indice": 32,
+   "indice": 35,
    "data": "2026-07-02",
    "nome": null,
    "partidos": [
