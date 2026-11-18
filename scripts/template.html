@@ -55,9 +55,10 @@ svg#h{display:block;width:100%;height:auto;min-width:600px}
 .tip{position:fixed;pointer-events:none;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 12px;max-width:260px;z-index:5;box-shadow:0 8px 24px rgba(0,0,0,.45)}
 .tip b{display:block;font-size:14px}
 .tip span{font-size:12px;color:var(--muted)}
-/* rosto: tenta a foto oficial, cai para iniciais */
+/* rosto: tenta a foto oficial, cai para iniciais (sem vazar inicial atrás da foto) */
 .face{flex:none;position:relative;overflow:hidden;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-weight:900;color:#101214}
-.face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;opacity:0;transition:opacity .14s}
+.face img.ok{opacity:1;background:var(--panel)}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;animation:rise .2s ease-out}
 .card .face{width:104px;height:132px;font-size:40px}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}}
@@ -375,35 +376,63 @@ body.banc #bancpg{display:flex}
 .bdeps b{display:block;font-size:14px}.bdeps span{font-size:12px;color:var(--muted)}
 @media (max-width:700px){.bstats{grid-template-columns:1fr 1fr}.bstats strong{font-size:26px}.belei{grid-template-columns:1fr 1fr}.bvot summary{grid-template-columns:1fr 92px}.bvot summary .vb{grid-column:1/-1;order:3}.bvot .vn{grid-template-columns:1fr}}
 /* ===== Você na Tribuna ===== */
-#tribpg{display:none;max-width:900px}
+#tribpg{display:none;max-width:980px}
 body.trib #perfil,body.trib #quiz,body.trib #cotapg,body.trib #bancpg{display:none!important}
 body.trib #tribpg{display:flex}
 .tbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
 .tbox h3{margin:0;font-size:18px}
+.tstatus{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;min-height:78px}
+.tstat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tstat strong{display:block;font-family:var(--display);font-size:32px;font-weight:800;line-height:1;color:var(--fg)}
+.tstat small{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.tsearchbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.tsearchhead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.tsearchhead h2{font-family:var(--body);font-size:17px;font-weight:700;margin:0;letter-spacing:0}
+.tcontrols{display:grid;grid-template-columns:1.6fr .8fr .8fr;gap:10px}
+.tcontrols input,.tcontrols select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.tres{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:10px}
+.tdep{font:inherit;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--fg);cursor:pointer;text-decoration:none;transition:transform .12s,border-color .12s}
+.tdep:hover{transform:translateY(-1px);border-color:var(--led)}
+.tdep-l{display:flex;align-items:center;gap:10px;min-width:0}
+.tdep .face{width:40px;height:48px;font-size:14px;border-radius:7px}
+.tdep b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tdep span{font-size:12px;color:var(--muted)}
+.tdep .task{font-size:12.5px;font-weight:700;color:var(--led);white-space:nowrap}
+.tsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px}
+.tsteps li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:13px;line-height:1.45;color:var(--muted)}
+.tsteps li b{display:block;font-size:14px;color:var(--fg);margin-bottom:4px}
+.tstepn{display:inline-block;font-family:var(--display);font-weight:800;font-size:18px;background:var(--led);color:var(--onled);padding:2px 9px;border-radius:4px;margin-bottom:6px;line-height:1.1}
+.tqalist{display:flex;flex-direction:column;gap:10px}
+.tqacard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px 18px;display:flex;flex-direction:column;gap:8px}
+.tqatop{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.tqatop a{color:var(--fg);font-weight:700;text-decoration:none}.tqatop a:hover{text-decoration:underline}
+.tbadge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.tbadge.ok{background:rgba(47,162,79,.15);color:var(--confirma)}
+.tbadge.wait{background:var(--ledA);color:var(--led)}
+.tbadge.no{background:var(--dotA);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
+.tqaq{margin:0;font-size:15px;font-weight:600;line-height:1.45;color:var(--fg)}
+.tqaa{margin:0;padding:10px 14px;border-left:3px solid var(--led);background:var(--bg);border-radius:0 7px 7px 0;font-size:13.5px;line-height:1.48}
 .tform{display:flex;flex-direction:column;gap:10px}
-.tform textarea{font:inherit;font-size:15px;background:#0F1B16;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:96px;resize:vertical}
-.tform .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.tform select{flex:1;min-width:150px}
-.tcount{font-size:12px;color:var(--muted);text-align:right}
-.tbtn{font:inherit;font-size:15px;font-weight:700;color:#1A1200;background:var(--led);border:0;border-radius:999px;padding:11px 20px;cursor:pointer;align-self:flex-start}
-.tbtn:disabled{opacity:.5;cursor:default}
-.tmsg{font-size:14px;padding:10px 12px;border-radius:8px;background:#0F1B16;border:1px solid var(--line)}
+.tform textarea{font:inherit;font-size:15px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:96px;resize:vertical;width:100%}
+.tform .row{display:grid;grid-template-columns:1.2fr 1fr;gap:8px}
+.tform select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.tscope{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:12.5px;color:var(--muted);line-height:1.45}
+.tchips{display:flex;gap:6px;flex-wrap:wrap}
+.tchip{font:inherit;font-size:11.5px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
+.tchip:hover{border-color:var(--led);color:var(--led)}
+.tcount{font-size:12px;color:var(--muted)}
+.tbtn{font:inherit;font-size:15px;font-weight:700;color:var(--onled);background:var(--led);border:0;border-radius:8px;padding:12px 20px;cursor:pointer;align-self:flex-start}
+.tbtn.full{width:100%;align-self:stretch;text-align:center}
+.tbtn:disabled{opacity:.48;cursor:default}
+.tmsg{font-size:14px;padding:10px 12px;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
 .tq{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px}
 .tq .tt{font-size:12px;color:var(--muted)}
 .tq p{margin:0;line-height:1.45}
-.tq .st{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:3px;align-self:flex-start;box-shadow:inset 0 0 0 1px currentColor}
-.tq blockquote{margin:4px 0 0;padding:8px 12px;border-left:3px solid var(--led);background:#0F1B16;border-radius:0 8px 8px 0;line-height:1.45}
-.tsteps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.tsteps li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;line-height:1.4}
-.tsteps li::before{content:counter(s);display:block;font-family:var(--ledf);font-weight:900;color:var(--led);font-size:22px;margin-bottom:4px}
-.tsearch{display:flex;flex-direction:column;gap:6px}
-.tres{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
-.tres a{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:center;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--fg);text-decoration:none}
-.tres .face{width:40px;height:50px;font-size:15px;border-radius:6px}
-.tres span{font-size:12px;color:var(--muted)}
-.tnums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.tnums div{border-top:2px solid var(--line);padding-top:8px}.tnums small{display:block;font-size:13px;color:var(--muted)}.tnums strong{font-family:var(--display);font-size:30px;font-weight:800}
-@media (max-width:700px){.tsteps{grid-template-columns:1fr 1fr}.tnums{grid-template-columns:1fr 1fr}}
+.tq .st{font-size:11px;letter-spacing:.6px;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:3px;align-self:flex-start;box-shadow:inset 0 0 0 1px currentColor}
+.tq blockquote{margin:4px 0 0;padding:8px 12px;border-left:3px solid var(--led);background:var(--bg);border-radius:0 8px 8px 0;line-height:1.45}
+dialog#tribModal{max-width:570px;width:calc(100vw - 24px);background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:14px;padding:22px;position:fixed;max-height:92svh;overflow-y:auto}
+dialog#tribModal::backdrop{background:rgba(15,27,22,.62);backdrop-filter:blur(3px)}
+@media (max-width:720px){.tstatus{grid-template-columns:1fr 1fr}.tcontrols{grid-template-columns:1fr}.tform .row{grid-template-columns:1fr}}
 /* ===== Em destaque ===== */
 .destq{max-width:1100px;margin:0 auto;padding:40px 20px 10px}
 body.dep .destq{display:none!important}
@@ -542,12 +571,12 @@ html.claro .bstrip a{border-color:#FFFFFF}
 html.claro .bvot .vb .n{background:#A3B0A8}
 html.claro .crow:hover,html.claro .bdeps a:hover,html.claro .bufs button:hover{border-color:#9FB0A6}
 html.claro .tform textarea{background:var(--bg)}
-html.claro .tmsg,html.claro .tq blockquote{background:#F0F4F1}
+html.claro .tmsg,html.claro .tq blockquote,html.claro .tqaa,html.claro .tscope{background:#EEF3EF}
 html.claro .dplacar{background:#0E1612;color:#FFB000}
 html.claro select option{background:#FFFFFF;color:var(--fg)}
 html.claro .tecla{box-shadow:0 4px 0 #9AA29E,inset 0 1px 0 #ffffff17}
 html.claro .tecla.branco{border-color:#CFCFC6}
-html.claro .qcard,html.claro .card,html.claro .dcard,html.claro .tbox{box-shadow:0 1px 2px rgba(20,33,27,.05)}
+html.claro .qcard,html.claro .card,html.claro .dcard,html.claro .tbox,html.claro .tsearchbox,html.claro .tstat,html.claro .tsteps li,html.claro .tqacard{box-shadow:0 1px 2px rgba(20,33,27,.05)}
 /* plenário claro */
 html.claro:not(.plen-escuro) #carpet stop:nth-child(1){stop-color:#DCEADF} html.claro:not(.plen-escuro) #carpet stop:nth-child(2){stop-color:#E6EFE8} html.claro:not(.plen-escuro) #carpet stop:nth-child(3){stop-color:#EEF3EF}
 html.claro:not(.plen-escuro) #floor path:not([fill^="url"]){stroke:#CFDDD3}
@@ -732,6 +761,7 @@ body.ap #appg{display:flex}
 <div class="wrap" id="cotapg"></div>
 <div class="wrap" id="bancpg"></div>
 <div class="wrap" id="tribpg"></div>
+<dialog id="tribModal" aria-label="Perguntar na Tribuna"></dialog>
 <div class="wrap" id="senpg"></div>
 <div class="wrap" id="appg"></div>
 <div id="tip" class="tip" hidden></div>
@@ -740,7 +770,7 @@ body.ap #appg{display:flex}
     <section>
       <div class="brand"><svg class="logo" viewBox="0 0 56 30" aria-hidden="true"><path d="M3.5 22 Q12.5 6 21.5 22 Z" fill="#FFB000"/><path d="M34.5 13 Q43.5 30 52.5 13 Z" fill="#FFB000"/><rect x="23.6" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="28.4" y="1" width="4" height="21" rx=".5" fill="#EEF0E8"/><rect x="23.6" y="9" width="8.8" height="1.8" fill="#EEF0E8"/><rect x="1.5" y="22" width="53" height="3" rx="1.5" fill="#EEF0E8"/></svg>CENTRO POLÍTICO</div>
       <p>Centro de informação, não posição política. Mostramos como os deputados votam, gastam e se elegem, só com dados oficiais e sem tomar lado.</p>
-      <p>Nada do que você faz aqui é guardado.</p>
+      <p>Na navegação e na Urna, nada é guardado; na Tribuna, apenas um código anônimo de 7 dias evita spam.</p>
       <p style="font-size:13px">Dados atualizados em __ATUALIZADO__.</p>
     </section>
     <section>
@@ -779,7 +809,7 @@ function initials(n){const p=n.replace(/^(Dr\.|Dra\.|Delegado|Delegada|Pastor|Ca
 const posLabel=s=> s<-0.3?'Bloco do PT e aliados':s>0.3?'Bloco do PL e aliados':'Centro';
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 // foto oficial da Câmara; se não carregar (ex.: bloqueio), ficam as iniciais
-function face(d,cls){return `<div class="face ${cls||''}" style="background:${color(d.s)}" aria-hidden="true">${initials(d.n)}<img alt="" src="https://www.camara.leg.br/internet/deputado/bandep/${d.id}.jpg" onerror="this.remove()"></div>`}
+function face(d,cls){return `<div class="face ${cls||''}" style="background:${color(d.s)}" aria-hidden="true">${initials(d.n)}<img alt="" src="https://www.camara.leg.br/internet/deputado/bandep/${d.id}.jpg" onload="this.classList.add('ok')" onerror="this.remove()"></div>`}
 function tenure(h){return h.l0===57?'1º mandato':`${h.l0}ª legislatura · ${2026-h.y0} anos desde a estreia`}
 const brl=v=>v>=1e6?'R$ '+(v/1e6).toLocaleString('pt-BR',{maximumFractionDigits:1})+' mi':'R$ '+Math.round(v/1e3).toLocaleString('pt-BR')+' mil';
 const AREA={'Encargos especiais':'Transferência especial (“emenda Pix”)','Múltiplo':'Várias áreas'};
@@ -905,7 +935,7 @@ document.addEventListener('pointerleave',hideHover); document.documentElement.ad
 addEventListener('blur',hideHover); addEventListener('scroll',()=>{if(!document.body.classList.contains('dep')) hideHover()},{passive:true});
 document.querySelector('.hall').addEventListener('scroll',hideHover,{passive:true});
 function pickPres(){ if(selected>=0) els[selected].classList.remove('sel'); selected=-1; pg.classList.add('sel');
-  const d={n:PRES.n,id:PRES.id,s:0}; const f=`<div class="face" style="background:#FFB000;width:104px;height:132px;font-size:40px" aria-hidden="true">HM<img alt="" src="https://www.camara.leg.br/internet/deputado/bandep/${PRES.id}.jpg" onerror="this.remove()"></div>`;
+  const d={n:PRES.n,id:PRES.id,s:0}; const f=`<div class="face" style="background:#FFB000;width:104px;height:132px;font-size:40px" aria-hidden="true">HM<img alt="" src="https://www.camara.leg.br/internet/deputado/bandep/${PRES.id}.jpg" onload="this.classList.add('ok')" onerror="this.remove()"></div>`;
   const rows=PRES.pautas.map(x=>`<a href="https://www.camara.leg.br/propostas-legislativas/${x.prop}" target="_blank" rel="noopener"><time datetime="${x.d}">${fdate(x.d)}</time><div style="min-width:0"><b>${esc(x.tit)}</b> <span>· ${esc(x.res)}</span><br><span>${esc(x.em)}</span></div><span>${x.n} ${x.n>1?'votações':'votação'} ↗</span></a>`).join('');
   card.innerHTML = f + `<div style="min-width:0"><h2>${PRES.n}</h2><div class="meta">${PRES.p}-${PRES.uf} · natural de ${PRES.nasc}</div><span class="role">Presidente da Câmara</span>
    <div class="facts">
@@ -1400,80 +1430,210 @@ function bancMap(uf,go){const svg=document.getElementById('bmap'); if(!svg) retu
 /* ===== Você na Tribuna ===== */
 const reeleito=h=>!!(h&&h.tse&&h.tse.cargo==='Deputado Federal'&&/^ELEITO/.test(h.tse.sit||''));
 const TEMAS=['Saúde','Educação','Segurança','Economia e impostos','Emprego e renda','Meio ambiente','Transporte e cidades','Direitos e costumes','Corrupção e transparência','Agro e campo','Gastos do mandato','Outro'];
+const SCOPE_HINTS={
+ 'Saúde':'Alçada de Deputado Federal: diretrizes e orçamento do SUS, piso nacional e leis sanitárias. (Gestão diária de postos/UPAs é municipal; hospitais estaduais são do Governador).',
+ 'Educação':'Alçada de Deputado Federal: diretrizes nacionais (LDB), FUNDEB, universidades/institutos federais e piso nacional. (Creches/fundamental são municipais; ensino médio estadual é do Governador).',
+ 'Segurança':'Alçada de Deputado Federal: Código Penal, penas, leis contra facções e fundo nacional de segurança. (Comando diário da PM e delegacias é do Governador).',
+ 'Economia e impostos':'Alçada de Deputado Federal: Imposto de Renda, Reforma Tributária (CBS), orçamento da União e regras fiscais. (IPTU é municipal; IPVA é estadual).',
+ 'Emprego e renda':'Alçada de Deputado Federal: CLT, jornada máxima (ex.: escala 6x1), salário mínimo, INSS e programas federais de renda.',
+ 'Meio ambiente':'Alçada de Deputado Federal: Código Florestal, licenciamento ambiental federal, Ibama/ICMBio, clima e demarcações.',
+ 'Transporte e cidades':'Alçada de Deputado Federal: Código de Trânsito, rodovias/ferrovias federais, aviação e marco do saneamento/habitação. (Zeladoria urbana e ônibus locais são municipais).',
+ 'Direitos e costumes':'Alçada de Deputado Federal: Código Civil, estatutos nacionais, liberdades individuais e garantias constitucionais.',
+ 'Corrupção e transparência':'Alçada de Deputado Federal: leis anticorrupção, CPIs, fiscalização de ministérios, foro privilegiado e transparência de emendas.',
+ 'Agro e campo':'Alçada de Deputado Federal: Plano Safra, crédito e seguro rural, defesa agropecuária e regularização fundiária federal.',
+ 'Gastos do mandato':'Alçada direta do parlamentar: uso da Cota Parlamentar (CEAP), verba de gabinete, presença em plenário e destino das emendas.',
+ 'Outro':'Certifique-se de que a pergunta trata de leis federais, votos na Câmara, fiscalização da União ou atuação do mandato.'
+};
 const tdate=ms=>{const d=new Date(ms); return `${d.getDate()} ${MES[d.getMonth()]} ${d.getFullYear()}`};
+let TS=null;
+function renderTribItem(q,depObj){
+  const st={respondida:['Respondida','ok'],aguardando:['Aguardando até '+tdate(q.prazo),'wait'],sem_resposta:['Sem resposta após 14 dias','no']}[q.status]||['Publicada','no'];
+  const headDep=depObj?`Para <a href="#dep/${depObj.id}">${esc(depObj.n)} (${esc(depObj.p)}-${depObj.uf})</a> · `:'';
+  return `<article class="tqacard"><div class="tqatop"><span>${headDep}Tema: <b>${esc(q.tema)}</b>${q.uf?` · leitor de ${esc(q.uf)}`:''}${q.enviada?` · enviada em ${tdate(q.enviada)}`:''}</span><span class="tbadge ${st[1]}">${st[0]}</span></div>
+   <p class="tqaq">“${esc(q.texto)}”</p>
+   ${q.resposta?`<blockquote class="tqaa"><b>Resposta do gabinete (na íntegra${q.respondida?', em '+tdate(q.respondida):''}):</b> “${esc(q.resposta)}”</blockquote>`:''}</article>`;
+}
 function tribBlock(d,h){
   if(!reeleito(h)) return `<p class="sec" id="tribsec">Você na Tribuna</p><p class="hint" style="margin:0">A Tribuna recebe perguntas só para deputados reeleitos em 2026, que continuam no cargo em 2027. <a href="#tribuna" style="color:var(--fg)">Como funciona</a></p>`;
   setTimeout(()=>tribLoad(d),0);
   return `<p class="sec" id="tribsec">Você na Tribuna <span class="hint">pergunte a ${esc(d.n)}</span></p>
-   <div class="tbox"><p class="hint" style="margin:0">Sua pergunta passa por uma triagem, vai para o gabinete por e-mail e aparece aqui com a resposta, ou com o aviso de que não respondeu em 14 dias. Não pedimos nome nem e-mail. <a href="#tribuna" style="color:var(--fg)">Regras</a></p>
+   <div class="tbox"><p class="hint" style="margin:0">Sua pergunta passa por triagem impessoal, vai toda segunda ao gabinete e aparece aqui com a resposta na íntegra (ou registro de ausência após 14 dias). Não pedimos nome nem e-mail. <a href="#tribuna" style="color:var(--fg)">Ir à Tribuna / Regras</a></p>
     <div id="tlist"><p class="hint" style="margin:0">Carregando perguntas…</p></div>
-    ${CFG.tribuna_api&&CFG.turnstile_sitekey?`<button type="button" class="tbtn" id="topen">Fazer uma pergunta</button><div id="tform" hidden></div>`:`<p class="hint" style="margin:0">O envio de perguntas abre em breve.</p>`}</div>`}
-async function tribLoad(d){const L=document.getElementById('tlist'); if(!L) return;
-  const op=document.getElementById('topen'); if(op) op.onclick=()=>tribForm(d);
+    ${CFG.tribuna_api&&CFG.turnstile_sitekey?`<button type="button" class="tbtn" id="topen">Fazer uma pergunta a ${esc(d.n.split(' ')[0])}</button><div id="tform" hidden></div>`:`<p class="hint" style="margin:0">O envio de perguntas abre em breve.</p>`}</div>`}
+async function tribLoad(d,targetEl){
+  const L=targetEl||document.getElementById('tlist'); if(!L) return;
+  if(!targetEl){const op=document.getElementById('topen'); if(op) op.onclick=()=>{op.hidden=true; const f=document.getElementById('tform'); f.hidden=false; mountTribForm(f,d,false);};}
   if(!CFG.tribuna_api){L.innerHTML='<p class="hint" style="margin:0">Ainda não há perguntas publicadas.</p>'; return;}
   try{const r=await (await fetch(CFG.tribuna_api+'/perguntas?dep='+d.id)).json(); const P=r.perguntas||[];
-    L.innerHTML=P.length?P.map(q=>{const st={respondida:['Respondeu','var(--fg)'],aguardando:['Aguardando resposta até '+tdate(q.prazo),'var(--led)'],sem_resposta:['Não respondeu no prazo','var(--muted)']}[q.status]||['','var(--muted)'];
-      return `<div class="tq"><span class="tt">${esc(q.tema)}${q.uf?` · eleitor de ${esc(q.uf)}`:''} · enviada em ${tdate(q.enviada)}</span><p>${esc(q.texto)}</p><span class="st" style="color:${st[1]}">${st[0]}</span>${q.resposta?`<blockquote>${esc(q.resposta)}<br><span class="tt">Resposta do gabinete em ${tdate(q.respondida)}</span></blockquote>`:''}</div>`}).join('')
-      :'<p class="hint" style="margin:0">Ainda não há perguntas publicadas para este deputado.</p>';}
+    L.innerHTML=P.length?`<div class="tqalist">${P.map(q=>renderTribItem(q,null)).join('')}</div>`
+      :'<p class="hint" style="margin:0">Ainda não há perguntas publicadas para este deputado. Seja o primeiro a perguntar.</p>';}
   catch(e){L.innerHTML='<p class="hint" style="margin:0">Não foi possível carregar as perguntas agora.</p>';}}
-let TS=null;
-function tribForm(d){const F=document.getElementById('tform'), op=document.getElementById('topen'); op.hidden=true; F.hidden=false;
-  F.innerHTML=`<div class="tform"><label class="sr" for="ttema">Tema</label>
-    <div class="row"><select id="ttema"><option value="">Tema da pergunta</option>${TEMAS.map(x=>`<option>${x}</option>`).join('')}</select>
-     <select id="tuf"><option value="">Seu estado (opcional)</option>${Object.keys(UFN).sort().map(u=>`<option value="${u}">${UFN[u]}</option>`).join('')}</select></div>
-    <label class="sr" for="ttxt">Pergunta</label><textarea id="ttxt" maxlength="300" placeholder="Escreva uma pergunta sobre o mandato: votos, projetos, gastos, posições. Seja direto e respeitoso."></textarea>
-    <div class="tcount" id="tcnt">0/300</div><div id="tts"></div>
-    <button type="button" class="tbtn" id="tsend" disabled>Enviar para a triagem</button><div id="tmsg"></div></div>`;
-  const tx=document.getElementById('ttxt'), sb=document.getElementById('tsend'), msg=document.getElementById('tmsg'); let tok='';
-  const ok=()=>{sb.disabled=!(tok&&document.getElementById('ttema').value&&tx.value.trim().length>=15)};
-  tx.oninput=()=>{document.getElementById('tcnt').textContent=tx.value.length+'/300'; ok()}; document.getElementById('ttema').onchange=ok;
-  const render=()=>{TS=turnstile.render('#tts',{sitekey:CFG.turnstile_sitekey,theme:'dark',language:'pt-br',callback:t=>{tok=t;ok()},'expired-callback':()=>{tok='';ok()}})};
+function mountTribForm(F,d,fullBtn){
+  F.innerHTML=`<div class="tform">
+    <div class="row">
+      <div><label style="display:block;font-size:12px;color:var(--muted);margin-bottom:4px">Tema oficial (alçada da Câmara)</label>
+       <select data-f="tema"><option value="">Escolha o tema…</option>${TEMAS.map(x=>`<option>${x}</option>`).join('')}</select></div>
+      <div><label style="display:block;font-size:12px;color:var(--muted);margin-bottom:4px">Seu estado (opcional)</label>
+       <select data-f="uf"><option value="">Prefiro não informar</option>${Object.keys(UFN).sort().map(u=>`<option value="${u}">${UFN[u]} (${u})</option>`).join('')}</select></div>
+    </div>
+    <div class="tscope" data-f="scope" hidden></div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">
+        <label style="font-size:12px;color:var(--muted)">Sua pergunta objetiva (15 a 300 caracteres)</label>
+        <span class="tcount" data-f="cnt">0 / 300</span>
+      </div>
+      <textarea data-f="txt" maxlength="300" placeholder="Escreva com respeito e foco na atuação parlamentar: leis federais, votos em plenário, fiscalização ou uso de verbas…"></textarea>
+    </div>
+    <div class="tchips">
+      <button type="button" class="tchip" data-tpl="Como pretende votar e atuar em 2027 sobre ">Modelo: Posição em 2027</button>
+      <button type="button" class="tchip" data-tpl="Por que votou dessa forma na votação sobre ">Modelo: Cobrar voto em plenário</button>
+      <button type="button" class="tchip" data-tpl="Qual critério seu gabinete usa para destinar emendas parlamentares em ">Modelo: Destino de emendas</button>
+    </div>
+    <div data-f="ts"></div>
+    <button type="button" class="tbtn${fullBtn?' full':''}" data-f="send" disabled>Enviar pergunta para a triagem</button>
+    <div data-f="msg"></div>
+   </div>`;
+  const selTema=F.querySelector('[data-f="tema"]'), selUf=F.querySelector('[data-f="uf"]'), scopeEl=F.querySelector('[data-f="scope"]');
+  const tx=F.querySelector('[data-f="txt"]'), cnt=F.querySelector('[data-f="cnt"]'), tsBox=F.querySelector('[data-f="ts"]');
+  const sb=F.querySelector('[data-f="send"]'), msg=F.querySelector('[data-f="msg"]');
+  let tok='';
+  const ok=()=>{sb.disabled=!(tok&&selTema.value&&tx.value.trim().length>=15)};
+  selTema.onchange=()=>{const h=SCOPE_HINTS[selTema.value]||''; scopeEl.textContent=h; scopeEl.hidden=!h; ok();};
+  tx.oninput=()=>{cnt.textContent=tx.value.length+' / 300'; ok();};
+  F.querySelectorAll('.tchip').forEach(b=>b.onclick=()=>{if(!tx.value.trim()){tx.value=b.dataset.tpl;}else if(!tx.value.startsWith(b.dataset.tpl)){tx.value=(b.dataset.tpl+tx.value).slice(0,300);} tx.focus(); cnt.textContent=tx.value.length+' / 300'; ok();});
+  if(window.turnstile&&TS!=null){try{turnstile.remove(TS);}catch(e){} TS=null;}
+  const isLight=document.documentElement.classList.contains('claro');
+  const render=()=>{TS=turnstile.render(tsBox,{sitekey:CFG.turnstile_sitekey,theme:isLight?'light':'dark',language:'pt-br',callback:t=>{tok=t;ok()},'expired-callback':()=>{tok='';ok()}})};
   if(window.turnstile) render(); else {const s=document.createElement('script'); s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; s.onload=render; document.head.appendChild(s);}
-  sb.onclick=async()=>{sb.disabled=true; msg.innerHTML='<div class="tmsg">Enviando…</div>';
-    try{const r=await fetch(CFG.tribuna_api+'/perguntar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({dep:d.id,tema:document.getElementById('ttema').value,uf:document.getElementById('tuf').value,texto:tx.value,token:tok})});
+  sb.onclick=async()=>{sb.disabled=true; msg.innerHTML='<div class="tmsg">Enviando pergunta…</div>';
+    try{const r=await fetch(CFG.tribuna_api+'/perguntar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({dep:d.id,tema:selTema.value,uf:selUf.value,texto:tx.value,token:tok})});
       const j=await r.json();
-      if(j.ok){F.innerHTML='<div class="tmsg"><b>Pergunta recebida.</b> Ela passa pela triagem e, se aprovada, vai para o gabinete na próxima segunda. Volte aqui para ver a resposta.</div>';}
+      if(j.ok){F.innerHTML='<div class="tmsg"><b>Pergunta recebida!</b> Ela passa pela triagem impessoal e, aprovada, segue ao gabinete na próxima segunda-feira com prazo de 14 dias para resposta.</div>';}
       else {msg.innerHTML=`<div class="tmsg">${esc(j.erro||'Não foi possível enviar.')}</div>`; tok=''; if(window.turnstile&&TS!=null) turnstile.reset(TS); ok();}}
-    catch(e){msg.innerHTML='<div class="tmsg">Sem conexão com a Tribuna agora. Tente de novo em instantes.</div>'; sb.disabled=false;}};}
+    catch(e){msg.innerHTML='<div class="tmsg">Sem conexão com a Tribuna agora. Tente de novo em instantes.</div>'; sb.disabled=false;}};
+}
+function openTribModal(d){
+  const dlg=document.getElementById('tribModal'); if(!dlg) return;
+  dlg.innerHTML=`<button type="button" class="close" id="tmClose" aria-label="Fechar">×</button>
+   <div style="display:flex;gap:14px;align-items:center;padding-right:34px;margin-bottom:14px">
+     ${face(d)}
+     <div style="min-width:0">
+       <div style="font-size:11.5px;color:var(--led);font-weight:700;letter-spacing:.08em;text-transform:uppercase">Perguntar na Tribuna</div>
+       <h2 style="margin:2px 0;font-size:32px">${esc(d.n)}</h2>
+       <div style="font-size:13px;color:var(--muted)">Deputado(a) Federal reeleito(a) · ${esc(d.p)}-${d.uf} · <a href="#dep/${d.id}" id="tmPerfil" style="color:var(--fg)">Ver votos e cota ↗</a></div>
+     </div>
+   </div>
+   <div id="tmForm"></div>
+   <details class="whatis" style="margin-top:14px"><summary>Perguntas já publicadas para ${esc(d.n.split(' ')[0])}</summary><div id="tmList" style="margin-top:10px"><p class="hint" style="margin:0">Carregando…</p></div></details>`;
+  dlg.querySelector('#tmClose').onclick=()=>dlg.close();
+  dlg.querySelector('#tmPerfil').onclick=()=>dlg.close();
+  dlg.onclick=e=>{if(e.target===dlg) dlg.close();};
+  dlg.showModal();
+  if(CFG.tribuna_api&&CFG.turnstile_sitekey) mountTribForm(dlg.querySelector('#tmForm'),d,true);
+  else dlg.querySelector('#tmForm').innerHTML='<p class="hint">O envio de perguntas abre em breve.</p>';
+  tribLoad(d,dlg.querySelector('#tmList'));
+}
 async function tribPage(){const el=document.getElementById('tribpg');
   const R=deps.filter(x=>reeleito(HIST.deps[x.id])).sort((a,b)=>a.n.localeCompare(b.n,'pt'));
+  const ufs=[...new Set(R.map(x=>x.uf))].sort(), pts=[...new Set(R.map(x=>x.p).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt'));
+  let lim=12, depCounts={};
   el.innerHTML=`<div class="cintro"><a class="back" href="#">Voltar ao plenário</a>
-    <p class="led" style="margin:18px 0 0;font-size:20px;letter-spacing:3px">TRIBUNA</p>
+    <p class="led" style="margin:18px 0 0;font-size:20px;letter-spacing:3px">TRIBUNA CIDADÃ · LEGISLATURA 2027–2030</p>
     <h1>Você na Tribuna</h1>
-    <p class="lead">A tribuna é de onde o deputado fala. Aqui, quem fala é você: faça uma pergunta a um deputado reeleito e acompanhe se ele responde.</p></div>
-   <div class="tnums" id="tnums"></div>
-   <div class="tsearch"><p class="sec" style="margin-top:6px">Para quem você quer perguntar?</p>
-    <input id="tq" type="search" placeholder="Nome do deputado, partido ou estado" autocomplete="off"><div class="tres" id="tres"></div>
-    <p class="hint" style="margin:0">${R.length} deputados reeleitos em 2026 podem receber perguntas. Quem não se reelegeu deixa o cargo em janeiro.</p></div>
-   <p class="sec">Como funciona</p>
-   <ol class="tsteps"><li>Você escolhe o deputado, o tema e escreve a pergunta (até 300 caracteres).</li><li>A pergunta passa por uma triagem: ofensas e assuntos fora do mandato não seguem.</li><li>Toda segunda, as perguntas aprovadas vão por e-mail para o gabinete.</li><li>O deputado tem 14 dias para responder.</li><li>A resposta aparece no perfil dele, na íntegra. Sem resposta, aparece o aviso.</li></ol>
-   <p class="sec">Regras</p>
-   <div class="tbox" style="gap:6px;font-size:14px;line-height:1.5">
-    <p style="margin:0"><b>Recusadas na hora, automaticamente:</b> palavrões, xingamentos, ameaças e discurso de ódio. Crítica dura ao mandato é bem-vinda; ofensa não.</p>
-    <p style="margin:0"><b>Não seguem para o gabinete:</b> vida pessoal sem relação com o mandato; propaganda ou links; textos que não são pergunta. Perguntas muito parecidas são juntadas numa só.</p>
-    <p style="margin:0"><b>Limites:</b> 1 pergunta por deputado por semana e 3 por dia, por pessoa.</p>
-    <p style="margin:0"><b>Sua privacidade:</b> não pedimos nome nem e-mail. Para o limite funcionar, o servidor guarda só um código embaralhado do seu acesso, que não identifica você e é apagado em 7 dias. O estado é opcional.</p>
-    <p style="margin:0"><b>Equilíbrio:</b> a contagem de perguntas e respostas de cada deputado é pública, para qualquer um conferir que todos os lados são cobrados do mesmo jeito.</p></div>
+    <p class="lead">Envie uma pergunta objetiva, dentro das atribuições reais do mandato, para qualquer deputado federal reeleito. Toda segunda-feira enviamos ao gabinete e publicamos a resposta na íntegra (ou o registro de ausência após 14 dias).</p></div>
+   <div class="tstatus" id="tnums">
+    <div class="tstat"><strong>${R.length}</strong><small>Deputados reeleitos habilitados</small></div>
+    <div class="tstat"><strong>14 DIAS</strong><small>Prazo igual de resposta aos gabinetes</small></div>
+    <div class="tstat"><strong>100%</strong><small>Respostas publicadas sem edição</small></div>
+    <div class="tstat"><strong id="tstat4">SEGUNDA</strong><small id="tstat4l">Dia fixo de envio dos lotes semanais</small></div>
+   </div>
+   <section class="tsearchbox">
+    <div class="tsearchhead"><h2>Para quem você quer perguntar?</h2><span id="tcountlbl" style="font-size:12.5px;color:var(--muted)"></span></div>
+    <div class="tcontrols">
+     <input id="tq" type="search" placeholder="Buscar por nome do deputado…" autocomplete="off">
+     <select id="tufsel"><option value="">Todos os estados (UF)</option>${ufs.map(u=>`<option value="${u}">${UFN[u]} (${u})</option>`).join('')}</select>
+     <select id="tpsel"><option value="">Todos os partidos</option>${pts.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('')}</select>
+    </div>
+    <div class="tres" id="tres"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+     <p class="hint" style="margin:0">${R.length} deputados reeleitos em 2026 podem receber perguntas. Quem não se reelegeu deixa o cargo em janeiro.</p>
+     <button type="button" class="cmore" id="tmore" hidden></button>
+    </div>
+   </section>
+   <p class="sec" style="margin-top:8px">Como funciona (4 passos)</p>
+   <ol class="tsteps">
+    <li><span class="tstepn">1</span><b>Escolha e pergunte</b>Até 300 caracteres focados em leis federais, orçamento, fiscalização ou voto em plenário.</li>
+    <li><span class="tstepn">2</span><b>Triagem impessoal</b>Barramos apenas xingamentos, dados pessoais, links ou temas fora da alçada federal (ex.: zeladoria municipal).</li>
+    <li><span class="tstepn">3</span><b>Envio toda segunda</b>O gabinete recebe no e-mail institucional da Câmara com prazo igual de 14 dias corridos.</li>
+    <li><span class="tstepn">4</span><b>Registro público</b>A resposta entra na íntegra no perfil do parlamentar. Sem retorno em 14 dias, fica registrado “sem resposta no prazo”.</li>
+   </ol>
+   <div id="tfeed">
+    <p class="sec">Como as perguntas aparecem no perfil <span class="hint">· exemplo ilustrativo de formato</span></p>
+    <div class="tqalist">
+     <article class="tqacard"><div class="tqatop"><span>Exemplo de pergunta · Tema: <b>Economia e impostos</b> · leitor de SP</span><span class="tbadge ok">Respondida no prazo</span></div>
+      <p class="tqaq">“Na regulamentação da Reforma Tributária em 2027, qual será sua posição sobre travas legais para impedir aumento da alíquota padrão do IVA sobre serviços?”</p>
+      <blockquote class="tqaa"><b>Resposta do gabinete (na íntegra):</b> O texto enviado pela assessoria ou pelo parlamentar entra aqui exatamente como foi respondido, sem cortes nem nota editorial.</blockquote></article>
+     <article class="tqacard"><div class="tqatop"><span>Exemplo de ausência · Tema: <b>Gastos do mandato</b> · leitor de MG</span><span class="tbadge no">Sem resposta após 14 dias</span></div>
+      <p class="tqaq">“Pretende aderir à abertura detalhada das notas de divulgação da atividade parlamentar e reduzir o uso mensal da cota de gabinete em 2027?”</p></article>
+    </div>
+   </div>
+   <details class="whatis"><summary>Regras completas de triagem, limites e privacidade</summary>
+    <p><b>Recusadas na hora, automaticamente:</b> palavrões, xingamentos, ameaças e discurso de ódio. Crítica dura ao mandato é bem-vinda; ofensa não.</p>
+    <p><b>Não seguem para o gabinete:</b> vida pessoal sem relação com o mandato; propaganda ou links; assuntos estritamente municipais/estaduais; textos que não são pergunta. Perguntas muito parecidas são agrupadas.</p>
+    <p><b>Limites:</b> 1 pergunta por deputado por semana e 3 por dia, por pessoa.</p>
+    <p><b>Sua privacidade:</b> não pedimos nome nem e-mail. Para o limite funcionar, o servidor guarda só um código embaralhado do seu acesso, que não identifica você e é apagado em 7 dias. O estado é opcional.</p>
+    <p><b>Equilíbrio:</b> a contagem de perguntas e respostas de cada deputado é pública, para qualquer um conferir que todos os lados são cobrados do mesmo jeito.</p>
+   </details>
    <div id="tmais"></div>`;
-  const draw=()=>{const q=document.getElementById('tq').value.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-    const L=q?R.filter(x=>(x.n+' '+x.p+' '+x.uf+' '+(UFN[x.uf]||'')).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q)):[];
-    document.getElementById('tres').innerHTML=L.slice(0,12).map(x=>`<a href="#dep/${x.id}/tribuna">${face(x)}<div style="min-width:0"><b>${esc(x.n)}</b><br><span>${esc(x.p)}-${x.uf}</span></div></a>`).join('')+(q&&!L.length?'<p class="hint">Nenhum deputado reeleito com esse nome.</p>':'');};
-  document.getElementById('tq').oninput=draw;
-  const N=document.getElementById('tnums');
-  if(!CFG.tribuna_api){N.innerHTML='<p class="hint" style="margin:0;grid-column:1/-1">O envio de perguntas abre em breve. Enquanto isso, veja como vai funcionar.</p>'; return;}
-  try{const r=await (await fetch(CFG.tribuna_api+'/resumo')).json(), T=r.totais||{}, D=r.deps||[];
-    const resp=D.reduce((a,x)=>a+(x.resp||0),0), sem=D.reduce((a,x)=>a+(x.sem||0),0);
-    N.innerHTML=`<div><small>Perguntas publicadas</small><strong>${T.publicadas||0}</strong></div><div><small>Respondidas</small><strong>${resp}</strong></div><div><small>Sem resposta no prazo</small><strong>${sem}</strong></div><div><small>Na triagem</small><strong>${T.triagem||0}</strong></div>`;
-    const top=D.map(x=>({...x,d:deps[byId[x.dep]]})).filter(x=>x.d).sort((a,b)=>b.n-a.n).slice(0,15);
-    if(top.length) document.getElementById('tmais').innerHTML=`<p class="sec">Quem mais recebeu perguntas</p><div class="bplist">${top.map(x=>`<div><a href="#dep/${x.dep}/tribuna" style="color:var(--fg)">${esc(x.d.n)}</a><i style="width:${(x.n/top[0].n*100).toFixed(1)}%"></i><b>${x.n}</b></div>`).join('')}</div><p class="hint" style="margin:6px 0 0">Número de perguntas publicadas. Toque no nome para ver as perguntas e respostas.</p>`;}
-  catch(e){N.innerHTML='<p class="hint" style="margin:0;grid-column:1/-1">Não foi possível carregar os números agora.</p>';}}
+  const clean=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const draw=()=>{
+    const q=clean(document.getElementById('tq').value.trim()), u=document.getElementById('tufsel').value, p=document.getElementById('tpsel').value;
+    const L=R.filter(x=>{
+      if(u&&x.uf!==u) return false;
+      if(p&&x.p!==p) return false;
+      if(q&&!clean(x.n).includes(q)&&clean(x.uf)!==q&&!clean(x.p).includes(q)) return false;
+      return true;
+    });
+    const shown=L.slice(0,lim);
+    document.getElementById('tcountlbl').textContent=L.length?`Mostrando ${shown.length} de ${L.length} deputados`:'Nenhum deputado neste filtro';
+    const grid=document.getElementById('tres');
+    grid.innerHTML=shown.length?shown.map(x=>{const nq=depCounts[x.id]||0;
+      return `<button type="button" class="tdep" data-dep="${x.id}"><span class="tdep-l">${face(x)}<span style="min-width:0"><b>${esc(x.n)}</b><span>${esc(x.p)}-${x.uf}${nq?` · ${nq} perg.`:''}</span></span></span><span class="task">Perguntar →</span></button>`;}).join('')
+      :'<p class="hint" style="margin:0;grid-column:1/-1">Nenhum deputado reeleito encontrado com esses filtros.</p>';
+    grid.querySelectorAll('.tdep').forEach(b=>b.onclick=()=>{const d=deps[byId[b.dataset.dep]]; if(d) openTribModal(d);});
+    const mb=document.getElementById('tmore');
+    if(L.length>lim){mb.hidden=false; mb.textContent=`Ver mais ${Math.min(24,L.length-lim)} deputados`; mb.onclick=()=>{lim+=24; draw();};}
+    else mb.hidden=true;
+  };
+  ['tq','tufsel','tpsel'].forEach(id=>{const c=document.getElementById(id); c.oninput=()=>{lim=12; draw();}; c.onchange=()=>{lim=12; draw();};});
+  draw();
+  if(!CFG.tribuna_api) return;
+  try{
+    const r=await (await fetch(CFG.tribuna_api+'/resumo')).json(), T=r.totais||{}, D=r.deps||[];
+    D.forEach(x=>{depCounts[x.dep]=x.n||0;});
+    const pub=T.publicadas||0, resp=D.reduce((a,x)=>a+(x.resp||0),0), sem=D.reduce((a,x)=>a+(x.sem||0),0), tri=T.triagem||0;
+    if(pub>0||tri>0){
+      document.getElementById('tnums').innerHTML=`<div class="tstat"><strong>${pub}</strong><small>Perguntas publicadas</small></div><div class="tstat"><strong>${resp}</strong><small>Respondidas pelos gabinetes</small></div><div class="tstat"><strong>${sem}</strong><small>Sem resposta após 14 dias</small></div><div class="tstat"><strong>${tri}</strong><small>Na fila de triagem</small></div>`;
+      draw();
+    }
+    const top=D.map(x=>({...x,d:deps[byId[x.dep]]})).filter(x=>x.d&&x.n>0).sort((a,b)=>b.n-a.n).slice(0,15);
+    if(top.length){
+      document.getElementById('tmais').innerHTML=`<p class="sec">Quem mais recebeu perguntas</p><div class="bplist">${top.map(x=>`<div><a href="#dep/${x.dep}/tribuna" style="color:var(--fg)">${esc(x.d.n)}</a><i style="width:${(x.n/top[0].n*100).toFixed(1)}%"></i><b>${x.n}</b></div>`).join('')}</div><p class="hint" style="margin:6px 0 0">Número de perguntas publicadas. Toque no nome para ver as perguntas e respostas.</p>`;
+      const pr=await (await fetch(CFG.tribuna_api+'/perguntas')).json();
+      const pubList=(pr.perguntas||[]).filter(q=>q.status!=='a_enviar').slice(0,6);
+      if(pubList.length){
+        document.getElementById('tfeed').innerHTML=`<p class="sec">Perguntas e respostas recentes</p><div class="tqalist">${pubList.map(q=>renderTribItem(q,deps[byId[q.dep]])).join('')}</div>`;
+      }
+    }
+  }catch(e){}
+}
 
 /* ===== Senado ===== */
 const SEN = __SEN__;
 const SBY = Object.fromEntries(SEN.sens.map(x=>[x.id,x]));
 const ssmin=Math.min(...SEN.sens.map(x=>x.s)), ssmax=Math.max(...SEN.sens.map(x=>x.s));
 const scolor=v=>{const t=v<0?Math.min(1,-v/Math.abs(ssmin)):Math.min(1,v/ssmax);return `rgb(${v<0?mix(C.mid,C.gov,t):mix(C.mid,C.opo,t)})`};
-const sface=(x,cls)=>`<div class="face ${cls||''}" style="background:${scolor(x.s)}" aria-hidden="true">${initials(x.n)}<img alt="" src="https://www.senado.leg.br/senadores/img/fotos-oficiais/senador${x.id}.jpg" onerror="this.remove()"></div>`;
+const sface=(x,cls)=>`<div class="face ${cls||''}" style="background:${scolor(x.s)}" aria-hidden="true">${initials(x.n)}<img alt="" src="https://www.senado.leg.br/senadores/img/fotos-oficiais/senador${x.id}.jpg" onload="this.classList.add('ok')" onerror="this.remove()"></div>`;
 const SV={'Sim':['b-S','Sim'],'Não':['b-N','Não'],'Abstenção':['b-A','Abstenção'],'P-NRV':['b-A','Presente, não votou'],'NCom':['b--','Não compareceu'],
   'AP':['b-J','Atividade parlamentar'],'LS':['b-J','Licença saúde'],'MIS':['b-J','Missão oficial'],'LP':['b-J','Licença'],'LAP':['b-J','Licença'],'NA':['b--','Não votou']};
 const svl=c=>c==null?['b--','Fora do cargo']:c.startsWith('Presidente')?['b-J','Presidiu']:(SV[c]||['b--',c]);
@@ -1568,7 +1728,7 @@ const apTit=t=>String(t||'').toLowerCase().replace(/(^|[\s-])(\p{L})/gu,(m,a,b)=
 const apSel=c=>c.e?(/eleit/i.test(c.st)?'ELEITO':c.st?c.st.toUpperCase():'ELEITO'):'';
 const apCor=sg=>/PT|PSOL|PCdoB|PSB|PDT|REDE|PV/.test(sg)?'var(--gov)':/PL|NOVO/.test(sg)?'var(--opo)':'var(--mid)';
 async function apGet(u){const r=await fetch(u,{cache:'no-store'}); if(!r.ok) throw new Error(r.status); return r.json();}
-function apFace(c,ele){return `<div class="face" style="background:${apCor(c.sg)}" aria-hidden="true">${initials(c.nm)}<img alt="" src="${AP.base}/${ele}/fotos/br/${c.sq}.jpeg" onerror="this.remove()"></div>`}
+function apFace(c,ele){return `<div class="face" style="background:${apCor(c.sg)}" aria-hidden="true">${initials(c.nm)}<img alt="" src="${AP.base}/${ele}/fotos/br/${c.sq}.jpeg" onload="this.classList.add('ok')" onerror="this.remove()"></div>`}
 function apPage(){const el=document.getElementById('appg'); const ele=apTeste()?AP.t1:AP.pres;
   el.innerHTML=`<a class="back" href="#">Voltar ao plenário</a>
   <div><span class="led" style="font-size:20px">${apTeste()?'TESTE COM O 1º TURNO':(apAoVivo()?'<i class="aovivo"></i>AO VIVO · ':new Date()>=AP_AOVIVO[1]?'RESULTADO · ':'')+'2º TURNO · 25 OUT 2026'}</span>
