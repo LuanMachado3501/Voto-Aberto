@@ -1729,13 +1729,6 @@
    "sexo": "M",
    "uf": "AM"
   },
-  "204558": {
-   "email": "dep.marcelonilo@camara.leg.br",
-   "nome": "Marcelo Nilo",
-   "partido": "REPUBLICANOS",
-   "sexo": "M",
-   "uf": "BA"
-  },
   "204559": {
    "email": "dep.zeneto@camara.leg.br",
    "nome": "Zé Neto",
@@ -1777,6 +1770,13 @@
    "partido": "PL",
    "sexo": "M",
    "uf": "MA"
+  },
+  "204571": {
+   "email": "dep.alexsantana@camara.leg.br",
+   "nome": "Alex Santana",
+   "partido": "REPUBLICANOS",
+   "sexo": "M",
+   "uf": "BA"
   },
   "204572": {
    "email": "dep.capitaoalbertoneto@camara.leg.br",
@@ -3593,5 +3593,5 @@
   }
  },
  "fonte": "Câmara dos Deputados, dados abertos",
- "gerado": "2026-11-18 15:24"
+ "gerado": "2026-11-20 15:01"
 }
