@@ -1,173 +1,289 @@
 {
- "gerado": "2026-11-16",
+ "gerado": "2026-11-23",
  "pesos": {
   "atencao": 0.7,
   "disputa": 0.3
  },
- "noticias_ok": true,
+ "noticias_ok": false,
  "itens": [
   {
-   "id": "2645346",
-   "titulo": "PDL 995/2026",
-   "ementa": "Escolhe o Senhor Rodrigo Otávio Soares Pacheco para o cargo de Ministro do Tribunal de Contas da União, nos termos do inciso II do § 2º do art. 73 da Constituição Federal, do inciso II do art. 105 da Lei nº 8.443, de 16 de julho de 1992, e do art. 2º do Decreto Legislativo nº 6, de 1993.",
+   "id": "2612908",
+   "titulo": "PDL 171/2026",
+   "ementa": "Susta os efeitos do Decreto nº 12.887, de 23 de março de 2026, que Amplia a Estação Ecológica de Taiamã, localizada nos Municípios de Cáceres e Poconé, Estado de Mato Grosso.",
    "placar": [
-    404,
-    61
+    276,
+    139
    ],
    "votacoes": 1,
-   "dividido": false,
+   "dividido": true,
    "aprovada": true,
-   "noticias": 14,
-   "atencao": 1.0,
-   "disputa": 0.171,
-   "indice": 75,
-   "data": "2026-09-02",
-   "nome": "Pacheco TCU",
-   "partidos": [],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      NaN
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      NaN
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      NaN
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      NaN
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      NaN
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      NaN
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      NaN
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      NaN
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2635476",
-   "titulo": "PLP 186/2026",
-   "ementa": "Altera a Lei Complementar nº 123, de 14 de dezembro de 2006, para dispor sobre o limite de receita bruta anual e o número de empregados do Microempreendedor Individual.",
-   "placar": [
-    461,
-    4
-   ],
-   "votacoes": 2,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 8,
-   "atencao": 0.811,
-   "disputa": 0.089,
-   "indice": 59,
-   "data": "2026-10-14",
+   "noticias": null,
+   "atencao": null,
+   "disputa": 0.675,
+   "indice": 20,
+   "data": "2026-07-14",
    "nome": null,
    "partidos": [
     [
      "PL",
-     88,
-     0
-    ],
-    [
-     "PT",
-     62,
-     0
-    ],
-    [
-     "UNIÃO",
-     48,
-     0
-    ],
-    [
-     "PSD",
-     43,
-     0
-    ],
-    [
-     "PP",
-     41,
-     0
-    ],
-    [
-     "REPUBLICANOS",
-     38,
-     0
-    ],
-    [
-     "MDB",
-     32,
-     0
-    ],
-    [
-     "PODE",
-     23,
+     83,
      1
     ],
     [
-     "PSDB",
-     14,
+     "PT",
+     0,
+     55
+    ],
+    [
+     "UNIÃO",
+     35,
+     5
+    ],
+    [
+     "PSD",
+     33,
+     6
+    ],
+    [
+     "REPUBLICANOS",
+     34,
+     1
+    ],
+    [
+     "PP",
+     32,
+     3
+    ],
+    [
+     "MDB",
+     21,
      2
     ],
     [
-     "PSB",
-     16,
-     0
+     "PODE",
+     9,
+     10
     ],
     [
      "PSOL",
-     13,
-     0
+     0,
+     13
+    ],
+    [
+     "PSDB",
+     12,
+     1
+    ],
+    [
+     "PSB",
+     1,
+     11
     ],
     [
      "PCdoB",
-     11,
-     0
+     0,
+     11
     ],
     [
      "PDT",
-     8,
-     0
+     0,
+     9
     ],
     [
      "PV",
-     6,
-     0
+     0,
+     6
     ],
     [
      "AVANTE",
-     5,
+     4,
+     1
+    ],
+    [
+     "SOLIDARIEDADE",
+     4,
      0
     ],
     [
      "NOVO",
      4,
      0
+    ],
+    [
+     "REDE",
+     0,
+     3
+    ],
+    [
+     "PRD",
+     2,
+     0
+    ],
+    [
+     "MISSÃO",
+     1,
+     0
+    ],
+    [
+     "CIDADANIA",
+     1,
+     0
+    ],
+    [
+     "DC",
+     0,
+     1
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Sim"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Sim"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Não"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2525620",
+   "titulo": "PL 2898/2025",
+   "ementa": "Altera a Lei nº 9.605, de 12 de fevereiro de 1998, que \"dispõe sobre as infrações e sanções administrativas ao meio ambiente, estabelece o processo administrativo federal para apuração destas infrações, e dá outras providências\", para estabelecer regime especial de sanções para pequenos produtores rurais que produzam para subsistência.",
+   "placar": [
+    305,
+    112
+   ],
+   "votacoes": 1,
+   "dividido": true,
+   "aprovada": true,
+   "noticias": null,
+   "atencao": null,
+   "disputa": 0.609,
+   "indice": 18,
+   "data": "2026-07-02",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     83,
+     1
+    ],
+    [
+     "PT",
+     0,
+     59
+    ],
+    [
+     "UNIÃO",
+     37,
+     3
+    ],
+    [
+     "PP",
+     36,
+     2
+    ],
+    [
+     "PSD",
+     33,
+     4
+    ],
+    [
+     "REPUBLICANOS",
+     28,
+     1
+    ],
+    [
+     "PODE",
+     22,
+     3
+    ],
+    [
+     "MDB",
+     18,
+     4
+    ],
+    [
+     "PSB",
+     12,
+     3
+    ],
+    [
+     "PSDB",
+     14,
+     1
+    ],
+    [
+     "PSOL",
+     0,
+     13
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PCdoB",
+     0,
+     8
+    ],
+    [
+     "PV",
+     0,
+     5
+    ],
+    [
+     "NOVO",
+     5,
+     0
+    ],
+    [
+     "AVANTE",
+     3,
+     1
+    ],
+    [
+     "REDE",
+     0,
+     3
     ],
     [
      "SOLIDARIEDADE",
@@ -176,11 +292,172 @@
     ],
     [
      "CIDADANIA",
-     2,
+     1,
      0
     ],
     [
+     "MISSÃO",
+     1,
+     0
+    ],
+    [
+     "PRD",
+     0,
+     1
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Sim"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Sim"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Não"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2642167",
+   "titulo": "PL 4921/2026",
+   "ementa": "Dispõe sobre a transformação de cargos vagos no quadro permanente do Tribunal Regional do Trabalho da 18 Região, sem aumento de despesas.",
+   "placar": [
+    320,
+    67
+   ],
+   "votacoes": 1,
+   "dividido": true,
+   "aprovada": true,
+   "noticias": null,
+   "atencao": null,
+   "disputa": 0.513,
+   "indice": 15,
+   "data": "2026-09-01",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     43,
+     30
+    ],
+    [
+     "PT",
+     51,
+     0
+    ],
+    [
+     "UNIÃO",
+     36,
+     3
+    ],
+    [
+     "PP",
+     24,
+     11
+    ],
+    [
+     "PSD",
+     28,
+     4
+    ],
+    [
+     "MDB",
+     23,
+     5
+    ],
+    [
+     "REPUBLICANOS",
+     26,
+     2
+    ],
+    [
+     "PODE",
+     15,
+     6
+    ],
+    [
+     "PSB",
+     15,
+     0
+    ],
+    [
+     "PSDB",
+     14,
+     1
+    ],
+    [
+     "PSOL",
+     10,
+     0
+    ],
+    [
+     "PCdoB",
+     10,
+     0
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PV",
+     5,
+     0
+    ],
+    [
+     "AVANTE",
+     4,
+     0
+    ],
+    [
+     "NOVO",
+     0,
+     4
+    ],
+    [
      "REDE",
+     3,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
      2,
      0
     ],
@@ -204,18 +481,18 @@
     "direita": [
      [
       "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
+      "",
+      "não votou"
      ],
      [
       "André Fernandes",
-      "PL-CE",
-      "Sim"
+      "",
+      "não votou"
      ],
      [
       "Julia Zanatta",
       "PL-SC",
-      "Sim"
+      "Não"
      ],
      [
       "Kim Kataguiri",
@@ -241,119 +518,124 @@
      ],
      [
       "Fernanda Melchionna",
-      "PSOL-RS",
-      "Sim"
+      "",
+      "não votou"
      ]
     ]
    }
   },
   {
-   "id": "2611313",
-   "titulo": "PLP 74/2026",
-   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
+   "id": "2236186",
+   "titulo": "PLP 281/2019",
+   "ementa": "Dispõe sobre os regimes de resolução das instituições autorizadas a funcionar pelo Banco Central do Brasil, pela Superintendência de Seguros Privados e pela Comissão de Valores Mobiliários.",
    "placar": [
-    346,
-    46
+    252,
+    176
    ],
    "votacoes": 1,
    "dividido": false,
-   "aprovada": true,
-   "noticias": 7,
-   "atencao": 0.768,
-   "disputa": 0.157,
-   "indice": 58,
-   "data": "2026-09-03",
+   "aprovada": false,
+   "noticias": null,
+   "atencao": null,
+   "disputa": 0.451,
+   "indice": 14,
+   "data": "2026-10-14",
    "nome": null,
    "partidos": [
     [
      "PL",
-     45,
-     23
+     77,
+     3
     ],
     [
      "PT",
-     52,
-     0
+     0,
+     61
     ],
     [
      "PSD",
-     37,
-     0
+     31,
+     9
     ],
     [
      "UNIÃO",
-     35,
-     2
-    ],
-    [
-     "PP",
-     32,
-     1
+     9,
+     30
     ],
     [
      "REPUBLICANOS",
-     31,
-     1
+     33,
+     3
+    ],
+    [
+     "PP",
+     30,
+     4
     ],
     [
      "MDB",
-     30,
-     0
+     27,
+     5
     ],
     [
      "PODE",
-     17,
-     2
+     16,
+     6
     ],
     [
      "PSDB",
      15,
-     1
+     0
     ],
     [
      "PSB",
-     15,
-     0
-    ],
-    [
-     "PCdoB",
-     11,
-     0
+     1,
+     13
     ],
     [
      "PSOL",
+     0,
+     12
+    ],
+    [
+     "PCdoB",
      0,
      10
     ],
     [
      "PDT",
-     9,
-     0
+     1,
+     7
     ],
     [
      "PV",
-     6,
-     0
-    ],
-    [
-     "NOVO",
      0,
-     5
+     6
     ],
     [
      "AVANTE",
      4,
-     0
+     1
     ],
     [
-     "SOLIDARIEDADE",
-     2,
+     "NOVO",
+     4,
      0
     ],
     [
      "REDE",
+     0,
+     3
+    ],
+    [
+     "SOLIDARIEDADE",
      2,
-     0
+     1
+    ],
+    [
+     "PRD",
+     1,
+     1
     ],
     [
      "MISSÃO",
@@ -362,16 +644,6 @@
     ],
     [
      "DC",
-     1,
-     0
-    ],
-    [
-     "CIDADANIA",
-     1,
-     0
-    ],
-    [
-     "PRD",
      1,
      0
     ]
@@ -391,7 +663,7 @@
      [
       "Julia Zanatta",
       "PL-SC",
-      "Não"
+      "Sim"
      ],
      [
       "Kim Kataguiri",
@@ -407,13 +679,13 @@
      ],
      [
       "Sâmia Bomfim",
-      "",
-      "não votou"
+      "PSOL-SP",
+      "Não"
      ],
      [
       "Tabata Amaral",
       "PSB-SP",
-      "Sim"
+      "Não"
      ],
      [
       "Fernanda Melchionna",
@@ -434,10 +706,10 @@
    "votacoes": 3,
    "dividido": false,
    "aprovada": true,
-   "noticias": 5,
-   "atencao": 0.662,
+   "noticias": null,
+   "atencao": null,
    "disputa": 0.382,
-   "indice": 58,
+   "indice": 11,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -605,10 +877,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": false,
-   "noticias": 4,
-   "atencao": 0.594,
+   "noticias": null,
+   "atencao": null,
    "disputa": 0.36,
-   "indice": 52,
+   "indice": 11,
    "data": "2026-07-14",
    "nome": null,
    "partidos": [
@@ -771,695 +1043,6 @@
    }
   },
   {
-   "id": "2606313",
-   "titulo": "PLP 41/2026",
-   "ementa": "Dispõe sobre o Sistema Nacional de Enfrentamento da Violência contra Meninas e Mulheres e a destinação de recursos às ações de enfrentamento ao feminicídio e de garantia da vida de meninas e mulheres.",
-   "placar": [
-    470,
-    1
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 6,
-   "atencao": 0.719,
-   "disputa": 0.042,
-   "indice": 52,
-   "data": "2026-07-07",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     93,
-     0
-    ],
-    [
-     "PT",
-     63,
-     0
-    ],
-    [
-     "UNIÃO",
-     48,
-     0
-    ],
-    [
-     "PSD",
-     42,
-     0
-    ],
-    [
-     "PP",
-     39,
-     0
-    ],
-    [
-     "REPUBLICANOS",
-     39,
-     0
-    ],
-    [
-     "MDB",
-     31,
-     0
-    ],
-    [
-     "PODE",
-     25,
-     0
-    ],
-    [
-     "PSDB",
-     17,
-     0
-    ],
-    [
-     "PSB",
-     14,
-     0
-    ],
-    [
-     "PSOL",
-     13,
-     0
-    ],
-    [
-     "PDT",
-     10,
-     0
-    ],
-    [
-     "PCdoB",
-     10,
-     0
-    ],
-    [
-     "PV",
-     6,
-     0
-    ],
-    [
-     "AVANTE",
-     5,
-     0
-    ],
-    [
-     "NOVO",
-     5,
-     0
-    ],
-    [
-     "PRD",
-     3,
-     0
-    ],
-    [
-     "REDE",
-     3,
-     0
-    ],
-    [
-     "SOLIDARIEDADE",
-     3,
-     0
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "CIDADANIA",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      "Sim"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Sim"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Sim"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Sim"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Artigo 17"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Sim"
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2236186",
-   "titulo": "PLP 281/2019",
-   "ementa": "Dispõe sobre os regimes de resolução das instituições autorizadas a funcionar pelo Banco Central do Brasil, pela Superintendência de Seguros Privados e pela Comissão de Valores Mobiliários.",
-   "placar": [
-    252,
-    176
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": false,
-   "noticias": 3,
-   "atencao": 0.512,
-   "disputa": 0.451,
-   "indice": 49,
-   "data": "2026-10-14",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     77,
-     3
-    ],
-    [
-     "PT",
-     0,
-     61
-    ],
-    [
-     "PSD",
-     31,
-     9
-    ],
-    [
-     "UNIÃO",
-     9,
-     30
-    ],
-    [
-     "REPUBLICANOS",
-     33,
-     3
-    ],
-    [
-     "PP",
-     30,
-     4
-    ],
-    [
-     "MDB",
-     27,
-     5
-    ],
-    [
-     "PODE",
-     16,
-     6
-    ],
-    [
-     "PSDB",
-     15,
-     0
-    ],
-    [
-     "PSB",
-     1,
-     13
-    ],
-    [
-     "PSOL",
-     0,
-     12
-    ],
-    [
-     "PCdoB",
-     0,
-     10
-    ],
-    [
-     "PDT",
-     1,
-     7
-    ],
-    [
-     "PV",
-     0,
-     6
-    ],
-    [
-     "AVANTE",
-     4,
-     1
-    ],
-    [
-     "NOVO",
-     4,
-     0
-    ],
-    [
-     "REDE",
-     0,
-     3
-    ],
-    [
-     "SOLIDARIEDADE",
-     2,
-     1
-    ],
-    [
-     "PRD",
-     1,
-     1
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "",
-      "não votou"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Sim"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Não"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2611992",
-   "titulo": "PLP 80/2026",
-   "ementa": "Altera a Lei nº 14.301, de 7 de janeiro de 2022, para prorrogar o prazo de vigência da não incidência do Adicional ao Frete para Renovação da Marinha Mercante (AFRMM) prevista no art. 17 da Lei nº 9.432, de 8 de janeiro de 1997, nas navegações de cabotagem, interior fluvial e lacustre, desde que a origem ou o destino seja porto localizado na Região Norte ou Nordeste do País.",
-   "placar": [
-    327,
-    26
-   ],
-   "votacoes": 1,
-   "dividido": false,
-   "aprovada": true,
-   "noticias": 3,
-   "atencao": 0.512,
-   "disputa": 0.114,
-   "indice": 39,
-   "data": "2026-08-12",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     73,
-     3
-    ],
-    [
-     "PT",
-     42,
-     1
-    ],
-    [
-     "PSD",
-     34,
-     1
-    ],
-    [
-     "UNIÃO",
-     32,
-     1
-    ],
-    [
-     "PP",
-     29,
-     3
-    ],
-    [
-     "REPUBLICANOS",
-     27,
-     0
-    ],
-    [
-     "MDB",
-     19,
-     0
-    ],
-    [
-     "PODE",
-     19,
-     0
-    ],
-    [
-     "PSDB",
-     12,
-     0
-    ],
-    [
-     "PSOL",
-     0,
-     12
-    ],
-    [
-     "PSB",
-     11,
-     0
-    ],
-    [
-     "PDT",
-     8,
-     0
-    ],
-    [
-     "PCdoB",
-     8,
-     0
-    ],
-    [
-     "PV",
-     4,
-     0
-    ],
-    [
-     "NOVO",
-     0,
-     4
-    ],
-    [
-     "AVANTE",
-     3,
-     0
-    ],
-    [
-     "SOLIDARIEDADE",
-     3,
-     0
-    ],
-    [
-     "MISSÃO",
-     0,
-     1
-    ],
-    [
-     "DC",
-     1,
-     0
-    ],
-    [
-     "PRD",
-     1,
-     0
-    ],
-    [
-     "REDE",
-     1,
-     0
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      "Sim"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Sim"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Não"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Sâmia Bomfim",
-      "",
-      "não votou"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Sim"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ]
-    ]
-   }
-  },
-  {
-   "id": "2612908",
-   "titulo": "PDL 171/2026",
-   "ementa": "Susta os efeitos do Decreto nº 12.887, de 23 de março de 2026, que Amplia a Estação Ecológica de Taiamã, localizada nos Municípios de Cáceres e Poconé, Estado de Mato Grosso.",
-   "placar": [
-    276,
-    139
-   ],
-   "votacoes": 1,
-   "dividido": true,
-   "aprovada": true,
-   "noticias": 1,
-   "atencao": 0.256,
-   "disputa": 0.675,
-   "indice": 38,
-   "data": "2026-07-14",
-   "nome": null,
-   "partidos": [
-    [
-     "PL",
-     83,
-     1
-    ],
-    [
-     "PT",
-     0,
-     55
-    ],
-    [
-     "UNIÃO",
-     35,
-     5
-    ],
-    [
-     "PSD",
-     33,
-     6
-    ],
-    [
-     "REPUBLICANOS",
-     34,
-     1
-    ],
-    [
-     "PP",
-     32,
-     3
-    ],
-    [
-     "MDB",
-     21,
-     2
-    ],
-    [
-     "PODE",
-     9,
-     10
-    ],
-    [
-     "PSOL",
-     0,
-     13
-    ],
-    [
-     "PSDB",
-     12,
-     1
-    ],
-    [
-     "PSB",
-     1,
-     11
-    ],
-    [
-     "PCdoB",
-     0,
-     11
-    ],
-    [
-     "PDT",
-     0,
-     9
-    ],
-    [
-     "PV",
-     0,
-     6
-    ],
-    [
-     "AVANTE",
-     4,
-     1
-    ],
-    [
-     "SOLIDARIEDADE",
-     4,
-     0
-    ],
-    [
-     "NOVO",
-     4,
-     0
-    ],
-    [
-     "REDE",
-     0,
-     3
-    ],
-    [
-     "PRD",
-     2,
-     0
-    ],
-    [
-     "MISSÃO",
-     1,
-     0
-    ],
-    [
-     "CIDADANIA",
-     1,
-     0
-    ],
-    [
-     "DC",
-     0,
-     1
-    ]
-   ],
-   "nomes": {
-    "direita": [
-     [
-      "Nikolas Ferreira",
-      "PL-MG",
-      "Sim"
-     ],
-     [
-      "André Fernandes",
-      "PL-CE",
-      "Sim"
-     ],
-     [
-      "Julia Zanatta",
-      "PL-SC",
-      "Sim"
-     ],
-     [
-      "Kim Kataguiri",
-      "MISSÃO-SP",
-      "Sim"
-     ]
-    ],
-    "esquerda": [
-     [
-      "Erika Hilton",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Sâmia Bomfim",
-      "PSOL-SP",
-      "Não"
-     ],
-     [
-      "Tabata Amaral",
-      "PSB-SP",
-      "Não"
-     ],
-     [
-      "Fernanda Melchionna",
-      "PSOL-RS",
-      "Não"
-     ]
-    ]
-   }
-  },
-  {
    "id": "2580259",
    "titulo": "PLP 230/2025",
    "ementa": "Altera a Lei Complementar nº 101, de 4 de maio de 2000, para vedar a limitação de empenho e movimentação financeira das despesas relativas ao Fundo de Universalização dos Serviços de Telecomunicações, e a Lei nº 9.998, de 17 de agosto de 2000, para os fins que especifica.",
@@ -1470,10 +1053,10 @@
    "votacoes": 1,
    "dividido": false,
    "aprovada": true,
-   "noticias": 2,
-   "atencao": 0.406,
+   "noticias": null,
+   "atencao": null,
    "disputa": 0.255,
-   "indice": 36,
+   "indice": 8,
    "data": "2026-08-12",
    "nome": null,
    "partidos": [
@@ -1631,6 +1214,423 @@
       "Fernanda Melchionna",
       "PSOL-RS",
       "Não"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2611313",
+   "titulo": "PLP 74/2026",
+   "ementa": "Dispõe sobre regras relativas a benefícios tributários e despesas obrigatórias no exercício de 2026.",
+   "placar": [
+    346,
+    46
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": null,
+   "atencao": null,
+   "disputa": 0.157,
+   "indice": 5,
+   "data": "2026-09-03",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     45,
+     23
+    ],
+    [
+     "PT",
+     52,
+     0
+    ],
+    [
+     "PSD",
+     37,
+     0
+    ],
+    [
+     "UNIÃO",
+     35,
+     2
+    ],
+    [
+     "PP",
+     32,
+     1
+    ],
+    [
+     "REPUBLICANOS",
+     31,
+     1
+    ],
+    [
+     "MDB",
+     30,
+     0
+    ],
+    [
+     "PODE",
+     17,
+     2
+    ],
+    [
+     "PSDB",
+     15,
+     1
+    ],
+    [
+     "PSB",
+     15,
+     0
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PSOL",
+     0,
+     10
+    ],
+    [
+     "PDT",
+     9,
+     0
+    ],
+    [
+     "PV",
+     6,
+     0
+    ],
+    [
+     "NOVO",
+     0,
+     5
+    ],
+    [
+     "AVANTE",
+     4,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     2,
+     0
+    ],
+    [
+     "REDE",
+     2,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "DC",
+     1,
+     0
+    ],
+    [
+     "CIDADANIA",
+     1,
+     0
+    ],
+    [
+     "PRD",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "",
+      "não votou"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Não"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Não"
+     ],
+     [
+      "Sâmia Bomfim",
+      "",
+      "não votou"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Não"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2645346",
+   "titulo": "PDL 995/2026",
+   "ementa": "Escolhe o Senhor Rodrigo Otávio Soares Pacheco para o cargo de Ministro do Tribunal de Contas da União, nos termos do inciso II do § 2º do art. 73 da Constituição Federal, do inciso II do art. 105 da Lei nº 8.443, de 16 de julho de 1992, e do art. 2º do Decreto Legislativo nº 6, de 1993.",
+   "placar": [
+    404,
+    61
+   ],
+   "votacoes": 1,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": null,
+   "atencao": null,
+   "disputa": 0.171,
+   "indice": 5,
+   "data": "2026-09-02",
+   "nome": "Pacheco TCU",
+   "partidos": [],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      NaN
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      NaN
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      NaN
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      NaN
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      NaN
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      NaN
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      NaN
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      NaN
+     ]
+    ]
+   }
+  },
+  {
+   "id": "2635476",
+   "titulo": "PLP 186/2026",
+   "ementa": "Altera a Lei Complementar nº 123, de 14 de dezembro de 2006, para dispor sobre o limite de receita bruta anual e o número de empregados do Microempreendedor Individual.",
+   "placar": [
+    461,
+    4
+   ],
+   "votacoes": 2,
+   "dividido": false,
+   "aprovada": true,
+   "noticias": null,
+   "atencao": null,
+   "disputa": 0.089,
+   "indice": 3,
+   "data": "2026-10-14",
+   "nome": null,
+   "partidos": [
+    [
+     "PL",
+     88,
+     0
+    ],
+    [
+     "PT",
+     62,
+     0
+    ],
+    [
+     "UNIÃO",
+     48,
+     0
+    ],
+    [
+     "PSD",
+     43,
+     0
+    ],
+    [
+     "PP",
+     41,
+     0
+    ],
+    [
+     "REPUBLICANOS",
+     38,
+     0
+    ],
+    [
+     "MDB",
+     32,
+     0
+    ],
+    [
+     "PODE",
+     23,
+     1
+    ],
+    [
+     "PSDB",
+     14,
+     2
+    ],
+    [
+     "PSB",
+     16,
+     0
+    ],
+    [
+     "PSOL",
+     13,
+     0
+    ],
+    [
+     "PCdoB",
+     11,
+     0
+    ],
+    [
+     "PDT",
+     8,
+     0
+    ],
+    [
+     "PV",
+     6,
+     0
+    ],
+    [
+     "AVANTE",
+     5,
+     0
+    ],
+    [
+     "NOVO",
+     4,
+     0
+    ],
+    [
+     "SOLIDARIEDADE",
+     3,
+     0
+    ],
+    [
+     "CIDADANIA",
+     2,
+     0
+    ],
+    [
+     "REDE",
+     2,
+     0
+    ],
+    [
+     "DC",
+     1,
+     0
+    ],
+    [
+     "MISSÃO",
+     0,
+     1
+    ],
+    [
+     "PRD",
+     1,
+     0
+    ]
+   ],
+   "nomes": {
+    "direita": [
+     [
+      "Nikolas Ferreira",
+      "PL-MG",
+      "Sim"
+     ],
+     [
+      "André Fernandes",
+      "PL-CE",
+      "Sim"
+     ],
+     [
+      "Julia Zanatta",
+      "PL-SC",
+      "Sim"
+     ],
+     [
+      "Kim Kataguiri",
+      "MISSÃO-SP",
+      "Não"
+     ]
+    ],
+    "esquerda": [
+     [
+      "Erika Hilton",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Sâmia Bomfim",
+      "PSOL-SP",
+      "Sim"
+     ],
+     [
+      "Tabata Amaral",
+      "PSB-SP",
+      "Sim"
+     ],
+     [
+      "Fernanda Melchionna",
+      "PSOL-RS",
+      "Sim"
      ]
     ]
    }
