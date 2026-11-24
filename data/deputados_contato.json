@@ -3052,6 +3052,13 @@
    "sexo": "M",
    "uf": "PR"
   },
+  "225846": {
+   "email": "dep.itamarpaim@camara.leg.br",
+   "nome": "Itamar Paim",
+   "partido": "PL",
+   "sexo": "M",
+   "uf": "PR"
+  },
   "226075": {
    "email": "dep.priscilacosta@camara.leg.br",
    "nome": "Priscila Costa",
@@ -3395,13 +3402,6 @@
    "sexo": "M",
    "uf": "MS"
   },
-  "74383": {
-   "email": "dep.giacobo@camara.leg.br",
-   "nome": "Giacobo",
-   "partido": "PSD",
-   "sexo": "M",
-   "uf": "PR"
-  },
   "74398": {
    "email": "dep.mariadorosario@camara.leg.br",
    "nome": "Maria do Rosário",
@@ -3593,5 +3593,5 @@
   }
  },
  "fonte": "Câmara dos Deputados, dados abertos",
- "gerado": "2026-11-23 18:41"
+ "gerado": "2026-11-24 17:21"
 }
