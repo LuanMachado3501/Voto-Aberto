@@ -175,13 +175,6 @@
    "sexo": "M",
    "uf": "CE"
   },
-  "141470": {
-   "email": "dep.joseguimaraes@camara.leg.br",
-   "nome": "José Guimarães",
-   "partido": "PT",
-   "sexo": "M",
-   "uf": "CE"
-  },
   "141485": {
    "email": "dep.luizcarlosbusato@camara.leg.br",
    "nome": "Luiz Carlos Busato",
@@ -3367,6 +3360,13 @@
    "sexo": "M",
    "uf": "SP"
   },
+  "74295": {
+   "email": "dep.inacioarruda@camara.leg.br",
+   "nome": "Inácio Arruda",
+   "partido": "PCdoB",
+   "sexo": "M",
+   "uf": "CE"
+  },
   "74317": {
    "email": "dep.juliocesar@camara.leg.br",
    "nome": "Júlio Cesar",
@@ -3593,5 +3593,5 @@
   }
  },
  "fonte": "Câmara dos Deputados, dados abertos",
- "gerado": "2026-11-26 16:16"
+ "gerado": "2026-11-27 16:11"
 }
